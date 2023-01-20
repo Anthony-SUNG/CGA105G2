@@ -8,7 +8,7 @@
                         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
                         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cga105g2</property>
                         <property name="hibernate.connection.username">root</property>
-                        <property name="hibernate.connection.password">Capoo840305</property>
+                        <property name="hibernate.connection.password">zxc412563</property>
 
 <!--                以tomcat測試 context-> java:comp/env/-->
 <!--                <property name="hibernate.connection.datasource">java:comp/env/jdbc/cga105g2</property>-->
