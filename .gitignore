@@ -1,1 +1,3 @@
 /target/
+/src/main/resources/hibernate.cfg.xml
+/CGA105G2/.gitignore
