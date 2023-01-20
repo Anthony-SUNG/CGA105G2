@@ -56,7 +56,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-uppercase" data-toggle="none" href="/CGA105G2/front-end/store/calltable/callTable.jsp">
+                                <a class="nav-link text-uppercase" data-toggle="none" href="/CGA105G2/TableServlet?action=table">
                                     🚩帶位
                                 </a>
                             </li>
