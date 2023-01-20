@@ -24,7 +24,7 @@
     </resource-ref>
 
     <request-character-encoding>UTF-8</request-character-encoding>
-<!--    <response-character-encoding>UTF-8</response-character-encoding>-->
+   <response-character-encoding>UTF-8</response-character-encoding>
 
 <!--    此處設定創建.jsp檔案時候，宣告為UTF8-->
     <jsp-config>
