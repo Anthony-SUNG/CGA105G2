@@ -131,7 +131,7 @@ public class CodeServlet extends HttpServlet {
         if("CouponPass".equals(action)){
             JSONArray json =codeSvc.statCodeAll();
             req.setAttribute("list_stat", json); // 資料庫取出的empVO物件,存入req
-            String url = "back-end/code/reviewCouponPass.jsp";
+            String url = "/back-end/code/reviewCouponPass.jsp";
             RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
             successView.forward(req, res);
         }

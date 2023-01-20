@@ -148,8 +148,6 @@
                                                     data-toggle="none" href="/CGA105G2/back-end/emp/updateEmp2.jsp">🗃️管理 </a></li>
                             <li class="nav-item"><a class="nav-link text-uppercase "
                                                     data-toggle="none" href="/CGA105G2/LonginServlet?action=out"> 🚪Sign in </a></li>
-                            <li class="nav-item"><span class="nav-link text-uppercase">${loginEmployee.empAcc}</span>
-                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -158,10 +156,6 @@
     </div>
 </section>
 <!-- header end -->
-
-
-
-
 
 <script src="/CGA105G2/assets/js/vendor.js"></script>
 <script src="/CGA105G2/assets/js/polyfills.js"></script>
@@ -180,27 +174,6 @@
         bottomSpacing: 20,
         containerSelector: ".container",
         innerWrapperSelector: ".sidebar__inner"
-    });
-</script>
-<script>
-    window.addEventListener("DOMContentLoaded", function (event) {
-        <c:forEach var="empRoot" items="${empRoot}" >
-        let e =${empRoot.rootId};
-        if (e === 2) {
-            $("#a1").removeClass("disabled");
-        } else if (e === 3) {
-            $("#a3").removeClass("disabled");
-        } else if (e === 4) {
-            $("#a2").removeClass("disabled");
-        } else if (e === 5) {
-            $("#a4").removeClass("disabled");
-        }else if (e===1){
-            $("#a1").removeClass("disabled");
-            $("#a2").removeClass("disabled");
-            $("#a3").removeClass("disabled");
-            $("#a4").removeClass("disabled");
-        }
-        </c:forEach>
     });
 </script>
 </body>

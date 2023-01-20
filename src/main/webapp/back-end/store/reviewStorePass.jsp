@@ -12,11 +12,8 @@
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>後台</title>
-
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/back-end/01h/headerin.jsp" %>
@@ -30,7 +27,7 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 my-5">
             <div class="table-responsive" style="overflow: hidden !important;">
                 <h1 class="h2">🔆已審核</h1>
-                <table id="code" class="table table-striped display">
+                <table id="store" class="table table-striped display">
                 </table>
             </div>
         </main>
@@ -44,49 +41,35 @@
 <!-- sidebar menu Class -->
 <script>
     $("a:contains(✔️審核)").closest("a").addClass("active disabled topage");
-    $("a:contains(🔻店家優惠券)").closest("a").attr("data-toggle","show");
-    $("#pageSubmenu5").removeClass("collapse");
-    $("a:contains(🔆已審核)").closest("a").addClass("active disabled bg-white topage");
+    $("a:contains(🔻店家帳號)").closest("a").attr("data-toggle","show");
+    $("#pageSubmenu2").removeClass("collapse");
+    $("#pageSubmenu2 a:contains(🔆已審核)").closest("a").addClass("active disabled bg-white topage");
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
 </script>
 <script>
-    window.addEventListener("DOMContentLoaded", function (event) {
-        <c:forEach var="empRoot" items="${empRoot}" >
-        let e =${empRoot.rootId};
-        if (e === 2) {
-            $("#a1").attr('class', 'nav-link text-uppercase');
-        } else if (e === 3) {
-            $("#a2").attr('class', 'nav-link text-uppercase');
-        } else if (e === 4) {
-            $("#a3").attr('class', 'nav-link text-uppercase');
-        } else if (e === 5) {
-            $("#a4").attr('class', 'nav-link text-uppercase');
-        }
-        </c:forEach>
-    });
-</script>
-
-
-<script>
     $(document).ready(function () {
-        const dataSet = [
-            <c:forEach var="code" items="${list_stat}">
-            ${code},
-            </c:forEach>
-        ];
-        $('#code').DataTable({
+        const dataSet = [];
+        <c:forEach var="store" items="${list_stat}">
+            dataSet.push(${store});
+        </c:forEach>
+        $('#store').DataTable({
             // 設定資料來源區塊(data or ajax….等),
             data: dataSet,
             // 設定資料欄位區塊(columns),
             columns: [
-                {data: 'CODE_RTIME', title: '通過日期'},
-                {data: 'STORE_NAME', title: '店家'},
-                {data: 'CODE_NUM', title: '優惠碼'},
-                {data: 'CODE_OFF', title: '折扣'},
-                {data: 'CODE_TEXT', title: '備註'},
-                {data: 'CODE_NTIME', title: '到期日期'},
+                {data: 'STORE_STATUS', title: '狀態'},
+                {data: 'EMP_ID', title: '經辦'},
+                {data: 'STORE_ID', title: '店號'},
+                {data: 'STORE_COM_ID', title: '統號'},
+                {data: 'STORE_NAME', title: '店名'},
+                {data: 'STORE_CITY', title: '縣市'},
+                {data: 'STORE_DISTRICT', title: '地區'},
+                {data: 'STORE_TW_ID', title: 'ID'},
+                {data: 'STORE_TO_NAME', title: '姓名'},
+                {data: 'STORE_PHONE', title: '電話'},
+                {data: 'STORE_MAIL', title: 'Mail'},
             ],
             // 設定欄位元素定義區塊(columnDefs),
             /*設定屬性(預設功能)區塊*/

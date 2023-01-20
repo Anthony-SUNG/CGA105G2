@@ -37,14 +37,17 @@ public class IdFilter extends HttpFilter {
 		System.out.println("empId:"+eId);
 		System.out.println("後台條件:"+ ( (eId>=1)&&(sId>=1)&&(mId>=1) ) );
 		System.out.println("========================================");
-
 		if(requestPath.matches(".*Servlet")&&(eId>=1||sId>=1||mId>=1)){
 			System.out.println("doFilter-1區");
 			chain.doFilter(request, response);
 		}else if((requestPath.matches(".*/back-end/.*")&& eId>=1) || (requestPath.matches(".*/front-end/Member/.*")&& mId>=1) || ((requestPath.matches(".*/front-end/store/.*")&& sId>=1))|| ((requestPath.matches(".*StoreStart_blank.*")&& sId>=1))){
 			System.out.println("doFilter-2區");
 			chain.doFilter(request, response);
-		}else if (requestPath.matches(".*index.jsp")||requestPath.matches(".*LonginServlet")||requestPath.matches(".*LognIn.*")||requestPath.matches(".*Register.*")||requestPath.matches(".*PassWord.*")||requestPath.matches(".*search.*")||requestPath.matches(".*Page.*")||requestPath.matches(".*addStandBy.*")||requestPath.matches(".*standby.*")||requestPath.matches(".*ECpay.*")){
+		}else if (requestPath.matches(".*index.jsp")||requestPath.matches(".*LonginServlet")||requestPath.matches(".*LognIn.*")||
+				requestPath.matches(".*Register.*")||requestPath.matches(".*PassWord.*")||requestPath.matches(".*search.*")||
+				requestPath.matches(".*Page.*")||requestPath.matches(".*addStandBy.*")||requestPath.matches(".*standby.*")||
+				requestPath.matches(".*ECpay.*")||requestPath.matches(".*employeeLogin.jsp.*")
+		){
 			System.out.println("doFilter-3區");
 			System.out.println("免登入區");
 			chain.doFilter(request, response);

@@ -230,8 +230,6 @@ public class LonginServlet extends HttpServlet {
 			request.getSession().setAttribute("memId", 0);
 			request.getSession().setAttribute("storeId",0);
 			request.getSession().setAttribute("empId",0);
-			request.getSession().setAttribute("empRoot",0);
-			request.getSession().setAttribute("loginEmployee",0);
 			String url = "/index.jsp";
 			RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 			successView.forward(request, response);

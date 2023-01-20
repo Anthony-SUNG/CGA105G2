@@ -52,7 +52,7 @@
         </div>
         <!-- 跳轉到社群連結 -->
         <div class="d-flex align-items-center justify-content-center">
-            <a href="/CGA105G2/back-end/frontSelect/frontSelect.jsp" class="footer-brand">FoodMap</a>
+            <a href="/CGA105G2/back-end/emp/employeeLogin.jsp" class="footer-brand">FoodMap</a>
             <div class="brand-icons-list ml-10 ml-sm-20">
                 <!-- FB圖案 -->
                 <a href="/CGA105G2/BlankPage/Loader1.jsp"

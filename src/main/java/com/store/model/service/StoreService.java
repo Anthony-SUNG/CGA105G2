@@ -89,5 +89,46 @@ public class StoreService {
 		dao.update(pojo);
 		return true;
 	}
+	public JSONArray statStoreAll() {
+		List<Store> list=dao.getBySsta(2);
+		JSONArray json = new JSONArray( );
+		JSONObject map=null;
+		for(Store e : list){
+			map = new JSONObject();
+			map.put("STORE_ID", e.getStoreId());
+			map.put("STORE_STATUS", "通過");
+			map.put("EMP_ID", e.getEmpId());
+			map.put("STORE_COM_ID", e.getStoreComId());
+			map.put("STORE_NAME",e.getStoreName());
+			map.put("STORE_CITY", e.getStoreCity());
+			map.put("STORE_DISTRICT", e.getStoreDistrict());
+			map.put("STORE_ACC", e.getStoreAcc());
+			map.put("STORE_TW_ID", e.getStoreTwId());
+			map.put("STORE_TO_NAME", e.getStoreComAddress());
+			map.put("STORE_PHONE", e.getStorePhone2());
+			map.put("STORE_MAIL", e.getStoreMail());
+			json.add(map);
+		}
+		List<Store> list2=dao.getBySsta(0);
+		for (Store e:list2){
+			if (e.getEmpId()>0){
+				map = new JSONObject();
+				map.put("STORE_ID", e.getStoreId());
+				map.put("STORE_STATUS", "未通過");
+				map.put("EMP_ID", e.getEmpId());
+				map.put("STORE_COM_ID", e.getStoreComId());
+				map.put("STORE_NAME",e.getStoreName());
+				map.put("STORE_CITY", e.getStoreCity());
+				map.put("STORE_DISTRICT", e.getStoreDistrict());
+				map.put("STORE_ACC", e.getStoreAcc());
+				map.put("STORE_TW_ID", e.getStoreTwId());
+				map.put("STORE_TO_NAME", e.getStoreComAddress());
+				map.put("STORE_PHONE", e.getStorePhone2());
+				map.put("STORE_MAIL", e.getStoreMail());
+				json.add(map);
+			}
+		}
+		return json;
+	}
 
 }
