@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+        <session-factory>
+<!--                以main()測試-->
+                        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+                        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cga105g2</property>
+                        <property name="hibernate.connection.username">root</property>
+                        <property name="hibernate.connection.password">Capoo840305</property>
+
+<!--                以tomcat測試 context-> java:comp/env/-->
+<!--                <property name="hibernate.connection.datasource">java:comp/env/jdbc/cga105g2</property>-->
+<!--                <property name="hibernate.current_session_context_class">thread</property>-->
+
+
+            <!-- 用於實作HibernateFilter-->
+<!--                        <property name="hibernate.current_session_context_class">thread</property>-->
+
+
+
+
+                <!--共通設定-->
+                <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+                <property name="hibernate.show_sql">true</property>
+                <property name="hibernate.format_sql">true</property>
+                <mapping class="com.art.model.Article.pojo.Article"/>
+                <mapping class="com.code.model.Code.pojo.Code"/>
+                <mapping class="com.emp.model.Employee.pojo.Employee"/>
+                <mapping class="com.emp.model.EmployeeRoot.pojo.EmployeeRoot"/>
+                <mapping class="com.followmem.model.FollowMem.pojo.FollowMem"/>
+                <mapping class="com.goods.model.Goods.pojo.Goods"/>
+                <mapping class="com.likeart.model.LikeArt.pojo.LikeArt"/>
+                <mapping class="com.foodorder.model.Meal.pojo.Meal"/>
+                <mapping class="com.member.model.Member.pojo.Member"/>
+                <mapping class="com.code.model.MemCode.pojo.MemCode"/>
+                <mapping class="com.msg.model.Message.pojo.Message"/>
+                <mapping class="com.order.model.Order.pojo.Order"/>
+                <mapping class="com.order.model.OrderDetail.pojo.OrderDetail"/>
+                <mapping class="com.point.model.Point.pojo.Point"/>
+                <mapping class="com.point.model.PointGoods.pojo.PointGoods"/>
+                <mapping class="com.point.model.PointOrder.pojo.PointOrder"/>
+                <mapping class="com.foodorder.model.Reserva.pojo.Reserva"/>
+                <mapping class="com.foodorder.model.ReservaDetail.pojo.ReservaDetail"/>
+                <mapping class="com.emp.model.Root.pojo.Root"/>
+                <mapping class="com.saveArt.model.SaveArt.pojo.SaveArt"/>
+                <mapping class="com.pushmesg.model.Smessage.pojo.Smessage"/>
+                <mapping class="com.waiting.model.pojo.Standby"/>
+                <mapping class="com.subs.model.Subscribe.pojo.Subscribe"/>
+                <mapping class="com.store.model.Store.pojo.Store"/>
+                <mapping class="com.foodorder.model.ReservaReservaDetailMeal.pojo.ReservaReservaDetailMeal"/>
+
+        </session-factory>
+</hibernate-configuration>
