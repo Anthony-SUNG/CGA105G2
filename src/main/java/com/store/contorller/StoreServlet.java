@@ -243,12 +243,13 @@ public class StoreServlet extends HttpServlet {
 			successView.forward(request, response);
 		}
 		//查詢
-		if("CouponPass".equals(action)){
-//			JSONArray json =codeSvc.statCodeAll();
-//			req.setAttribute("list_stat", json); // 資料庫取出的empVO物件,存入req
-//			String url = "back-end/code/reviewCouponPass.jsp";
-//			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
-//			successView.forward(req, res);
+		if("StorePass".equals(action)){
+			StoreService storeService=new StoreService();
+			JSONArray json =storeService.statStoreAll();
+			request.setAttribute("list_stat", json); // 資料庫取出的empVO物件,存入req
+			String url = "/back-end/store/reviewStorePass.jsp";
+			RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+			successView.forward(request, response);
 		}
 
 	}

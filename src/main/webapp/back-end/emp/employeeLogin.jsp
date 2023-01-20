@@ -64,34 +64,7 @@
 <script>
     $("a:contains(🚪Sign in)").closest("a").addClass("active disabled topage");
 </script>
-<script>
-    const list=[];
-    <c:forEach var="empRoot" items="${empRoot}">
-    list.push(${empRoot.rootId});
-    </c:forEach>
-    for (let e of list){
-        switch (e){
-            case 1:
-                $("#a2").removeClass("disabled");
-                $("#a3").removeClass("disabled");
-                $("#a4").removeClass("disabled");
-                $("#a5").removeClass("disabled");
-                break;
-            case 2:
-                $("#a2").removeClass("disabled");
-                break;
-            case 3:
-                $("#a3").removeClass("disabled");
-                break;
-            case 4:
-                $("#a4").removeClass("disabled");
-                break;
-            case 5:
-                $("#a5").removeClass("disabled");
-                break;
-        }
-    }
-</script>
+
 <script>
     var inputAcc = document.getElementById('inputAcc');
     var inputPwd = document.getElementById('inputPwd');
