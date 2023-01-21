@@ -9,25 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ea68665-2573-4269-b5d2-4f838485a1ca" name="变更" comment="Anthony:&#10;1.店家帶位&#10;a.店家進入帶位頁面時，從資料庫收尋店家設定之訂位時段，桌數。&#10;b.店家依照日期時段收尋，回傳訂位資訊，訂位筆數，並使用差集剃除有設定座位之資料，產稱下拉選單。">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/_2023_1_21__03_53____.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2023_1_21_上午_03_53_取消提交了变更_[变更]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.jpb/persistence-units.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.settings/.jsdtscope" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.settings/org.eclipse.wst.jsdt.ui.superType.container" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.settings/org.eclipse.wst.jsdt.ui.superType.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/artifacts/CGA105G2/CGA105G2.war" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/calltable/contorller/TableServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/calltable/service/TableService.java" afterDir="false" />
-    </list>
+    <list default="true" id="1ea68665-2573-4269-b5d2-4f838485a1ca" name="变更" comment="Anthony:&#10;1.店家帶位&#10;a.店家進入帶位頁面時，從資料庫收尋店家設定之訂位時段，桌數。&#10;b.店家依照日期時段收尋，回傳訂位資訊，訂位筆數，並使用差集剃除有設定座位之資料，產稱下拉選單。" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -348,7 +330,7 @@
       <workItem from="1674244606723" duration="1137000" />
       <workItem from="1674245752293" duration="634000" />
       <workItem from="1674246402487" duration="185000" />
-      <workItem from="1674280801506" duration="414000" />
+      <workItem from="1674280801506" duration="48000" />
     </task>
     <task id="LOCAL-00001" summary="Anthony:&#10;1.hellow.java:新增測試文字">
       <created>1674199821016</created>
@@ -385,14 +367,7 @@
       <option name="project" value="LOCAL" />
       <updated>1674245867689</updated>
     </task>
-    <task id="LOCAL-00006" summary="Anthony:&#10;1.店家帶位&#10;a.店家進入帶位頁面時，從資料庫收尋店家設定之訂位時段，桌數。&#10;b.店家依照日期時段收尋，回傳訂位資訊，訂位筆數，並使用差集剃除有設定座位之資料，產稱下拉選單。">
-      <created>1674281213449</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1674281213449</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -415,17 +390,6 @@
                   <entry key="Show.Git.Branches" value="true" />
                 </map>
               </option>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/32_anthony" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
             </State>
           </value>
         </entry>
@@ -439,16 +403,6 @@
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="origin/32_anthony" />
-                </option>
-              </RecentGroup>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="origin/master" />
-                </option>
-              </RecentGroup>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="master" />
                 </option>
               </RecentGroup>
               <RecentGroup>
