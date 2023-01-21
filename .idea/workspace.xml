@@ -2,31 +2,20 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="CGA105G2" />
+      <artifact name="CGA105G2:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ea68665-2573-4269-b5d2-4f838485a1ca" name="变更" comment="Anthony:&#10;1.店家帶位&#10;a.店家進入帶位頁面時，從資料庫收尋店家設定之訂位時段，桌數。&#10;b.店家依照日期時段收尋，回傳訂位資訊，訂位筆數，並使用差集剃除有設定座位之資料，產稱下拉選單。">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/_2023_1_21__03_53____.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2023_1_21_上午_03_53_取消提交了变更_[变更]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.jpb/persistence-units.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.settings/.jsdtscope" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.settings/org.eclipse.wst.jsdt.ui.superType.container" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.settings/org.eclipse.wst.jsdt.ui.superType.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/artifacts/CGA105G2/CGA105G2.war" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/calltable/contorller/TableServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/calltable/service/TableService.java" afterDir="false" />
+    <list default="true" id="05ea3268-01ee-4778-8f96-c67efb4f3d2b" name="变更" comment="Anthony:&#10;1.店家帶位&#10;a.店家進入帶位頁面時，從資料庫收尋店家設定之訂位時段，桌數。&#10;b.店家依照日期時段收尋，回傳訂位資訊，訂位筆數，並使用差集剃除有設定座位之資料，產稱下拉選單。">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_1_21__03_53____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_1_21__03_53____.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/CGA105G2/CGA105G2.war" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CGA105G2/CGA105G2.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/code/contorller/CodeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/code/contorller/CodeServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +73,9 @@
     <option name="version" value="2" />
   </component>
   <component name="ProjectId" id="2KFbCVkbv2AwC2X0AUn9b0iTJA0" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="compactDirectories" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
