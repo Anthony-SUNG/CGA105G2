@@ -129,7 +129,7 @@
                 </form>
             </label>
             <div class="input-group-text col-3">
-                <p>訂位數：${listq}</p>
+                <p>剩餘訂位數：${listq}</p>
             </div>
         </div>
 
@@ -145,13 +145,13 @@
                        style="background-color: rgba(253, 72, 72, 0.65); color: black;">訂位表</p>
                 </div>
                 <div class="btn-group btn-group-toggle" style="display: block" id="tablecheck">
-                    <div class="table-responsive ">
+                    <div class="table-responsive">
                         <table class="table table-striped m-0">
                             <thead>
                             <tr class="text-center">
-                                <th>姓名</th>
-                                <th class="col-5">電話</th>
-                                <th class="pl-0">人數</th>
+                                <th class="col-4">電話</th>
+                                <th class="col-4">姓名</th>
+                                <th class="col-4">人數</th>
                             </tr>
                             </thead>
                         </table>
@@ -272,151 +272,26 @@
         <!--      第二欄    -->
         <div class="col-2 p-0 border border-left " style="z-index: 1;">
             <div class="input-group-text ">
-                <p class="form-control pt-5 "
-                   style="background-color: rgba(253, 72, 72, 0.65); color: black;">現場桌況</p>
+                <p class="form-control pt-5 " style="background-color: rgba(253, 72, 72, 0.65); color: black;">現場桌況</p>
             </div>
             <div class="btn-group btn-group-toggle" style="display: block">
                 <div class="table-responsive ">
                     <table class="table table-striped m-0">
                         <thead>
-                        <tr>
-                            <th>桌號</th>
-                            <th>姓名</th>
-                            <th>人數</th>
+                        <tr class="text-center">
+                            <th class="col-4">桌號</th>
+                            <th class="col-4">姓名</th>
+                            <th class="col-4">人數</th>
                         </tr>
                         </thead>
                     </table>
                 </div>
             </div>
-            <section class="section p-0 " id="faq3"
-                     style="overflow-y: scroll; height: 600px">
+            <section class="section p-0 " id="faq3" style="overflow-y: scroll; height: 600px">
                 <div class="section-content container">
                     <div class="row">
-                        <div class="col-12 p-0">
+                        <div class="col-12 p-0 nowuse">
                             <article class="faq p-0">
-                                <header class="faq-header" data-toggle="collapse"
-                                        data-target="#faq3-item-1" aria-expanded="false">
-                                    <table class="table table-striped m-0">
-                                        <tbody class="code_tbody">
-                                        <tr>
-                                            <td>A1</td>
-                                            <td>王小姐</td>
-                                            <td>3位</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="faq-toggle" style="display: none">
-                                        <i class="material-icons faq-toggle-closed">add</i> <i
-                                            class="material-icons faq-toggle-open">remove</i>
-                                    </div>
-                                </header>
-                                <div class="faq-body collapse" id="faq3-item-1">
-                                    <div class="card-body d-flex flex-column p-5"
-                                         data-mh="gift-vouchers">
-                                        <select class="custom-select mb-5">
-                                            <option selected>桌號</option>
-                                            <option value="1">A1</option>
-                                            <option value="2">A2</option>
-                                            <option value="3">A3</option>
-                                        </select>
-
-                                        <div
-                                                class="d-flex align-items-center justify-content-between">
-												<span class="text-dark">1 <span class="text-muted">×</span>
-													Creeme Soup
-												</span>
-                                            <div class="price fs-6 text-black">
-                                                <div class="price-currency pr-0">$</div>
-                                                <div class="price-value">9</div>
-                                            </div>
-                                        </div>
-                                        <div
-                                                class="d-flex align-items-center justify-content-between mt-3">
-												<span class="text-dark">2 <span class="text-muted">×</span>
-													Multi-greens Salad
-												</span>
-                                            <div class="price fs-6 text-black">
-                                                <div class="price-currency pr-0">$</div>
-                                                <div class="price-value">22</div>
-                                            </div>
-                                        </div>
-                                        <div class="border-lighter border-top my-9"></div>
-                                        <div
-                                                class="d-flex align-items-center justify-content-between mt-3">
-                                            <span class="text-dark"><strong>TOTAL</strong></span>
-                                            <div class="price fs-6 text-black">
-                                                <div class="price-currency pr-0">$</div>
-                                                <div class="price-value">34</div>
-                                            </div>
-                                        </div>
-                                        <a href="#" class="btn btn-primary d-block mt-10">結帳</a>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-                <div class="section-content container">
-                    <div class="row">
-                        <div class="col-12 p-0">
-                            <article class="faq p-0">
-                                <header class="faq-header" data-toggle="collapse"
-                                        data-target="#faq2-item-2" aria-expanded="false">
-                                    <table class="table table-striped m-0">
-                                        <tbody class="code_tbody">
-                                        <tr>
-                                            <td>A1</td>
-                                            <td>王小姐</td>
-                                            <td>3位</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="faq-toggle" style="display: none">
-                                        <i class="material-icons faq-toggle-closed">add</i> <i
-                                            class="material-icons faq-toggle-open">remove</i>
-                                    </div>
-                                </header>
-                                <div class="faq-body collapse" id="faq2-item-2">
-                                    <div class="card-body d-flex flex-column p-5"
-                                         data-mh="gift-vouchers">
-                                        <select class="custom-select mb-5">
-                                            <option selected>桌號</option>
-                                            <option value="1">A1</option>
-                                            <option value="2">A2</option>
-                                            <option value="3">A3</option>
-                                        </select>
-                                        <div
-                                                class="d-flex align-items-center justify-content-between">
-												<span class="text-dark">1 <span class="text-muted">×</span>
-													Creeme Soup
-												</span>
-                                            <div class="price fs-6 text-black">
-                                                <div class="price-currency pr-0">$</div>
-                                                <div class="price-value">9</div>
-                                            </div>
-                                        </div>
-                                        <div
-                                                class="d-flex align-items-center justify-content-between mt-3">
-												<span class="text-dark">2 <span class="text-muted">×</span>
-													Multi-greens Salad
-												</span>
-                                            <div class="price fs-6 text-black">
-                                                <div class="price-currency pr-0">$</div>
-                                                <div class="price-value">22</div>
-                                            </div>
-                                        </div>
-                                        <div class="border-lighter border-top my-9"></div>
-                                        <div
-                                                class="d-flex align-items-center justify-content-between mt-3">
-                                            <span class="text-dark"><strong>TOTAL</strong></span>
-                                            <div class="price fs-6 text-black">
-                                                <div class="price-currency pr-0">$</div>
-                                                <div class="price-value">34</div>
-                                            </div>
-                                        </div>
-                                        <a href="#" class="btn btn-primary d-block mt-10">結帳</a>
-                                    </div>
-                                </div>
                             </article>
                         </div>
                     </div>
@@ -519,8 +394,8 @@
         for (let i of tb) {
             table3CU.innerHTML +=
                 `
-            <div class="col-md-3 p-5" id="A\${i}">
-                <div class="card border-0" style="height: 100px !important;">
+            <div class="col-md-3 p-5">
+                <div class="card border-0" id="A\${i}" style="height: 100px !important;">
                     <div class="card-body p-19 p-md-20 d-flex"
                          style="border: 1px solid black">
                         <svg width="16" height="16" viewBox="0 0 16 16">
@@ -543,6 +418,11 @@
         ${list},
         </c:forEach>
     ];
+    const noworder = [
+        <c:forEach var="usejson" items="${usejson}">
+        ${usejson},
+        </c:forEach>
+    ];
     //可以帶位的桌號-->cantab
     const cantable = $(tables).not(tablehave).toArray();
 
@@ -551,8 +431,9 @@
         const toorder = document.querySelector('.toorder');
         toorder.innerHTML = '';
         for (let i of obder) {
-            if (i.TABLE === 0) {
-                i.TABLE = "桌號";
+            let a="桌號";
+            if (i.TABLE > 0) {
+                a=i.TABLE;
             }
             toorder.innerHTML += `
             <article class="faq p-0">
@@ -577,8 +458,11 @@
                                             <div>
                                                 <form METHOD="post" ACTION="/CGA105G2/TableServlet" class="d-flex col-12">
                                                     <select class="btn btn-dark p-0 w-75 cantab" name="table">
-                                                        <option value=\${i.TABLE} selected>A\${i.TABLE}</option>
+                                                        <option value=\${i.TABLE} selected>A\${a}</option>
+                                                        <option value=0>A桌號</option>
                                                     </select>
+                                                    <input type="hidden" name="date" value="${date}" class="d-none">
+                                                    <input type="hidden" name="totime" value="${totime}" class="d-none">
                                                     <button class="btn btn-dark p-0 w-25">✔</button>
                                                     <input type="hidden" name="action" value="totable" class="d-none">
                                                     <input type="hidden" name="toid" value="\${i.REN_ID}" class="d-none">
@@ -591,9 +475,80 @@
                                                 <div class="price-value fs-3">$\${i.PRICE}</div>
                                             </div>
                                             <form METHOD="post" ACTION="/CGA105G2/TableServlet">
+                                                <input type="hidden" name="date" value="${date}" class="d-none">
+                                                <input type="hidden" name="totime" value="${totime}" class="d-none">
                                                 <input type="hidden" name="toid" value="\${i.REN_ID}" class="d-none">
+                                                <input type="hidden" name="table" value="\${i.TABLE}" class="d-none">
                                                 <button class="btn p-0 w-100 " style="background-color: rgba(253, 72, 72, 0.65); color: black;">報到</button>
                                                 <input type="hidden" name="action" value="check" class="d-none">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </article>
+            `;
+        }
+    }
+    function now(ulist) {
+        // 定義變數，在使用變數
+        const useorder = document.querySelector('.nowuse');
+        useorder.innerHTML = '';
+        for (let e of ulist) {
+            let b="桌號";
+            if (e.TABLE > 0) {
+                b=e.TABLE;
+            }
+            let to="out";
+            let p="離席"
+            if (e.PRICE==0){
+                p="點餐";
+                to="tobuy";
+            }
+            useorder.innerHTML += `
+            <article class="faq p-0">
+                                    <header class="faq-header" data-toggle="collapse"
+                                            data-target="#faq1-item-\${e.REN_ID}" aria-expanded="false">
+                                        <table class="table table-striped m-0">
+                                            <tbody class="code_tbody">
+                                            <tr class="text-center">
+                                                <td class="col-4">A\${e.TABLE}</td>
+                                                <td class="col-4">\${e.NAME}</td>
+                                                <td class="col-4">\${e.PepQ}位</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="faq-toggle" style="display: none">
+                                            <i class="material-icons faq-toggle-closed">add</i>
+                                            <i class="material-icons faq-toggle-open">remove</i>
+                                        </div>
+                                    </header>
+                                    <div class="faq-body collapse" id="faq1-item-\${e.REN_ID}">
+                                        <div class="card-body pt-0 pb-1" data-mh="gift-vouchers">
+                                            <div>
+                                                <form METHOD="post" ACTION="/CGA105G2/TableServlet" class="d-flex col-12">
+                                                    <select class="btn btn-dark p-0 w-75 cantab" name="table">
+                                                        <option value=\${e.TABLE} selected>A\${b}</option>
+                                                        <option value=0>A桌號</option>
+                                                    </select>
+                                                    <input type="hidden" name="date" value="${date}" class="d-none">
+                                                    <input type="hidden" name="totime" value="${totime}" class="d-none">
+                                                    <button class="btn btn-dark p-0 w-25">✔</button>
+                                                    <input type="hidden" name="action" value="totable" class="d-none">
+                                                    <input type="hidden" name="toid" value="\${e.REN_ID}" class="d-none">
+                                                </form>
+                                            </div>
+                                            <div id="orderD\${e.REN_ID}"></div>
+                                            <div class="border-lighter border-top my-2"></div>
+                                            <div class="d-flex align-items-center justify-content-between mt-2">
+                                                <div class="text-dark">TOTAL</div>
+                                                <div class="price-value fs-3">$\${e.PRICE}</div>
+                                            </div>
+                                            <form METHOD="post" ACTION="/CGA105G2/TableServlet">
+                                                <input type="hidden" name="date" value="${date}" class="d-none">
+                                                <input type="hidden" name="totime" value="${totime}" class="d-none">
+                                                <input type="hidden" name="toid" value="\${e.REN_ID}" class="d-none">
+                                                <button class="btn p-0 w-100 " style="background-color: rgba(253, 72, 72, 0.65); color: black;">\${p}</button>
+                                                <input type="hidden" name="table" value="\${e.TABLE}" class="d-none">
+                                                <input type="hidden" name="action" value=\${to} class="d-none">
                                             </form>
                                         </div>
                                     </div>
@@ -614,6 +569,13 @@
         }
     }
 
+    function tablecolor(tablehave) {
+        for (let e of tablehave) {
+            const id = "A" + e;
+            document.getElementById(id.toString()).setAttribute("style", "height: 100px !important; background-color: rgba(253, 72, 72, 0.65);");
+        }
+    }
+
     function tab(list) {
         const order = document.querySelectorAll('.cantab');
         for (let i of order) {
@@ -622,11 +584,15 @@
             }
         }
     }
-
-
     orderlist(foodorder);
+    now(noworder);
+    tablecolor(tablehave);
     detail(foodorder);
+    detail(noworder);
     tab(cantable);
+
+
+
 </script>
 
 <!-- Vue -->
