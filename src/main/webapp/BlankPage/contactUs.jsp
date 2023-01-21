@@ -40,7 +40,7 @@
 								<form action="#" class="row mt-17">
 									<div class="col-12 ">
 										<div class="form-group">
-											<label for="name" class="form-label">First name</label> <input
+											<label for="name" class="form-label">Name</label> <input
 												type="text" class="form-control" id="name" />
 										</div>
 									</div>
