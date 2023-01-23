@@ -13,12 +13,11 @@ import javax.mail.internet.MimeMessage;
 public class Mailer {
 	
 	// sender 123
-	private String user = "zxchuahua2417@gmail.com";
-	private String pass = "lpmwmxsueszwtxfk";
+	private final String user = "zxchuahua2417@gmail.com";
+	private final String pass = "lpmwmxsueszwtxfk";
 	// to
-	private String costomer = "zxchuahua2417@gmail.com";
-	private String subject = "測試信件";
-	private String txt = "innerText";
+	private final String costomer = "zxchuahua2417@gmail.com";
+
 
 	public void send(String name, String phone, String mail, String message) {
 

@@ -27,19 +27,18 @@ public class SendMailServlet extends HttpServlet {
 		String message = req.getParameter("message");
 
 		if ("sendMail".equals(action)) {
-//			PrintWriter out = resp.getWriter();
 			Mailer mailer = new Mailer();
 			mailer.send(name, phone, mail, message);
-//			out.print("message has been sent successfully");
-//			out.close();
 			String url = "/CGA105G2/BlankPage/contactUsDone.jsp";
 			resp.sendRedirect(url);
+//			PrintWriter out = resp.getWriter();
+//			out.print("message has been sent successfully");
+//			out.close();
 //			RequestDispatcher successView = req.getRequestDispatcher(url);
 //			successView.forward(req, resp);
 		}
 
 	}
-
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doPost(req, resp);
