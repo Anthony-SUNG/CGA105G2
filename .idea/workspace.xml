@@ -9,12 +9,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="1ea68665-2573-4269-b5d2-4f838485a1ca" name="变更" comment="JIM: update contactUs">
       <change afterPath="$PROJECT_DIR$/src/main/webapp/BlankPage/contactUsDone.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/waiting/contorller/SendMailServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/waiting/contorller/SendMailServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/BlankPage/contactUs.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/BlankPage/contactUs.jsp" afterDir="false" />
+=======
+    <list default="true" id="05ea3268-01ee-4778-8f96-c67efb4f3d2b" name="变更" comment="Anthony:&#10;1.店家帶位&#10;a.店家進入帶位頁面時，從資料庫收尋店家設定之訂位時段，桌數。&#10;b.店家依照日期時段收尋，回傳訂位資訊，訂位筆數，並使用差集剃除有設定座位之資料，產稱下拉選單。">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_1_21__03_53____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_1_21__03_53____.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/CGA105G2/CGA105G2.war" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CGA105G2/CGA105G2.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/code/contorller/CodeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/code/contorller/CodeServlet.java" afterDir="false" />
+>>>>>>> origin/32_anthony
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +96,9 @@
     <option name="version" value="2" />
   </component>
   <component name="ProjectId" id="2KFbCVkbv2AwC2X0AUn9b0iTJA0" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="compactDirectories" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -443,8 +455,12 @@
       <workItem from="1674244606723" duration="1137000" />
       <workItem from="1674245752293" duration="634000" />
       <workItem from="1674246402487" duration="185000" />
+<<<<<<< HEAD
       <workItem from="1674280801506" duration="48000" />
       <workItem from="1674282585920" duration="20405000" />
+=======
+      <workItem from="1674280801506" duration="414000" />
+>>>>>>> origin/32_anthony
     </task>
     <task id="LOCAL-00001" summary="Anthony:&#10;1.hellow.java:新增測試文字">
       <created>1674199821016</created>
@@ -481,12 +497,21 @@
       <option name="project" value="LOCAL" />
       <updated>1674245867689</updated>
     </task>
+<<<<<<< HEAD
     <task id="LOCAL-00006" summary="JIM: update contactUs">
       <created>1674293137037</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
       <updated>1674293137037</updated>
+=======
+    <task id="LOCAL-00006" summary="Anthony:&#10;1.店家帶位&#10;a.店家進入帶位頁面時，從資料庫收尋店家設定之訂位時段，桌數。&#10;b.店家依照日期時段收尋，回傳訂位資訊，訂位筆數，並使用差集剃除有設定座位之資料，產稱下拉選單。">
+      <created>1674281213449</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1674281213449</updated>
+>>>>>>> origin/32_anthony
     </task>
     <option name="localTasksCounter" value="7" />
     <servers />
@@ -511,6 +536,17 @@
                   <entry key="Show.Git.Branches" value="true" />
                 </map>
               </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/32_anthony" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
             </State>
           </value>
         </entry>
@@ -524,6 +560,16 @@
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="origin/32_anthony" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/master" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
                 </option>
               </RecentGroup>
               <RecentGroup>

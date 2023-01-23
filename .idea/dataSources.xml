@@ -12,5 +12,12 @@ C:/CGA105G2/CGA105G2/src/main/resources/hibernate.cfg.xml</remarks>
       <jdbc-url>jdbc:mysql://localhost:3306/cga105g2</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="@localhost" uuid="26b88f14-a7bb-48d8-b941-2ff3a91a3cd6">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

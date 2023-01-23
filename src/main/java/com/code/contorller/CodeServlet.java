@@ -126,7 +126,6 @@ public class CodeServlet extends HttpServlet {
             String url = "/CodeServlet?action=reviewCoupon";
             RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
             successView.forward(req, res);
-            req.getRequestDispatcher(url).forward(req, res);
         }
         if("CouponPass".equals(action)){
             JSONArray json =codeSvc.statCodeAll();

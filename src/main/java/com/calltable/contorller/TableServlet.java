@@ -2,6 +2,7 @@ package com.calltable.contorller;
 
 
 import com.calltable.service.TableService;
+import com.foodorder.model.Reserva.pojo.Reserva;
 import com.store.model.Store.pojo.Store;
 import org.json.simple.JSONArray;
 
@@ -12,10 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 
 @WebServlet("/TableServlet")
 public class TableServlet extends HttpServlet {
@@ -52,13 +53,16 @@ public class TableServlet extends HttpServlet {
             String date= req.getParameter("date");
             String totime=req.getParameter("totime");
             Map<String,JSONArray> ans=tbs.search(storeId,date,totime,0);
+            Map<String,JSONArray> use=tbs.search(storeId,date,totime,2);
             JSONArray json=ans.get("json");
+            JSONArray usejson=use.get("json");
             JSONArray tablehave=ans.get("tablehave");
             req.setAttribute("date",date);
             req.setAttribute("totime",totime);
             req.setAttribute("list",json);
             req.setAttribute("listq",json.size());
             req.setAttribute("tablehave",tablehave);
+            req.setAttribute("usejson",usejson);
             String url = "/TableServlet?action=table";
             RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
             successView.forward(req, res);
@@ -75,13 +79,58 @@ public class TableServlet extends HttpServlet {
         }
         //帶位
         if("totable".equals(action)){
+            String date= req.getParameter("date");
+            String totime=req.getParameter("totime");
+            req.setAttribute("date",date);
+            req.setAttribute("totime",totime);
             Integer id= Integer.valueOf(req.getParameter("toid"));
             Integer table= Integer.valueOf(req.getParameter("table"));
-
+            String url = "/TableServlet?action=search";
+            Reserva pojo=new Reserva();
+            pojo.setRenId(id);
+            pojo.setRenTable(table);
+            tbs.totable(pojo);
+            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            successView.forward(req, res);
+            return;
         }
         //報到
         if("check".equals(action)){
+            String date= req.getParameter("date");
+            String totime=req.getParameter("totime");
+            req.setAttribute("date",date);
+            req.setAttribute("totime",totime);
             Integer id= Integer.valueOf(req.getParameter("toid"));
+            Integer table= Integer.valueOf(req.getParameter("table"));
+            Reserva pojo=new Reserva();
+            pojo.setRenId(id);
+            pojo.setRenStatus(2);
+            pojo.setRenTable(table);
+            tbs.totable(pojo);
+            String url = "/TableServlet?action=search";
+            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            successView.forward(req, res);
+            return;
+        }
+        if ("out".equals(action)){
+            String date= req.getParameter("date");
+            String totime=req.getParameter("totime");
+            req.setAttribute("date",date);
+            req.setAttribute("totime",totime);
+            Integer id= Integer.valueOf(req.getParameter("toid"));
+            Integer table= Integer.valueOf(req.getParameter("table"));
+            Reserva pojo=new Reserva();
+            pojo.setRenId(id);
+            pojo.setRenStatus(3);
+            pojo.setRenTable(table);
+            tbs.totable(pojo);
+            String url = "/TableServlet?action=search";
+            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            successView.forward(req, res);
+            return;
+        }
+        if ("tobuy".equals(action)){
+
         }
 
 

@@ -127,10 +127,8 @@ static {
 						ResultSet.CONCUR_READ_ONLY)) {
 			reserva_old = getById(reserva_new.getRenId());
 			pstmt.setInt(1, reserva_old.getRenStatus());
-
 			pstmt.setInt(2, reserva_old.getRenTable());
 			pstmt.setDate(3, reserva_old.getRenDate());
-//			System.out.println(reserva_old.getRenDate());
 			pstmt.setInt(4, reserva_old.getRenId());
 			if (reserva_new.getRenStatus() != null) {
 				pstmt.setInt(1, reserva_new.getRenStatus());

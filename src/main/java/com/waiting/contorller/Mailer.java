@@ -11,8 +11,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class Mailer {
-
-	// sender
+	
+	// sender 123
 	private String user = "zxchuahua2417@gmail.com";
 	private String pass = "lpmwmxsueszwtxfk";
 	// to
