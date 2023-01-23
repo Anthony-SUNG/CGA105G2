@@ -39,7 +39,7 @@
 								<h1 class="text-center">Contact Us</h1>
 
 
-								<form action="<%=request.getContextPath()%>/ContactUs/SendMailServlet" class="row mt-17" method="POST">
+								<form action="/CGA105G2/SendMailServlet" class="row mt-17" method="POST">
 									<div class="col-12 ">
 										<div class="form-group">
 											<label for="name" class="form-label">Name</label> <input
@@ -66,6 +66,7 @@
 													  rows="3"></textarea>
 										</div>
 										<div class="form-group mb-0">
+											<input type="hidden" name="action" value= "sendMail">
 											<input type="submit" value="發送訊息"
 												   class="btn btn-primary btn-lg btn-block fs-5">
 												 

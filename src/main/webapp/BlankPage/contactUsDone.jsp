@@ -41,6 +41,7 @@
         </section>
     </main>
 </div>
+ <canvas height = "200"></canvas>
 <!-- main -->
 <!-- footer start -->
 <%@ include file="/back-end/01h/footerin.jsp" %>

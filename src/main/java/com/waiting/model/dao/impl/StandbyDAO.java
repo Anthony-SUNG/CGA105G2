@@ -17,6 +17,14 @@ import java.util.List;
 
 public class StandbyDAO implements StandbyDAO_interface {
 
+	static {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void insert(Standby standbyVo) {
 		String INSERT_STMT = " INSERT INTO cga105g2.standby(`STORE_ID`, `STA_NAME`, `STA_PHONE`, `STA_NUMBER`) VALUES  (?, ?, ?, ?)";
@@ -56,8 +64,6 @@ public class StandbyDAO implements StandbyDAO_interface {
 			// Clean up JDBC resources
 		}
 	}
-
-
 
 	@Override
 	public void delete(Integer staId) {
@@ -154,7 +160,7 @@ public class StandbyDAO implements StandbyDAO_interface {
 
 			rs = pstm.executeQuery();
 			while (rs.next()) {
-				
+
 				staCount = rs.getInt(1);
 			}
 		} catch (SQLException e) {
@@ -215,7 +221,6 @@ public class StandbyDAO implements StandbyDAO_interface {
 			System.out.println("------------------------");
 		}
 
-		
 //		count
 		System.out.println(dao.standByCount());
 	}
