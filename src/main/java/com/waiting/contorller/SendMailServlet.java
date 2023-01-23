@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = { "/ContactUs/SendMailServlet" })
+@WebServlet(urlPatterns = { "/SendMailServlet" })
 public class SendMailServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -18,21 +18,25 @@ public class SendMailServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html");
+
+		String action = req.getParameter("action");
 		String name = req.getParameter("name");
 		String phone = req.getParameter("phone");
 		String mail = req.getParameter("email");
 		String message = req.getParameter("message");
 
-		resp.setContentType("text/html");
-		PrintWriter out = resp.getWriter();
-
-		Mailer mailer = new Mailer();
-		mailer.send(name, phone, mail, message);
-		out.print("message has been sent successfully");
-		out.close();
-		String url = "/BlankPage/contactUsDone.jsp";
-		RequestDispatcher successView = req.getRequestDispatcher(url);
-		successView.forward(req, resp);
+		if ("sendMail".equals(action)) {
+//			PrintWriter out = resp.getWriter();
+			Mailer mailer = new Mailer();
+			mailer.send(name, phone, mail, message);
+//			out.print("message has been sent successfully");
+//			out.close();
+			String url = "/CGA105G2/BlankPage/contactUsDone.jsp";
+			resp.sendRedirect(url);
+//			RequestDispatcher successView = req.getRequestDispatcher(url);
+//			successView.forward(req, resp);
+		}
 
 	}
 
