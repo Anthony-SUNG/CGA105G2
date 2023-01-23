@@ -25,7 +25,7 @@
 					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom text-center" >
 					<h1 class="h2 text-center mx-auto mt-5">🔆聯繫我們</h1>
 					<div class="btn-toolbar mb-2 mb-md-0">
-						
+
 					</div>
 				</div>
 				<!-- "contacts" section start -->
@@ -34,35 +34,41 @@
 						<div class="">
 							<div class="col-12 col-lg-12 mb-14 mb-lg-0 text-center">
 								<small
-									class="fs-1 font-family-secondary text-uppercase font-weight-bold letter-spacing-caption text-muted text-center">
+										class="fs-1 font-family-secondary text-uppercase font-weight-bold letter-spacing-caption text-muted text-center">
 									We answer within 24 hours </small>
 								<h1 class="text-center">Contact Us</h1>
-								<form action="#" class="row mt-17">
+
+
+								<form action="<%=request.getContextPath()%>/ContactUs/SendMailServlet" class="row mt-17" method="POST">
 									<div class="col-12 ">
 										<div class="form-group">
 											<label for="name" class="form-label">Name</label> <input
-												type="text" class="form-control" id="name" />
+												type="text" class="form-control" name="name" id="name"/>
 										</div>
 									</div>
 									<div class="col-12 col-sm-6">
 										<div class="form-group">
 											<label for="phone" class="form-label">Phone</label> <input
-												type="text" class="form-control" id="phone" />
+												type="text" class="form-control" name="phone" id="phone"/>
 										</div>
 									</div>
 									<div class="col-12 col-sm-6">
 										<div class="form-group">
 											<label for="email" class="form-label">Email</label> <input
-												type="text" class="form-control" id="email" />
+												type="text" class="form-control" name="email" id="email"/>
 										</div>
 									</div>
 									<div class="col-12">
 										<div class="form-group">
-											<label for="message" class="form-label">Message</label>
-											<textarea id="message" class="form-control" rows="3"></textarea>
+											<label for="message"
+												   class="form-label">Message</label>
+											<textarea name="message" id="message" class="form-control"
+													  rows="3"></textarea>
 										</div>
 										<div class="form-group mb-0">
-											<button class="btn btn-primary btn-lg btn-block fs-5">發送訊息</button>
+											<input type="submit" value="發送訊息"
+												   class="btn btn-primary btn-lg btn-block fs-5">
+												 
 										</div>
 									</div>
 								</form>
