@@ -106,7 +106,7 @@
 											aria-label="Search"
 											aria-describedby="search-addon"
 											name="memberInput"
-											
+											id=memberInput
 										/> <input
 											type=hidden
 											name="action"
@@ -121,9 +121,7 @@
 								</form>
 
 								<%
-								MemberService memberSvc = new MemberService();
-								List<Member> list = memberSvc.getMemberList();
-								pageContext.setAttribute("list", list);
+								Member memberVo = (Member) request.getAttribute("member");
 								%>
 
 								<table class="table table-hover">
@@ -140,16 +138,6 @@
 										</tr>
 									</thead>
 									<tbody>
-
-										<%
-										Member memberVo = new Member();
-										%>
-										<%
-										for (int i = 0; i < list.size(); i++) {
-											memberVo = list.get(i);
-										%>
-
-
 										<tr>
 											<th scope="row"><%=memberVo.getMemId()%></th>
 											<td><%=memberVo.getMemAcc()%></td>
@@ -160,10 +148,7 @@
 											<td><%=memberVo.getMemTime()%></td>
 											<td><%=memberVo.getMemPoint()%></td>
 										</tr>
-										<%
-										}
-										%>
-
+									
 									</tbody>
 								</table>
 							</div>
@@ -233,8 +218,8 @@
 											storeVo = storeList.get(i);
 										%>
 
-							
 										<tr>
+
 											<td><%=storeVo.getStoreId()%></td>
 											<td><%=storeVo.getStoreName()%></td>
 
@@ -372,17 +357,17 @@
         );
     
 //     $(document).ready(function(){
-//     $("#memberInput").keyup(function(){
-//     	let inputValue = $(this).val();
-//     	$.ajax({
-//     		type:"POST",
-//     		url: "/CGA105G2/frontSelect" ,
-//     		data:{inputValue:inputValue},
-//     		success: function(response){
-//     			$("#result").html(response);
-//     		}
-//     	});
-//     });
+    $("#memberInput").keyup(function(){
+    	let inputValue = $(this).val();
+    	$.ajax({
+    		type:"POST",
+    		url: "/CGA105G2/frontSelect" ,
+    		data:{inputValue:inputValue},
+    		success: function(response){
+    			$("#result").html(response);
+    		}
+    	});
+    });
     	
 //     });
     
@@ -405,8 +390,8 @@
             title: '訂單明細',
             html: "<h2>訂單編號:1</h2>" +
                 "<h2>商品編號:1</h2>" +
-                "<h2>商品數量:3</h2>" +
-                "<h2>商品價格:200</h2>",
+                "<h2>商品數量:1</h2>" +
+                "<h2>商品價格:1</h2>",
            
             showConfirmButton: false,
             timer: 10000

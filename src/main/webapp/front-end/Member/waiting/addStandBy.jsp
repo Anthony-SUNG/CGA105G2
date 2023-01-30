@@ -8,8 +8,8 @@
 
 
 <%
-    Standby standbyVo = (Standby) request.getAttribute("standbyVo");
-
+   
+ Standby standbyVo =(Standby) request.getAttribute("standbyVo"); 
     StandbyDAO dao = new StandbyDAO();
     StandbyService standbySvc = new StandbyService();
     Integer staCount = dao.standByCount();
@@ -117,7 +117,7 @@
                                 <div class="col-12 col-sm-12 my-5">
                                     <div class="form-group">
                                         <label class="form-label fs-md-6  font-weight-bold ">店家</label>
-                                        <input type="text" class="form-control" name="storeId"/>
+                                        <input type="text" class="form-control" value="1" name="storeId"/>
                                     </div>
                                 </div>
 

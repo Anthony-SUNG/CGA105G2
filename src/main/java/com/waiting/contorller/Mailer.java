@@ -12,10 +12,10 @@ import javax.mail.internet.MimeMessage;
 
 public class Mailer {
 	
-	// sender 123
+	// sender
 	private final String user = "zxchuahua2417@gmail.com";
 	private final String pass = "lpmwmxsueszwtxfk";
-	// to
+	// to 
 	private final String costomer = "zxchuahua2417@gmail.com";
 
 

@@ -31,11 +31,7 @@ public class SendMailServlet extends HttpServlet {
 			mailer.send(name, phone, mail, message);
 			String url = "/CGA105G2/BlankPage/contactUsDone.jsp";
 			resp.sendRedirect(url);
-//			PrintWriter out = resp.getWriter();
-//			out.print("message has been sent successfully");
-//			out.close();
-//			RequestDispatcher successView = req.getRequestDispatcher(url);
-//			successView.forward(req, resp);
+
 		}
 
 	}
