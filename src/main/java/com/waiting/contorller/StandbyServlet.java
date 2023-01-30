@@ -111,16 +111,22 @@ public class StandbyServlet extends HttpServlet {
 			standbyVo.setStoreId(storeId);
 			standbyVo.setStaPhone(staPhone);
 			standbyVo.setStaNumber(staNumber);
+			
+			
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("standbyVo", standbyVo); // 含有輸入格式錯誤的waitingVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/Member/standby/addStandBy.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/Member/waiting/addStandBy.jsp");
 				failureView.forward(req, res);
 				return;
 			}
 			// ============================開始新增================================================
 			StandbyService standBySvc = new StandbyService();
 			standbyVo = standBySvc.addStandBy(storeId, staName, staPhone, staNumber);
-			String url = "/front-end/store/calltable/callTable.jsp";
+			
+			
+			
+			req.setAttribute("standbyVo", standbyVo);
+			String url = "/front-end/Member/waiting/listOneStandby.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}

@@ -183,6 +183,7 @@ public class MemberDAO implements MemberDAO_interface {
 		}
 		return list;
 	}
+	
 
 	public List<Member> getAllByName(String memName) {
 		List<Member> list = new ArrayList<Member>();
