@@ -15,4 +15,5 @@ public interface MemberDAO_interface {
     Member signin(String memAcc, String memPwd);
 
     List<Member> getAllByName(String memName);
+	public void update3(Member member);
 }

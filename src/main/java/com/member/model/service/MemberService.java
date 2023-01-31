@@ -105,4 +105,14 @@ public class MemberService {
 	public Member getById(Integer memId) {
 		return dao.getById(memId);
 	}
+
+	public Member forget1(String memAcc, String memPwd) {
+		Member member = new Member();
+		
+		member.setMemAcc(memAcc);
+		member.setMemPwd(memPwd);
+		dao.update3(member);
+		
+		return member;
+	}
 }

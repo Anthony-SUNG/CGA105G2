@@ -7,7 +7,7 @@
     Member member = (Member) request.getAttribute("member");
 %>
 
-<!-- cccccc -->
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -108,7 +108,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="w-50 text-md-right">
-                                                    <a href="#">忘記密碼</a>
+                                                    <a href="/CGA105G2/front-end/Member/member/forget1.jsp">忘記密碼</a>
                                                 </div>
                                             </div>
                                         </form>

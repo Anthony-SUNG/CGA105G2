@@ -283,8 +283,56 @@ public class LonginServlet extends HttpServlet {
 			successView.forward(request, response);
 		}
 
+		
+		
+	//  forget1(update)  	-------------------------------------------------------------------------------------------------------------------------------
+			if ("forget1".equals(action)) { // 來自addEmp.jsp的請求
 
+				List<String> errorMsgs = new LinkedList<String>();
+				// Store this set in the request scope, in case we need to
+				// send the ErrorPage view.
+				request.setAttribute("errorMsgs", errorMsgs);
 
+				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/			
+
+				String memacc = request.getParameter("MEM_ACC").trim();
+				if (memacc == null || memacc.trim().length() == 0) {
+					errorMsgs.add("帳號請勿空白");
+				}
+
+				String mempwd = request.getParameter("MEM_PWD").trim();
+				if (mempwd == null || mempwd.trim().length() == 0) {
+					errorMsgs.add("密碼請勿空白");
+				}
+
+				String mempwd2 = request.getParameter("MEM_PWD2").trim();
+				if (mempwd2 == null || mempwd2.trim().length() == 0) {
+					errorMsgs.add("確認密碼請勿空白");
+				}
+				
+				Member Member = new Member();
+				Member.setMemAcc(memacc);
+				Member.setMemPwd(mempwd);				
+
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					request.setAttribute("Member", Member); // 含有輸入格式錯誤的empVO物件,也存入req
+					RequestDispatcher failureView = request
+							.getRequestDispatcher("/front-end/Member/member/forget1.jsp");
+					failureView.forward(request, response);
+					return;
+				}
+
+				/*************************** 2.開始新增資料 ***************************************/
+				MemberService memSvc = new MemberService();
+				Member = memSvc.forget1(memacc, mempwd);
+
+				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+				String url = "/front-end/Member/member/memberLognIn.jsp";
+				RequestDispatcher successView = request.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				successView.forward(request, response);
+
+			}
 
 
 
