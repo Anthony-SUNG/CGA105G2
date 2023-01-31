@@ -126,6 +126,7 @@ public class StandbyServlet extends HttpServlet {
 			
 			
 			req.setAttribute("standbyVo", standbyVo);
+			
 			String url = "/front-end/Member/waiting/listOneStandby.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
@@ -144,6 +145,10 @@ public class StandbyServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
+		
+		
+		
+		
 
 	}
 }
