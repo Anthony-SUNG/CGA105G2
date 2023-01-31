@@ -177,15 +177,15 @@ public class StandbyDAO implements StandbyDAO_interface {
 //		java.util.Date utilDate = new java.util.Date();
 //
 //		java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(utilDate.getTime());
-		standbyVo.setStoreId(1);
-		standbyVo.setStaName("887");
-		standbyVo.setStaPhone("099990005");
-		standbyVo.setStaNumber(1);
-//		waitingVo1.setSta_time(sqlTimestamp);
-//		waitingVo1.setSta_status(1);
-
-		dao.insert(standbyVo);
-		System.out.println("insert ok");
+//		standbyVo.setStoreId(1);
+//		standbyVo.setStaName("887");
+//		standbyVo.setStaPhone("099990005");
+//		standbyVo.setStaNumber(1);
+////		waitingVo1.setSta_time(sqlTimestamp);
+////		waitingVo1.setSta_status(1);
+//
+//		dao.insert(standbyVo);
+//		System.out.println("insert ok");
 ////		
 
 //		// update
