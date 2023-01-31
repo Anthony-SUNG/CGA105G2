@@ -8,7 +8,7 @@
 
 
 <%
-	 StandbyService standbySvc = new StandbyService();
+	StandbyService standbySvc = new StandbyService();
 	List<Standby> standbyList = standbySvc.getAll();
 
 // 	pageContext.setAttribute("waitinglist", waitinglist);
