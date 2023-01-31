@@ -96,7 +96,7 @@
                     <th>修改日期</th>
                 </tr>
                 <%@ include file="/front-end/Member/goods/page1.jsp" %>
-                <c:forEach var="goodsVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+                <c:forEach var="goodsVO" items="${list}" >
 
                     <tr>
                         <td>${goodsVO.goodsId}</td>
