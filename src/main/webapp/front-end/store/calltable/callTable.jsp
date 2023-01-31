@@ -84,7 +84,7 @@ a {
 					<label class="input-group-text col-4"> <select
 						class="btn btn-secondary form-control  p-0"
 						style="background-color: rgba(9, 148, 101, 0.42); color: white;"
-						id="Select01" name="totime" ;
+						id="Select01" name="totime";
                             v
 						def=${totime
 					}>
