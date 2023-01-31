@@ -1,6 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
+<%@ page import="com.point.model.PointOrder.pojo.PointOrder"%>
+<%@ page import="com.point.model.service.PointOrderService"%>
+<%
+	PointOrderService pointorderSvc = new PointOrderService();
+	List<PointOrder> list = pointorderSvc.getBackOrder();
+    pageContext.setAttribute("list",list);
+%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -83,10 +90,11 @@
 
 <body>
   <div id="page-start-anchor"></div>
+
 <!-- header start -->
 <%@ include file="/back-end/01h/headerin.jsp" %>
 <!-- header end -->
-<!-- main -->
+ <!-- main -->
   <div class="container-fluid p-0">
     <div class="row">
       <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
@@ -98,7 +106,7 @@
               </a>
               <ul class="collapse list-unstyled " id="pageSubmenu2">
                 <li>
-                  <hr><a href="/CGA105G2/back-end/pointgood/backPointOrder.jsp" class="nav-link">🔆待出貨訂單</a>
+                  <hr><a href="/CGA105G2/back-end/pointgood/backPointOrder.jsp" class="nav-link disabled bg-white" style="color: #216a51;">🔆待出貨訂單</a>
                 </li>
                 <li>
                   <a href="/CGA105G2/back-end/pointgood/listPointOrder.jsp" class="nav-link">🔆訂單總覽</a>
@@ -115,7 +123,7 @@
                 <li>
                   <hr><a href="/CGA105G2/back-end/pointgood/addPointGood.jsp" class="nav-link">🔆新增商品</a>
                 </li>
-                <li><a href="/CGA105G2/back-end/pointgood/listPointGood.jsp" class="nav-link" >🔆商品總覽</a></li>
+                <li><a href="/CGA105G2/back-end/pointgood/listPointGood.jsp" class="nav-link">🔆商品總覽</a></li>
                 <hr>
                 </li>
               </ul>
@@ -124,52 +132,65 @@
         </div>
       </nav>
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 p-0">
-				<div class="container my-20 col-6 ">
-					<div class="card card-body shadow bg-cyan-20 "
-						style="border-radius: 20px;">
-
-						<h1 class="text-center mt-5">修改商品</h1>
-						<FORM METHOD="post" ACTION="point.do" name="form1"
-							enctype="multipart/form-data">
-							<div class="col-8 mx-auto">		
-							<img src="${pageContext.request.contextPath}/back-end/pointgood/point.do?action=getPdImg&pdId=${param.pdId}" width= 345px height= 400px >
-							</div>
-							<div class="col-8 mx-auto">
-								<label for="" class="font-weight-bold fs-6 ">商品名稱:</label> <input
-									type="TEXT" name="pdName" value="${param.pdName}" />${errorMsgs.pdName}
-							</div>
-							<div class="col-8 mx-auto">
-								<label for="" class="font-weight-bold fs-6 ">商品單價:</label> <input
-									type="TEXT" name="pdPrice" value="${param.pdPrice}" />${errorMsgs.pdPrice}
-							</div>
-							<div class="col-8 mx-auto">
-								<label for="" class="font-weight-bold fs-6 ">商品介紹:</label> <input
-									type="TEXT" cols="40" rows="3" name="pdText" value="${param.pdText}"
-									class="form-control">${errorMsgs.pdText}
-							</div>
-							<div class="col-8 mx-auto">
-								<label for="" class="font-weight-bold fs-6 ">上傳圖片:</label> <input
-									type="file" name="pdImg" class="form-control ">
-							</div>
-
-							<div class="col-8 mx-auto my-10 text-center">
-								<label for="" class="font-weight-bold fs-6 float-left mt-9">商品狀態
-									:</label>
-								<div class="radio-buttons-group mb-5 mx-auto text-center m-5 ">
-								<input id=pdStatus type="hidden" name="pdStatus" value=0>
-									<input type="button" class="btn btn-light bg-white fs-5" value="上架" onclick="already()">
-									<input type="button" class="btn btn-light bg-white fs-5 selected" value="下架" onclick="besold()">
-							</div>
-							</div>
-							<div class=" col-7 mx-auto  text-center">
-								<input type="hidden" name="action" value="update">
-								<input type="hidden" name="pdId" value="${param.pdId}">
-								<button type="submit"
-									class="btn btn-warning btn-block btn-lg fs-5">送出</button>
-							</div>
-						</form>
-						
-
+      
+        <section class="py-5">
+        <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2 mt-5">🔆待出貨訂單</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group mr-2">
+<!--                             <button type="button" class="btn btn-sm btn-outline-info">Share</button> -->
+<!--                             <button type="button" class="btn btn-sm btn-outline-info">Export</button> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive ">
+                    <table class="table table-striped ">
+                        <thead>
+                            <tr>
+                                <th>編號</th>
+                                <th>會員編號</th>
+                                <th>商品編號</th>
+                                <th>單價</th>
+                                <th>備註</th>
+                                <th>新增日期</th>
+                                <th>員工編號</th>
+                                <th>點擊出貨</th>
+                                </tr>
+                        </thead>
+                        <tbody class="code_tbody">
+	<c:forEach var="PointOrder" items="${list}" >
+		<tr>
+								<td>${PointOrder.poId}</td>
+								<td>${PointOrder.memId}</td>
+								<td>${PointOrder.pdId}</td>
+								<td>${PointOrder.poPrice}</td>
+								<td>${PointOrder.poText}</td>
+								<td>${PointOrder.poTime}</td>
+								<td>${PointOrder.empId}</td>
+								<td>
+								<FORM METHOD="post" ACTION="point.do">
+								<input type="hidden" name="poId" value=${PointOrder.poId}>
+								<input type="hidden" name="poStatus" value=1>
+								<input type="hidden" name="action" value="updateOrder">
+								<input class="btn btn-outline-dark mt-auto fs-4" type="submit" value="出貨">
+								</form>
+								</td>
+		</tr>
+	</c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+                <canvas class="my-4 w-100" id="myChart" width="900" height="150"></canvas>
+          </section>
+                          <br>
+               <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">  	              
+              <nav aria-label="Page navigation example   justify-content-center" class="m-5 ">
+                <ul class="pagination">
+                </ul>
+              </nav>
+              </div>   
+              
       </main>
     </div>
 
@@ -178,6 +199,7 @@
 <!-- footer start -->
 <%@ include file="/back-end/01h/footerin.jsp" %>
 <!-- footer end -->
+
   <script src="/CGA105G2/assets/js/vendor.js"></script>
   <script src="/CGA105G2/assets/js/polyfills.js"></script>
   <script src="/CGA105G2/assets/js/app.js"></script>
@@ -203,63 +225,9 @@
       }
       </c:forEach>
     });
-    
-    function already() {
-        var pdStatus=document.getElementById("pdStatus").value;
-        document.form1.pdStatus.value=1;
-    };
-    
-    function besold() {
-        var pdStatus=document.getElementById("pdStatus").value;
-        document.form1.pdStatus.value=0;
-    };
+
   </script>
 
 </body>
-
-</html>
-
-
-
-
-<html>
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>修改商品</title>
-
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-  }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
-</style>
-
-</head>
-
 
 </html>

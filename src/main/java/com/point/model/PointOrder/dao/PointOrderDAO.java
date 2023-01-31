@@ -1,8 +1,7 @@
-package com.point.model.PointOrder.dao.impl;
+package com.point.model.PointOrder.dao;
 
-import com.core.common.Common;
-import com.point.model.PointOrder.dao.PointOrderDAO_interface;
-import com.point.model.PointOrder.pojo.PointOrder;
+import static com.core.common.Common.PASSWORD;
+import static com.core.common.Common.USER;
 
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -11,11 +10,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.core.common.Common.PASSWORD;
-import static com.core.common.Common.USER;
+import javax.print.attribute.standard.DateTimeAtCompleted;
+
+import com.core.common.Common;
+import com.point.model.PointOrder.dao.impl.PointOrderDAO_interface;
+import com.point.model.PointOrder.pojo.PointOrder;
 
 public class PointOrderDAO implements PointOrderDAO_interface {
 
@@ -126,6 +129,50 @@ public class PointOrderDAO implements PointOrderDAO_interface {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	@Override
+	public List<PointOrder> getBackOrder() {
+		List<PointOrder> list = new ArrayList<PointOrder>();
+		String sql = "SELECT PO_ID, MEM_ID, PD_ID, PO_PRICE, PO_TEXT, PO_STATUS, PO_TIME, PO_UTIME, EMP_ID FROM cga105g2.point_order WHERE PO_STATUS = 0";
+		try (Connection con = DriverManager.getConnection(Common.URL, USER, PASSWORD);
+				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY)) {
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				PointOrder pointorder = new PointOrder();
+				pointorder.setPoId(rs.getInt("PO_ID"));
+				pointorder.setMemId(rs.getInt("MEM_ID"));
+				pointorder.setPdId(rs.getInt("PD_ID"));
+				pointorder.setPoPrice(rs.getInt("PO_PRICE"));
+				pointorder.setPoText(rs.getString("PO_TEXT"));
+				pointorder.setPoStatus(rs.getInt("PO_STATUS"));
+				pointorder.setPoTime(rs.getTimestamp("PO_TIME"));
+				pointorder.setPoUtime(rs.getTimestamp("PO_UTIME"));
+				pointorder.setEmpId(rs.getInt("EMP_ID"));
+				list.add(pointorder);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	@Override
+	public void updateStatus(PointOrder pointorder) {
+		String sql = "UPDATE cga105g2.point_order set PO_STATUS=?, PO_UTIME=? where PO_ID = ?";
+		try (Connection con = DriverManager.getConnection(Common.URL, USER, PASSWORD);
+				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY)) {
+			pstmt.setInt(1, pointorder.getPoStatus());
+			java.util.Date utilDate = new java.util.Date();
+			java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(utilDate.getTime());
+			pstmt.setTimestamp(2, null);
+			pstmt.setInt(3, pointorder.getPoId());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args) {
