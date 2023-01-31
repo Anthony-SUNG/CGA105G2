@@ -35,7 +35,7 @@ public class IdFilter extends HttpFilter {
 		System.out.println("memId:"+mId);
 		System.out.println("storeId:"+sId);
 		System.out.println("empId:"+eId);
-		System.out.println("後台條件:"+ ( (eId>=1)&&(sId>=1)&&(mId>=1) ) );
+		System.out.println("後台條件:"+ ((sId>=1)&&(mId>=1)) );
 		System.out.println("========================================");
 		if(requestPath.matches(".*Servlet")&&(eId>=1||sId>=1||mId>=1)){
 			System.out.println("doFilter-1區");

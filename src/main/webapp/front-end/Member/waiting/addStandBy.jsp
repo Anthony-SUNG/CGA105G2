@@ -8,7 +8,11 @@
 
 
 <%
+
 // 	Standby standbyVo =(Standby) request.getAttribute("standbyVo")1; 
+
+	Standby standbyVo =(Standby) request.getAttribute("standbyVo"); 
+
     StandbyDAO dao = new StandbyDAO();
     StandbyService standbySvc = new StandbyService();
     Integer staCount = dao.standByCount();
