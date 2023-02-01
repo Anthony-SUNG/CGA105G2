@@ -149,4 +149,14 @@ public class StoreService {
 		return store;
 	}
 
+	public Store changepwd(Integer storeId, String storePwd) {
+		Store store = new Store();
+
+		store.setStoreId(storeId);
+		store.setStorePwd(storePwd);
+		dao.update4(store);
+
+		return store;
+	}
+
 }

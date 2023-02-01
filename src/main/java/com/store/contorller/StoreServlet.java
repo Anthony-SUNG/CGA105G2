@@ -251,6 +251,70 @@ public class StoreServlet extends HttpServlet {
 			RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 			successView.forward(request, response);
 		}
+		
+	//  chgpwd(update)  	-------------------------------------------------------------------------------------------------------------------------------
+			if ("chgpwd".equals(action)) { // 來自addEmp.jsp的請求
+
+				List<String> errorMsgs = new LinkedList<String>();
+				request.setAttribute("errorMsgs", errorMsgs);
+
+				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/			
+
+				String storepwd = request.getParameter("STORE_PWD").trim();
+				String storepwd2 = request.getParameter("STORE_PWD2").trim();
+				String storepwd3 = request.getParameter("STORE_PWD3").trim();			
+				
+				
+				if (storepwd == null || storepwd.trim().length() == 0) {
+					errorMsgs.add("原始密碼請勿空白");
+				}
+
+				if (storepwd2 == null || storepwd2.trim().length() == 0) {
+					errorMsgs.add("新密碼請勿空白");
+				}
+				
+				if (storepwd3 == null || storepwd3.trim().length() == 0) {
+					errorMsgs.add("確認密碼請勿空白");
+				}
+				
+				if (!storepwd2.equals(storepwd3)) {
+					errorMsgs.add("確認密碼請與密碼相同");
+				}
+				
+				
+				
+				Store Store = new Store();
+				Store.setStorePwd(storepwd2);				
+
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					request.setAttribute("Store", Store); // 含有輸入格式錯誤的empVO物件,也存入req
+					RequestDispatcher failureView = request
+							.getRequestDispatcher("/front-end/store/Login/changepwd2.jsp");
+					failureView.forward(request, response);
+					return;
+				}
+
+				/*************************** 2.開始新增資料 ***************************************/
+				StoreService strSvc = new StoreService();
+				
+				Store store1 = strSvc.signin(strSvc.getById(storeId).getStoreAcc(), storepwd);
+				Integer storeid2 = store1.getStoreId();
+				if (storeid2 == 0) {
+					errorMsgs.add("原始密碼錯誤");
+					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/store/Login/changepwd2.jsp");
+					failureView.forward(request, response);
+					return;// 程式中斷
+				}else {
+					Store = strSvc.changepwd(storeId, storepwd2);
+				}
+
+				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+				String url = "/front-end/store/Login/changepwd2.jsp";
+				RequestDispatcher successView = request.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				successView.forward(request, response);
+
+			}
 
 	}
 

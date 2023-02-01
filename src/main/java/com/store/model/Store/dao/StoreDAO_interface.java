@@ -22,4 +22,5 @@ public interface StoreDAO_interface {
 
     List<Store> getBySsta(Integer sta);
 	public void update3(Store store);
+	public void update4(Store store);
 }

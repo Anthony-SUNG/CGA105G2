@@ -576,5 +576,22 @@ public class StoreDAO implements StoreDAO_interface {
 		
 	}
 
+	@Override
+	public void update4(Store store) {
+		String sql = "UPDATE cga105g2.store set STORE_PWD=? where STORE_ID=?";
+		try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY)) {
+
+			pstmt.setString(1, store.getStorePwd());
+			pstmt.setInt(2, store.getStoreId());
+
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		}
+		
+	}
+
 
 }
