@@ -119,16 +119,19 @@
                         <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
                         <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
                         <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="4"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="5"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="6"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="7"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="8"></li>
                     </ol>
-                     <jsp:useBean id="adSvc" scope="page" class="com.advertise.model.service.AdvertiseService" /> 
                     
+                     <jsp:useBean id="adSvc" scope="page" class="com.advertise.model.service.AdvertiseService" /> 
                     <div class="carousel-inner" style="height: 100%">
+                     <div class="carousel-item active h-100 p-auto">
+                            <img src="/CGA105G2/assets/images/nig.png" class="d-block  h-100 w-auto "
+                                 style="min-width: auto ;margin:0 auto ;position: static !important" alt="...">
+                            <div class="carousel-caption d-none d-md-block h-25">
+                                <h5>4.???</h5>
+                                <p>歡迎聚餐、聚餐、喝酒</p>
+                            </div>
+                        </div>
+                    
                     <c:forEach var="ad" items="${adSvc.status}" >
                         <div class="carousel-item  h-100 p-auto">
                             <img src="<%=request.getContextPath()%>/adServlet?action=getPhoto&adId=${ad.advId}" class="d-block  h-100 w-auto "

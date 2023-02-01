@@ -46,7 +46,7 @@ public class IdFilter extends HttpFilter {
 		}else if (requestPath.matches(".*index.jsp")||requestPath.matches(".*LonginServlet")||requestPath.matches(".*LognIn.*")||
 				requestPath.matches(".*Register.*")||requestPath.matches(".*PassWord.*")||requestPath.matches(".*search.*")||
 				requestPath.matches(".*Page.*")||requestPath.matches(".*addStandBy.*")||requestPath.matches(".*standby.*")||
-				requestPath.matches(".*ECpay.*")||requestPath.matches(".*employeeLogin.jsp.*")
+				requestPath.matches(".*ECpay.*")||requestPath.matches(".*employeeLogin.jsp.*")||requestPath.matches(".*adServlet.*")
 		){
 			System.out.println("doFilter-3區");
 			System.out.println("免登入區");
