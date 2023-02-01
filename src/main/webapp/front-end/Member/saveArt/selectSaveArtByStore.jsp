@@ -129,14 +129,14 @@ pageContext.setAttribute("list", list);
                     <div class="col-12" style="display: flex;">
                         <div class="col-2"></div>
                         <div class="col-2 mr-10 ml-20">
-                            <a href="/CGA105G2/front-end/Member/saveArt/selectSaveArtByStore.jsp">
+                            <a href="<%=request.getContextPath()%>/front-end/Member/saveArt/selectSaveArtByStore.jsp">
                                 <button type="button" class="btn btn-block btn-info active"
                                     style="height: 60px;font-size: 22px;">訂閱店家</button>
                             </a>
                         </div>
 
                         <div class="col-2 mr-10">
-                            <a href="/CGA105G2/front-end/Member/saveArt/selectSaveArtByMember.jsp">
+                            <a href="<%=request.getContextPath()%>/front-end/Member/saveArt/selectSaveArtByMember.jsp">
                                 <button type="button" class="btn btn-block btn-primary"
                                     style="height: 60px;font-size: 22px;">追蹤會員</button>
                             </a>
@@ -176,7 +176,7 @@ pageContext.setAttribute("list", list);
                             <div class="col-md-1 border">
                                 <div class="position-relative snipimage"
                                     style="height: 100px;text-align: center;line-height: 100px;">
-                                    <img src="/assets/images/ex1.jpg"
+                                    <img src="https://via.placeholder.com/450x350"
                                         style="width: 100%;height: 70%;border: 3px solid rgb(255, 216, 87);">
                                 </div>
                             </div>

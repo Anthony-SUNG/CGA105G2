@@ -236,11 +236,11 @@
             
                                         </div>
                                         <div class="poststore_text" style="margin-left: 5px;align-items: center;display: flex;">
-            
+            							<a href="${pageContext.request.contextPath}/LonginServlet?action=StorePage&SearchstoreId=${article.store.storeId}">
                                             <span class="post_name" style="font-size: 30px;font-weight: 1000;">
                                                 ${article.store.storeName}
                                             </span>
-            
+            							</a>
                                         </div>
                                     </div>
 

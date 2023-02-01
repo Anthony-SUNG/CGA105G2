@@ -94,7 +94,7 @@
     <div class="p-4 pt-5">
         <ul class="list-unstyled components mb-5">
             <li class="my-4">
-                <a href="/CGA105G2/front-end/Member/art/listArt.jsp">
+                <a href="<%=request.getContextPath()%>/front-end/Member/art/listArt.jsp">
                     <h2>My Home</h2>
                 </a>
             </li>
@@ -102,8 +102,8 @@
                 <a href="#pageSubmenu1" data-toggle="show" aria-expanded="false" class="dropdown fs-md-6">🔻我的收藏</a>
                 <ul class="list-unstyled  " id="pageSubmenu1">
                     
-                    <li><a href="/CGA105G2/front-end/Member/saveArt/selectSaveArtByMember.jsp" class="nav-link">🔆追蹤會員</a></li>
-                    <li><a href="/CGA105G2/front-end/Member/saveArt/selectSaveArtByStore.jsp" class="nav-link">🔆訂閱店家</a>
+                    <li><a href="<%=request.getContextPath()%>/front-end/Member/saveArt/selectSaveArtByMember.jsp" class="nav-link">🔆追蹤會員</a></li>
+                    <li><a href="<%=request.getContextPath()%>/front-end/Member/saveArt/selectSaveArtByStore.jsp" class="nav-link">🔆訂閱店家</a>
                         <hr>
                     </li>
                 </ul>
