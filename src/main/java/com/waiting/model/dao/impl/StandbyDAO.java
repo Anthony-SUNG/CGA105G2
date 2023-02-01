@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class StandbyDAO implements StandbyDAO_interface {
@@ -209,17 +210,27 @@ public class StandbyDAO implements StandbyDAO_interface {
 //		System.out.println(standbyVo3.getStaTime());
 //		System.out.println(standbyVo3.getStaStatus());
 
+		
 		// getall
 		List<Standby> list = dao.getAll();
-		for (Standby waitingVo4 : list) {
-			System.out.println(waitingVo4.getStaId());
-			System.out.println(waitingVo4.getStoreId());
-			System.out.println(waitingVo4.getStaName());
-			System.out.println(waitingVo4.getStaPhone());
-			System.out.println(waitingVo4.getStaNumber());
-			System.out.println(waitingVo4.getStaStatus());
-			System.out.println("------------------------");
+		List<Standby> list2 = new ArrayList<Standby>();
+		
+		for(Standby listt: list) {
+			list2.add(listt);
 		}
+		for(Standby list3: list2) {
+			System.out.println(list3.getStaId());
+			
+		}
+//		for (Standby waitingVo4 : list) {
+//			System.out.println(waitingVo4.getStaId());
+//			System.out.println(waitingVo4.getStoreId());
+//			System.out.println(waitingVo4.getStaName());
+//			System.out.println(waitingVo4.getStaPhone());
+//			System.out.println(waitingVo4.getStaNumber());
+//			System.out.println(waitingVo4.getStaStatus());
+//			System.out.println("------------------------");
+//		}
 
 //		count
 		System.out.println(dao.standByCount());
