@@ -2,6 +2,7 @@ package com.store.model.service;
 
 import com.code.model.Code.pojo.Code;
 import com.code.model.service.CodeService;
+import com.member.model.Member.pojo.Member;
 import com.store.model.Store.dao.StoreDAO_interface;
 import com.store.model.Store.dao.impl.StoreDAO;
 import com.store.model.Store.pojo.Store;
@@ -136,6 +137,16 @@ public class StoreService {
 
 	public List<Store> getStoreList() {
 		return dao.getAll();
+	}
+
+	public Store forget1(String storeAcc, String storePwd) {
+		Store store = new Store();
+
+		store.setStoreAcc(storeAcc);
+		store.setStorePwd(storePwd);
+		dao.update3(store);
+
+		return store;
 	}
 
 }

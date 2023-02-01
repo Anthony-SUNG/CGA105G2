@@ -161,7 +161,7 @@
                                                     <label class="checkbox-wrap checkbox-primary mb-0">註冊</label>
                                                 </div>
                                                 <div class="w-50 text-md-right">
-                                                    <a href="#">忘記密碼</a>
+                                                    <a href="/CGA105G2/front-end/Member/member/forget2.jsp">忘記密碼</a>
                                                 </div>
                                             </div>
                                         </form>
