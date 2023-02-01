@@ -201,10 +201,11 @@
                                         </div>
                                         <div class="poststore_text"
                                              style="margin-left: 5px;align-items: center;display: flex;">
-            
+            							<a href="/CGA105G2/LonginServlet?action=StorePage&SearchstoreId=${articlelist.store.storeId}">
                                             <span class="post_name" style="font-size: 30px;font-weight: 1000;">
                                                     ${articlelist.store.storeName}
                                             </span>
+                                        </a>
 
                                         </div>
                                         <c:if test="${not empty articlelist.artTag}">
