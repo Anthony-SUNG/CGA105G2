@@ -104,10 +104,8 @@
 
                     <div>
                         <c:if test="${not empty errorMsgs}">
-                            <ul>
-                                <li style="color: red"> ${errorMsgs.error1} </li>
-                                <li style="color: red"> ${errorMsgs.error2} </li>
-                            </ul>
+                                <h4 style="color: red"> ${errorMsgs.error1}</h4>
+                                <h4 style="color: red"> ${errorMsgs.error2}</h4>
                         </c:if>
                     </div>
                     </c:if>
