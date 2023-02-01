@@ -113,6 +113,7 @@ public class MemberService {
 		member.setMemPwd(memPwd);
 		dao.update3(member);
 		
+		
 		return member;
 	}
 }

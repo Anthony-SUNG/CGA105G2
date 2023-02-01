@@ -296,16 +296,16 @@ public class LonginServlet extends HttpServlet {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/			
 
 				String memacc = request.getParameter("MEM_ACC").trim();
+				String mempwd = request.getParameter("MEM_PWD").trim();
+				String mempwd2 = request.getParameter("MEM_PWD2").trim();
 				if (memacc == null || memacc.trim().length() == 0) {
 					errorMsgs.add("帳號請勿空白");
 				}
 
-				String mempwd = request.getParameter("MEM_PWD").trim();
 				if (mempwd == null || mempwd.trim().length() == 0) {
 					errorMsgs.add("密碼請勿空白");
 				}
 
-				String mempwd2 = request.getParameter("MEM_PWD2").trim();
 				if (mempwd2 == null || mempwd2.trim().length() == 0) {
 					errorMsgs.add("確認密碼請勿空白");
 				}
@@ -326,6 +326,14 @@ public class LonginServlet extends HttpServlet {
 				/*************************** 2.開始新增資料 ***************************************/
 				MemberService memSvc = new MemberService();
 				Member = memSvc.forget1(memacc, mempwd);
+				Member member1 = memSvc.signin(memacc, mempwd);
+				Integer memid = member1.getMemId();
+				if (memid == 0) {
+					errorMsgs.add("查無帳號");
+					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/Member/member/forget1.jsp");
+					failureView.forward(request, response);
+					return;// 程式中斷
+				}
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/front-end/Member/member/memberLognIn.jsp";
