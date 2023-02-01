@@ -105,4 +105,7 @@ public class MemberService {
 	public Member getById(Integer memId) {
 		return dao.getById(memId);
 	}
+	public List<Member> getAllByAcc(String memAcc) {
+		return dao.getAllByAcc(memAcc);
+	}
 }
