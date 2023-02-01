@@ -126,79 +126,18 @@
                         <li data-target="#carouselExampleCaptions" data-slide-to="7"></li>
                         <li data-target="#carouselExampleCaptions" data-slide-to="8"></li>
                     </ol>
+                     <jsp:useBean id="adSvc" scope="page" class="com.advertise.model.service.AdvertiseService" /> 
+                    
                     <div class="carousel-inner" style="height: 100%">
-                        <div class="carousel-item active h-100 p-auto">
-                            <img src="/CGA105G2/assets/images/nig.png" class="d-block  h-100 w-auto "
+                    <c:forEach var="ad" items="${adSvc.status}" >
+                        <div class="carousel-item  h-100 p-auto">
+                            <img src="<%=request.getContextPath()%>/adServlet?action=getPhoto&adId=${ad.advId}" class="d-block  h-100 w-auto "
                                  style="min-width: auto ;margin:0 auto ;position: static !important" alt="...">
                             <div class="carousel-caption d-none d-md-block h-25">
-                                <h5>1.阿雄麵店</h5>
-                                <p>歡迎聚餐、聚餐、喝酒</p>
-                            </div>
+                            </div>           
                         </div>
-                        <div class="carousel-item h-100 p-auto">
-                            <img src="/CGA105G2/assets/images/tenor.gif" class="d-block  h-100 w-auto "
-                                 style="min-width: auto ;margin:0 auto ;position: static !important" alt="...">
-                            <div class="carousel-caption d-none d-md-block h-25">
-                                <h5>2.麥當勞歡唱無限</h5>
-                                <p>歡迎聚餐、聚餐、喝酒</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item h-100 p-auto">
-                            <img src="/CGA105G2/assets/images/nig.png" class="d-block  h-100 w-auto "
-                                 style="min-width: auto ;margin:0 auto ;position: static !important" alt="...">
-                            <div class="carousel-caption d-none d-md-block h-25">
-                                <h5>3.偉育尾牙聚餐</h5>
-                                <p>歡迎聚餐、聚餐、喝酒</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item h-100 p-auto">
-                            <img src="/CGA105G2/assets/images/nig.png" class="d-block  h-100 w-auto "
-                                 style="min-width: auto ;margin:0 auto ;position: static !important" alt="...">
-                            <div class="carousel-caption d-none d-md-block h-25">
-                                <h5>4.???</h5>
-                                <p>歡迎聚餐、聚餐、喝酒</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item h-100 p-auto">
-                            <img src="/CGA105G2/assets/images/nig.png" class="d-block  h-100 w-auto "
-                                 style="min-width: auto ;margin:0 auto ;position: static !important" alt="...">
-                            <div class="carousel-caption d-none d-md-block h-25">
-                                <h5>5.???</h5>
-                                <p>歡迎聚餐、聚餐、喝酒</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item h-100 p-auto">
-                            <img src="/CGA105G2/assets/images/tenor.gif" class="d-block  h-100 w-auto "
-                                 style="min-width: auto ;margin:0 auto ;position: static !important" alt="...">
-                            <div class="carousel-caption d-none d-md-block h-25">
-                                <h5>6.???</h5>
-                                <p>歡迎聚餐、聚餐、喝酒</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item h-100 p-auto">
-                            <img src="/CGA105G2/assets/images/nig.png" class="d-block  h-100 w-auto "
-                                 style="min-width: auto ;margin:0 auto ;position: static !important" alt="...">
-                            <div class="carousel-caption d-none d-md-block h-25">
-                                <h5>7.麥當勞歡唱無限</h5>
-                                <p>歡迎聚餐、聚餐、喝酒</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item h-100 p-auto">
-                            <img src="/CGA105G2/assets/images/tenor.gif" class="d-block  h-100 w-auto "
-                                 style="min-width: auto ;margin:0 auto ;position: static !important" alt="...">
-                            <div class="carousel-caption d-none d-md-block h-25">
-                                <h5>8.???</h5>
-                                <p>歡迎聚餐、聚餐、喝酒</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item h-100 p-auto">
-                            <img src="/CGA105G2/assets/images/nig.png" class="d-block  h-100 w-auto "
-                                 style="min-width: auto ;margin:0 auto ;position: static !important" alt="...">
-                            <div class="carousel-caption d-none d-md-block h-25">
-                                <h5>9.???</h5>
-                                <p>歡迎聚餐、聚餐、喝酒</p>
-                            </div>
-                        </div>
+                </c:forEach> 
+                       
                     </div>
 
                     <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button"
