@@ -10,6 +10,14 @@ import java.util.List;
 
 
 public class SubscribeJDBCDAO implements Subscribe_interface {
+	
+	static {
+		  try {
+		   Class.forName("com.mysql.cj.jdbc.Driver");
+		  } catch (Exception e) {
+		   e.printStackTrace();
+		  }
+		 }
 
 	@Override
 	public void insert(Subscribe Subscribe) {
@@ -95,6 +103,38 @@ public class SubscribeJDBCDAO implements Subscribe_interface {
 		} 
 		return Subscribe;
 	}
+	
+	public Subscribe getByMemIdStoreId(Integer storeId, Integer memId ) {
+		String sql =
+				"SELECT * FROM cga105g2.SUBSCRIBE where MEM_ID = ? and STORE_ID = ?";
+		Subscribe Subscribe = null;
+
+		ResultSet rs = null;
+
+		try (Connection con= DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+	            PreparedStatement pstmt=con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)){
+
+
+			pstmt.setInt(1, storeId);
+			pstmt.setInt(1, memId);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				Subscribe = new Subscribe();
+				Subscribe.setSubId(rs.getInt("SUB_ID"));
+				Subscribe.setStoreId(rs.getInt("STORE_ID"));
+				Subscribe.setMemId(rs.getInt("MEM_ID"));
+
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		
+		} 
+		return Subscribe;
+	}
 
 	public List<Subscribe> getAllByMemId(Integer memId) {
 		String sql =
@@ -127,8 +167,40 @@ public class SubscribeJDBCDAO implements Subscribe_interface {
 		} 
 		return list;
 	}
+	
+	public List<Subscribe> getAllByMemIdStoreId(Integer storeId, Integer memId) {
+		String sql =
+				"SELECT * FROM cga105g2.SUBSCRIBE where STORE_ID = ? and MEM_ID = ?";
+		List<Subscribe> list = new ArrayList<Subscribe>();
+		Subscribe Subscribe = null;
 
+		ResultSet rs = null;
 
+		try(Connection con= DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+	            PreparedStatement pstmt=con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+
+			
+			pstmt.setInt(1, storeId);
+			pstmt.setInt(2, memId);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				
+				Subscribe = new Subscribe();
+				Subscribe.setStoreId(rs.getInt("STORE_ID"));
+				Subscribe.setMemId(rs.getInt("MEM_ID"));
+
+				list.add(Subscribe);
+			}
+
+		
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			
+		} 
+		return list;
+	}
+	
 	public List<Subscribe> getAllBystoreId(Integer storeId) {
 		String sql =
 				"SELECT * FROM cga105g2.SUBSCRIBE where STORE_ID = ?";
@@ -189,9 +261,9 @@ public class SubscribeJDBCDAO implements Subscribe_interface {
 		Subscribe Subscribe = new Subscribe();
 		
 		//新增
-//		Subscribe.setStoreId(4);
-//		Subscribe.setMemId(2);
-//		subscribeJDBCDAO.insert(Subscribe); // insert成功
+		Subscribe.setStoreId(4);
+		Subscribe.setMemId(6);
+		subscribeJDBCDAO.insert(Subscribe); // insert成功
 		//查詢by MemId
 //		Subscribe = subscribeJDBCDAO.getByMemId(2);
 //		System.out.println("SUB_ID:" + Subscribe.getSubId());
