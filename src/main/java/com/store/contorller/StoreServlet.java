@@ -316,6 +316,17 @@ public class StoreServlet extends HttpServlet {
 
 			}
 
+		//  plan1(update)  	-------------------------------------------------------------------------------------------------------------------------------
+					if ("plan1".equals(action)) {
+
+						StoreService strSvc = new StoreService();
+						Store Store = strSvc.updateplan(storeId);						
+
+						String url = "/front-end/store/Login/changepwd2.jsp";
+						RequestDispatcher successView = request.getRequestDispatcher(url); 
+						successView.forward(request, response);
+
+					}
 	}
 
 }

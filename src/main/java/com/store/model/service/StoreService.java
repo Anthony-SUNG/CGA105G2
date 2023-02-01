@@ -159,4 +159,8 @@ public class StoreService {
 		return store;
 	}
 
+	public Store updateplan(Integer storeId) {
+		return updateplan(storeId);
+	}
+
 }

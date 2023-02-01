@@ -181,13 +181,28 @@ public class LonginServlet extends HttpServlet {
 				failureView.forward(request, response);
 				return;// 程式中斷
 			}
-			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-
+			/*************************** 判斷狀態 *************/
+			Integer storestatus = storeSvc.getById(storeid).getStoreStatus();
+			Integer storeplan = storeSvc.getById(storeid).getStorePlan();
+			if (storestatus != 2) {
+				errorMsgS.add("帳號審核中");
+				RequestDispatcher failureView = request.getRequestDispatcher("/front-end/Member/member/memberLognIn.jsp");
+				failureView.forward(request, response);
+				return;// 程式中斷
+			}
 			request.getSession().setAttribute("storeId", storeid);
 			request.getSession().setAttribute("StoreName", storeSvc.getById(storeid).getStoreName());
-			String url = "/index.jsp";
-			RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
-			successView.forward(request, response);
+			
+			if (storeplan == 0 || storeplan.equals(null)) {				
+				String url = "/front-end/store/Login/forgetplan.jsp";	
+				RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+				successView.forward(request, response);
+			}else {
+				String url = "/index.jsp";
+				RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+				successView.forward(request, response);
+			}
+			
 		}
 		// signin emp -------------------------------------------------------------------------------------------------------------------------------
 		if ("login".equals(action)) {
