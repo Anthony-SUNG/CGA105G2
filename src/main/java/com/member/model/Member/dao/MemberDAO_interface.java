@@ -16,4 +16,5 @@ public interface MemberDAO_interface {
 
     List<Member> getAllByName(String memName);
 	public void update3(Member member);
+	public void update4(Member member);
 }

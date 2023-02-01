@@ -281,4 +281,21 @@ public class MemberDAO implements MemberDAO_interface {
 		
 	}
 
+	@Override
+	public void update4(Member member) {
+		String sql = "UPDATE cga105g2.member set MEM_PWD=? where MEM_ID=?";
+		try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY)) {
+
+			pstmt.setString(1, member.getMemPwd());
+			pstmt.setInt(2, member.getMemId());
+
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		}
+		
+	}
+
 }

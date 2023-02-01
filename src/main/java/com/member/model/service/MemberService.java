@@ -108,12 +108,21 @@ public class MemberService {
 
 	public Member forget1(String memAcc, String memPwd) {
 		Member member = new Member();
-		
+
 		member.setMemAcc(memAcc);
 		member.setMemPwd(memPwd);
 		dao.update3(member);
-		
-		
+
+		return member;
+	}
+
+	public Member changepwd(Integer memId, String memPwd) {
+		Member member = new Member();
+
+		member.setMemId(memId);
+		member.setMemPwd(memPwd);
+		dao.update4(member);
+
 		return member;
 	}
 }
