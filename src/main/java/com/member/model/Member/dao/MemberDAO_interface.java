@@ -16,4 +16,6 @@ public interface MemberDAO_interface {
 
     List<Member> getAllByName(String memName);
     List<Member> getAllByAcc(String memAcc); //CJ 0125
+    public void update3(Member member);
+    public void update4(Member member);
 }

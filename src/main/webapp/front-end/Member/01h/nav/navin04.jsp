@@ -52,9 +52,7 @@
                     <li>
                         <hr><a href="/CGA105G2/Member/MemberServlet?action=MemberInfo" class="nav-link">🔆基本資料</a>
                     </li>
-                    <li><a href="/CGA105G2/BlankPage/Loader2.jsp" class="nav-link">🔆收件地址</a></li>
-                    <li><a href="/CGA105G2/BlankPage/Loader2.jsp" class="nav-link">🔆付款方式</a></li>
-                    <li><a href="/CGA105G2/BlankPage/Loader2.jsp" class="nav-link">🔆變更密碼</a>
+                    <li><a href="/CGA105G2/front-end/Member/member/changepwd.jsp" class="nav-link">🔆變更密碼</a>
                         <hr>
                     </li>
                 </ul>

@@ -203,20 +203,32 @@
     integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
     crossorigin="anonymous"></script>
   <script>
-    window.addEventListener("DOMContentLoaded", function (event) {
-      <c:forEach var="empRoot" items="${empRoot}" >
-      let e =${empRoot.rootId};
-      if (e === 2) {
-        $("#a1").attr('class', 'nav-link text-uppercase');
-      } else if (e === 3) {
-        $("#a2").attr('class', 'nav-link text-uppercase');
-      } else if (e === 4) {
-        $("#a3").attr('class', 'nav-link text-uppercase');
-      } else if (e === 5) {
-        $("#a4").attr('class', 'nav-link text-uppercase');
-      }
+      const list=[];
+      <c:forEach var="empRoot" items="${empRoot}">
+      list.push(${empRoot.rootId});
       </c:forEach>
-    });
+      for (let e of list){
+          switch (e){
+              case 1:
+                  $("#a2").removeClass("disabled");
+                  $("#a3").removeClass("disabled");
+                  $("#a4").removeClass("disabled");
+                  $("#a5").removeClass("disabled");
+                  break;
+              case 2:
+                  $("#a2").removeClass("disabled");
+                  break;
+              case 3:
+                  $("#a3").removeClass("disabled");
+                  break;
+              case 4:
+                  $("#a4").removeClass("disabled");
+                  break;
+              case 5:
+                  $("#a5").removeClass("disabled");
+                  break;
+          }
+      }
   </script>
 
 </body>
