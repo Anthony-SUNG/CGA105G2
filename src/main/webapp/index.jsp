@@ -100,13 +100,10 @@
                         </select>
                         <button class="btn btn-outline-warning  my-sm-0 my-5 ml-5" type="submit">開始瀏覽</button>
                     </form>
-
                     <div>
                         <c:if test="${not empty errorMsgs}">
-                            <ul>
-                                <li style="color: red"> ${errorMsgs.error1} </li>
-                                <li style="color: red"> ${errorMsgs.error2} </li>
-                            </ul>
+                                <h4 style="color: red"> ${errorMsgs.error1}</h4>
+                                <h4 style="color: red"> ${errorMsgs.error2}</h4>
                         </c:if>
                     </div>
                     </c:if>

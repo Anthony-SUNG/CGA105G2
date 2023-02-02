@@ -24,7 +24,7 @@
         <div class="container mt-17 mb-17">
             <div class="col-md-9  card shadow m-5">
                 <h1 class=" m-5 text-center"><i class="fa-solid fa-user"></i>訂位資訊</h1>
-                <form METHOD="post" action="<%=request.getContextPath()%>/front-end/store/food_order/food_order.do"
+                <form METHOD="post" action="<%=request.getContextPath()%>/front-end/Member/food_order/food_order.do"
                       style="padding: 10px 100px;" autocomplete="off">
                     <div class="input-group input-group-lg mb-5">
                         <span class="input-group-text" id="inputGroup-sizing-lg1"><i class="fa-solid fa-store"></i>店家名稱 : </span>
@@ -104,7 +104,7 @@
     $("a:contains(🗃️管理)").closest("a").addClass("active disabled topage");
     $("a:contains(🔻訂位)").closest("a").attr("data-toggle", "show");
     $("#pageSubmenu3").removeClass("collapse");
-    $("#pageSubmenu3 a:contains(🔆訂位預約)").closest("a").addClass("active disabled bg-white topage");
+    $("#pageSubmenu3 a:contains(🔆預約查詢)").closest("a").addClass("active disabled bg-white topage");
 </script>
 <script>
     var order_time_list = [

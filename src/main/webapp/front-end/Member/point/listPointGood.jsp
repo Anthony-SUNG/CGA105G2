@@ -5,7 +5,7 @@
 <%@ page import="com.point.model.service.PointGoodsService" %>
 <%
     PointGoodsService pointgoodsSvc = new PointGoodsService();
-    List<PointGoods> list = pointgoodsSvc.getAll();
+    List<PointGoods> list = pointgoodsSvc.getAlready();
     pageContext.setAttribute("list", list);
 %>
 <!DOCTYPE html>
@@ -18,29 +18,6 @@
 
     <title>💰point</title>
     <style>
-        body {
-            height: 100%;
-        }
-
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
-        a {
-            color: black;
-        }
-
         /* 商品名稱 */
         .fw-bolder {
             font-size: 1.3rem;
@@ -70,7 +47,9 @@
         }
     </style>
 </head>
+
 <body>
+<div id="page-start-anchor"></div>
 <!-- header start -->
 <%@ include file="/front-end/Member/01h/headerin.jsp" %>
 <!-- header end -->
@@ -81,33 +60,16 @@
         <%@ include file="/front-end/Member/01h/nav/navin01.jsp" %>
         <!-- nav end -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 p-0">
-            <section class="section jarallax text-white" data-jarallax data-speed="0.2">
-                <!-- <img class="section-background-image jarallax-img" src="./images/tenor.gif" alt="background image" /> -->
-                <div class="section-background-color"
-                     style="background: linear-gradient(to right top, rgb(25, 182, 143), rgb(68, 100, 148)) rgb(25, 182, 143); padding-top: 120px; padding-bottom: 40px;">
-                </div>
-                <div class="section-content container d-flex flex-column align-items-center">
-            <span
-                    class="badge badge-pill badge-ghost fs-2 font-family-dark text-uppercase font-weight-bold letter-spacing-caption">
-              FoodMap
-            </span>
-                    <h1 class="mt-5 mb-17 fs-10 fs-md-10">點數商城</h1>
-                </div>
-            </section>
-
             <section class="py-5">
                 <div class="container px-4 px-lg-5 mt-5">
                     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
-                        <c:forEach var="PointGoods" items="${list}">
+                        <%@ include file="/back-end/pointgood/page1.jsp" %>
+                        <c:forEach var="PointGoods" items="${list}" begin="<%=pageIndex%>"
+                                   end="<%=pageIndex+rowsPerPage-1%>">
                             <div class="col mb-5">
                                 <div class="card h-100">
-                                    <!-- Product image-->
-                                    <a href="http://127.0.0.1:5502/CGA105G2/home/PointGood_item1.html">
-                                        <img class="card-img-top"
-                                             src="https://images.pexels.com/photos/3768323/pexels-photo-3768323.jpeg?auto=compress&cs=tinysrgb&w=600"
-                                             alt="..."/>
-                                    </a>
+                                    <!--Product image -->
+                                    <img src="${pageContext.request.contextPath}/PointServlet?action=getPdImg&pdId=${PointGoods.pdId}" width= 260px height= 300px >
                                     <!-- Product details-->
                                     <div class="card-body p-4">
                                         <div class="text-center">
@@ -126,34 +88,41 @@
                                 </div>
                             </div>
                         </c:forEach>
-
-                        <nav aria-label="Page navigation example   justify-content-center" class="m-5 ">
-                            <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">上一頁</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">下一頁</a></li>
-                            </ul>
-                        </nav>
                     </div>
                 </div>
             </section>
+            <br>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <nav aria-label="Page navigation example   justify-content-center" class="m-5 ">
+                    <ul class="pagination">
+                        <%@ include file="/back-end/pointgood/page2.jsp" %>
+                    </ul>
+                </nav>
+            </div>
         </main>
     </div>
+
 </div>
+
 <!-- main -->
 <!-- footer start -->
 <%@ include file="/front-end/Member/01h/footerin.jsp" %>
 <!-- footer end -->
-<!-- sticky-sidebar -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
 <script>
     $("a:contains(💰point)").closest("a").addClass("active disabled topage");
-    let a = new StickySidebar("#sidebar", {
-        topSpacing: 30,
-        bottomSpacing: 20,
-        leftSpacing: 30,
-        containerSelector: ".container",
-        innerWrapperSelector: ".sidebar__inner"
+    $("a:contains(💰點數商城)").closest("a").attr("data-toggle", "show");
+    $("#pageSubmenu1").removeClass("collapse");
+    $("#pageSubmenu1 a:contains(🔆點數商品)").closest("a").addClass("active disabled bg-white topage");
+</script>
+<script>
+
+    $(document).ready(function () {
+
+        $("#pointgooditem").click(function () {
+            //输入另一个页面的链接
+            //我的跳转到controller中的toIntroduction这个方法中进行的页面跳转
+            window.location.href = "pointItemPage.jsp";
+        });
     });
 
 </script>

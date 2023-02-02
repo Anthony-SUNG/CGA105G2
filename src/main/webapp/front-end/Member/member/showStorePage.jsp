@@ -1,12 +1,14 @@
+<%@page import="java.util.List" %>
+<%@page import="com.subs.model.Subscribe.pojo.Subscribe" %>
+<%@page import="com.subs.model.service.SubsService" %>
 <%@ page import="com.store.model.Store.pojo.Store" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <%
-    Store store1 = (Store) request.getAttribute("store");
-    String a = store1.getStoreMap();
-    String[] parts = a.split(",");
+
 %>
 
 <!DOCTYPE html>
@@ -18,7 +20,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <title>🗃️管理</title>
+    <link rel="stylesheet" href="/CGA105G2/assets/css/StorePage.css"/>
 
+    <link rel="stylesheet" href="/CGA105G2/assets/css/StorePage.css"/>
     <style>
         #map {
             height: 160px;
@@ -53,21 +57,38 @@
                     </div>
                     <div>
                         <div class="i" style="padding: 0;">
+
                             <p style="line-height: 1; font-size: 35px;margin-top: 15px;margin-bottom: 13px;padding: 0;font-weight: 600;">
                                 ${store.storeName}
                             </p>
+
                         </div>
-                        <div class="i">
-                <span style="font-size: 20px;padding: 5px 15px;border-radius:15px ;background-color: rgb(255, 112, 60);">4.7
+                        <c:if test="${ StoreScore >= 0 }">
+                            <div class="i">
+                <span style="font-size: 20px;padding: 5px 15px;border-radius:15px ;background-color: rgb(255, 112, 60);font-weight:1000;">${StoreScore}
                   <i class="fa-solid fa-star" style="color: rgb(249, 249, 106);"></i>
                 </span>
-                        </div>
+                                <span style="font-size: 20px;padding: 5px 5px;font-color:gray">(${commemt}則評論)</span>
+                            </div>
+                        </c:if>
+
+                        <c:if test="${empty StoreScore}">
+                            <div class="i">
+                <span style="font-size: 22px;font-weight:1000;">(0則評論)
+                  
+                </span>
+                            </div>
+                        </c:if>
+                        <!--                 哈哈 -->
+
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-4">
                         <div>
+                            <!--                         ==============這是google地圖====================== -->
                             <div id="map"></div>
+                            <!--                         ==============這是google地圖====================== -->
                         </div>
                     </div>
                     <div class="col-8">
@@ -83,10 +104,32 @@
                         </div>
                         <!-- ==============訂閱按鈕開始====================== -->
                         <div class="subscribe_div" , style="margin-top: 10px;">
-                            <button class="button button-like">
-                                <i class="fa fa-heart"></i>
-                                <span id="subscribe_store">訂閱店家</span>
-                            </button>
+
+                            <c:if test="${subslist.size() == 0}">
+                                <form method="post" action="/CGA105G2/MyFavoriteServlet" name="">
+                                    <input type="hidden" name="subStoreId" value="${store.storeId}">
+                                    <input type="hidden" name="subMemId" value="${member.memId}">
+                                    <button class="button button-like" type="submit" onclick="insertSubs()"
+                                            id="insertSubs">
+                                        <i class="fa fa-heart"></i>
+                                        <span>訂閱店家</span>
+                                    </button>
+                                    <input type="hidden" name="action" value="insertSubs">
+                                </form>
+                            </c:if>
+                            <c:if test="${subslist.size() != 0 }">
+                                <form method="post" action="/CGA105G2/MyFavoriteServlet" name="">
+                                    <input type="hidden" name="subStoreId" value="${store.storeId}" id="subStoreId">
+                                    <input type="hidden" name="subMemId" value="${member.memId}" id="subMemId">
+                                    <button class="button button-like liked" type="submit" onclick="deleteSubs()"
+                                            id="deleteSubs">
+                                        <i class="fa fa-heart"></i>
+                                        <span id="subscribe_store">已訂閱</span>
+                                    </button>
+                                    <input type="hidden" name="action" value="deleteSubsbyPage">
+                                </form>
+
+                            </c:if>
 
                             <!-- modal開啟後之背景 -->
                             <div class="modal-overlay">
@@ -113,17 +156,23 @@
                 <div>
                     <div>
                         <a href="">
-                            <button id="store_standby" type="button" class="btn btn-success btn-block"
-                                    style="font-size:28px;border:0;">線上候位
-                            </button>
+                            <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/standby">
+                                <input type="hidden" name="foodorder_storeId" value="${store.storeId}">
+                                <input type="hidden" name="action" value="Member_order_button">
+                                <button id="store_standby" type="button" class="btn btn-success btn-block"
+                                        style="font-size:28px;border:0;">線上候位
+                                </button>
+                            </FORM>
                         </a>
                     </div>
                     <div>
-                        <a href="">
-                            <button id="store_order" type="button" class="btn btn-success btn-block mt-5"
+                        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/Member/food_order/food_order.do">
+                            <button id="store_order" type="submit" class="btn btn-success btn-block mt-5"
                                     style="font-size:28px;border:0;background-color: #216a51;">立即訂位
                             </button>
-                        </a>
+                            <input type="hidden" name="action" value="Member_order_button">
+                            <input type="hidden" name="foodorder_storeId" value="${store.storeId}">
+                        </FORM>
                     </div>
                     <div>
                         <a href="">
@@ -245,86 +294,68 @@
 
             <div class="d-flex justify-content-center row">
                 <!-- ==============第一則評論================== -->
-                <ol class="member_postinstore" style="list-style: none;padding: 0;">
-                    <li>
+                <ol class="member_postinstore col-12" style="list-style: none;padding: 0;">
+                    <c:if test="${articlelist.size() == 0}">
                         <div class="col-12" style="padding: 15px 0px 0px 0px;">
-                            <div style="background-color: white;">
-                                <div class="d-flex flex-row user p-2"><img class="rounded-circle"
-                                                                           src="/CGA105G2/assets/images/ex1.jpg"
-                                                                           width="60px">
-                                    <div class="d-flex flex-column ml-2"><span
-                                            class="name font-weight-bold">江詩傑</span><span>2022-12-23</span>
+                            <div class="col-12" style="background-color: white;height:150px;line-height:120px;">
+                                <div class="col-12 d-flex flex-row user p-2 pt-5">
+                                    <p style="font-size:30px;font-weight:1000;margin-left:380px">
+                                        目前暫無評論
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                    <c:if test="${articlelist.size() != 0}">
+                        <c:forEach var="articlelist" items="${articlelist}">
+                            <li>
+                                <div class="col-12" style="padding: 15px 0px 0px 0px;">
+                                    <div class="col-12" style="background-color: white;">
+                                        <div class="col-12 d-flex flex-row user p-2 pt-5">
+                                            <c:if test="${not empty articlelist.member.memPic}">
+                                                <img class="rounded-circle"
+                                                     src="${pageContext.request.contextPath}/LonginServlet?action=getOtherMemberPhoto&memId=${articlelist.memId}"
+                                                     style="width:60px;">
+                                            </c:if>
+                                            <c:if test="${empty articlelist.member.memPic}">
+                                                <img class="rounded-circle"
+                                                     src="https://i.pinimg.com/564x/07/c4/72/07c4720d19a9e9edad9d0e939eca304a.jpg"
+                                                     alt="" style="width:60px;"/>
+                                            </c:if>
+                                            <a href="/CGA105G2/LonginServlet?action=MemberPage&SearchMemberId=${articlelist.member.memId}">
+                                                <div class="col-12 d-flex flex-column"><span
+                                                        class="name font-weight-bold">${articlelist.member.memName}</span><span><fmt:formatDate
+                                                        value="${articlelist.artTime}" pattern="yyyy-MM-dd"/></span>
+                                                </div>
+                                            </a>
+                                            <c:if test="${not empty articlelist.artTag}">
+                                        <span
+                                                style="font-size: 20px;padding: 8px 12px;border-radius:15px ;margin-left: 10px;background-color: rgb(82, 206, 156);color: white;line-height:25px;height:40px;margin-top:10px">#${articlelist.artTag}
+                                        </span>
+                                            </c:if>
+                                        </div>
+                                        <!-- =================評分====================== -->
+                                        <div style="padding-left:10px;font-size: 15px; ">
+                    <span style="background-color:rgb(255, 112, 60);padding: 4px 10px;border-radius: 20px;">${articlelist.artScore} <i
+                            class="fa-solid fa-star" style="color: rgb(249, 249, 106);">
+                      </i></span>
+                                        </div>
+                                        <div class="mt-2 pb-5 pl-5 pr-5">
+                                            <p class="comment-content" style="font-size: 18px;">
+                                                    ${articlelist.artText}.</p>
+                                        </div>
+
+                                        <div class="d-flex align-items-center p-8 border-top Thumbs">
+                                            <i class="fa-regular fa-thumbs-up" style="position: absolute;right: 20px;">
+                                                讚</i>
+
+                                        </div>
                                     </div>
 
                                 </div>
-                                <!-- =================評分====================== -->
-                                <div style="padding-left:10px;font-size: 15px; ">
-                    <span style="background-color:rgb(255, 112, 60);padding: 4px 10px;border-radius: 20px;">4.7 <i
-                            class="fa-solid fa-star" style="color: rgb(249, 249, 106);">
-                      </i></span>
-                                </div>
-                                <div class="mt-2 pb-5 pl-5 pr-5">
-                                    <p class="comment-content" style="font-size: 18px;">Lorem ipsum dolor sit amet,
-                                        consectetur
-                                        adipiscing
-                                        elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                        quis nostrud
-                                        exercitation
-                                        ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit
-                                        amet, consectetur
-                                        adipiscing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-
-                                <div class="d-flex align-items-center border-left p-8 border-top Thumbs">
-                                    <i class="fa-regular fa-thumbs-up" style="position: absolute;right: 20px;"> 讚</i>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </li>
-                    <!-- ===================第二個==================== -->
-                    <li>
-                        <div class="col-12" style="padding: 15px 0px 0px 0px;">
-                            <div style="background-color: white;">
-                                <div class="d-flex flex-row user p-2"><img class="rounded-circle"
-                                                                           src="/CGA105G2/assets/images/ex1.jpg"
-                                                                           width="60px">
-                                    <div class="d-flex flex-column ml-2"><span
-                                            class="name font-weight-bold">江詩傑</span><span>2022-12-23</span>
-                                    </div>
-
-                                </div>
-                                <!-- =================評分====================== -->
-                                <div style="padding-left:10px;font-size: 15px; ">
-                    <span style="background-color:rgb(255, 112, 60);padding: 4px 10px;border-radius: 20px;">4.7 <i
-                            class="fa-solid fa-star" style="color: rgb(249, 249, 106);">
-                      </i></span>
-                                </div>
-                                <div class="mt-2 pb-5 pl-5 pr-5">
-                                    <p class="comment-content" style="font-size: 18px;">Lorem ipsum dolor sit amet,
-                                        consectetur
-                                        adipiscing
-                                        elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                        quis nostrud
-                                        exercitation
-                                        ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit
-                                        amet, consectetur
-                                        adipiscing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-
-                                <div class="d-flex align-items-center border-left p-8 border-top Thumbs">
-                                    <i class="fa-regular fa-thumbs-up" style="position: absolute;right: 20px;"> 讚</i>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </li>
+                            </li>
+                        </c:forEach>
+                    </c:if>
                 </ol>
             </div>
         </div>
@@ -341,7 +372,10 @@
 <!--     ===================google地圖開始======================== -->
 <script>
     function initMap() {
-        var uluru = {lat: <%= parts[0].substring(1) %>, lng: <%= parts[1].substring(0,parts[1].length()-1) %>};
+        var uluru = {
+            lat: ${store.storeMap.split(',')[0].substring(1)},
+            lng: ${store.storeMap.split(',')[1].substring(0,10)}
+        };
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 18,
             center: uluru
@@ -357,7 +391,18 @@
 </script>
 <!--     ===================google地圖結束======================== -->
 
+<script>
+    // function insertSubs() {
+    // let storeId = document.getElementById("storeId").value;
+    // let memId = document.getElementById("memId").value;
+    // let url = "insertSubs.jsp?storeId=" + storeId + "&memId=" +memId;
 
+    // let xhr = new XMLHttpRequest();
+    // xhr.open("POST", url, true);
+    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    // xhr.send();
+    // }
+</script>
 <script>
     $("a:contains(🌟)").closest("a").addClass("active disabled topage");
     $(document).ready(function () {
@@ -371,8 +416,8 @@
         $(this).toggleClass("fa-heart fa-heart-o");
     });
 </script>
-<script src="https://kit.fontawesome.com/2c6d23848b.js" crossorigin="anonymous"></script>
 <script src="/CGA105G2/assets/js/Storepage.js"></script>
+<script src="https://kit.fontawesome.com/2c6d23848b.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

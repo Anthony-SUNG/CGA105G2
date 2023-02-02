@@ -1,8 +1,8 @@
 package com.point.model.PointOrder.dao;
 
-import com.point.model.PointOrder.pojo.PointOrder;
-
 import java.util.List;
+
+import com.point.model.PointOrder.pojo.PointOrder;
 
 public interface PointOrderDAO_interface {
 
@@ -15,5 +15,9 @@ public interface PointOrderDAO_interface {
 	PointOrder getByPK(Integer po_id);
 
 	List<PointOrder> getAll();
+	
+	List<PointOrder> getBackOrder();
+
+	void updateStatus(PointOrder pointorder);
 
 }

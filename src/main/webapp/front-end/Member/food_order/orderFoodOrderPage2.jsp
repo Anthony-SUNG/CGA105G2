@@ -25,7 +25,7 @@
         <div class="container mt-17 mb-17">
             <div class="col-md-9  card shadow m-5">
                 <h1 class=" m-5 text-center">訂餐資訊</h1>
-                <form METHOD="post" action="<%=request.getContextPath()%>/front-end/store/food_order/food_order.do"
+                <form METHOD="post" action="<%=request.getContextPath()%>/front-end/Member/food_order/food_order.do"
                       class="p-4 ">
                     <table class="table" style="text-align:center; font-size: 20px;">
                         <thead class="thead-light">
@@ -97,12 +97,6 @@
 
 
 <script>
-    let a = new StickySidebar("#sidebar", {
-        topSpacing: 40,
-        bottomSpacing: 20,
-        containerSelector: ".container",
-        innerWrapperSelector: ".sidebar__inner"
-    });
 
     var total_count = 0;
     var total_coint_limit = parseInt(${foodorder_peopleNum});// jsp取得人數

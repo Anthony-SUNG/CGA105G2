@@ -5,8 +5,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-    Store store = (Store) request.getAttribute("store");
-    Integer memId = 0;
+    
+
 %>
 
 <!DOCTYPE html>
@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="/CGA105G2/assets/custom.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+	
 
     <style>
         body {
@@ -143,8 +144,32 @@
                     <li id="search_result1">
                         <div class="row justify-content-center mt-10 mb-10">
                             <div class="col-md-3 border">
-                                <div class="position-relative snipimage" style="height: 200px;">
-                                    <img src="/assets/images/ex1.jpg" class="rounded img-fluid img-responsive" style="width: 100%;height: 100%;">
+                                <div class="position-relative snipimage" style="height: 200px;">                           
+<!--                         ==============這是google地圖====================== -->
+							
+<!--                             <div id="map" style="width: 100%;height: 100%;"></div> -->
+                            <script>
+
+//                             function initMap() {
+//                             var uluru = {lat: ${store.storeMap.split(',')[0].substring(1)}, lng: ${store.storeMap.split(',')[1].substring(0,11)}};
+//                             var map = new google.maps.Map(document.getElementById('map'), {
+//                                 zoom: 18,
+//                                 center: uluru
+//                             });
+//                             var marker = new google.maps.Marker({
+//                                 position: uluru,
+//                                 map: map
+//                             });
+//                             };
+                            </script>
+
+<!--                            <script async defer -->
+<!--         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhKclAtJHGqNeIzBRjYLisnajuzq_PCcA&callback=initMap"> -->
+<!-- 							</script> -->
+
+
+ <!--                         ==============這是google地圖====================== -->
+                                    <img src="https://via.placeholder.com/450x350" class="rounded img-fluid img-responsive" style="width: 100%;height: 100%;">
                                 </div>
                             </div>
                             <div class="col-md-5 border">
@@ -166,9 +191,9 @@
                                 </div>
                             </div>
                             <div class="col-md-2 border d-flex flex-column justify-content-end">
-                                <span style="font-size: 18px;padding: 5px 15px;border-radius:20px ;background-color: rgb(255, 92, 51);position:absolute;top: 20px;right: 20px;">4.7
-                                    <i class="fa-solid fa-star" style="color: rgb(249, 249, 106);"></i>
-                                </span>
+<!--                                 <span style="font-size: 18px;padding: 5px 15px;border-radius:20px ;background-color: rgb(255, 92, 51);position:absolute;top: 20px;right: 20px;">4.7 -->
+<!--                                     <i class="fa-solid fa-star" style="color: rgb(249, 249, 106);"></i> -->
+<!--                                 </span> -->
                                 <form method="post" action="/CGA105G2/LonginServlet" name="form1">
                                     <button name="action" value="StorePage" type="submit"
                                             class="btn btn-success btn-block mt-5"
@@ -226,7 +251,25 @@
 
 <!-- stickey bar: -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
+<!--     ===================google地圖開始======================== -->
+<script>
+//     function initMap() {
+//         var uluru = {lat: ${store.storeMap.split(',')[0].substring(1)}, lng: ${store.storeMap.split(',')[1].substring(0,11)};
+//         var map = new google.maps.Map(document.getElementById('map'), {
+//             zoom: 18,
+//             center: uluru
+//         });
+//         var marker = new google.maps.Marker({
+//             position: uluru,
+//             map: map
+//         });
+//     }
+</script>
 
+                            <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhKclAtJHGqNeIzBRjYLisnajuzq_PCcA&callback=initMap">
+							</script>
+<!--     ===================google地圖結束======================== -->
 <script>
     let a = new StickySidebar("#sidebar", {
         topSpacing: 40,

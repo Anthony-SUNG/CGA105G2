@@ -15,7 +15,7 @@ public class ArtService {
 	}
 	
 	public Article addArt(Integer memId, Integer storeId, String artHeader, String artText, byte[] artImg,
-			Integer artScore) {
+			Integer artScore,String artTag) {
 
 		Article artVO = new Article();
 		
@@ -25,6 +25,7 @@ public class ArtService {
 		artVO.setArtText(artText);
 		artVO.setArtImg(artImg);
 		artVO.setArtScore(artScore);
+		artVO.setArtTag(artTag);
 		dao.insert(artVO);
 
 		return artVO;
@@ -57,6 +58,14 @@ public class ArtService {
 
 	public List<Article> getAllMem(Integer memId) {
 		return dao.getAllByMemId(memId);
+	}
+	
+	public List<Article> getAllByStoreId(Integer storeId) {
+		return dao.getAllByStoreId(storeId);
+	}
+	
+	public List<Article> getAllByMemIdStoreId(Integer memId, Integer storeId) {
+		return dao.getAllByMemIdStoreId(memId, storeId);
 	}
 
 	public List<Article> getAll() {

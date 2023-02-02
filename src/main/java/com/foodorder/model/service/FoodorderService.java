@@ -1,5 +1,8 @@
 package com.foodorder.model.service;
 
+import com.art.model.Article.dao.ArtDAO_interface;
+import com.art.model.Article.dao.impl.ArtJDBCDAO;
+import com.art.model.Article.pojo.Article;
 import com.code.model.Code.dao.CodeDAO_interface;
 import com.code.model.Code.dao.impl.CodeJDBCDAO;
 import com.foodorder.model.Meal.dao.MealDAO_interface;
@@ -8,24 +11,37 @@ import com.foodorder.model.Meal.pojo.Meal;
 import com.foodorder.model.Reserva.dao.ReservaDAO_interface;
 import com.foodorder.model.Reserva.dao.impl.ReservaJDBCDAO;
 import com.foodorder.model.Reserva.pojo.Reserva;
+import com.foodorder.model.ReservaDetail.dao.ReservaDetailDAO_interface;
+import com.foodorder.model.ReservaDetail.dao.impl.ReservaDetailJDBCDAO;
+import com.foodorder.model.ReservaDetail.pojo.ReservaDetail;
+import com.member.model.Member.dao.MemberDAO_interface;
+import com.member.model.Member.dao.impl.MemberDAO;
+import com.member.model.Member.pojo.Member;
 import com.store.model.Store.dao.StoreDAO_interface;
 import com.store.model.Store.dao.impl.StoreDAO;
 import com.store.model.Store.pojo.Store;
 
 import java.util.List;
+import java.util.Map;
 
 public class FoodorderService {
 	private MealDAO_interface dao;
 	private StoreDAO_interface storedao;
 	private ReservaDAO_interface reservadao;
 	private CodeDAO_interface codedao;
+	private ReservaDetailDAO_interface reservaDetaildao;
+	private ArtDAO_interface artdao;
+	private MemberDAO_interface memberdao;
 
 	public FoodorderService() {
 //		dao = new MealHibernateDAO();
 		dao = new MealJDBCDAO();
 		storedao = new StoreDAO();
 		reservadao = new ReservaJDBCDAO();
-		codedao =new CodeJDBCDAO();
+		codedao = new CodeJDBCDAO();
+		reservaDetaildao = new ReservaDetailJDBCDAO();
+		artdao = new ArtJDBCDAO();
+		memberdao = new MemberDAO();
 	}
 	// 取出所有餐點 且 狀態是上架的
 	public List<Meal> getAllStatusOk(Integer storeid) {
@@ -88,7 +104,52 @@ public class FoodorderService {
 	public List<Integer> getCodeId(String codeNum,Integer storeId){
 		return codedao.getCodeId(codeNum,storeId);
 	}
+	// 新增訂單 及 新增訂單明細
+	public void insertReservaReservaDetail(Reserva reservaVO, List<Map> list) {
+		reservadao.insertWithReservaDetails(reservaVO, list);
+	}
+
+	// 用會員id及訂單狀態取出訂單
+	public List<Reserva> getBymemIdrenStatus(Integer memid, Integer renstatus){
+		return reservadao.getBymemIdrenStatus(memid, renstatus);
+	}
+
+	// 利用訂單id取出該訂單所有餐點編號及數量
+	public List<ReservaDetail> getByPK(Integer id, String pk){
+		return reservaDetaildao.getByPK(id, pk);
+	}
+	// 利用餐點編號取出餐點名稱
+	public Meal getByMealId(Integer id) {
+		return dao.getByMealId(id);
+	}
+	// 會員查詢已預約 刪除更改狀態
+	public void updaterenStatusByrenId(Integer renid, Integer renstatus) {
+		reservadao.updateRenstatusByRenid(renid, renstatus);
+	}
+
+	// 用會員id取出所有訂單
+	public List<Reserva> getReservaBymemId(Integer memid) {
+		return reservadao.getBymemId(memid);
+	}
+
+	// 利用會員id加店家id 查出所有文章資訊
+	public List<Article> getArticleByMemIdStoreId(Integer memId, Integer storeId){
+		return artdao.getAllByMemIdStoreId(memId, storeId);
+	}
 
 
+	// 用店家id及訂單狀態取出訂單
+	public List<Reserva> getBystoreIdrenStatus(Integer storeid, Integer renstatus){
+		return reservadao.getBystoreIdrenStatus(storeid, renstatus);
+	}
+	// 用店家id取出所有訂單
+	public List<Reserva> getReservaBystoreId(Integer storeid) {
+		return reservadao.getBystoreId(storeid);
+	}
+	// 用會員id取得該會員資料
+	public Member getmemberById(Integer memId) {
+		return memberdao.getById(memId);
+
+	}
 
 }

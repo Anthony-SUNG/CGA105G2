@@ -7,7 +7,7 @@
     <div class="p-4 pt-5">
         <ul class="list-unstyled components mb-5">
             <li class="my-4">
-                <a href="/CGA105G2/front-end/Member/member/Member.jsp">
+                <a href="/CGA105G2/CodeServlet?action=memCodeAllU">
                     <h2>Home</h2>
                 </a>
             </li>
@@ -24,7 +24,7 @@
             </li>
             <li class="my-4">
                 <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown fs-md-6">🔻訂單</a>
-                <ul class="collapse list-unstyled collapse" id="pageSubmenu2" >
+                <ul class="collapse list-unstyled" id="pageSubmenu2" >
                     <li>
                         <hr><a href="/CGA105G2/BlankPage/Loader2.jsp" class="nav-link">🔆待出貨</a>
                     </li>
@@ -38,9 +38,9 @@
                 <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown fs-md-6">🔻訂位</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu3">
                     <li>
-                        <hr><a href="/CGA105G2/front-end/Member/food_order/listAllFoodOrder.jsp" class="nav-link">🔆訂位預約</a>
+                        <hr><a href="<%=request.getContextPath()%>/front-end/Member/food_order/food_order.do?action=listAllFoodOrder" class="nav-link">🔆預約查詢</a>
                     </li>
-                    <li><a href="/CGA105G2/BlankPage/Loader2.jsp" class="nav-link">🔆訂位紀錄</a>
+                    <li><a href="<%=request.getContextPath()%>/front-end/Member/food_order/food_order.do?action=listFoodOrderScore" class="nav-link">🔆訂位紀錄</a>
                         <hr>
                     </li>
                 </ul>
@@ -52,9 +52,7 @@
                     <li>
                         <hr><a href="/CGA105G2/Member/MemberServlet?action=MemberInfo" class="nav-link">🔆基本資料</a>
                     </li>
-                    <li><a href="/CGA105G2/BlankPage/Loader2.jsp" class="nav-link">🔆收件地址</a></li>
-                    <li><a href="/CGA105G2/BlankPage/Loader2.jsp" class="nav-link">🔆付款方式</a></li>
-                    <li><a href="/CGA105G2/BlankPage/Loader2.jsp" class="nav-link">🔆變更密碼</a>
+                    <li><a href="/CGA105G2/front-end/Member/member/changepwd.jsp" class="nav-link">🔆變更密碼</a>
                         <hr>
                     </li>
                 </ul>

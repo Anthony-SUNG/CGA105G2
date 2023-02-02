@@ -1,10 +1,14 @@
 package com.foodorder.contorller;
 
-
-
+import com.art.model.Article.pojo.Article;
 import com.foodorder.model.Meal.pojo.Meal;
 import com.foodorder.model.Reserva.pojo.Reserva;
+
+import com.foodorder.model.ReservaDetail.pojo.ReservaDetail;
 import com.foodorder.model.service.FoodorderService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.member.model.Member.pojo.Member;
 import com.store.model.Store.pojo.Store;
 
 import javax.servlet.RequestDispatcher;
@@ -15,6 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -23,8 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
-@WebServlet(urlPatterns= {"/front-end/store/food_order/food_order.do","/front-end/Member/food_order/food_order.do"})
+@WebServlet(urlPatterns = { "/front-end/store/food_order/food_order.do", "/front-end/Member/food_order/food_order.do" })
 public class FoodorderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,7 +49,7 @@ public class FoodorderServlet extends HttpServlet {
 			// 取得店家id，這邊照理來說應該要在session可以取到，因為最前面進入店家
 			// 現在先模擬自己set進去 再get出來 之後前面頁面有set過 *這邊set要移除*
 			HttpSession session = req.getSession();
-			session.setAttribute("storeId", 6);
+//			session.setAttribute("storeId", 6);
 			Integer storeid = (Integer) session.getAttribute("storeId");
 
 			// 利用service取資料
@@ -491,9 +497,11 @@ public class FoodorderServlet extends HttpServlet {
 			// 取得店家id，這邊照理來說應該要在session可以取到，因為最前面進入店家
 			// 現在先模擬自己set進去 再get出來 之後前面頁面有set過 *這邊set要移除*
 			HttpSession session = req.getSession();
-			session.setAttribute("storeId", 6);
-			session.setAttribute("memberId", 1);
-			Integer storeid = (Integer) session.getAttribute("storeId");
+//			session.setAttribute("foodorder_storeId", 6);
+//			session.setAttribute("memId", 1);
+//			Integer storeid = (Integer) session.getAttribute("foodorder_storeId");
+			Integer storeid = Integer.parseInt(req.getParameter("foodorder_storeId"));
+			session.setAttribute("foodorder_storeId", storeid);
 			// 利用service
 			FoodorderService foodorderSvc = new FoodorderService();
 			Store storeInfo = foodorderSvc.getStoreInfo(storeid);
@@ -512,7 +520,7 @@ public class FoodorderServlet extends HttpServlet {
 		// 會員店餐資訊回傳處理
 		if ("Member_order_to_meal".equals(action)) {
 			HttpSession session = req.getSession();
-			Integer storeid = (Integer) session.getAttribute("storeId");
+			Integer storeid = (Integer) session.getAttribute("foodorder_storeId");
 			// 取得前面資訊
 			String orderShopName = req.getParameter("order_shop_name");
 			String nameInput = req.getParameter("nameInput");
@@ -566,20 +574,19 @@ public class FoodorderServlet extends HttpServlet {
 				req.setAttribute("peopleNum1", peopleNum1);
 				req.setAttribute("dateInput", dateInput);
 				req.setAttribute("time1", time1);
-
 				req.setAttribute("errorMsgs", errorMsgs);
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-end/Member/food_order/setFoodOrderInfo.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/Member/food_order/setFoodOrderInfo.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
-
 			// 先查詢該日訂單人數上限是否已滿，如果已滿一樣要把資料設回去 讓前端在重輸
 			// 利用service
 			FoodorderService foodorderSvc = new FoodorderService();
 			// 用id + 日期 +時段+訂單狀態成立、報到(一定要取消訂單或者完成訂單 才釋出訂位數) 的訂單 取出
-			List<Reserva> reservabyStoreidRendate = foodorderSvc.getReservabyStoreidRendate(storeid, dateInput, time1+":00", 0);
-			List<Reserva> reservabyStoreidRendate2 = foodorderSvc.getReservabyStoreidRendate(storeid, dateInput, time1+":00", 2);
+			List<Reserva> reservabyStoreidRendate = foodorderSvc.getReservabyStoreidRendate(storeid, dateInput,
+					time1 + ":00", 0);
+			List<Reserva> reservabyStoreidRendate2 = foodorderSvc.getReservabyStoreidRendate(storeid, dateInput,
+					time1 + ":00", 2);
 			Store storeInfo = foodorderSvc.getStoreInfo(storeid);
 			// 取出店家訂位上限數
 			Integer limit = 0;
@@ -590,6 +597,7 @@ public class FoodorderServlet extends HttpServlet {
 			System.out.println(dateInput);
 			System.out.println(time1);
 			System.out.println(reservabyStoreidRendate.size());
+			System.out.println(reservabyStoreidRendate2.size());
 			System.out.println(limit);
 			if((reservabyStoreidRendate.size()+reservabyStoreidRendate2.size())>=limit) {
 				errorMsgs.put("overlimit","該日期時段已訂滿，請重新選擇日期!");
@@ -608,21 +616,18 @@ public class FoodorderServlet extends HttpServlet {
 				req.setAttribute("peopleNum1", peopleNum1);
 				req.setAttribute("dateInput", dateInput);
 				req.setAttribute("time1", time1);
-
 				req.setAttribute("errorMsgs", errorMsgs);
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/front-end/Member/food_order/setFoodOrderInfo.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
-
 			// 到這都正常  準備將資料放進session 讓後面餐點跟優惠劵 一併到時候到結帳頁面 在寫入 訂單 跟 訂單明細
 			session.setAttribute("foodorder_name", nameInput);
 			session.setAttribute("foodorder_phone", phoneInput);
 			session.setAttribute("foodorder_peopleNum", peopleNum1);
-			session.setAttribute("foodorder_time", time1+":00");
+			session.setAttribute("foodorder_time", time1 + ":00");
 			session.setAttribute("foodorder_date", dateInput);
-
 			// 準備下一頁資料
 			List<Meal> allMealbyStoreidStatus = foodorderSvc.getAllMealbyStoreidStatus(storeid, 1);
 			req.setAttribute("list", allMealbyStoreidStatus);
@@ -640,17 +645,16 @@ public class FoodorderServlet extends HttpServlet {
 				req.setAttribute("nameInput", nameInput);
 				req.setAttribute("phoneInput", phoneInput);
 				req.setAttribute("storename", orderShopName);
-
 				req.setAttribute("peopleNum1", peopleNum1);
 				req.setAttribute("dateInput", dateInput);
 				req.setAttribute("time1", time1);
-
 				req.setAttribute("errorMsgs", errorMsgs);
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/front-end/Member/food_order/setFoodOrderInfo.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
+			System.out.println("轉交");
 			String url = "/front-end/Member/food_order/orderFoodOrderPage2.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
@@ -658,13 +662,14 @@ public class FoodorderServlet extends HttpServlet {
 		}
 		// 結帳按鈕
 		if ("Member_order_meal".equals(action)) {
-			// 整理餐點訂單資訊 [{mealId:2, mealName:套餐1, rdQuantity:1, pdPrice:180},{mealId:3, mealName:套餐2, rdQuantity:1, pdPrice:180}]
+			// 整理餐點訂單資訊 [{mealId:2, mealName:套餐1, rdQuantity:1, pdPrice:180},{mealId:3,
+			// mealName:套餐2, rdQuantity:1, pdPrice:180}]
 			List<Map> mealListInfo = new ArrayList<Map>();
 			String errorMealNumMsgs = "";
 			HttpSession session = req.getSession();
-			Integer storeid = (Integer) session.getAttribute("storeId");
+			Integer storeid = (Integer) session.getAttribute("foodorder_storeId");
 			Integer peopleNum = Integer.parseInt((String) session.getAttribute("foodorder_peopleNum"));
-			//優惠劵
+			// 優惠劵
 			String codeinput = req.getParameter("codeinput");
 			session.setAttribute("foodorder_code", codeinput);
 			// 利用service
@@ -672,11 +677,12 @@ public class FoodorderServlet extends HttpServlet {
 			List<Meal> allMealbyStoreidStatus = foodorderSvc.getAllMealbyStoreidStatus(storeid, 1);
 			// 先檢查數量是否正確 如果不對則跳回那頁
 			Integer total = 0;
-			for (int i = 0; i<allMealbyStoreidStatus.size(); i++) {
-				total = total + Integer.parseInt(req.getParameter(String.valueOf(allMealbyStoreidStatus.get(i).getMealId())));
+			for (int i = 0; i < allMealbyStoreidStatus.size(); i++) {
+				total = total
+						+ Integer.parseInt(req.getParameter(String.valueOf(allMealbyStoreidStatus.get(i).getMealId())));
 			}
-			if(total<peopleNum) {
-				errorMealNumMsgs = errorMealNumMsgs + "餐點數量不正確!請選"+peopleNum+"份";
+			if (total < peopleNum) {
+				errorMealNumMsgs = errorMealNumMsgs + "餐點數量不正確!請選" + peopleNum + "份";
 				req.setAttribute("list", allMealbyStoreidStatus);
 				req.setAttribute("errorMealNumMsgs", errorMealNumMsgs);
 				req.setAttribute("codeinput", codeinput);
@@ -728,8 +734,537 @@ public class FoodorderServlet extends HttpServlet {
 			String url = "/front-end/Member/food_order/checkout.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
+		}
+
+		if ("checkout".equals(action)) {
+			HttpSession session = req.getSession();
+			Integer storeid = (Integer) session.getAttribute("foodorder_storeId");
+			Integer memid = (Integer) session.getAttribute("memId");
+			String name = (String) session.getAttribute("foodorder_name");
+			String phone = (String) session.getAttribute("foodorder_phone");
+			Integer peopleNum = Integer.parseInt((String) session.getAttribute("foodorder_peopleNum"));
+			String time = (String) session.getAttribute("foodorder_time");
+			String date = (String) session.getAttribute("foodorder_date");
+			Integer codeMoney = (Integer) session.getAttribute("foodorder_codeMoney");
+			Integer codeId = null;
+			if (session.getAttribute("foodorder_codeId") != null) {
+				codeId = (Integer) session.getAttribute("foodorder_codeId");
+				System.out.println("codeid:" + codeId);
+			}
+			Integer totalMoney = (Integer) session.getAttribute("foodorder_totalMoney");
+			Integer totalCodeMoney = (Integer) session.getAttribute("foodorder_totalCodeMoney");
+			List<Map> mealList = (List<Map>) session.getAttribute("foodorder_mealList");
+			System.out.println(name);
+			System.out.println(phone);
+			System.out.println(peopleNum);
+			System.out.println(date);
+			System.out.println(codeMoney);
+			System.out.println(totalMoney);
+			System.out.println(totalCodeMoney);
+			for (int i = 0; i < mealList.size(); i++) {
+				System.out.println(mealList.get(i));
+			}
+			// 利用service
+			FoodorderService foodorderSvc = new FoodorderService();
+			// 先把rdQuantity是0的去除
+			for (int i = 0; i < mealList.size(); i++) {
+				if ((Integer) mealList.get(i).get("rdQuantity") == 0) {
+					mealList.remove(i);
+				}
+			}
+			if (session.getAttribute("foodorder_codeId") == null) {
+				Reserva reserva = new Reserva(storeid, memid, name, phone, time, Date.valueOf(date), peopleNum,
+						totalMoney, totalCodeMoney);
+				foodorderSvc.insertReservaReservaDetail(reserva, mealList);
+			} else {
+				Integer codeid = (Integer) session.getAttribute("foodorder_codeId");
+				Reserva reserva = new Reserva(storeid, memid, name, phone, time, Date.valueOf(date), peopleNum, codeid,
+						totalMoney, totalCodeMoney);
+				foodorderSvc.insertReservaReservaDetail(reserva, mealList);
+			}
+
+			// 訂完餐 要跳轉哪頁?
+			// 跳轉到結帳頁
+//			String url = "/test.jsp";
+//			String url = "/front-end/Member/food_order/checkout2.jsp";
+//			RequestDispatcher successView = req.getRequestDispatcher(url);
+//			successView.forward(req, res);
 
 		}
+
+
+//		if ("checkout_final".equals(action)) {
+//			HttpSession session = req.getSession();
+//			Integer storeid = (Integer) session.getAttribute("foodorder_storeId");
+//			Integer memid = (Integer) session.getAttribute("memId");
+//			String name = (String) session.getAttribute("foodorder_name");
+//			String phone = (String) session.getAttribute("foodorder_phone");
+//			Integer peopleNum = Integer.parseInt((String) session.getAttribute("foodorder_peopleNum"));
+//			String time = (String) session.getAttribute("foodorder_time");
+//			String date = (String) session.getAttribute("foodorder_date");
+//			Integer codeMoney = (Integer) session.getAttribute("foodorder_codeMoney");
+//			Integer codeId = null;
+//			if (session.getAttribute("foodorder_codeId") != null) {
+//				codeId = (Integer) session.getAttribute("foodorder_codeId");
+//				System.out.println("codeid:" + codeId);
+//			}
+//			Integer totalMoney = (Integer) session.getAttribute("foodorder_totalMoney");
+//			Integer totalCodeMoney = (Integer) session.getAttribute("foodorder_totalCodeMoney");
+//			List<Map> mealList = (List<Map>) session.getAttribute("foodorder_mealList");
+//			System.out.println(name);
+//			System.out.println(phone);
+//			System.out.println(peopleNum);
+//			System.out.println(date);
+//			System.out.println(codeMoney);
+//			System.out.println(totalMoney);
+//			System.out.println(totalCodeMoney);
+//			for (int i = 0; i < mealList.size(); i++) {
+//				System.out.println(mealList.get(i));
+//			}
+//			// 利用service
+//			FoodorderService foodorderSvc = new FoodorderService();
+//			// 先把rdQuantity是0的去除
+//			for (int i = 0; i < mealList.size(); i++) {
+//				if ((Integer) mealList.get(i).get("rdQuantity") == 0) {
+//					mealList.remove(i);
+//				}
+//			}
+//			if (session.getAttribute("foodorder_codeId") == null) {
+//				Reserva reserva = new Reserva(storeid, memid, name, phone, time, Date.valueOf(date), peopleNum,
+//						totalMoney, totalCodeMoney);
+//				foodorderSvc.insertReservaReservaDetail(reserva, mealList);
+//			} else {
+//				Integer codeid = (Integer) session.getAttribute("foodorder_codeId");
+//				Reserva reserva = new Reserva(storeid, memid, name, phone, time, Date.valueOf(date), peopleNum, codeid,
+//						totalMoney, totalCodeMoney);
+//				foodorderSvc.insertReservaReservaDetail(reserva, mealList);
+//			}
+//
+//			// 訂完餐 要跳轉哪頁?
+//			// 跳轉到結帳頁
+////			String url = "/test.jsp";
+//			String url = "http://localhost:8081/CGA105G2/index.jsp";
+//			RequestDispatcher successView = req.getRequestDispatcher(url);
+//			successView.forward(req, res);
+//
+//		}
+//////////////////////////////////////////////member 查詢訂位訂餐 ////////////////////
+		if ("listAllFoodOrder".equals(action)) {
+			HttpSession session = req.getSession();
+			// 這邊之後要拿掉
+//			session.setAttribute("memId", 1);
+			Integer memid = (Integer) session.getAttribute("memId");
+			// 準備資料
+			// 利用service
+			FoodorderService foodorderSvc = new FoodorderService();
+			List<Reserva> reservaList = foodorderSvc.getBymemIdrenStatus(memid, 0);
+			System.out.println(reservaList.size());
+			List<Map> foodorderListInfo = new ArrayList<Map>();
+//			{"REN_ID":"1","REN_NAME":"周盟鎮","REN_PHONE":"0987654321",
+//				"REN_TIME":"11:00","REN_STATUS":"已預約","REN_DATE":"2023-01-01",
+//				"REN_HEADCOUNT":"4","MEAL_NAME_LIST":"牛排套餐*1, 豬排套餐*1"-,
+//				"REN_FPRICE":"2000","STORE_NAME":"貴族世家"-}
+			if (reservaList.size() > 0) {
+				for (int i = 0; i < reservaList.size(); i++) {
+					Map onedata = new LinkedHashMap();
+					onedata.put("REN_ID", reservaList.get(i).getRenId());
+					onedata.put("REN_NAME", reservaList.get(i).getRenName());
+					onedata.put("REN_PHONE", reservaList.get(i).getRenPhone());
+					onedata.put("REN_TIME", reservaList.get(i).getRenTime());
+					onedata.put("REN_STATUS", "已預約");
+					onedata.put("REN_DATE", reservaList.get(i).getRenDate());
+					onedata.put("REN_HEADCOUNT", reservaList.get(i).getRenHeadcount());
+					onedata.put("REN_FPRICE", reservaList.get(i).getRenFprice());
+					Store storeInfo = foodorderSvc.getStoreInfo(reservaList.get(i).getStoreId());
+					onedata.put("STORE_NAME", storeInfo.getStoreName());
+					System.out.println(reservaList.get(i).getRenId());
+					List<ReservaDetail> reservaDetail = foodorderSvc.getByPK(reservaList.get(i).getRenId(), "renId");
+					String mealStringTemp = "";
+					for (int j = 0; j < reservaDetail.size(); j++) {
+						Integer mealId = reservaDetail.get(j).getMealId();
+						Integer rdQuantity = reservaDetail.get(j).getRdQuantity();
+						Meal oneMeal = foodorderSvc.getByMealId(mealId);
+						String oneMealName = oneMeal.getMealName();
+						mealStringTemp = mealStringTemp + oneMealName + "*" + rdQuantity + ", ";
+					}
+					mealStringTemp = mealStringTemp.substring(0, mealStringTemp.length() - 2);
+
+					onedata.put("MEAL_NAME_LIST", mealStringTemp);
+					foodorderListInfo.add(onedata);
+					System.out.println(onedata);
+
+				}
+			}
+			GsonBuilder builder = new GsonBuilder();
+			builder.setPrettyPrinting();
+			Gson gson = builder.create();
+			String listJson = gson.toJson(foodorderListInfo);
+			System.out.println(listJson);
+			req.setAttribute("foodorderListInfo", listJson);
+			// 跳轉到瀏覽頁面
+			String url = "/front-end/Member/food_order/listAllFoodOrder.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+			successView.forward(req, res);
+		}
+
+		if ("Member_order_delete_button".equals(action)) {
+			String deleteRenid = req.getParameter("deleteid");
+			// 利用service 更改訂單狀態
+			FoodorderService foodorderSvc = new FoodorderService();
+			foodorderSvc.updaterenStatusByrenId(Integer.parseInt(deleteRenid), 1);
+
+			// 準備資料轉交
+			HttpSession session = req.getSession();
+			Integer memid = (Integer) session.getAttribute("memId");
+			List<Reserva> reservaList = foodorderSvc.getBymemIdrenStatus(memid, 0);
+			System.out.println(reservaList.size());
+			List<Map> foodorderListInfo = new ArrayList<Map>();
+//			{"REN_ID":"1","REN_NAME":"周盟鎮","REN_PHONE":"0987654321",
+//				"REN_TIME":"11:00","REN_STATUS":"已預約","REN_DATE":"2023-01-01",
+//				"REN_HEADCOUNT":"4","MEAL_NAME_LIST":"牛排套餐*1, 豬排套餐*1"-,
+//				"REN_FPRICE":"2000","STORE_NAME":"貴族世家"-}
+			if (reservaList.size() > 0) {
+				for (int i = 0; i < reservaList.size(); i++) {
+					Map onedata = new LinkedHashMap();
+					onedata.put("REN_ID", reservaList.get(i).getRenId());
+					onedata.put("REN_NAME", reservaList.get(i).getRenName());
+					onedata.put("REN_PHONE", reservaList.get(i).getRenPhone());
+					onedata.put("REN_TIME", reservaList.get(i).getRenTime());
+					onedata.put("REN_STATUS", "已預約");
+					onedata.put("REN_DATE", reservaList.get(i).getRenDate());
+					onedata.put("REN_HEADCOUNT", reservaList.get(i).getRenHeadcount());
+					onedata.put("REN_FPRICE", reservaList.get(i).getRenFprice());
+					Store storeInfo = foodorderSvc.getStoreInfo(reservaList.get(i).getStoreId());
+					onedata.put("STORE_NAME", storeInfo.getStoreName());
+					System.out.println(reservaList.get(i).getRenId());
+					List<ReservaDetail> reservaDetail = foodorderSvc.getByPK(reservaList.get(i).getRenId(), "renId");
+					String mealStringTemp = "";
+					for (int j = 0; j < reservaDetail.size(); j++) {
+						Integer mealId = reservaDetail.get(j).getMealId();
+						Integer rdQuantity = reservaDetail.get(j).getRdQuantity();
+						Meal oneMeal = foodorderSvc.getByMealId(mealId);
+						String oneMealName = oneMeal.getMealName();
+						mealStringTemp = mealStringTemp + oneMealName + "*" + rdQuantity + ", ";
+					}
+					mealStringTemp = mealStringTemp.substring(0, mealStringTemp.length() - 2);
+
+					onedata.put("MEAL_NAME_LIST", mealStringTemp);
+					foodorderListInfo.add(onedata);
+					System.out.println(onedata);
+
+				}
+			}
+			GsonBuilder builder = new GsonBuilder();
+			builder.setPrettyPrinting();
+			Gson gson = builder.create();
+			String listJson = gson.toJson(foodorderListInfo);
+			System.out.println(listJson);
+			req.setAttribute("foodorderListInfo", listJson);
+			// 跳轉到瀏覽頁面
+			String url = "/front-end/Member/food_order/listAllFoodOrder.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+			successView.forward(req, res);
+		}
+
+		if ("listFoodOrderScore".equals(action)) {
+			HttpSession session = req.getSession();
+			// 這邊之後要拿掉
+//			session.setAttribute("memId", 1);
+			Integer memid = (Integer) session.getAttribute("memId");
+			// 準備資料
+			// 利用service
+			FoodorderService foodorderSvc = new FoodorderService();
+			List<Reserva> reservaList = foodorderSvc.getReservaBymemId(memid);
+			System.out.println(reservaList.size());
+			List<Map> foodorderListInfo = new ArrayList<Map>();
+//			{"REN_ID":"1","REN_NAME":"周盟鎮","REN_PHONE":"0987654321",
+//				"REN_TIME":"11:00","REN_STATUS":"所有情況"-,"REN_DATE":"2023-01-01",
+//				"REN_HEADCOUNT":"4","MEAL_NAME_LIST":"牛排套餐*1, 豬排套餐*1"-,
+//				"REN_FPRICE":"2000","STORE_NAME":"貴族世家"-,"SCORE_INPUT":"0 or 1"-,"MEM_ID":"","STORE_ID":""}
+			if (reservaList.size() > 0) {
+				for (int i = 0; i < reservaList.size(); i++) {
+					Map onedata = new LinkedHashMap();
+					onedata.put("REN_ID", reservaList.get(i).getRenId());
+					onedata.put("REN_NAME", reservaList.get(i).getRenName());
+					onedata.put("REN_PHONE", reservaList.get(i).getRenPhone());
+					onedata.put("REN_TIME", reservaList.get(i).getRenTime());
+//					onedata.put("REN_STATUS", "已預約");
+					onedata.put("REN_DATE", reservaList.get(i).getRenDate());
+					onedata.put("REN_HEADCOUNT", reservaList.get(i).getRenHeadcount());
+					onedata.put("REN_FPRICE", reservaList.get(i).getRenFprice());
+					Store storeInfo = foodorderSvc.getStoreInfo(reservaList.get(i).getStoreId());
+					onedata.put("STORE_NAME", storeInfo.getStoreName());
+					System.out.println(reservaList.get(i).getRenId());
+					// 做訂單的狀態
+					String reservaStringStatus = "";
+					if (reservaList.get(i).getRenStatus()==0) {
+						reservaStringStatus = "已預約";
+					} else if(reservaList.get(i).getRenStatus()==1) {
+						reservaStringStatus = "取消";
+					} else if(reservaList.get(i).getRenStatus()==2) {
+						reservaStringStatus = "報到";
+					} else if(reservaList.get(i).getRenStatus()==3) {
+						reservaStringStatus = "完成";
+					}
+					onedata.put("REN_STATUS", reservaStringStatus);
+					// 做訂單的評分按鈕是否出現
+					//1. 取出該會員在該店家所有評論的最後一筆時間
+					if ("完成".equals(reservaStringStatus)) {
+						List<Article> articleByMemIdStoreId = foodorderSvc.getArticleByMemIdStoreId(memid, reservaList.get(i).getStoreId());
+						if (articleByMemIdStoreId.size()>0) {
+							Timestamp artTime = articleByMemIdStoreId.get(articleByMemIdStoreId.size()-1).getArtTime();
+							System.out.println(reservaList.get(i).getRenCurdate());
+							System.out.println(artTime);
+							if (artTime.before(reservaList.get(i).getRenCurdate())) {
+								onedata.put("SCORE_INPUT", "1");
+							} else {
+								onedata.put("SCORE_INPUT", "0");
+							}
+						} else {
+							onedata.put("SCORE_INPUT", "1");
+						}
+					} else {
+						onedata.put("SCORE_INPUT", "0");
+					}
+					List<ReservaDetail> reservaDetail = foodorderSvc.getByPK(reservaList.get(i).getRenId(), "renId");
+					String mealStringTemp = "";
+					// 做訂單的訂餐明細清單字串
+					for (int j = 0; j < reservaDetail.size(); j++) {
+						Integer mealId = reservaDetail.get(j).getMealId();
+						Integer rdQuantity = reservaDetail.get(j).getRdQuantity();
+						Meal oneMeal = foodorderSvc.getByMealId(mealId);
+						String oneMealName = oneMeal.getMealName();
+						mealStringTemp = mealStringTemp + oneMealName + "*" + rdQuantity + ", ";
+					}
+					mealStringTemp = mealStringTemp.substring(0, mealStringTemp.length() - 2);
+
+					onedata.put("MEAL_NAME_LIST", mealStringTemp);
+					onedata.put("MEM_ID",reservaList.get(i).getMemId());
+					onedata.put("STORE_ID",reservaList.get(i).getStoreId());
+					foodorderListInfo.add(onedata);
+					System.out.println(onedata);
+
+				}
+
+			}
+			GsonBuilder builder = new GsonBuilder();
+			builder.setPrettyPrinting();
+			Gson gson = builder.create();
+			String listJson = gson.toJson(foodorderListInfo);
+			System.out.println(listJson);
+			req.setAttribute("foodorderListInfo", listJson);
+			// 跳轉到瀏覽頁面
+			String url = "/front-end/Member/food_order/listFoodOrderScore.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+			successView.forward(req, res);
+		}
+
+
+
+//////////////////////////////////////////////store 查詢訂位訂餐 ////////////////////
+		if ("storelistAllFoodOrderReserve".equals(action)) {
+			HttpSession session = req.getSession();
+			// 這邊之後要拿掉 登入就拿的到
+//			session.setAttribute("storeId", 6);
+			Integer storeid = (Integer) session.getAttribute("storeId");
+			// 準備資料
+			// 利用service
+			FoodorderService foodorderSvc = new FoodorderService();
+			List<Reserva> reservaList = foodorderSvc.getBystoreIdrenStatus(storeid, 0);
+			System.out.println(reservaList.size());
+			List<Map> foodorderListInfo = new ArrayList<Map>();
+//			{"REN_ID":"1","MEM_NAME":""-,"MEM_PHONE":""-,"REN_NAME":"周盟鎮","REN_PHONE":"0987654321",
+//				"REN_TIME":"11:00","REN_STATUS":"已預約","REN_DATE":"2023-01-01","REN_HEADCOUNT":"4",
+//				"MEAL_NAME_LIST":"牛排套餐*1, 豬排套餐*1"-,"REN_FPRICE":"2000"}
+			if (reservaList.size() > 0) {
+				for (int i = 0; i < reservaList.size(); i++) {
+					Map onedata = new LinkedHashMap();
+					onedata.put("REN_ID", reservaList.get(i).getRenId());
+					onedata.put("REN_NAME", reservaList.get(i).getRenName());
+					onedata.put("REN_PHONE", reservaList.get(i).getRenPhone());
+					onedata.put("REN_TIME", reservaList.get(i).getRenTime());
+					onedata.put("REN_STATUS", "已預約");
+					onedata.put("REN_DATE", reservaList.get(i).getRenDate());
+					onedata.put("REN_HEADCOUNT", reservaList.get(i).getRenHeadcount());
+					onedata.put("REN_FPRICE", reservaList.get(i).getRenFprice());
+					System.out.println(reservaList.get(i).getRenId());
+					List<ReservaDetail> reservaDetail = foodorderSvc.getByPK(reservaList.get(i).getRenId(), "renId");
+					String mealStringTemp = "";
+					for (int j = 0; j < reservaDetail.size(); j++) {
+						Integer mealId = reservaDetail.get(j).getMealId();
+						Integer rdQuantity = reservaDetail.get(j).getRdQuantity();
+						Meal oneMeal = foodorderSvc.getByMealId(mealId);
+						String oneMealName = oneMeal.getMealName();
+						mealStringTemp = mealStringTemp + oneMealName + "*" + rdQuantity + ", ";
+					}
+					mealStringTemp = mealStringTemp.substring(0, mealStringTemp.length() - 2);
+
+					onedata.put("MEAL_NAME_LIST", mealStringTemp);
+					foodorderListInfo.add(onedata);
+					Member memberInfo = foodorderSvc.getmemberById(reservaList.get(i).getMemId());
+					onedata.put("MEM_NAME", memberInfo.getMemName());
+					onedata.put("MEM_PHONE", memberInfo.getMemPhone());
+
+
+
+
+					System.out.println(onedata);
+
+				}
+			}
+			GsonBuilder builder = new GsonBuilder();
+			builder.setPrettyPrinting();
+			Gson gson = builder.create();
+			String listJson = gson.toJson(foodorderListInfo);
+			System.out.println(listJson);
+			req.setAttribute("foodorderListInfo", listJson);
+			// 跳轉到瀏覽頁面
+			String url = "/front-end/store/food_order/listAllFoodOrderReserve.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+			successView.forward(req, res);
+		}
+
+
+		if ("storelistAllFoodOrder".equals(action)) {
+			HttpSession session = req.getSession();
+			// 這邊之後要拿掉 登入就拿的到
+//			session.setAttribute("storeId", 6);
+			Integer storeid = (Integer) session.getAttribute("storeId");
+			// 準備資料
+			// 利用service
+			FoodorderService foodorderSvc = new FoodorderService();
+			List<Reserva> reservaList = foodorderSvc.getReservaBystoreId(storeid);
+			System.out.println(reservaList.size());
+			List<Map> foodorderListInfo = new ArrayList<Map>();
+//			{"REN_ID":"1","MEM_NAME":""-,"MEM_PHONE":""-,"REN_NAME":"周盟鎮","REN_PHONE":"0987654321",
+//				"REN_TIME":"11:00","REN_STATUS":"已預約","REN_DATE":"2023-01-01","REN_HEADCOUNT":"4",
+//				"MEAL_NAME_LIST":"牛排套餐*1, 豬排套餐*1"-,"REN_FPRICE":"2000"}
+			if (reservaList.size() > 0) {
+				for (int i = 0; i < reservaList.size(); i++) {
+					Map onedata = new LinkedHashMap();
+					onedata.put("REN_ID", reservaList.get(i).getRenId());
+					onedata.put("REN_NAME", reservaList.get(i).getRenName());
+					onedata.put("REN_PHONE", reservaList.get(i).getRenPhone());
+					onedata.put("REN_TIME", reservaList.get(i).getRenTime());
+//					onedata.put("REN_STATUS", "已預約");
+					onedata.put("REN_DATE", reservaList.get(i).getRenDate());
+					onedata.put("REN_HEADCOUNT", reservaList.get(i).getRenHeadcount());
+					onedata.put("REN_FPRICE", reservaList.get(i).getRenFprice());
+					// 做訂單的狀態
+					String reservaStringStatus = "";
+					if (reservaList.get(i).getRenStatus()==0) {
+						reservaStringStatus = "已預約";
+					} else if(reservaList.get(i).getRenStatus()==1) {
+						reservaStringStatus = "取消";
+					} else if(reservaList.get(i).getRenStatus()==2) {
+						reservaStringStatus = "報到";
+					} else if(reservaList.get(i).getRenStatus()==3) {
+						reservaStringStatus = "完成";
+					}
+					onedata.put("REN_STATUS", reservaStringStatus);
+					System.out.println(reservaList.get(i).getRenId());
+					List<ReservaDetail> reservaDetail = foodorderSvc.getByPK(reservaList.get(i).getRenId(), "renId");
+					String mealStringTemp = "";
+					for (int j = 0; j < reservaDetail.size(); j++) {
+						Integer mealId = reservaDetail.get(j).getMealId();
+						Integer rdQuantity = reservaDetail.get(j).getRdQuantity();
+						Meal oneMeal = foodorderSvc.getByMealId(mealId);
+						String oneMealName = oneMeal.getMealName();
+						mealStringTemp = mealStringTemp + oneMealName + "*" + rdQuantity + ", ";
+					}
+					mealStringTemp = mealStringTemp.substring(0, mealStringTemp.length() - 2);
+
+					onedata.put("MEAL_NAME_LIST", mealStringTemp);
+					foodorderListInfo.add(onedata);
+					Member memberInfo = foodorderSvc.getmemberById(reservaList.get(i).getMemId());
+					onedata.put("MEM_NAME", memberInfo.getMemName());
+					onedata.put("MEM_PHONE", memberInfo.getMemPhone());
+
+
+
+
+					System.out.println(onedata);
+
+				}
+			}
+			GsonBuilder builder = new GsonBuilder();
+			builder.setPrettyPrinting();
+			Gson gson = builder.create();
+			String listJson = gson.toJson(foodorderListInfo);
+			System.out.println(listJson);
+			req.setAttribute("foodorderListInfo", listJson);
+			// 跳轉到瀏覽頁面
+			String url = "/front-end/store/food_order/listAllFoodOrder.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+			successView.forward(req, res);
+		}
+
+		if ("Store_order_delete_button".equals(action)) {
+			String deleteRenid = req.getParameter("deleteid");
+			// 利用service 更改訂單狀態
+			FoodorderService foodorderSvc = new FoodorderService();
+			foodorderSvc.updaterenStatusByrenId(Integer.parseInt(deleteRenid), 1);
+
+			// 準備資料轉交
+			HttpSession session = req.getSession();
+			Integer storeid = (Integer) session.getAttribute("storeId");
+			// 準備資料
+			// 利用service
+			List<Reserva> reservaList = foodorderSvc.getBystoreIdrenStatus(storeid, 0);
+			System.out.println(reservaList.size());
+			List<Map> foodorderListInfo = new ArrayList<Map>();
+//			{"REN_ID":"1","MEM_NAME":""-,"MEM_PHONE":""-,"REN_NAME":"周盟鎮","REN_PHONE":"0987654321",
+//				"REN_TIME":"11:00","REN_STATUS":"已預約","REN_DATE":"2023-01-01","REN_HEADCOUNT":"4",
+//				"MEAL_NAME_LIST":"牛排套餐*1, 豬排套餐*1"-,"REN_FPRICE":"2000"}
+			if (reservaList.size() > 0) {
+				for (int i = 0; i < reservaList.size(); i++) {
+					Map onedata = new LinkedHashMap();
+					onedata.put("REN_ID", reservaList.get(i).getRenId());
+					onedata.put("REN_NAME", reservaList.get(i).getRenName());
+					onedata.put("REN_PHONE", reservaList.get(i).getRenPhone());
+					onedata.put("REN_TIME", reservaList.get(i).getRenTime());
+					onedata.put("REN_STATUS", "已預約");
+					onedata.put("REN_DATE", reservaList.get(i).getRenDate());
+					onedata.put("REN_HEADCOUNT", reservaList.get(i).getRenHeadcount());
+					onedata.put("REN_FPRICE", reservaList.get(i).getRenFprice());
+					System.out.println(reservaList.get(i).getRenId());
+					List<ReservaDetail> reservaDetail = foodorderSvc.getByPK(reservaList.get(i).getRenId(), "renId");
+					String mealStringTemp = "";
+					for (int j = 0; j < reservaDetail.size(); j++) {
+						Integer mealId = reservaDetail.get(j).getMealId();
+						Integer rdQuantity = reservaDetail.get(j).getRdQuantity();
+						Meal oneMeal = foodorderSvc.getByMealId(mealId);
+						String oneMealName = oneMeal.getMealName();
+						mealStringTemp = mealStringTemp + oneMealName + "*" + rdQuantity + ", ";
+					}
+					mealStringTemp = mealStringTemp.substring(0, mealStringTemp.length() - 2);
+
+					onedata.put("MEAL_NAME_LIST", mealStringTemp);
+					foodorderListInfo.add(onedata);
+					Member memberInfo = foodorderSvc.getmemberById(reservaList.get(i).getMemId());
+					onedata.put("MEM_NAME", memberInfo.getMemName());
+					onedata.put("MEM_PHONE", memberInfo.getMemPhone());
+
+
+
+
+					System.out.println(onedata);
+
+				}
+			}
+			GsonBuilder builder = new GsonBuilder();
+			builder.setPrettyPrinting();
+			Gson gson = builder.create();
+			String listJson = gson.toJson(foodorderListInfo);
+			System.out.println(listJson);
+			req.setAttribute("foodorderListInfo", listJson);
+			// 跳轉到瀏覽頁面
+			String url = "/front-end/store/food_order/listAllFoodOrderReserve.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+			successView.forward(req, res);
+		}
+
+
 
 	}
 

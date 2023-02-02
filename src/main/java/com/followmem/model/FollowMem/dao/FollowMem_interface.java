@@ -12,4 +12,5 @@ public interface FollowMem_interface {
     public FollowMem getByMemId1(Integer memId1);
     public List<FollowMem> getAll();
     public List<FollowMem> getAllByMemId1(Integer memId);
+    public List<FollowMem> getAllByMemId1MemId2(Integer memId1, Integer memId2);
 }

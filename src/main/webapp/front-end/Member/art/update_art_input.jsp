@@ -43,15 +43,15 @@
 
         /* ========button的樣式=============== */
         .btn-secondary {
-            font-family: "Noto Sans TC", sans-serif;
-            font-size: 18px;
-            letter-spacing: .05em;
-            border-radius: .75em;
-            font-weight: 500;
-            color: #FFFFFF;
-            background-color: #164570;
-            padding: 5px 13px;
-            cursor: pointer;
+            font-family: "Noto Sans TC", sans-serif !important;
+            font-size: 18px !important;
+            letter-spacing: .05em !important;
+            border-radius: .75em !important;
+            font-weight: 500 !important;
+            color: #FFFFFF !important;
+            background-color: #164570 !important;
+            padding: 5px 13px !important;
+            cursor: pointer !important;
         }
 
         /* ============星星的css============== */
@@ -60,22 +60,22 @@
         }
 
         .storescorelabel {
-            color: #E1E6F6;
-            cursor: pointer;
-            font-size: 32px;
-            padding: 8px 3px;
-            transition: color 0.5s;
+            color: #E1E6F6 !important;
+            cursor: pointer !important;
+            font-size: 32px !important;
+            padding: 8px 3px !important;
+            transition: color 0.5s !important; 
         }
 
         .storescore {
-            height: 100%;
-            width: 100%;
-            display: none;
+            height: 100% !important;
+            width: 100% !important;
+            display: none !important;
         }
 
         .storescorelabel:hover, .storescorelabel:hover ~ .storescorelabel,
         .storescore:checked ~ label {
-            color: #ffe223;
+            color: #ffe223 !important;
         }
 
         /* ==================上傳圖片的css==================== */
@@ -88,24 +88,24 @@
         }
 
         .upload-field .file-thumbnail {
-            cursor: pointer;
-            border: 1px dashed #BBD9EC;
-            border-radius: 11px;
-            text-align: center;
-            padding: 10px 0px;
-            width: 100px;
-            height: 100px;
+            cursor: pointer !important;
+            border: 1px dashed #BBD9EC !important;
+            border-radius: 11px !important;
+            text-align: center !important;
+            padding: 10px 0px !important;
+            width: 100px !important;
+            height: 100px !important;
         }
 
         .upload-field .file-thumbnail img {
-            width: 50px;
+            width: 50px !important;
         }
 
         .upload-field .file-thumbnail h3 {
-            font-size: 15px;
-            color: #000000;
-            font-weight: 1000;
-            margin-top: 10px;
+            font-size: 15px !important;
+            color: #000000 !important;
+            font-weight: 1000 !important;
+            margin-top: 10px !important;
         }
 
         /* ==================上傳圖片css結束======================= */
@@ -123,25 +123,19 @@
         <%@ include file="/front-end/Member/01h/nav/navin02.jsp" %>
         <!-- nav end -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 my-5">
-            <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">🔆修改文章頁面</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group mr-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                    </div>
-                </div>
-            </div>
             <!-- =======================會員頭像======================= -->
-
             <div class="row justify-content-center">
                 <div class="col-7 mb-10">
                     <div class="postmember_info"
                          style="display: flex; margin-top: 30px;">
                         <div class="postmember_img">
-                            <img src="/CGA105G2/assets/images/men.png"
-                                 style="width: 65px; height: 60px; border-radius: 80%; border: 1px solid rgb(255, 216, 87);">
+                            <c:if test="${not empty member.memPic}">
+                            <img src="${pageContext.request.contextPath}/LonginServlet?action=getOtherMemberPhoto&memId=${member.memId}"
+                                 style="width: 60px; height: 60px; border-radius: 80%; border: 1px solid rgb(255, 216, 87);">
+						</c:if>
+						<c:if test="${empty member.memPic}">
+                            	 <img src="https://i.pinimg.com/564x/07/c4/72/07c4720d19a9e9edad9d0e939eca304a.jpg" alt="" style="width: 60px; height: 60px; border-radius: 80%; border: 1px solid rgb(255, 216, 87);">
+                            		</c:if>
 
                         </div>
                         <div class="postmember_text mt-6" style="margin-left: 5px;font-weight:1000">
@@ -181,8 +175,8 @@
                                 <input type="hidden" name="memId" value="${param.memId}">
                                 <input type="hidden" name="storeId" value="${param.storeId}">
                                 <span
-                                        style="font-size: 22px; font-weight: 600; background-color: antiquewhite; margin-left: 20px; line-height: 60px;">(5
-										/ 1)</span>
+                                        style="font-size: 22px; font-weight: 600; background-color: antiquewhite; margin-left: 20px; line-height: 60px;">
+										</span>
                                 <!-- star 5 -->
                                 <input type="radio" id="5-star-rating" class="storescore"
                                        name="artScore" value="5"> <label
@@ -223,12 +217,12 @@
 
 
                         <!-- ==============標記tag================== -->
-                        <div class="tag" style="margin-top: 15px; display: flex;">
-                            <b><span
-                                    style="font-size: 16px; padding: 8px 15px; border-radius: 15px; margin-right: 5px; background-color: rgb(82, 206, 156); color: white;">#寵物友善店家</span></b>
-                            <b><span
-                                    style="font-size: 16px; padding: 8px 15px; border-radius: 15px; margin-right: 5px; background-color: rgb(82, 206, 156); color: white;">#銀髮族友善店家</span></b>
-                        </div>
+							<div class="tag" style="margin-top: 5px;display: flex;background-color: rgb(82, 206, 156);color: white;border-radius:15px ;font-size: 22px;font-weight: 1000;padding: 5px;padding-left: 10px;">
+                                店家標籤:
+                                <input type="checkbox" value="銀髮族友善店家" name="artTag"  style="margin-left: 10px;zoom: 180%;">&nbsp;銀髮族友善店家󠀠
+                                <input type="checkbox" value="寵物友善店家" name="artTag"  style="margin-left: 10px;zoom: 180%;">&nbsp;寵物友善店家
+                                <input type="checkbox" value="殘障人士友善店家" name="artTag"  style="margin-left: 10px;zoom: 180%;">&nbsp;殘障人士友善店家
+                            </div>
                         <!-- ===========輸入欄位開始================ -->
                         <div style="margin-bottom: 30px;">
 
@@ -328,6 +322,20 @@
         innerWrapperSelector: ".sidebar__inner"
     });
 </script>
+    <script>
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].addEventListener('change', function() {
+                var checkboxGroup = this.parentNode.parentNode;
+                var checkboxesInGroup = checkboxGroup.querySelectorAll('input[type="checkbox"]');
+                for (var j = 0; j < checkboxesInGroup.length; j++) {
+                    if (checkboxesInGroup[j] !== this) {
+                        checkboxesInGroup[j].checked = false;
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

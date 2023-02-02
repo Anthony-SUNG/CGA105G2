@@ -1,14 +1,24 @@
+<%@page import="java.sql.Date" %>
+<%@page import="org.apache.naming.java.javaURLContextFactory" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@page import="com.member.model.Member.pojo.Member" %>
+<%@page import="com.member.model.service.MemberService" %>
 <%@page import="com.art.model.service.ArtService" %>
 <%@page import="com.art.model.Article.pojo.Article" %>
 <%@ page import="java.util.*" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
-    Article article = (Article) request.getAttribute("article");
-    ArtService artService = new ArtService();
-    List<Article> list = artService.getAllMem(article.getMemId()); //這邊會拿到一個集合物件
+    Integer memId = (Integer) request.getSession().getAttribute("memId");
+    MemberService memberService = new MemberService();
+    Member member = memberService.getById(memId);
+    ArtService artSvc = new ArtService();
+    List<Article> list = artSvc.getAllMem(memId);
+    pageContext.setAttribute("member", member);
     pageContext.setAttribute("list", list);
+
 %>
 
 <!DOCTYPE html>
@@ -20,6 +30,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <title>🗃️管理</title>
+    <link rel="stylesheet" href="/CGA105G2/assets/css/profile.css">
+    <script src="https://kit.fontawesome.com/2c6d23848b.js" crossorigin="anonymous"></script>
     <style>
         body {
             height: 100%;
@@ -91,16 +103,21 @@
         <%@ include file="/front-end/Member/01h/nav/navin02.jsp" %>
         <!-- nav end -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4  bg-cyan-20">
-            <canvas height="100"></canvas>
+            <canvas height="50"></canvas>
             <div class="container my-5">
-
                 <div class="profile-header">
-                    <div class="img">
-                        <img src="/CGA105G2/assets/images/ex2.jpg" alt="hero background" class="jarallax-img">
-                    </div>
+                    <div class="profile-header-cover"
+                         style="background: url(images/ex2.jpg);"></div>
                     <div class="profile-header-content">
                         <div class="profile-header-img mb-1">
-                            <img src="/CGA105G2/assets/images/men.png" alt=""/>
+                            <c:if test="${not empty member.memPic}">
+                                <img src="${pageContext.request.contextPath}/LonginServlet?action=getOtherMemberPhoto&memId=${member.memId}"
+                                     alt=""/>
+                            </c:if>
+                            <c:if test="${empty member.memPic}">
+                                <img src="https://i.pinimg.com/564x/07/c4/72/07c4720d19a9e9edad9d0e939eca304a.jpg"
+                                     alt=""/>
+                            </c:if>
                         </div>
                         <div class="profile-header-info">
                             <div style="display: flex;">
@@ -108,8 +125,7 @@
                                     style="font-weight: 1000;font-size: 33px;">${member.memName}</h3>
                                 <p class="m-t-sm mt-7 ml-4" style="color: rgb(215, 235, 68);">@${member.memAcc}</p>
                             </div>
-                            <button class="btn btn-sm btn-primary mb-4" style="font-size: 17px;">追蹤會員</button>
-                            <button class="btn btn-sm btn-primary mb-4 ml-5" style="font-size: 17px;">聊天室</button>
+                            <button class="btn btn-sm btn-primary mb-4 " style="font-size: 17px;">聊天室</button>
                         </div>
                     </div>
 
@@ -120,11 +136,9 @@
                     <div class="row">
                         <div class="col-md-12"
                              style="height: 100px;font-size: 20px;font-weight: 800;margin-top: 5px;">
-                            自我簡介:${member.memText}
-
+                            自我簡介:
                             <div>
-
-                                ${member.memName}
+                                ${member.memText}
                             </div>
                         </div>
                     </div>
@@ -132,15 +146,35 @@
                 </div>
                 <!-- POST1 -->
                 <!--                     這邊要開始for each -->
-                <c:forEach var="article" items="${list}" begin="0" end="${list.size()-1}">
+                <% if (list == null || list.size() == 0) { %>
+                <div class="container bg-white mt-10 p-8">
+                    <div class="row">
+                        <div class="col-md-12"
+                             style="height: 100px;font-size: 40px;font-weight: 800;margin-top: 10px;text-align: center;line-height: 100px;color: rgb(91, 91, 91);">
+                            你還沒有貼文喔
+                        </div>
+                    </div>
+                </div>
+
+                <%} else { %>
+
+                <c:forEach var="articlelist" items="${list}">
                     <div class="container bg-white mt-10 p-8">
+
                         <div class="row">
                             <div class="col-md-12" style="font-size: 20px;font-weight: 800;margin-top: 5px;">
                                 <!-- ====個人圖片==== -->
                                 <div class="postmember_info" style="display: flex;">
                                     <div class="postmember_img">
-                                        <img src="/CGA105G2/assets/images/men.png"
-                                             style="width:70px ; height:65px;border-radius: 80%;border: 1px solid rgb(255, 216, 87);">
+                                        <c:if test="${not empty member.memPic}">
+                                            <img src="${pageContext.request.contextPath}/LonginServlet?action=getOtherMemberPhoto&memId=${member.memId}"
+                                                 style="width:70px ; height:65px;border-radius: 80%;border: 1px solid rgb(255, 216, 87);">
+                                        </c:if>
+                                        <c:if test="${empty member.memPic}">
+                                            <img src="https://i.pinimg.com/564x/07/c4/72/07c4720d19a9e9edad9d0e939eca304a.jpg"
+                                                 alt=""
+                                                 style="width:70px ; height:65px;border-radius: 80%;border: 1px solid rgb(255, 216, 87);">
+                                        </c:if>
 
                                     </div>
                                     <div class="postmember_text mt-3" style="margin-left: 5px;line-height: 26px;">
@@ -149,14 +183,15 @@
                                                 ${member.memName}
                                         </span>
                                         <div>
-                                            <time style="font-size: 14px;color: rgb(104, 104, 104);">${article.artTime}</time>
+                                            <p style="font-size: 14px;color: rgb(104, 104, 104);"><fmt:formatDate
+                                                    value="${articlelist.artTime}" pattern="yyyy-MM-dd"/></p>
                                         </div>
                                     </div>
                                     <!-- ==================評分跟店家頭像===================== -->
                                     <div class="ml-5" style="margin-top: 14px;">
                                         <span style="font-size: 20px;padding: 5px 15px;border-radius:15px ;background-color: rgb(255, 112, 60);">
-                                        ${article.artScore} <i class="fa-solid fa-star"
-                                                               style="color: rgb(249, 249, 106);"></i>
+                                        ${articlelist.artScore} <i class="fa-solid fa-star"
+                                                                   style="color: rgb(249, 249, 106);"></i>
 
                                         </span>
                                     </div>
@@ -168,12 +203,18 @@
                                         </div>
                                         <div class="poststore_text"
                                              style="margin-left: 5px;align-items: center;display: flex;">
-            
+                                            <a href="/CGA105G2/LonginServlet?action=StorePage&SearchstoreId=${articlelist.store.storeId}">
                                             <span class="post_name" style="font-size: 30px;font-weight: 1000;">
-                                                    ${article.store.storeName}
+                                                    ${articlelist.store.storeName}
                                             </span>
+                                            </a>
 
                                         </div>
+                                        <c:if test="${not empty articlelist.artTag}">
+                                        <span
+                                                style="font-size: 20px;padding: 8px 12px;border-radius:15px ;margin-left: 10px;background-color: rgb(82, 206, 156);color: white;line-height:25px;height:40px;margin-top:10px">#${articlelist.artTag}
+                                        </span>
+                                        </c:if>
                                     </div>
 
 
@@ -184,37 +225,27 @@
                                             <button class="btn btn-sm btn-info" style="font-size: 15px;">修改文章
                                             </button>
                                             <input type="hidden" name="action" value="getOneArt_For_Update">
-                                            <input type="hidden" name="artId" value="${article.artId}">
+                                            <input type="hidden" name="artId" value="${articlelist.artId}">
                                         </form>
                                     </div>
                                 </div>
                                 <!-- ====個人圖片結束==== -->
-                                <h2 class="mt-6" style="font-weight: 1000;">${article.artHeader}</h2>
+                                <h2 class="mt-6" style="font-weight: 1000;">${articlelist.artHeader}</h2>
                                 <div>
-                                    <p>${article.artText}</p>
-                                    <img src="${pageContext.request.contextPath}/front-end/Member/art/ArtServlet?action=getPhoto&artId=${article.artId}"
+                                    <p>${articlelist.artText}</p>
+                                    <img src="${pageContext.request.contextPath}/front-end/Member/art/ArtServlet?action=getPhoto&artId=${articlelist.artId}"
                                          style="max-width:600px;max-height:450px">
                                 </div>
                                 <ul class="profile-header-tab nav nav-tabs mt-5">
-                                    <li class="nav-item">
-                                        <button id="like1" onclick="liked()">
-                                            <i class="fa fa-thumbs-up p-4 border-0"></i>
-                                            <span class="icon">Like</span>
-                                        </button>
-                                    </li>
-                                    <li class="nav-item text-center ">
-                                        <div id=heart1 style="border:1px solid red"><i class="fa fa-heart-o m-5"
-                                                                                       aria-hidden="true"><span
-                                                class="icon ml-2" style="font-size: 20px;font-weight: 1000;">收藏</span></i>
-                                        </div>
 
-                                    </li>
                                     <li class="nav-item">
-                                        <button class=" btn btn-outline-primary align-items-center"
-                                                style="height: 46px; padding: 5px; border-radius: 0%;font-size: 20px;font-weight: 1000">
-                                            <i class="material-icons">share</i>
-                                            分享
-                                        </button>
+                                        <a href="https://line.me/R/msg/text/?${article.artHeader}%0D%0A/CGA105G2/front-end/Member/art/listArt.jsp">
+                                            <button class=" btn btn-outline-primary align-items-center"
+                                                    style="height: 46px; padding: 5px; border-radius: 0%;font-size: 20px;font-weight: 1000">
+                                                <i class="material-icons">share</i>
+                                                分享到Line
+                                            </button>
+                                        </a>
                                     </li>
 
                                 </ul>
@@ -222,6 +253,10 @@
                         </div>
                     </div>
                 </c:forEach>
+                <%
+                    }
+                    ;
+                %>
                 <!--                     這邊要結束for each -->
 
             </div>
@@ -256,13 +291,7 @@
         });
     });
 </script>
-<script>
-    $(document).ready(function () {
 
-        new ClipboardJS('.btn');
-
-    });
-</script>
 <!-- ==========================button特效開始======================= -->
 <script>
     const button = document.querySelectorAll('.button');
