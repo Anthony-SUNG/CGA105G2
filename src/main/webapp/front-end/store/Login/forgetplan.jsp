@@ -52,7 +52,7 @@
 															<Form method="post"
 																action="${pageContext.request.contextPath}/Member/StoreServlet">
 																<input type="hidden" name="action" value="plan1">
-																<button type="button"
+																<button type="submit"
 																	class="btn btn-lg btn-block btn-primary align-bottom">選擇一般會員</button>
 															</Form>
 														</div>
@@ -74,7 +74,7 @@
 															<Form method="post"
 																action="${pageContext.request.contextPath}/Member/StoreServlet">
 																<input type="hidden" name="action" value="plan2">
-																<button type="button"
+																<button type="submit"
 																	class="btn btn-lg btn-block btn-primary align-bottom">選擇高級會員</button>
 															</Form>
 														</div>
