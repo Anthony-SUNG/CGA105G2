@@ -30,7 +30,7 @@
                         <div
                                 class="row d-flex justify-content-center align-items-center h-100 p-4">
                             <div class="col-xl-9">
-                                <h1 class="text-white text-center m-5">Member Registration</h1>
+                                <h1 class="text-white text-center m-5">🔆基本資料</h1>
                                 <div class="card" style="border-radius: 15px;">
                                     <div class="card-body p-4">
                                         <%-- 錯誤表列 --%>
@@ -43,8 +43,9 @@
                                             </ul>
                                         </c:if>
                                         <Form method="post"
+                                              enctype="multipart/form-data"
                                               action="${pageContext.request.contextPath}/Member/MemberServlet"
-                                              name="updatee" enctype="multipart/form-data">
+                                              name="updatee">
                                             <div class="row align-items-center pt-4 pb-3">
                                                 <div class="col-md-3 ps-5">
                                                     <h4 class="mb-0">用戶名稱</h4>
@@ -112,26 +113,25 @@
                                             </div>
                                             <hr class="mx-n3">
                                             <div class="row align-items-center pt-4 pb-3">
-													<div class="col-md-3 ps-5">
-
-														<h4 class="mb-0">地址</h4>
-
-													</div>
-													<div class="col-md-9 pe-5">
-														<input class="js-demeter-tw-zipcode-selector"
-															name="MEM_POSTAL_CODE" data-city="#city4"
-															data-dist="#dist4" placeholder="請輸入郵遞區號"
-															value=${ Member.memPostalCode }> <select
-															id="city4" placeholder=${ Member.memCity } name="MEM_CITY">
-															<option selected>${ Member.memCity }</option>
-														</select> <select id="dist4" placeholder=${ Member.memDistrict }
-															name="MEM_DISTRICT"><option selected>${ Member.memDistrict }</option></select>
-
-														<input type="text" name="MEM_ADDRESS"
-															class="form-control form-control-lg"
-															id="memberstore-address" value=${ Member.memAddress } />
-													</div>
-												</div>
+                                                <div class="col-md-3 ps-5">
+                                                    <h4 class="mb-0">地址</h4>
+                                                </div>
+                                                <div class="col-md-9 pe-5">
+                                                    <input class="js-demeter-tw-zipcode-selector"
+                                                           name="MEM_POSTAL_CODE" data-city="#city4"
+                                                           data-dist="#dist4" placeholder="請輸入郵遞區號"
+                                                           value=${ Member.memPostalCode }> <select
+                                                        id="city4" placeholder="請選擇縣市" name="MEM_CITY">
+                                                    <option>${ Member.memCity }</option>
+                                                </select> <select id="dist4" placeholder="請選擇鄉鎮區"
+                                                                  name="MEM_DISTRICT">
+                                                    <option>${ Member.memDistrict }</option>
+                                                </select>
+                                                    <input type="text" name="MEM_ADDRESS"
+                                                           class="form-control form-control-lg"
+                                                           id="memberstore-address" value=${ Member.memAddress }>
+                                                </div>
+                                            </div>
                                             <hr class="mx-n3">
                                             <div class="row align-items-center py-3">
                                                 <div class="col-md-3 ps-5">
@@ -205,8 +205,8 @@
     $("a:contains(🔻設定)").closest("a").attr("data-toggle", "show");
     $("#pageSubmenu4").removeClass("collapse");
     $("#pageSubmenu4 a:contains(🔆基本資料)").closest("a").addClass("active disabled bg-white topage");
-    
 </script>
 <script src="https://demeter.5fpro.com/tw/zipcode-selector.js"></script>
+
 </body>
 </html>

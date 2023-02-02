@@ -10,6 +10,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+
 @MultipartConfig
 @WebServlet("/Member/MemberServlet")
 public class MemberServlet extends HttpServlet {
@@ -139,6 +140,7 @@ public class MemberServlet extends HttpServlet {
 				errorMsgs.add("帳號請勿空白");
 			}
 
+
 			String memrecipient = request.getParameter("MEM_RECIPIENT").trim();
 			if (memrecipient == null || memrecipient.trim().length() == 0) {
 				errorMsgs.add("姓名欄位請勿空白");
@@ -208,7 +210,6 @@ public class MemberServlet extends HttpServlet {
 			Member.setMemMail(memmail);
 			Member.setMemText(memtext);
 			Member.setMemPic(mempic);
-
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				request.setAttribute("Member", Member); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -224,10 +225,9 @@ public class MemberServlet extends HttpServlet {
 					memcity, memdistrict, memaddress, memmail, memtext, mempic);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/front-end/Member/member/memberIInfo.jsp";
+			String url = "/front-end/Member/art/listArt.jsp";
 			RequestDispatcher successView = request.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(request, response);
-
 		}
 
 //  search  	-------------------------------------------------------------------------------------------------------------------------------
@@ -292,21 +292,21 @@ public class MemberServlet extends HttpServlet {
 			successView.forward(request, response);
 
 		}
-		
-		
+
+
 		//  chgpwd(update)  	-------------------------------------------------------------------------------------------------------------------------------
 		if ("chgpwd".equals(action)) { // 來自addEmp.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
 
-			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/			
+			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 
 			String mempwd = request.getParameter("MEM_PWD").trim();
 			String mempwd2 = request.getParameter("MEM_PWD2").trim();
-			String mempwd3 = request.getParameter("MEM_PWD3").trim();			
-			
-			
+			String mempwd3 = request.getParameter("MEM_PWD3").trim();
+
+
 			if (mempwd == null || mempwd.trim().length() == 0) {
 				errorMsgs.add("原始密碼請勿空白");
 			}
@@ -314,19 +314,19 @@ public class MemberServlet extends HttpServlet {
 			if (mempwd2 == null || mempwd2.trim().length() == 0) {
 				errorMsgs.add("新密碼請勿空白");
 			}
-			
+
 			if (mempwd3 == null || mempwd3.trim().length() == 0) {
 				errorMsgs.add("確認密碼請勿空白");
 			}
-			
+
 			if (!mempwd2.equals(mempwd3)) {
 				errorMsgs.add("確認密碼請與密碼相同");
 			}
-			
-			
-			
+
+
+
 			Member Member = new Member();
-			Member.setMemPwd(mempwd2);				
+			Member.setMemPwd(mempwd2);
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
@@ -339,7 +339,7 @@ public class MemberServlet extends HttpServlet {
 
 			/*************************** 2.開始新增資料 ***************************************/
 			MemberService memSvc = new MemberService();
-			
+
 			Member member1 = memSvc.signin(memSvc.getById(memid).getMemAcc(), mempwd);
 			Integer memid2 = member1.getMemId();
 			if (memid2 == 0) {

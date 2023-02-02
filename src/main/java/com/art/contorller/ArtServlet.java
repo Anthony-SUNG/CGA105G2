@@ -1,5 +1,6 @@
 package com.art.contorller;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.LinkedHashMap;
@@ -46,13 +47,16 @@ public class ArtServlet extends HttpServlet{
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 
 
-				memId = Integer.valueOf(req.getParameter("memId").trim());
-			 storeId = Integer.valueOf(req.getParameter("storeId").trim());
+				
+			storeId = Integer.valueOf(req.getParameter("storeId").trim());
 
-
-
-
-			Integer artScore = Integer.valueOf(req.getParameter("artScore"));
+			Integer artScore = null;
+			try {								//這個好像沒用
+				artScore = Integer.valueOf(req.getParameter("artScore").trim());
+			} catch (NumberFormatException e) {
+				errorMsgs.add("請給評分");
+			}
+			String artTag = req.getParameter("artTag");
 			String artHeader = req.getParameter("artHeader");
 			String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,50}$";
 			String enameReg2 = "^.{1,2000}$";
@@ -68,6 +72,10 @@ public class ArtServlet extends HttpServlet{
 				errorMsgs.add("評論限制為2000字以內");
             }
 			byte[] artImg =req.getPart("artImg").getInputStream().readAllBytes();
+			if (artImg == null || artText.trim().length() == 0) {
+				errorMsgs.add("請上傳圖片");
+			}
+			
 			Article article = new Article();
 			article.setMemId(memId);
 			article.setStoreId(storeId);
@@ -75,6 +83,7 @@ public class ArtServlet extends HttpServlet{
 			article.setArtText(artText);
 			article.setArtImg(artImg);
 			article.setArtScore(artScore);
+			article.setArtTag(artTag);
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("article", article); // 含有輸入格式錯誤的empVO物件,也存入req //保留key-in錯誤的資料
 				RequestDispatcher failureView = req
@@ -85,16 +94,8 @@ public class ArtServlet extends HttpServlet{
 			System.out.print("bbb");
 			/***************************2.開始新增資料***************************************/
 			ArtService artSvc = new ArtService();
-			article = artSvc.addArt(memId, storeId, artHeader, artText, artImg, artScore);
-			MemberService memberService = new MemberService();
-			Member member = memberService.getById(memId); //這邊可以直接創立一個Member物件
-			StoreDAO storeDAO = new StoreDAO();
-			Store store = storeDAO.getById(storeId); //評價店家的資訊也加進去
-
-			/***************************3.新增完成,準備轉交(Send the Success view)***********/
-			req.setAttribute("article", article);   //要set東西進去 另一個頁面才抓得到
-			req.setAttribute("member", member);
-			req.setAttribute("store", store);
+			article = artSvc.addArt(memId, storeId, artHeader, artText, artImg, artScore, artTag);
+			/***************************3.新增完成,準備轉交(Send the Success view)***********/   //要set東西進去 另一個頁面才抓得到
 			String url = "/front-end/Member/art/listArt.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交
 			successView.forward(req, res);	
@@ -102,7 +103,7 @@ public class ArtServlet extends HttpServlet{
 		}
 		if("getPhoto".equals(action)) { //秀文章圖片
 			OutputStream out = res.getOutputStream();
-			String artId = req.getParameter("artId"); //該如何使用
+			String artId = req.getParameter("artId"); 
 			ArtService artService = new ArtService();
 			Article article = artService.getOneArt(Integer.parseInt(artId));
 			res.setContentType("image/jpg");
@@ -180,10 +181,12 @@ public class ArtServlet extends HttpServlet{
 			Member member = memberService.getById(memId); //這邊可以直接創立一個Member物件
 			StoreDAO storeDAO = new StoreDAO();
 			Store store = storeDAO.getById(storeId); //評價店家的資訊也加進去
+			List<Article> list = artSvc.getAllMem(article.getMemId()); 
 			/***************************3.修改完成,準備轉交(Send the Success view)*************/
 			req.setAttribute("article", article); // 資料庫update成功後,正確的的empVO物件,存入req
 			req.setAttribute("member", member);
 			req.setAttribute("store", store);
+			req.setAttribute("list", list);
 			String url = "/front-end/Member/art/listArt.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listArt.jsp
 			successView.forward(req, res);

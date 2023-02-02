@@ -67,7 +67,6 @@
                         <hr>
                         <a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆合約查詢</a>
                     </li>
-                    <li><a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆合約續約</a></li>
                     <li><a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆新增廣告</a>
                         <hr>
                     </li>

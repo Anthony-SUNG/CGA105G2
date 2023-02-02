@@ -12,8 +12,12 @@ public interface ReservaDAO_interface {
 //    public void delete(Integer REN_ID);
     public Reserva getById(Integer REN_ID);
     public List<Reserva> getAll();
+    public List<Reserva> getByStoreIdRendate(Integer storeid, String rendate, String rentime, Integer renstatus);
+    public void insertWithReservaDetails(Reserva reservaVO, List<Map> list);
+    public List<Reserva> getBymemIdrenStatus(Integer memid, Integer renstatus);
+	void updateRenstatusByRenid(Integer renid, Integer renstatus);
+	public List<Reserva> getBymemId(Integer memid);
+	public List<Reserva> getBystoreId(Integer storeid);
+	public List<Reserva> getBystoreIdrenStatus(Integer storeid, Integer renstatus);
 
-    List<Reserva> getByStoreIdRendate(Integer storeid, String rendate, String rentime, Integer renstatus);
-
-    void insertWithReservaDetails(Reserva reservaVO, List<Map> list);
 }

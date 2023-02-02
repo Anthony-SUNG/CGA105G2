@@ -35,7 +35,7 @@
         <div class="container" style="max-width: 1400px">
             <div class="row" style="max-width: 1400px">
                 <nav class="navbar navbar-expand-lg navbar-light fs-md-6" id="header-navbar">
-                    <a class="navbar-brand font-weight-bold" href="<%=request.getContextPath()%>/front-end/store/food_order/food_order.do?action=food_order_button">
+                    <a class="navbar-brand font-weight-bold" href="/CGA105G2/index.jsp">
                         <img src="/CGA105G2/assets/images/Logo.PNG" style="width: 100px; height: 100px" alt="" />FoodMap</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-uppercase" data-toggle="none" href="/CGA105G2/front-end/store/food_order/listAllFoodOrder.jsp">
+                                <a class="nav-link text-uppercase" data-toggle="none" href="<%=request.getContextPath()%>/front-end/store/food_order/food_order.do?action=storelistAllFoodOrder">
                                     🚩訂位
                                 </a>
                             </li>
@@ -66,13 +66,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-uppercase " data-toggle="none" href="/CGA105G2/front-end/store/food_order/setFoodOrderInfo.jsp">
+                                <a class="nav-link text-uppercase " data-toggle="none" href="/CGA105G2/front-end/store/code/addCode.jsp">
                                     🗃️管理
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-uppercase" data-toggle="none" href="/CGA105G2/LonginServlet?action=out">
-                                    🚪Sing out
+                                    🚪Sign out
                                 </a>
                             </li>
                         </ul>

@@ -94,23 +94,19 @@
     <div class="p-4 pt-5">
         <ul class="list-unstyled components mb-5">
             <li class="my-4">
-                <a href="/CGA105G2/front-end/Member/art/listArt.jsp">
+                <a href="<%=request.getContextPath()%>/front-end/Member/art/listArt.jsp">
                     <h2>My Home</h2>
                 </a>
             </li>
             <li class="my-4">
-                <a href="#pageSubmenu1" data-toggle="show" aria-expanded="false" class="dropdown fs-md-6">🔻我的收藏</a>
-                <ul class="list-unstyled  " id="pageSubmenu1">
-                    <li>
-                        <hr><a href="/CGA105G2/BlankPage/Loader2.jsp" class="nav-link">🔆收藏文章</a>
-                    </li>
-                    <li><a href="/CGA105G2/BlankPage/Loader2.jsp" class="nav-link">🔆追蹤會員</a></li>
-                    <li><a href="/CGA105G2/BlankPage/Loader2.jsp" class="nav-link">🔆訂閱店家</a>
+                <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown fs-md-6">🔻我的收藏</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu1">
+                    <li><a href="<%=request.getContextPath()%>/front-end/Member/saveArt/selectSaveArtByMember.jsp" class="nav-link">🔆追蹤會員</a></li>
+                    <li><a href="<%=request.getContextPath()%>/front-end/Member/saveArt/selectSaveArtByStore.jsp" class="nav-link">🔆訂閱店家</a>
                         <hr>
                     </li>
                 </ul>
             </li>
-
         </ul>
     </div>
 </nav>

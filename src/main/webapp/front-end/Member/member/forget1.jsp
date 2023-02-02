@@ -10,18 +10,15 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title>🗃️管理</title>
+    <title>🚪Sing in</title>
 </head>
 <body>
 <!-- header start -->
-<%@ include file="/front-end/Member/01h/headerin.jsp" %>
+<%@ include file="/front-end/Member/01h/headerout.jsp" %>
 <!-- header end -->
 <!-- main -->
 <div class="container-fluid">
     <div class="row">
-        <!-- nav start -->
-        
-        <!-- nav end -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 my-5">
             <div class="container mb-17 p-4">
                 <section class="shadow p-4"
@@ -109,10 +106,7 @@
 <%@ include file="/front-end/Member/01h/footerin.jsp" %>
 <!-- footer end -->
 <script>
-    $("a:contains(🗃️管理)").closest("a").addClass("active disabled topage");
-    $("a:contains(🔻設定)").closest("a").attr("data-toggle", "show");
-    $("#pageSubmenu4").removeClass("collapse");
-    $("#pageSubmenu4 a:contains(🔆基本資料)").closest("a").addClass("active disabled bg-white topage");
+    $("a:contains(🚪Sing in)").closest("a").addClass("active disabled topage");
 </script>
 
 </body>

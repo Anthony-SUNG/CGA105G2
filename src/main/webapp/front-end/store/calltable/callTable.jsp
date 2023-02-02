@@ -425,7 +425,24 @@ a {
     ];
     //可以帶位的桌號-->cantab
     const cantable = $(tables).not(tablehave).toArray();
-
+    // 調整成今天才會顯示候位選項
+    $(function () {
+        $("#Select01").change(function () {
+            if ($("#Select01").val() === "Time") {
+                $("#tablenumber").css("display", "none");
+            } else {
+                $("#tablenumber").css("display", "flex");
+            }
+        })
+    });
+    $(function () {
+        $("#option1").click(function () {
+            $("#tablewait").css("display", "block");
+        });
+        $("#option2").click(function () {
+            $("#tablewait").css("display", "none");
+        })
+    });
     function orderlist(obder) {
         // 定義變數，在使用變數
         const toorder = document.querySelector('.toorder');

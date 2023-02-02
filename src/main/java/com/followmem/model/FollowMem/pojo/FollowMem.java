@@ -53,5 +53,12 @@ public class FollowMem implements java.io.Serializable{
   public void setMemId2(Integer memId2) {
     this.memId2 = memId2;
   }
+  
+
+public com.member.model.Member.pojo.Member getMember() {
+	    com.member.model.service.MemberService memSvc = new com.member.model.service.MemberService();
+	    com.member.model.Member.pojo.Member member = memSvc.getById(memId2);
+	    return member;
+}
 
 }

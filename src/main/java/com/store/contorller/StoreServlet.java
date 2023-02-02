@@ -251,20 +251,20 @@ public class StoreServlet extends HttpServlet {
 			RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 			successView.forward(request, response);
 		}
-		
+
 	//  chgpwd(update)  	-------------------------------------------------------------------------------------------------------------------------------
 			if ("chgpwd".equals(action)) { // 來自addEmp.jsp的請求
 
 				List<String> errorMsgs = new LinkedList<String>();
 				request.setAttribute("errorMsgs", errorMsgs);
 
-				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/			
+				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 
 				String storepwd = request.getParameter("STORE_PWD").trim();
 				String storepwd2 = request.getParameter("STORE_PWD2").trim();
-				String storepwd3 = request.getParameter("STORE_PWD3").trim();			
-				
-				
+				String storepwd3 = request.getParameter("STORE_PWD3").trim();
+
+
 				if (storepwd == null || storepwd.trim().length() == 0) {
 					errorMsgs.add("原始密碼請勿空白");
 				}
@@ -272,19 +272,19 @@ public class StoreServlet extends HttpServlet {
 				if (storepwd2 == null || storepwd2.trim().length() == 0) {
 					errorMsgs.add("新密碼請勿空白");
 				}
-				
+
 				if (storepwd3 == null || storepwd3.trim().length() == 0) {
 					errorMsgs.add("確認密碼請勿空白");
 				}
-				
+
 				if (!storepwd2.equals(storepwd3)) {
 					errorMsgs.add("確認密碼請與密碼相同");
 				}
-				
-				
-				
+
+
+
 				Store Store = new Store();
-				Store.setStorePwd(storepwd2);				
+				Store.setStorePwd(storepwd2);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -297,7 +297,7 @@ public class StoreServlet extends HttpServlet {
 
 				/*************************** 2.開始新增資料 ***************************************/
 				StoreService strSvc = new StoreService();
-				
+
 				Store store1 = strSvc.signin(strSvc.getById(storeId).getStoreAcc(), storepwd);
 				Integer storeid2 = store1.getStoreId();
 				if (storeid2 == 0) {
@@ -316,29 +316,6 @@ public class StoreServlet extends HttpServlet {
 
 			}
 
-		//  plan1(update)  	-------------------------------------------------------------------------------------------------------------------------------
-					if ("plan1".equals(action)) {
-
-						StoreService strSvc = new StoreService();
-						Store Store = strSvc.updateplan(storeId);						
-
-						String url = "/front-end/Member/member/memberLognIn.jsp";
-						RequestDispatcher successView = request.getRequestDispatcher(url); 
-						successView.forward(request, response);
-
-					}
-					
-				//  plan2(update)  	-------------------------------------------------------------------------------------------------------------------------------
-					if ("plan2".equals(action)) {
-
-						StoreService strSvc = new StoreService();
-						Store Store = strSvc.updateplan2(storeId);						
-
-						String url = "/front-end/Member/member/memberLognIn.jsp";
-						RequestDispatcher successView = request.getRequestDispatcher(url); 
-						successView.forward(request, response);
-
-					}
 	}
 
 }
