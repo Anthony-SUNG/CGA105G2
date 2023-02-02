@@ -315,6 +315,30 @@ public class StoreServlet extends HttpServlet {
 				successView.forward(request, response);
 
 			}
+			
+		//  plan1(update)  	-------------------------------------------------------------------------------------------------------------------------------
+			if ("plan1".equals(action)) {
+
+				StoreService strSvc = new StoreService();
+				Store Store = strSvc.updateplan(storeId);						
+
+				String url = "/front-end/Member/member/memberLognIn.jsp";
+				RequestDispatcher successView = request.getRequestDispatcher(url); 
+				successView.forward(request, response);
+
+			}
+			
+		//  plan2(update)  	-------------------------------------------------------------------------------------------------------------------------------
+			if ("plan2".equals(action)) {
+
+				StoreService strSvc = new StoreService();
+				Store Store = strSvc.updateplan2(storeId);						
+
+				String url = "/front-end/Member/member/memberLognIn.jsp";
+				RequestDispatcher successView = request.getRequestDispatcher(url); 
+				successView.forward(request, response);
+
+			}
 
 	}
 

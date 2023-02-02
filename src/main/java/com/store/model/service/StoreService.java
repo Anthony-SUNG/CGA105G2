@@ -201,5 +201,22 @@ public class StoreService {
 
 		return store;
 	}
+	public Store updateplan(Integer storeId) {
+		Store store = new Store();
+
+		store.setStoreId(storeId);
+		dao.updateplan(storeId);
+
+		return store;
+	}
+	
+	public Store updateplan2(Integer storeId) {
+		Store store = new Store();
+
+		store.setStoreId(storeId);
+		dao.updateplan2(storeId);
+
+		return store;
+	}
 
 }
