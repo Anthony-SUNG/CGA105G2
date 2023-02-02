@@ -12,10 +12,10 @@
 // 	Standby standbyVo =(Standby) request.getAttribute("standbyVo")1; 
 
 	Standby standbyVo =(Standby) request.getAttribute("standbyVo"); 
-
     StandbyDAO dao = new StandbyDAO();
     StandbyService standbySvc = new StandbyService();
     Integer staCount = dao.standByCount();
+    
 %>
 <!-- 123 -->
 
@@ -87,7 +87,7 @@
         <main role="main " class="col-md-9 ml-sm-auto col-lg-10 px-md-4 container ">
             <div class=" m-10 p-10  " style="">
 
-
+					<div>${onOff}</div>
                 <section
                         class="section-content  col-6  py-10 mt-10 mb-10 card shadow bg-yellow-10  mx-auto"
                         id="contacts"
@@ -157,8 +157,9 @@
                                     <!--<button class="btn btn-outline-info btn-lg fs-8 container" -->
                                     <!--style="border-radius: 20px;" onclick="addWaitAlert()">送出</button> -->
 
-                                    <input type="hidden" name="action" value="insert"> <input
-                                        type="submit" value="新增候位"
+                                    <input type="hidden" name="action" value="insertSta"> <input
+                                        type="submit" value="新增候位" disabled
+                                        title="目前店家尚未開放"
                                         class="btn btn-outline-info btn=lg fs-7 text-center "
                                         style="border-radius: 20px; width: 300px;">
                                 </div>
@@ -205,6 +206,22 @@
     function addStandBy() {
         setTimeout(addStandByAlert(), 1000);
     }
+
+
+    $(document).ready(function (){
+        $.ajax({
+            type:"POST",
+            url:"/CGA105G2/standby",
+            data :{action:"addStaLoading"},
+            
+
+        })
+
+
+    });
+
+
+
 
     function addStandByAlert() {
         const swalWithBootstrapButtons = Swal.mixin({

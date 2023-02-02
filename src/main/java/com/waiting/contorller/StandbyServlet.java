@@ -1,13 +1,7 @@
 package com.waiting.contorller;
 
-import com.google.gson.Gson;
-import com.waiting.model.pojo.Standby;
-import com.waiting.model.service.StandbyService;
-
 import java.io.IOException;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,6 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.waiting.model.pojo.Standby;
+import com.waiting.model.service.StandbyService;
 
 @WebServlet("/standby")
 public class StandbyServlet extends HttpServlet {
@@ -40,6 +38,16 @@ public class StandbyServlet extends HttpServlet {
 		Integer storeId = (Integer) req.getSession().getAttribute("storeId");
 		Integer memId = (Integer) req.getSession().getAttribute("memId");
 		Integer empId = (Integer) req.getSession().getAttribute("empId");
+		String Stadefault = "off";
+
+		String onOff = req.getParameter("onOff");
+		req.setAttribute("onOff", onOff);
+		StandbyService staSvc = new StandbyService();
+
+		if ("addStaLoading".equals(action)) {
+			res.setContentType("text/plain");
+
+		}
 
 		if ("getOneUpdate".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
@@ -81,7 +89,7 @@ public class StandbyServlet extends HttpServlet {
 		}
 
 		// ===============================Insert(addStandBy.jsp)============================================
-		if ("insert".equals(action)) {
+		if ("insertSta".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
@@ -152,31 +160,45 @@ public class StandbyServlet extends HttpServlet {
 
 		if ("selectStandBy".equals(action)) {
 			res.setContentType("text/html;charset=UTF-8");
-			StandbyService staSvc = new StandbyService();
 			List<Standby> list = staSvc.getAll();
 			List<Standby> staList = new ArrayList<Standby>();
-			for(Standby list2 :list){
+			for (Standby list2 : list) {
 				staList.add(list2);
 			}
-
 			Gson gson = new Gson();
 			String json = gson.toJson(staList);
 			res.getWriter().write(json);
+			System.out.println(onOff);
+		}
 
-
+		if ("checkMem".equals(action)) {
+			// 修改STANDBY狀態狀態
+			Integer staId = Integer.valueOf(req.getParameter("staId"));
+			Standby standby = staSvc.updateStandBy(staId, 2);
+			res.setContentType("text/plain");
+			res.getWriter().write("update succ");
+			//===新增到訂位===
+			String date = req.getParameter("date");
+			String totime = req.getParameter("totime");
+			req.setAttribute("date", date);
+			req.setAttribute("totime", totime);
 
 		}
 
 	}
-//	public static void main(String[] args) {
+
+	public static void main(String[] args) {
 //		StandbyService staSvc = new StandbyService();
 //		List<Standby> staList = new ArrayList<Standby>();
 //		List<Standby> list = staSvc.getAll();
-//		for(Standby list2 :list){
+//		for (Standby list2 : list) {
 //			staList.add(list2);
 //		}
-//		for(Standby list3 : staList) {
+//		for (Standby list3 : staList) {
 //			System.out.println(list3.getStaId());
 //		}
-//	}
+		// StandbyService standbyService = new StandbyService();
+		// Standby standby = standbyService.updateStandBy(11, 2);
+
+	}
 }

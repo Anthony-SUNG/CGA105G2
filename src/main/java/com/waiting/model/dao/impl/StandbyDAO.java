@@ -1,8 +1,5 @@
 package com.waiting.model.dao.impl;
 
-import com.waiting.model.dao.StandbyDAO_interface;
-import com.waiting.model.pojo.Standby;
-
 import static com.core.common.Common.PASSWORD;
 import static com.core.common.Common.URL;
 import static com.core.common.Common.USER;
@@ -13,8 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
+import com.waiting.model.dao.StandbyDAO_interface;
+import com.waiting.model.pojo.Standby;
 
 public class StandbyDAO implements StandbyDAO_interface {
 
@@ -121,7 +120,7 @@ public class StandbyDAO implements StandbyDAO_interface {
 	@Override
 	public List<Standby> getAll() {
 		String GET_ALL_STMT = "SELECT `STA_ID`, `STORE_ID`, `STA_NAME`, `STA_PHONE`, `STA_NUMBER`, `STA_TIME`, `STA_STATUS`\r\n"
-				+ "FROM cga105g2.`standby` order by sta_id";
+				+ "FROM cga105g2.`standby` where STA_STATUS = 0    order by sta_id";
 		List<Standby> list = new ArrayList<Standby>();
 		Standby standbyVo = null;
 

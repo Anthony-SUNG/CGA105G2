@@ -578,24 +578,39 @@
                                                 </script>
                                                 <!-- 	==========候位============== -->
                                                 <script>
-                                                    // ============Select===================
                                                     $(document).ready(function () {
+                                                        if ($('#option2').is(':checked')) {
+                                                            $.ajax({
+                                                                type: "POST",
+                                                                url: "/CGA105G2/standby",
+                                                                data: { onOff: "off" },
+                                                                success: function () {
+                                                                    console.log("sta:off");
+                                                                }
+                                                            });
+                                                        }
+
+
+
+                                                        // ============Select===================
                                                         $('#option1').click(function () {
                                                             $.ajax({
                                                                 type: "POST",
                                                                 url: "/CGA105G2/standby",
-                                                                data: { action: "selectStandBy" },
+                                                                data: { action: "selectStandBy" ,onOff:"on"},
                                                                 dataType: "json",
                                                                 success: function (data) {
-                                                                    console.log("success!");
-                                                                    console.log(data);
+                                                                    console.log("select success!");
+                                                                    // console.log(data);
                                                                     let html = "";
                                                                     for (let i = 0; i < data.length; i++) {
 
-                                                                        html += `<header class="faq-header"
+                                                                        html +=         
+                                                                                    `<div id="staHeader-\${data[i].staId}">
+                                                                                        <header class="faq-header"
                                                                                                 data-toggle="collapse"
                                                                                                 data-target="#faq2-item-\${data[i].staId}"
-                                                                                                aria-expanded="false">
+                                                                                                aria-expanded="false" >
                                                                                             <table
                                                                                                    class="table table-striped m-0">
                                                                                                 <tbody
@@ -647,40 +662,78 @@
                                                                                                 <input type="hidden"
                                                                                                        name="action"
                                                                                                        value="delete">
-
+                                                                                        <input type="hidden" name="date" value="${date}" class="d-none">
+                                                                                        <input type="hidden" name="totime" value="${totime}" class="d-none">
                                                                                             </form>
 
                                                                                             <form METHOD="post"
                                                                                                   id="checkStandby"
                                                                                                   ACTION="<%=request.getContextPath()%>/standby" class="d-block">
-                                                                                                <input class="btn btn-outline-info w-auto text-dark btn-lg"
-                                                                                                       data-value="come"
-                                                                                                       id="checkMem"
-                                                                                                       onclick=""
-                                                                                                       type="submit"
-                                                                                                       value="報到" >
+                                                                                               
+
                                                                                                 <input type="hidden"
                                                                                                        name="staId"
+                                                                                                       id="checkStaId"
                                                                                                        value="\${data[i].staId}">
+
+
                                                                                                 <input type="hidden"
                                                                                                        name="action"
-                                                                                                       value="callStandby">
+                                                                                                       value="checkMem">
+
+                                                                                                <input  type= "submit" class="d-none">
+
+
+                                                                                             <input class="btn btn-outline-info w-auto text-dark btn-lg"
+                                                                                                       data-value="come"
+                                                                                                       id="checkMemBtn"
+                                                                                                       type="button"
+                                                                                                       onclick="checkMem()"
+                                                                                                       value="報到"
+                                                                                                       >
+
 
                                                                                             </form>
-                                                                                        </div>  </div>`;
+                                                                                        </div> 
+                                                                                         </div>
+                                                                                          </div>`;
                                                                     }
                                                                     $("#selectStandByResult").html(html);
                                                                 }
                                                             });
                                                         });
+                                                        // ------------------------------------------
+                                                        //報到 
 
+                                                        // $('#checkMemBtn').click(function(){
                                                        
+                                                        // });
 
+                                                        // ---------doc.ready--------
+                                                    });
+                                                    // ---------doc.ready--------
+                                                    $('#checkMemBtn').click(function(){
 
+                                                        console.log('staTest');
                                                     });
 
-
-
+                                                    function checkMem(){
+                                                            let staId = $('#checkStaId').val();
+                                                            console.log(staId);
+                                                            $.ajax({
+                                                                type:"POST",
+                                                                url:"/CGA105G2/standby",
+                                                                data:$('#checkStandby').serialize(),
+                                                                success:function(data){
+                                                                    console.log("checkStaSuccess!");
+                                                                    $(`#staHeader-\${staId}`).css("display","none");
+                                                                    $("#option1").trigger('click');
+                                                                },
+                                                                error:function(){
+                                                                    console.log("erroeSta");
+                                                                }
+                                                            });
+                                                    } 
 
 
                                                     // 通知
