@@ -21,9 +21,9 @@
         <!-- nav start -->
         <%@ include file="/front-end/Member/01h/nav/navin04.jsp" %>
         <!-- nav end -->
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 mb-6 mt-5">
+        <main role="main" class="col-md-9">
             <div class="table-responsive" style="overflow: hidden !important;">
-                <h1 class="h2">會員訂單管理</h1>
+                <h1 class="h2">會員預約查詢</h1>
                 <table id="code" class="table table-striped display" style="text-align:center;">
                 </table>
             </div>
@@ -39,178 +39,60 @@
     $("a:contains(🗃️管理)").closest("a").addClass("active disabled topage");
     $("a:contains(🔻訂位)").closest("a").attr("data-toggle", "show");
     $("#pageSubmenu3").removeClass("collapse");
-    $("#pageSubmenu3 a:contains(🔆訂位預約)").closest("a").addClass("active disabled bg-white topage");
+    $("#pageSubmenu3 a:contains(🔆預約查詢)").closest("a").addClass("active disabled bg-white topage");
 </script>
+
 <script>
-    const order_time_list = ["11:00", "13:00", "14:00"];
-    const data_test = [
-        {
-            'name': '測試者',
-            'shop': '喜來登大飯店 中壢廠',
-            'count': '2',
-            'date_time': '12/21/2022',
-            'time_frame': '11:00',
-            'meal': '豬排套餐*1, 牛排套餐*1, 豬排套餐*1, 牛排套餐*1,豬排套餐*1, 牛排套餐*1, 豬排套餐*1, 牛排套餐*1,豬排套餐*1, 牛排套餐*1, 豬排套餐*1, 牛排套餐*1,豬排套餐*1, 牛排套餐*1, 豬排套餐*1, 牛排套餐*1',
-            'score': '',
-            'state': '已完成'
-        }, {
-            'name': "James",
-            'shop': 'MC',
-            'count': '1',
-            'date_time': '12/21/2022',
-            'time_frame': '11:00',
-            'meal': '牛排套餐*1',
-            'score': '',
-            'state': '已預約'
-        },
-        {
-            'name': 'David',
-            'shop': 'MC',
-            'count': '2',
-            'date_time': '12/21/2022',
-            'time_frame': '11:00',
-            'meal': '豬排套餐*1, 牛排套餐*1',
-            'score': '',
-            'state': '已預約'
-        }, {
-            'name': "James",
-            'shop': 'MC',
-            'count': '1',
-            'date_time': '12/21/2022',
-            'time_frame': '11:00',
-            'meal': '牛排套餐*1',
-            'score': '',
-            'state': '取消'
-        },
-        {
-            'name': 'David',
-            'shop': 'MC',
-            'count': '2',
-            'date_time': '12/21/2022',
-            'time_frame': '11:00',
-            'meal': '豬排套餐*1, 牛排套餐*1',
-            'score': '',
-            'state': '已完成'
-        }, {
-            'name': "James",
-            'shop': 'MC',
-            'count': '1',
-            'date_time': '12/21/2022',
-            'time_frame': '11:00',
-            'meal': '牛排套餐*1',
-            'score': '',
-            'state': '已預約'
-        },
-        {
-            'name': 'David',
-            'shop': 'MC',
-            'count': '2',
-            'date_time': '12/21/2022',
-            'time_frame': '11:00',
-            'meal': '豬排套餐*1, 牛排套餐*1',
-            'score': '',
-            'state': '已預約'
-        }, {
-            'name': "James",
-            'shop': 'MC',
-            'count': '1',
-            'date_time': '12/21/2022',
-            'time_frame': '11:00',
-            'meal': '牛排套餐*1',
-            'score': '',
-            'state': '取消'
-        },
-        {
-            'name': 'David',
-            'shop': 'MC',
-            'count': '2',
-            'date_time': '12/21/2022',
-            'time_frame': '11:00',
-            'meal': '豬排套餐*1, 牛排套餐*1',
-            'score': '',
-            'state': '已預約'
-        }, {
-            'name': "James",
-            'shop': 'MC',
-            'count': '1',
-            'date_time': '12/21/2022',
-            'time_frame': '11:00',
-            'meal': '牛排套餐*1',
-            'score': '',
-            'state': '已預約'
-        },
-        {
-            'name': 'David',
-            'shop': 'MC',
-            'count': '2',
-            'date_time': '12/21/2022',
-            'time_frame': '11:00',
-            'meal': '豬排套餐*1, 牛排套餐*1',
-            'score': '',
-            'state': '取消'
-        }, {
-            'name': "James",
-            'shop': 'MC',
-            'count': '1',
-            'date_time': '12/21/2022',
-            'time_frame': '11:00',
-            'meal': '牛排套餐*1',
-            'score': '',
-            'state': '取消'
-        },
-        {
-            'name': 'David',
-            'shop': 'MC',
-            'count': '2',
-            'date_time': '12/21/2022',
-            'time_frame': '11:00',
-            'meal': '豬排套餐*1, 牛排套餐*1',
-            'score': '',
-            'state': '已預約'
-        }, {
-            'name': "James",
-            'shop': 'MC',
-            'count': '1',
-            'date_time': '12/21/2022',
-            'time_frame': '11:00',
-            'meal': '牛排套餐*1',
-            'score': '',
-            'state': '已預約'
-        }
-    ];
 
+    //     var data_test = `[
+    //       {"REN_ID":"1","REN_NAME":"周盟鎮","REN_PHONE":"0987654321","REN_TIME":"11:00","REN_STATUS":"已預約","REN_DATE":"2023-01-01","REN_HEADCOUNT":"4","MEAL_NAME_LIST":"牛排套餐*1, 豬排套餐*1","REN_FPRICE":"2000","STORE_NAME":"貴族世家"}
+    //     ]`;
+    var data_test = `${foodorderListInfo}`;
 
-    function deleteFun(jj) {
-        // post後端取回已修改資料庫訊號
-        let name = document.getElementById(`name${jj}`).innerHTML;
-        let shop = document.getElementById(`shop${jj}`).innerHTML;
-        let count = document.getElementById(`count${jj}`).innerHTML;
-        let date_time = document.getElementById(`date_time${jj}`).innerHTML;
-        let time = document.getElementById(`time_frame${jj}`).innerHTML;
-
-
-        //1. 把資料整理往後送
-        let post_data = {
-            data: [{
-                "name": `${name}`,
-                "shop": `${shop}`,
-                "count": `${count}`,
-                "date_time": `${date_time}`,
-                "time": `${time}`
-            }]
-        };
-        console.log(post_data.data[0]);
-        alert(`${post_data.data[0]}`);
-        let return_state = 'ok';
-        if (return_state === 'ok') {
-            //2. 該筆資料前端刪除
-            document.getElementById(`name${jj}`).parentElement.setAttribute('style', 'display: none;')
-            alert("已刪除");
-        } else {
-            alert('不能刪除');
-        }
-
+    function filter_state(data) {
+        console.log("aaaa");
+        console.log(data);
+        let filter_data = JSON.parse(data).filter(function (entry) {
+            return entry.REN_STATUS === '已預約';
+        });
+        console.log(filter_data);
+        var aa = filter_data;
+        return filter_data;
     }
+
+
+    // function deleteFun(jj){
+    //   // post後端取回已修改資料庫訊號
+    //   let name = document.getElementById(`name${jj}`).innerHTML;
+    //   let shop = document.getElementById(`shop${jj}`).innerHTML;
+    //   let count = document.getElementById(`count${jj}`).innerHTML;
+    //   let date_time = document.getElementById(`date_time${jj}`).innerHTML;
+    //   let time = document.getElementById(`time_frame${jj}`).innerHTML;
+
+
+    //   //1. 把資料整理往後送
+    //   let post_data = {
+    //     data:[{"name":`${name}`,"shop":`${shop}`,"count":`${count}`,"date_time":`${date_time}`,"time":`${time}`}]
+    //   };
+    //   console.log(post_data.data[0]);
+    //   alert(`${post_data.data[0]}`);
+    //   //取回後送更改狀態是否OK
+    //   let return_state = 'ok';
+    //   if(return_state==='ok'){
+    //       //2. 該筆資料前端隱藏
+    //       // document.getElementById(`name${jj}`).parentElement.setAttribute('style','display: none;');
+    //       console.log(jj-1);
+    //       console.log(filter_data);
+    //       filter_data.splice(jj-1,1);
+    //       $('#code').DataTable.fnDestroy;
+    //       table_test(filter_data);
+
+    //       alert("已取消");
+    //   }else{
+    //     alert('不能取消');
+    //   }
+
+    // }
 
     function table_test(data_test) {
         let i = 0;
@@ -219,60 +101,69 @@
             data: data_test,
             // 設定資料欄位區塊(columns),
             "columns": [
-                {data: 'name', title: "姓名"},
-                {data: 'shop', title: "店家"},
-                {data: 'count', title: "人數"},
-                {data: 'date_time', title: "日期"},
-                {data: 'time_frame', title: "時段"},
-                {data: 'meal', title: "餐點"},
-                {data: 'score', title: "評分"},
-                {data: 'state', title: "狀態"},
+                {data: null, title: ""},
+                {data: 'REN_ID', title: "訂單編號"},
+                {data: 'REN_NAME', title: "姓名"},
+                {data: 'REN_PHONE', title: "電話"},
+                {data: 'STORE_NAME', title: "店家"},
+                {data: 'REN_DATE', title: "日期"},
+                {data: 'REN_TIME', title: "時段"},
+                {data: 'REN_HEADCOUNT', title: "人數"},
+                {data: 'MEAL_NAME_LIST', title: "餐點"},
+                {data: 'REN_FPRICE', title: "金額"},
+                {data: 'REN_STATUS', title: "狀態"},
                 {
                     data: null, title: "操作功能"  // 這邊是欄位
                 },
             ],
             "columnDefs": [
                 {
-                    targets: [0, 1, 2, 3, 4, 5, 6, 7, 8], // 第一欄
+                    targets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], // 第一欄
                     createdCell: function (cell, cellData, rowData, rowIndex, colIndex) {
                         if (colIndex === 0) {
                             i = i + 1;
-                            cell.setAttribute('id', `name${i}`);
+                            cell.innerHTML = `\${i}`
                             cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 1) {
-                            cell.setAttribute('id', `shop${i}`);
-                            cell.setAttribute('style', `width:10%`);
+                            cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 2) {
-                            cell.setAttribute('id', `count${i}`);
                             cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 3) {
-                            cell.setAttribute('id', `date_time${i}`);
-                            cell.setAttribute('style', `width:15%`);
-                        }
-                        if (colIndex === 4) {
-                            cell.setAttribute('id', `time_frame${i}`);
                             cell.setAttribute('style', `width:5%`);
                         }
+                        if (colIndex === 4) {
+                            cell.setAttribute('style', `width:10%`);
+                        }
                         if (colIndex === 5) {
-                            cell.setAttribute('id', `meal${i}`);
                             cell.setAttribute('style', `width:20%`);
                         }
                         if (colIndex === 6) {
-                            cell.setAttribute('id', `score${i}`);
-                            cell.setAttribute('style', `width:10%`);
+                            cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 7) {
-                            cell.setAttribute('id', `state${i}`);
-                            cell.setAttribute('style', `width:10%`);
+                            cell.setAttribute('style', `width:5%`);
                         }
-
-
                         if (colIndex === 8) {
-                            cell.innerHTML = `<button type="button" id="button_delete${i}" onclick="deleteFun(${i})" class="btn btn-danger btn-sm">刪除</button> `;
                             cell.setAttribute('style', `width:20%`);
+                        }
+                        if (colIndex === 9) {
+                            cell.setAttribute('style', `width:5%`);
+                        }
+                        if (colIndex === 10) {
+                            cell.setAttribute('style', `width:5%`);
+                        }
+                        if (colIndex === 11) {
+                            cell.innerHTML = `
+                          <FORM METHOD="post" ACTION="food_order.do" >
+                            <input type="hidden" name="deleteid" value="\${data_test[i-1].REN_ID}">
+                            <input type="hidden" name="action" value="Member_order_delete_button">
+                            <input type="submit" class="btn btn-danger btn-sm" value="取消">
+                          </FORM>
+                          `;
+                            cell.setAttribute('style', `width:10%`);
                         }
                     }
 
@@ -283,7 +174,7 @@
             /*設定屬性(預設功能)區塊*/
             searching: true, // 預設為true 搜尋功能，若要開啟不用特別設定
             paging: true, // 預設為true 分頁功能，若要開啟不用特別設定
-            ordering: false, // 預設為true 排序功能，若要開啟不用特別設定
+            ordering: true, // 預設為true 排序功能，若要開啟不用特別設定
             sPaginationType: "full_numbers", // 分頁樣式 預設為"full_numbers"，若需其他樣式才需設定
             // 在初始表格的左上有個可選擇的每頁列數的選單設定
             lengthChange: false, // 呈現選單
@@ -305,11 +196,11 @@
                 lengthMenu: "顯示 MENU 筆資料",
                 sProcessing: "處理中...",
                 sZeroRecords: "資料不存在",
-                sInfo: "共有 TOTAL 筆資料",
+                sInfo: "共有 _TOTAL_ 筆資料",
                 sInfoEmpty: "目前共有 0 筆紀錄",
                 sInfoFiltered: " ",
                 sInfoPostFix: "",
-                sSearch: "搜尋",
+                sSearch: "收尋",
                 sUrl: "",
                 sEmptyTable: "尚未有資料紀錄存在",
                 sLoadingRecords: "載入資料中...",
@@ -332,7 +223,8 @@
 
     }
 
-    $(document).ready(table_test(data_test));
+    let filter_data = filter_state(data_test);
+    $(document).ready(table_test(filter_data));
 
 
 </script>

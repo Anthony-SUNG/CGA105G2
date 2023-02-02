@@ -1,8 +1,7 @@
 package com.point.model.PointGoods.dao.impl;
 
-import com.core.common.Common;
-import com.point.model.PointGoods.dao.PointGoodsDAO_interface;
-import com.point.model.PointGoods.pojo.PointGoods;
+import static com.core.common.Common.PASSWORD;
+import static com.core.common.Common.USER;
 
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -11,11 +10,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.core.common.Common.PASSWORD;
-import static com.core.common.Common.USER;
+import com.core.common.Common;
+import com.point.model.Point.pojo.Point;
+import com.point.model.PointGoods.dao.PointGoodsDAO_interface;
+import com.point.model.PointGoods.pojo.PointGoods;
 
 public class PointGoodsDAO implements PointGoodsDAO_interface {
 
@@ -25,14 +27,15 @@ public class PointGoodsDAO implements PointGoodsDAO_interface {
 		try (Connection con = DriverManager.getConnection(Common.URL, USER, PASSWORD);
 				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_READ_ONLY)) {
-			pstmt.setString(1, pointgoods.getPdName());
-			pstmt.setInt(2, pointgoods.getPdPrice());
-			pstmt.setString(3, pointgoods.getPdText());
+			pstmt.setBytes(1, pointgoods.getPdImg());
+			pstmt.setString(2, pointgoods.getPdName());
+			pstmt.setInt(3, pointgoods.getPdPrice());
+			pstmt.setString(4, pointgoods.getPdText());
 			java.util.Date utilDate = new java.util.Date();
 			java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(utilDate.getTime());
-			pstmt.setTimestamp(4, sqlTimestamp);
 			pstmt.setTimestamp(5, sqlTimestamp);
-			pstmt.setInt(6, pointgoods.getPdStatus());
+			pstmt.setTimestamp(6, sqlTimestamp);
+			pstmt.setInt(7, pointgoods.getPdStatus());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -41,18 +44,19 @@ public class PointGoodsDAO implements PointGoodsDAO_interface {
 
 	@Override
 	public void update(PointGoods pointgoods) {
-		String sql = "UPDATE cga105g2.point_goods set PD_NAME=?, PD_PRICE=?, PD_TEXT=?, PD_RTIME=?, PD_STATUS=? where PD_ID = ?";
+		String sql = "UPDATE cga105g2.point_goods set PD_IMG=?, PD_NAME=?, PD_PRICE=?, PD_TEXT=?, PD_RTIME=?, PD_STATUS=? where PD_ID = ?";
 		try (Connection con = DriverManager.getConnection(Common.URL, USER, PASSWORD);
 				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_READ_ONLY)) {
-			pstmt.setString(1, pointgoods.getPdName());
-			pstmt.setInt(2, pointgoods.getPdPrice());
-			pstmt.setString(3, pointgoods.getPdText());
+			pstmt.setBytes(1, pointgoods.getPdImg());
+			pstmt.setString(2, pointgoods.getPdName());
+			pstmt.setInt(3, pointgoods.getPdPrice());
+			pstmt.setString(4, pointgoods.getPdText());
 			java.util.Date utilDate = new java.util.Date();
 			java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(utilDate.getTime());
-			pstmt.setTimestamp(4, sqlTimestamp);
-			pstmt.setInt(5, pointgoods.getPdStatus());
-			pstmt.setInt(6, pointgoods.getPdId());
+			pstmt.setTimestamp(5, sqlTimestamp);
+			pstmt.setInt(6, pointgoods.getPdStatus());
+			pstmt.setInt(7, pointgoods.getPdId());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,7 +79,7 @@ public class PointGoodsDAO implements PointGoodsDAO_interface {
 	@Override
 	public PointGoods getByPK(Integer pdId) {
 		PointGoods pointgoods = null;
-		String sql = "SELECT PD_ID, PD_NAME, PD_PRICE, PD_TEXT, PD_TIME, PD_RTIME, PD_STATUS FROM cga105g2.point_goods WHERE PD_ID = ? ";
+		String sql = "SELECT PD_ID, PD_IMG, PD_NAME, PD_PRICE, PD_TEXT, PD_TIME, PD_RTIME, PD_STATUS FROM cga105g2.point_goods WHERE PD_ID = ? ";
 		try (Connection con = DriverManager.getConnection(Common.URL, USER, PASSWORD);
 				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_READ_ONLY)) {
@@ -84,6 +88,7 @@ public class PointGoodsDAO implements PointGoodsDAO_interface {
 			while (rs.next()) {
 				pointgoods = new PointGoods();
 				pointgoods.setPdId(rs.getInt("PD_ID"));
+				pointgoods.setPdImg(rs.getBytes("PD_IMG"));
 				pointgoods.setPdName(rs.getString("PD_NAME"));
 				pointgoods.setPdPrice(rs.getInt("PD_PRICE"));
 				pointgoods.setPdText(rs.getString("PD_TEXT"));
@@ -100,7 +105,7 @@ public class PointGoodsDAO implements PointGoodsDAO_interface {
 	@Override
 	public List<PointGoods> getAll() {
 		List<PointGoods> list = new ArrayList<PointGoods>();
-		String sql = "SELECT PD_ID, PD_NAME, PD_PRICE, PD_TEXT, PD_TIME, PD_RTIME, PD_STATUS FROM cga105g2.point_goods order by PD_ID";
+		String sql = "SELECT PD_ID, PD_IMG, PD_NAME, PD_PRICE, PD_TEXT, PD_TIME, PD_RTIME, PD_STATUS FROM cga105g2.point_goods order by PD_ID";
 		try (Connection con = DriverManager.getConnection(Common.URL, USER, PASSWORD);
 				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_READ_ONLY)) {
@@ -108,6 +113,33 @@ public class PointGoodsDAO implements PointGoodsDAO_interface {
 			while (rs.next()) {
 				PointGoods pointgoods = new PointGoods();
 				pointgoods.setPdId(rs.getInt("PD_ID"));
+				pointgoods.setPdImg(rs.getBytes("PD_IMG"));
+				pointgoods.setPdName(rs.getString("PD_NAME"));
+				pointgoods.setPdPrice(rs.getInt("PD_PRICE"));
+				pointgoods.setPdText(rs.getString("PD_TEXT"));
+				pointgoods.setPdTime(rs.getTimestamp("PD_TIME"));
+				pointgoods.setPdRtime(rs.getTimestamp("PD_RTIME"));
+				pointgoods.setPdStatus(rs.getInt("PD_STATUS"));
+				list.add(pointgoods);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	@Override
+	public List<PointGoods> getAlready() {
+		List<PointGoods> list = new ArrayList<PointGoods>();
+		String sql = "SELECT PD_ID, PD_IMG, PD_NAME, PD_PRICE, PD_TEXT, PD_TIME, PD_RTIME, PD_STATUS FROM cga105g2.point_goods WHERE PD_STATUS=1 order by PD_ID";
+		try (Connection con = DriverManager.getConnection(Common.URL, USER, PASSWORD);
+				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY)) {
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				PointGoods pointgoods = new PointGoods();
+				pointgoods.setPdId(rs.getInt("PD_ID"));
+				pointgoods.setPdImg(rs.getBytes("PD_IMG"));
 				pointgoods.setPdName(rs.getString("PD_NAME"));
 				pointgoods.setPdPrice(rs.getInt("PD_PRICE"));
 				pointgoods.setPdText(rs.getString("PD_TEXT"));

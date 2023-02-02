@@ -10,6 +10,14 @@ import java.util.List;
 
 
 public class FollowMemJDBCDAO implements FollowMem_interface {
+	
+	static {
+		  try {
+		   Class.forName("com.mysql.cj.jdbc.Driver");
+		  } catch (Exception e) {
+		   e.printStackTrace();
+		  }
+		 }
 
 	@Override
 	public void insert(FollowMem FollowMem) {
@@ -97,7 +105,7 @@ public class FollowMemJDBCDAO implements FollowMem_interface {
 		} 
 		return FollowMem;
 	}
-	
+	@Override
 	public List<FollowMem> getAllByMemId1(Integer memId) {
 		String sql =
 				"SELECT * FROM cga105g2.FOLLOW_MEM where MEM_ID1 = ?";
@@ -110,6 +118,36 @@ public class FollowMemJDBCDAO implements FollowMem_interface {
 	            PreparedStatement pstmt=con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)){
 			
 			pstmt.setInt(1, memId);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				
+				FollowMem = new FollowMem();
+				FollowMem.setMemId1(rs.getInt("MEM_ID1"));
+				FollowMem.setMemId2(rs.getInt("MEM_ID2"));
+
+				list.add(FollowMem);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} 
+		return list;
+	}
+	@Override
+	public List<FollowMem> getAllByMemId1MemId2(Integer memId1, Integer memId2) {
+		String sql =
+				"SELECT * FROM cga105g2.FOLLOW_MEM where MEM_ID1 = ? and MEM_ID2 = ? ";
+		List<FollowMem> list = new ArrayList<FollowMem>();
+		FollowMem FollowMem = null;
+
+		ResultSet rs = null;
+
+		try (Connection con= DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+	            PreparedStatement pstmt=con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)){
+			
+			pstmt.setInt(1, memId1);
+			pstmt.setInt(2, memId2);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

@@ -7,7 +7,7 @@
     <div class="p-4 pt-5 sidebar__inner">
         <ul class="list-unstyled components mb-5">
             <li class="m-5">
-                <a href="/CGA105G2/front-end/Member/member/Member.jsp">
+                <a href="/CGA105G2/front-end/Member/point/listPoint.jsp">
                     <h2>Home</h2>
                 </a>
             </li>

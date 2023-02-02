@@ -3,16 +3,24 @@ package com.core.servlet;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.art.model.Article.pojo.Article;
+import com.art.model.service.ArtService;
 import com.emp.model.Employee.pojo.Employee;
 import com.emp.model.EmployeeRoot.pojo.EmployeeRoot;
 import com.emp.model.service.EmployeeService;
+import com.followmem.model.FollowMem.pojo.FollowMem;
+import com.followmem.model.service.FollowMemService;
 import com.member.model.service.MemberService;
 import com.member.model.Member.pojo.Member;
 import com.store.model.Store.pojo.Store;
 import com.store.model.service.StoreService;
+import com.subs.model.Subscribe.pojo.Subscribe;
+import com.subs.model.service.SubsService;
 
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -234,12 +242,97 @@ public class LonginServlet extends HttpServlet {
 			RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 			successView.forward(request, response);
 		}
+		
+//		==================================CJ區============================================
+		
 		if ("byStoreName".equals(action)) { // 來自index.jsp的請求
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			request.setAttribute("errorMsgs", errorMsgs);
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 			String storeName = request.getParameter("storeName");
 			if (storeName == null || (storeName.trim()).length() == 0) {
+				errorMsgs.put("error1", "錯誤:請輸入要查詢的文字");
+			}
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = request
+						.getRequestDispatcher("/index.jsp");
+				failureView.forward(request, response);
+				return;//程式中斷
+			}
+			/***************************2.開始查詢資料*****************************************/
+			
+			StoreService storeService = new StoreService();
+			List<Store> list = storeService.getStoreName(storeName);
+			
+			if (list.size()==0) {
+				errorMsgs.put("error2", "查無資料，請換一個搜索字");
+				RequestDispatcher failureView = request
+						.getRequestDispatcher("/index.jsp");
+				failureView.forward(request, response);
+				return;//程式中斷
+			}
+			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+			request.setAttribute("list", list); // 資料庫取出的list物件,存入req
+			String url = "/front-end/Member/member/searchStore.jsp";
+			RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 searchStore.jsp
+			successView.forward(request, response);
+		}
+		if ("StorePage".equals(action)) { //來自searchStore的請求 要轉交到店家頁面
+			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			Integer memId   = (Integer) request.getSession().getAttribute("memId");
+			Integer storeId = Integer.valueOf(request.getParameter("SearchstoreId").trim());	//拿到我設定的input hidden
+
+			/***************************2.開始查詢資料*****************************************/
+
+			StoreService storeService = new StoreService();
+			Store store = storeService.getById(storeId);  //依照剛剛取得的id 去找尋該筆店家
+			MemberService memberService = new MemberService();
+			Member member = memberService.getById(memId);
+			ArtService artService = new ArtService();
+			List<Article> articlelist = artService.getAllByStoreId(storeId);
+			
+			float sum = 0;
+			int commemt = articlelist.size();   
+			request.setAttribute("commemt", commemt);//算共有幾則評論
+			for (int i = 0; i < articlelist.size(); i++) {
+				   Article article = articlelist.get(i);
+				   float a = article.getArtScore();
+				   sum = sum + a;
+				} 
+			try {
+				 DecimalFormat df = new DecimalFormat("#.0");
+				 float StoreScore = Float.valueOf(df.format(sum / articlelist.size()));
+				 request.setAttribute("StoreScore", StoreScore);   //這邊在算店家的評分 加上四捨五入的方法
+			} catch (NumberFormatException e) {
+				
+			}
+//			 DecimalFormat df = new DecimalFormat("#.0");
+//			 float StoreScore = Float.valueOf(df.format(sum / articlelist.size()));
+			
+//			String StoreScore = String.format("%.1f",(sum / articlelist.size())); //這邊在算店家的評分 加上四捨五入的方法
+			
+			SubsService subSvs = new SubsService();
+			List<Subscribe> subslist = subSvs.getAllByMemIdStoreId(storeId, memId);
+
+			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+
+			request.setAttribute("store", store);//set店家讓下個頁面能收到值
+			request.setAttribute("member", member);//set會員讓下個頁面能收到值
+			request.setAttribute("articlelist", articlelist);
+			request.setAttribute("subslist", subslist);
+//			request.setAttribute("StoreScore", StoreScore);
+			String url = "/front-end/Member/member/showStorePage.jsp";
+
+			RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 showStorePage.jsp
+			successView.forward(request, response);
+		}
+		
+		if ("byMemName".equals(action)) { // 來自index.jsp的請求，這是搜尋會員
+			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+			request.setAttribute("errorMsgs", errorMsgs);
+			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			String memAcc = request.getParameter("storeName"); 
+			if (memAcc == null || (memAcc.trim()).length() == 0) {
 				errorMsgs.put("error1", "請輸入要查詢的文字");
 			}
 			if (!errorMsgs.isEmpty()) {
@@ -249,8 +342,8 @@ public class LonginServlet extends HttpServlet {
 				return;//程式中斷
 			}
 			/***************************2.開始查詢資料*****************************************/
-			StoreService storeService = new StoreService();
-			List<Store> list = storeService.getStoreName(storeName);
+			MemberService memService = new MemberService();
+			List<Member> list = memService.getAllByAcc(memAcc); //依照會員的帳號去搜
 			if (list.size()==0) {
 				errorMsgs.put("error2", "查無資料");
 				RequestDispatcher failureView = request
@@ -260,27 +353,56 @@ public class LonginServlet extends HttpServlet {
 			}
 			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 			request.setAttribute("list", list); // 資料庫取出的list物件,存入req
-			String url = "/front-end/Member/member/searchStore.jsp";
-			RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+			String url = "/front-end/Member/member/searchMember.jsp";
+			RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 searchMember.jsp
 			successView.forward(request, response);
 		}
-		if ("StorePage".equals(action)) { //來自searchStore的請求 要轉交到店家頁面
+//==========================查看會員頁面=================================
+		if ("MemberPage".equals(action)) { //來自searchMember的請求 要轉交到會員頁面
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-			Integer storeIds = Integer.valueOf(request.getParameter("SearchstoreId").trim());	//拿到我設定的input hidden
+			Integer memId1 = (Integer) request.getSession().getAttribute("memId");
+			Integer memId2 = Integer.valueOf(request.getParameter("SearchMemberId").trim());	//拿到我設定的input hidden
 
 			/***************************2.開始查詢資料*****************************************/
-
-			StoreService storeService = new StoreService();
-			Store store = storeService.getById(storeIds);  //依照剛剛取得的id 去找尋該筆店家
-
-
+			
+			MemberService memService = new MemberService();
+			Member member2 = memService.getById(memId2); //別的會員
+			Member member1 = memService.getById(memId1); //登入的本人
+			ArtService artService = new ArtService();
+			List<Article> list = artService.getAllMem(memId2);
+			FollowMemService followMemService = new FollowMemService();
+			List<FollowMem> followlist = followMemService.getAllByMemId1MeMId2(memId1, memId2);
+			
 			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+			
+			request.setAttribute("member1", member1);
+			request.setAttribute("member2", member2); //set店家讓下個頁面能收到值
+			request.setAttribute("list", list); //這是文章的list
+			request.setAttribute("followlist", followlist); //追蹤的list
+			String url = "/front-end/Member/member/showMemberPage.jsp";
 
-			request.setAttribute("store", store); //set店家讓下個頁面能收到值
-			String url = "/front-end/Member/member/showStorePage.jsp";
-
-			RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+			RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 showMemberPage.jsp會員頁面
 			successView.forward(request, response);
+		}
+		
+		if("getOtherMemberArticlePhoto".equals(action)) { //秀文章圖片
+			OutputStream out = response.getOutputStream();
+			String artId = request.getParameter("artId"); 
+			ArtService artService = new ArtService();
+			Article article = artService.getOneArt(Integer.parseInt(artId));
+//			response.setContentType("image/jpg");
+			out.write(article.getArtImg());
+			out.close();
+		}
+		
+		if("getOtherMemberPhoto".equals(action)) { //秀會員圖片
+			OutputStream out = response.getOutputStream();
+			String memId = request.getParameter("memId"); 
+			MemberService memberService = new MemberService();
+			Member member = memberService.getById(Integer.parseInt(memId));
+//			response.setContentType("image/jpg");
+			out.write(member.getMemPic());
+			out.close();
 		}
 
 

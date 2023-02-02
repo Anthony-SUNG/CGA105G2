@@ -80,7 +80,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light fs-md-6" id="header-navbar">
                     <!-- @*Navbar(白色)*@ -->
                     <div>
-                        <a class="navbar-brand font-weight-bold" href="/CGA105G2/front-end/Member/member/Member.jsp">
+                        <a class="navbar-brand font-weight-bold" href="/CGA105G2/index.jsp">
                             <img src="/CGA105G2/assets/images/Logo.PNG" style="width: 100px; height: 100px" alt=""/></a>
                     </div>
                     <form class="form-inline my-2 my-md-0 bg-white p-1 " style="border-radius: 30px;">
@@ -112,7 +112,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-uppercase" data-toggle="none" href="/CGA105G2/front-end/Member/point/listPointGood.jsp">
+                                <a class="nav-link text-uppercase" data-toggle="none" href="/CGA105G2/front-end/Member/point/listPoint.jsp">
                                     💰point
                                 </a>
                             </li>
@@ -129,7 +129,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-uppercase" data-toggle="none"
                                    href="/CGA105G2/LonginServlet?action=out">
-                                    🚪Sing out
+                                    🚪Sign out
                                 </a>
                             </li>
                         </ul>
