@@ -157,12 +157,12 @@
 //                           console.log(data_test[i-1].SCORE_INPUT);
                             if (data_test[i - 1].SCORE_INPUT === "1") {
                                 cell.innerHTML = `
-							    <FORM METHOD="post" ACTION="food_order.do" >
-							      <input type="hidden" name="listAllFoodOrderScoreMemid" value="\${data_test[i-1].MEM_ID}">
-							      <input type="hidden" name="listAllFoodOrderScoreStoreid" value="\${data_test[i-1].STORE_ID}">
-							      <input type="hidden" name="action" value="">
-							      <input type="submit" class="btn btn-danger btn-sm" value="評分">
-							    </FORM>
+                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/Member/art/ArtServlet" >
+                                     <input type="hidden" name="listAllFoodOrderScoreMemid" value="\${data_test[i-1].MEM_ID}">
+                                     <input type="hidden" name="listAllFoodOrderScoreStoreid" value="\${data_test[i-1].STORE_ID}">
+                                     <input type="hidden" name="action" value="toart">
+                                     <input type="submit" class="btn btn-danger btn-sm" value="評分">
+                                </FORM>
 							 `;
                             }
                             if (data_test[i - 1].SCORE_INPUT === "0") {

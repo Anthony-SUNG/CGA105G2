@@ -39,17 +39,11 @@ public class ArtServlet extends HttpServlet{
 		Integer storeId = (Integer) req.getSession().getAttribute("storeId");
 		Integer memId   = (Integer) req.getSession().getAttribute("memId");
 		Integer empId   = (Integer) req.getSession().getAttribute("empId");
-
-
 		if ("insertArt".equals(action)) { //新增發文 來自postArt的請求
 			List<String> errorMsgs = new LinkedList<String>(); //放錯誤訊息用的
 			req.setAttribute("errorMsgs", errorMsgs);
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-
-
-				
 			storeId = Integer.valueOf(req.getParameter("storeId").trim());
-
 			Integer artScore = null;
 			try {								//這個好像沒用
 				artScore = Integer.valueOf(req.getParameter("artScore").trim());
@@ -75,7 +69,6 @@ public class ArtServlet extends HttpServlet{
 			if (artImg == null || artText.trim().length() == 0) {
 				errorMsgs.add("請上傳圖片");
 			}
-			
 			Article article = new Article();
 			article.setMemId(memId);
 			article.setStoreId(storeId);
@@ -137,17 +130,8 @@ public class ArtServlet extends HttpServlet{
 			req.setAttribute("errorMsgs", errorMsgs);
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 			Integer artId = Integer.valueOf(req.getParameter("artId").trim()); //對到jsp頁面的 410行
-
-
-
-
-
 			 memId = Integer.valueOf(req.getParameter("memId").trim());
 			 storeId = Integer.valueOf(req.getParameter("storeId").trim());
-
-
-
-
 			Integer artScore = Integer.valueOf(req.getParameter("artScore"));
 			String artHeader = req.getParameter("artHeader");
 			String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,50}$";
@@ -191,6 +175,17 @@ public class ArtServlet extends HttpServlet{
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listArt.jsp
 			successView.forward(req, res);
 		}
+		if("toart".equals(action)){
+			Integer sid = Integer.valueOf(req.getParameter("listAllFoodOrderScoreStoreid"));
+			String StoreName=new StoreDAO().getById(sid).getStoreName();
+			req.setAttribute("StoreName", StoreName);
+			req.setAttribute("sid", sid);
+			String url = "/front-end/Member/art/postArt.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listArt.jsp
+			successView.forward(req, res);
+
+		}
+
 
 	}
 }

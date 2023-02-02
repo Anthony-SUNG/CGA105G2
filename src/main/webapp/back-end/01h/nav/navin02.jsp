@@ -89,21 +89,23 @@
         }
     </style>
 </head>
-
-
-
 <body>
 <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
     <div class="p-4 pt-5">
         <ul class="list-unstyled components mb-5">
+            <li class="my-4">
+                <a href="/CGA105G2/back-end/pointgood/listPointGood.jsp">
+                    <h1>Home</h1>
+                </a>
+            </li>
             <li class="mb-5 mt-5">
                 <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown">🔻訂單管理</a>
                 <ul class="collapse list-unstyled " id="pageSubmenu2">
                     <li>
-                        <hr><a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆待出貨訂單</a>
+                        <hr><a href="/CGA105G2/back-end/pointgood/backPointOrder.jsp" class="nav-link">🔆待出貨訂單</a>
                     </li>
                     <li>
-                        <a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆訂單總覽</a>
+                        <a href="/CGA105G2/back-end/pointgood/listPointOrder.jsp" class="nav-link">🔆訂單總覽</a>
                     </li>
                     <hr>
                     </li>
