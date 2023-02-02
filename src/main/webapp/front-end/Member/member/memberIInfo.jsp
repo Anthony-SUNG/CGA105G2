@@ -44,7 +44,7 @@
                                         </c:if>
                                         <Form method="post"
                                               action="${pageContext.request.contextPath}/Member/MemberServlet"
-                                              name="updatee">
+                                              name="updatee" enctype="multipart/form-data">
                                             <div class="row align-items-center pt-4 pb-3">
                                                 <div class="col-md-3 ps-5">
                                                     <h4 class="mb-0">用戶名稱</h4>
@@ -52,7 +52,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" name="MEM_NAME"
                                                            class="form-control form-control-lg"
-                                                           id="memberr-fullname" value=${ Member.memName }/>
+                                                           id="memberr-fullname" value=${ Member.memName }>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -63,7 +63,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" name="MEM_ACC"
                                                            class="form-control form-control-lg"
-                                                           id="memberr-accountid" value=${ Member.memAcc }/>
+                                                           id="memberr-accountid" value=${ Member.memAcc }>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -74,7 +74,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" name="MEM_RECIPIENT"
                                                            class="form-control form-control-lg"
-                                                           id="memberr-recipient" value=${ Member.memRecipient }/>
+                                                           id="memberr-recipient" value=${ Member.memRecipient }>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -85,7 +85,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" name="MEM_TW_ID"
                                                            class="form-control form-control-lg"
-                                                           id="memberr-identitycard" value=${ Member.memTwId }/>
+                                                           id="memberr-identitycard" value=${ Member.memTwId }>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -96,7 +96,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="date" name="MEM_BIRTHDAY"
                                                            class="form-control form-control-lg"
-                                                           id="memberr-birthday" value=${ Member.memBirthday }/>
+                                                           id="memberr-birthday" value=${ Member.memBirthday }>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -107,30 +107,31 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" name="MEM_PHONE"
                                                            class="form-control form-control-lg"
-                                                           id="memberr-phonenumber" value=${ Member.memPhone }/>
+                                                           id="memberr-phonenumber" value=${ Member.memPhone }>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
                                             <div class="row align-items-center pt-4 pb-3">
-                                                <div class="col-md-3 ps-5">
-                                                    <h4 class="mb-0">地址</h4>
-                                                </div>
-                                                <div class="col-md-9 pe-5">
-                                                    <input class="js-demeter-tw-zipcode-selector"
-                                                           name="MEM_POSTAL_CODE" data-city="#city4"
-                                                           data-dist="#dist4" placeholder="請輸入郵遞區號"
-                                                           value=${ Member.memPostalCode }> <select
-                                                        id="city4" placeholder="請選擇縣市" name="MEM_CITY">
-                                                    <option>${ Member.memCity }</option>
-                                                </select> <select id="dist4" placeholder="請選擇鄉鎮區"
-                                                                  name="MEM_DISTRICT">
-                                                    <option>${ Member.memDistrict }</option>
-                                                </select>
-                                                    <input type="text" name="MEM_ADDRESS"
-                                                           class="form-control form-control-lg"
-                                                           id="memberstore-address"/>
-                                                </div>
-                                            </div>
+													<div class="col-md-3 ps-5">
+
+														<h4 class="mb-0">地址</h4>
+
+													</div>
+													<div class="col-md-9 pe-5">
+														<input class="js-demeter-tw-zipcode-selector"
+															name="MEM_POSTAL_CODE" data-city="#city4"
+															data-dist="#dist4" placeholder="請輸入郵遞區號"
+															value=${ Member.memPostalCode }> <select
+															id="city4" placeholder=${ Member.memCity } name="MEM_CITY">
+															<option selected>${ Member.memCity }</option>
+														</select> <select id="dist4" placeholder=${ Member.memDistrict }
+															name="MEM_DISTRICT"><option selected>${ Member.memDistrict }</option></select>
+
+														<input type="text" name="MEM_ADDRESS"
+															class="form-control form-control-lg"
+															id="memberstore-address" value=${ Member.memAddress } />
+													</div>
+												</div>
                                             <hr class="mx-n3">
                                             <div class="row align-items-center py-3">
                                                 <div class="col-md-3 ps-5">
@@ -140,7 +141,7 @@
                                                     <input type="email" name="MEM_MAIL"
                                                            class="form-control form-control-lg"
                                                            placeholder="example@example.com"
-                                                           id="memberr-emailaddress" value=${ Member.memMail }/>
+                                                           id="memberr-emailaddress" value=${ Member.memMail }>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -162,7 +163,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input class="form-control form-control-lg" name="MEM_PIC"
                                                            id="formFileLg" type="file" id="memberr-uploadphoto"
-                                                           value=${ Member.memPic }/>
+                                                           value=${ Member.memPic }>
                                                     <div class="small text-muted mt-2">Upload your photo
                                                         sticker
                                                     </div>
@@ -204,7 +205,8 @@
     $("a:contains(🔻設定)").closest("a").attr("data-toggle", "show");
     $("#pageSubmenu4").removeClass("collapse");
     $("#pageSubmenu4 a:contains(🔆基本資料)").closest("a").addClass("active disabled bg-white topage");
+    
 </script>
-
+<script src="https://demeter.5fpro.com/tw/zipcode-selector.js"></script>
 </body>
 </html>
