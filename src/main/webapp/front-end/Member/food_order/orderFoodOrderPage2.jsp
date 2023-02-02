@@ -97,12 +97,6 @@
 
 
 <script>
-    let a = new StickySidebar("#sidebar", {
-        topSpacing: 40,
-        bottomSpacing: 20,
-        containerSelector: ".container",
-        innerWrapperSelector: ".sidebar__inner"
-    });
 
     var total_count = 0;
     var total_coint_limit = parseInt(${foodorder_peopleNum});// jsp取得人數

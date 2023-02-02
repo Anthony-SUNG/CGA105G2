@@ -47,7 +47,7 @@ public class EcpayController extends HttpServlet {
         obj.setReturnURL("a");
         // OrderResultURL   : 選填 消費者完成付費後。重新導向的位置
         obj.setOrderResultURL("http://localhost:8081/CGA105G2/index.jsp");
-        obj.setNeedExtraPaidInfo("N");
+        obj.setNeedExtraPaidInfo("Y");
 
 
         // 回傳form訂單 並自動將使用者導到 綠界

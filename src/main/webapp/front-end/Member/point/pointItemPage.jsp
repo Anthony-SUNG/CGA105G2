@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.emp.model.*"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.point.model.PointGoods.pojo.PointGoods"%>
+<%@ page import="com.point.model.service.PointGoodsService"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -10,6 +12,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
   <title>💰point</title>
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="/CGA105G2/assets/css/vendor.css" />
+  <link rel="stylesheet" href="/CGA105G2/assets/css/style.css" />
+  <link rel="stylesheet" href="/CGA105G2/assets/custom.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
     body {
       height: 100%;
@@ -37,43 +47,52 @@
 </head>
 
 <body>
+
+  <div id="page-start-anchor"></div>
 <!-- header start -->
 <%@ include file="/front-end/Member/01h/headerin.jsp" %>
 <!-- header end -->
-<!-- main -->
+  <!-- main -->
   <div class="container-fluid">
     <div class="row">
-      <!-- nav start -->
-      <%@ include file="/front-end/Member/01h/nav/navin01.jsp" %>
-      <!-- nav end -->
+      <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light collapse  sidebar">
+        <div class="p-4 pt-5 sidebar__inner">
+          <ul class="list-unstyled components mb-5">
+            <li class="mb-5 mt-5">
+              <a href="/CGA105G2/front-end/Member/point/listPoint.jsp">
+                <h2>Home</h2>
+              </a>
+            </li>
+            <li class="mb-5 mt-5">
+              <a href="/CGA105G2/front-end/Member/point/listPoint.jsp" data-toggle="collapse" aria-expanded="false" class="dropdown">
+                <h3>💰點數查詢</h3>
+              </a>
+            </li>
+            <li class="mb-5 mt-5">
+              <a href="/CGA105G2/front-end/Member/point/listPointGood.jsp" aria-expanded="false"
+                class="dropdown">
+                <h3>💰點數商品</h3>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <FORM METHOD="post" ACTION="point.do" name="form1" enctype="multipart/form-data">
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-        <section class="section jarallax text-white" data-jarallax data-speed="0.2">
-          <!-- <img class="section-background-image jarallax-img" src="./images/tenor.gif" alt="background image" /> -->
-          <div class="section-background-color"
-            style="background: linear-gradient(to right top, rgb(25, 182, 143), rgb(68, 100, 148)) rgb(25, 182, 143); padding-top: 120px; padding-bottom: 40px;">
-          </div>
-          <div class="section-content container d-flex flex-column align-items-center">
-            <span
-              class="badge badge-pill badge-ghost fs-2 font-family-dark text-uppercase font-weight-bold letter-spacing-caption">
-              FoodMap
-            </span>
-            <h1 class="mt-5 mb-17 fs-10 fs-md-10">點數商城</h1>
-          </div>
-        </section>
         <section class="py-5">
           <div class="   my-5">
             <div class="row gx-4 gx-lg-5 align-items-center">
               <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" height="500px" width="300px"
-                  src="https://images.pexels.com/photos/3768323/pexels-photo-3768323.jpeg?auto=compress&cs=tinysrgb&w=600"
+                  src="${pageContext.request.contextPath}/back-end/pointgood/point.do?action=getPdImg&pdId=${param.pdId}"
                   alt="..." /></div>
               <div class="col-md-6">
-                <h1 class="display-5 fw-bolder">${PointGoods.pdName}</h1>
+                <h1 class="display-5 fw-bolder">${param.pdName}</h1>
                 <div class="fs-5 mb-5">
-                  <span class="text-decoration-line-through">${PointGoods.pdPrice} <dfn>points</dfn></span>
+                  <span class="text-decoration-line-through">${param.pdPrice} <dfn>points</dfn></span>
                 </div>
                 <div class="slogan" id="SloganContainer" itemprop="description">
                   <ul>
-                    <li>${PointGoods.pdText}</li>
+                    <li>${param.pdText}</li>
                   </ul>
 
                 </div>
@@ -90,6 +109,7 @@
           </div>
         </section>
       </main>
+      </form>
     </div>
   </div>
 
@@ -104,19 +124,43 @@
 <!-- footer start -->
 <%@ include file="/front-end/Member/01h/footerin.jsp" %>
 <!-- footer end -->
-<!-- sticky-sidebar -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
-<script>
-  $("a:contains(💰point)").closest("a").addClass("active disabled topage");
-  let a = new StickySidebar("#sidebar", {
-    topSpacing: 30,
-    bottomSpacing: 20,
-    leftSpacing: 30,
-    containerSelector: ".container",
-    innerWrapperSelector: ".sidebar__inner"
-  });
+  <script src="/assets/js/vendor.js"></script>
+  <script src="/assets/js/polyfills.js"></script>
+  <script src="/assets/js/app.js"></script>
+  <!-- Bootstrap 4.6.2 & Vue 3 & jquery 3.4.1-->
 
-</script>
+  <!-- Bootstrap js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+    crossorigin="anonymous"></script>
+  <!-- Vue -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          message: "Hello Vue!",
+        };
+      },
+    }).mount("#app");
+
+
+  </script>
+
+
+  <!-- sticky-sidebar -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
+  <script>
+    let a = new StickySidebar("#sidebar", {
+      topSpacing: 40,
+      bottomSpacing: 20,
+      containerSelector: ".container",
+      innerWrapperSelector: ".sidebar__inner"
+    });
+
+  </script>
 
 
   <!-- sweetalert2 -->

@@ -104,7 +104,7 @@
     $("a:contains(🗃️管理)").closest("a").addClass("active disabled topage");
     $("a:contains(🔻訂位)").closest("a").attr("data-toggle", "show");
     $("#pageSubmenu3").removeClass("collapse");
-    $("#pageSubmenu3 a:contains(🔆訂位預約)").closest("a").addClass("active disabled bg-white topage");
+    $("#pageSubmenu3 a:contains(🔆預約查詢)").closest("a").addClass("active disabled bg-white topage");
 </script>
 <script>
     var order_time_list = [

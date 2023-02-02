@@ -1,11 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.point.model.PointGoods.pojo.PointGoods"%>
-<%@ page import="com.point.model.service.PointGoodsService"%>
+<%@ page import="com.point.model.PointOrder.pojo.PointOrder"%>
+<%@ page import="com.point.model.service.PointOrderService"%>
 <%
-	PointGoodsService pointgoodsSvc = new PointGoodsService();
-	List<PointGoods> list = pointgoodsSvc.getAll();
+	PointOrderService pointorderSvc = new PointOrderService();
+	List<PointOrder> list = pointorderSvc.getBackOrder();
     pageContext.setAttribute("list",list);
 %>
 <!DOCTYPE html>
@@ -90,22 +90,23 @@
 
 <body>
   <div id="page-start-anchor"></div>
+
 <!-- header start -->
 <%@ include file="/back-end/01h/headerin.jsp" %>
 <!-- header end -->
-  <!-- main -->
+ <!-- main -->
   <div class="container-fluid p-0">
     <div class="row">
       <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
         <div class="p-4 pt-5">
           <ul class="list-unstyled components mb-5">
             <li class="mb-5 mt-5">
-              <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown fs-md-6">
+              <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="true" class="dropdown fs-md-6 show">
                 <h3>🔻訂單管理</h3>
               </a>
-              <ul class="collapse list-unstyled " id="pageSubmenu2">
+              <ul class="list-unstyled " id="pageSubmenu2">
                 <li>
-                  <hr><a href="/CGA105G2/back-end/pointgood/backPointOrder.jsp" class="nav-link">🔆待出貨訂單</a>
+                  <hr><a href="/CGA105G2/back-end/pointgood/backPointOrder.jsp" class="nav-link disabled bg-white" style="color: #216a51;">🔆待出貨訂單</a>
                 </li>
                 <li>
                   <a href="/CGA105G2/back-end/pointgood/listPointOrder.jsp" class="nav-link">🔆訂單總覽</a>
@@ -118,12 +119,11 @@
               <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown">
                 <h3>🔻商品管理</h3>
               </a>
-              <ul class="list-unstyled" id="pageSubmenu3">
+              <ul class="collapse list-unstyled" id="pageSubmenu3">
                 <li>
                   <hr><a href="/CGA105G2/back-end/pointgood/addPointGood.jsp" class="nav-link">🔆新增商品</a>
                 </li>
-                <li><a href="/CGA105G2/back-end/pointgood/listPointGood.jsp" class="nav-link disabled bg-white"
-                       style="color: #216a51;">🔆商品總覽</a></li>
+                <li><a href="/CGA105G2/back-end/pointgood/listPointGood.jsp" class="nav-link">🔆商品總覽</a></li>
                 <hr>
                 </li>
               </ul>
@@ -134,52 +134,59 @@
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 p-0">
       
         <section class="py-5">
-          <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-	<%@ include file="page1.jsp" %>
-<c:forEach var="PointGoods" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
-              <div class="col mb-5">
-									<div class="card h-100">
-<!-- 										Product image -->
-										<a>
-										<img src="${pageContext.request.contextPath}/back-end/pointgood/point.do?action=getPdImg&pdId=${PointGoods.pdId}" width= 260px height= 300px >
-										</a>
-										<!-- Product details-->
-										<div class="card-body p-4">
-											<div class="text-center">
-												<!-- Product name-->
-												<h5 class="fw-bolder">${PointGoods.pdName}</h5>
-												<!-- Product price-->
-												<span class="lrp_text_count">${PointGoods.pdPrice} <dfn>points</dfn></span>
-											</div>
-										</div>
-										<!-- Product actions-->
-										<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-											<div class="text-center p-1">
-												<td>
-													<FORM METHOD="post"
-														ACTION="<%=request.getContextPath()%>/back-end/pointgood/point.do"
-														style="margin-bottom: 0px;">
-														<input class="btn btn-outline-dark mt-auto fs-4"
-															type="submit" value="修改商品"> <input type="hidden"
-															name="pdId" value="${PointGoods.pdId}"> <input
-															type="hidden" name="action" value="getOne_For_Update">
-													</FORM>
-												</td>
-											</div>
-										</div>
-									</div>
-								</div>            
-                  </c:forEach>
-            </div>
-          </div>
-        </section>
-        
+        <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2 mt-5">🔆待出貨訂單</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group mr-2">
+<!--                             <button type="button" class="btn btn-sm btn-outline-info">Share</button> -->
+<!--                             <button type="button" class="btn btn-sm btn-outline-info">Export</button> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive ">
+                    <table class="table table-striped ">
+                        <thead>
+                            <tr>
+                                <th>編號</th>
+                                <th>會員編號</th>
+                                <th>商品編號</th>
+                                <th>單價</th>
+                                <th>備註</th>
+                                <th>新增日期</th>
+                                <th>員工編號</th>
+                                <th>點擊出貨</th>
+                                </tr>
+                        </thead>
+                        <tbody class="code_tbody">
+	<c:forEach var="PointOrder" items="${list}" >
+		<tr>
+								<td>${PointOrder.poId}</td>
+								<td>${PointOrder.memId}</td>
+								<td>${PointOrder.pdId}</td>
+								<td>${PointOrder.poPrice}</td>
+								<td>${PointOrder.poText}</td>
+								<td>${PointOrder.poTime}</td>
+								<td>${PointOrder.empId}</td>
+								<td>
+								<FORM METHOD="post" ACTION="point.do">
+								<input type="hidden" name="poId" value=${PointOrder.poId}>
+								<input type="hidden" name="poStatus" value=1>
+								<input type="hidden" name="action" value="updateOrder">
+								<input class="btn btn-outline-dark mt-auto fs-4" type="submit" value="出貨">
+								</form>
+								</td>
+		</tr>
+	</c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+                <canvas class="my-4 w-100" id="myChart" width="900" height="150"></canvas>
+          </section>
                           <br>
                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">  	              
               <nav aria-label="Page navigation example   justify-content-center" class="m-5 ">
                 <ul class="pagination">
-<%@ include file="page2.jsp" %>
                 </ul>
               </nav>
               </div>   
@@ -192,6 +199,7 @@
 <!-- footer start -->
 <%@ include file="/back-end/01h/footerin.jsp" %>
 <!-- footer end -->
+
   <script src="/CGA105G2/assets/js/vendor.js"></script>
   <script src="/CGA105G2/assets/js/polyfills.js"></script>
   <script src="/CGA105G2/assets/js/app.js"></script>
@@ -217,6 +225,7 @@
       }
       </c:forEach>
     });
+
   </script>
 
 </body>

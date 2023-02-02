@@ -10,7 +10,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light fs-md-6" id="header-navbar">
                     <!-- @*Navbar(白色)*@ -->
                     <div>
-                        <a class="navbar-brand font-weight-bold" href="/index.jsp">
+                        <a class="navbar-brand font-weight-bold" href="/CGA105G2/index.jsp">
                             <img src="/CGA105G2/assets/images/Logo.PNG" style="width: 100px; height: 100px" alt=""/></a>
                     </div>
                     <form class="form-inline my-2 my-md-0 bg-white p-1 " style="border-radius: 30px;">
