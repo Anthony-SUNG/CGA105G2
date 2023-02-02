@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import java.util.List;
 
 public class StoreService {
+	private static final Integer Integer = null;
 	private StoreDAO_interface dao;
 
 	public StoreService() {
@@ -20,6 +21,27 @@ public class StoreService {
 
 	public Store signin(String storeAcc, String storePwd) {
 		return dao.signin(storeAcc, storePwd);
+	}
+
+	public JSONArray getAllByAddress(String storeCity, String storeDistrict) {
+		new StoreService();
+		List<Store> list = dao.getAllByAddress(storeCity, storeDistrict);
+		JSONArray json = new JSONArray();
+		JSONObject map = null;
+		for (Store e : list) {
+			if (e.getStoreStatus() == 0) {
+				map = new JSONObject();
+				map.put("STORE_ID", e.getStoreId().toString());
+				map.put("STORE_STATUS", e.getStoreStatus().toString());
+				map.put("STORE_NAME", e.getStoreName());
+				map.put("STORE_CITY", e.getStoreCity());
+				map.put("STORE_DISTRICT", e.getStoreDistrict());
+				map.put("STORE_ADDRESS", e.getStoreAddress());
+				map.put("STORE_URL", e.getStoreUrl().toString());
+				json.add(map);
+			}
+		}
+		return json;
 	}
 
 	public Store getById(Integer storeId) {
@@ -92,6 +114,27 @@ public class StoreService {
 		dao.update(pojo);
 		return true;
 	}
+
+	public void update(Integer storeid, String storeaddress, String storeacc, String storehours, String storecomid, String storephone1,
+					   String storemail, String storetext, String storeweb, String storecomaddress, String storephone2,
+					   String storetwid) {
+		Store Store = new Store();
+		Store.setStoreId(storeid);
+		Store.setStoreAddress(storeaddress);
+		Store.setStoreAcc(storeacc);
+		Store.setStoreHours(storehours);
+		Store.setStoreComId(storecomid);
+		Store.setStorePhone1(storephone1);
+		Store.setStoreMail(storemail);
+		Store.setStoreText(storetext);
+		Store.setStoreWeb(storeweb);
+		Store.setStoreComAddress(storecomaddress);
+		Store.setStorePhone2(storephone2);
+		Store.setStoreTwId(storetwid);
+		dao.update2(Store);
+
+	}
+
 
 	public JSONArray statStoreAll() {
 		List<Store> list = dao.getBySsta(2);

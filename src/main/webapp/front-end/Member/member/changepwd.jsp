@@ -20,7 +20,7 @@
 <div class="container-fluid">
     <div class="row">
         <!-- nav start -->
-        
+        <%@ include file="/front-end/Member/01h/nav/navin04.jsp" %>
         <!-- nav end -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 my-5">
             <div class="container mb-17 p-4">

@@ -83,15 +83,15 @@
                         <a class="navbar-brand font-weight-bold" href="/CGA105G2/index.jsp">
                             <img src="/CGA105G2/assets/images/Logo.PNG" style="width: 100px; height: 100px" alt=""/></a>
                     </div>
-                    <form class="form-inline my-2 my-md-0 bg-white p-1 " style="border-radius: 30px;">
+                    <form METHOD="post" ACTION="/CGA105G2/LonginServlet" class="form-inline my-2 my-md-0 bg-white p-1 " style="border-radius: 30px;" >
                         <div class="single-icon" data-toggle="tooltip" title="" data-original-title="search"
                              style="border: 0; "><i
                                 class="material-icons">search</i>
                         </div>
-                        <input class="form-control " type="text" placeholder="Search"
+                        <input class="form-control " type="text" placeholder="Search" name="storeName"
                                style="border: 0; border-radius: 30px;">
+                        <input type="hidden" name="action" value="byStoreName">
                     </form>
-
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

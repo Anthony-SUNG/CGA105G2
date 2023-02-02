@@ -23,7 +23,7 @@
         <!-- nav end -->
         <main role="main" class="col-md-9">
             <div class="table-responsive" style="overflow: hidden !important;">
-                <h1 class="h2">會員預約查詢</h1>
+                <h1 class="h2">🔆預約查詢</h1>
                 <table id="code" class="table table-striped display" style="text-align:center;">
                 </table>
             </div>

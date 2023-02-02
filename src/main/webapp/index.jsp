@@ -100,7 +100,6 @@
                         </select>
                         <button class="btn btn-outline-warning  my-sm-0 my-5 ml-5" type="submit">開始瀏覽</button>
                     </form>
-
                     <div>
                         <c:if test="${not empty errorMsgs}">
                                 <h4 style="color: red"> ${errorMsgs.error1}</h4>

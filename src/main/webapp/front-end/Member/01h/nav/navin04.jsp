@@ -24,7 +24,7 @@
             </li>
             <li class="my-4">
                 <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown fs-md-6">🔻訂單</a>
-                <ul class="collapse list-unstyled collapse" id="pageSubmenu2" >
+                <ul class="collapse list-unstyled" id="pageSubmenu2" >
                     <li>
                         <hr><a href="/CGA105G2/BlankPage/Loader2.jsp" class="nav-link">🔆待出貨</a>
                     </li>

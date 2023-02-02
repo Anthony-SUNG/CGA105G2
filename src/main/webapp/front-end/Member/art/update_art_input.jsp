@@ -230,9 +230,9 @@
                         <!-- ==============標記tag================== -->
 							<div class="tag" style="margin-top: 5px;display: flex;background-color: rgb(82, 206, 156);color: white;border-radius:15px ;font-size: 22px;font-weight: 1000;padding: 5px;padding-left: 10px;">
                                 店家標籤:
-                                <input type="checkbox" value="銀髮族友善店家" name="artTag" id="tb22_status" style="margin-left: 10px;zoom: 180%;">&nbsp;銀髮族友善店家󠀠
-                                <input type="checkbox" value="寵物友善店家" name="artTag" id="tb22_status" style="margin-left: 10px;zoom: 180%;">&nbsp;寵物友善店家
-                                <input type="checkbox" value="殘障人士友善店家" name="artTag" id="tb22_status" style="margin-left: 10px;zoom: 180%;">&nbsp;殘障人士友善店家
+                                <input type="checkbox" value="銀髮族友善店家" name="artTag"  style="margin-left: 10px;zoom: 180%;">&nbsp;銀髮族友善店家󠀠
+                                <input type="checkbox" value="寵物友善店家" name="artTag"  style="margin-left: 10px;zoom: 180%;">&nbsp;寵物友善店家
+                                <input type="checkbox" value="殘障人士友善店家" name="artTag"  style="margin-left: 10px;zoom: 180%;">&nbsp;殘障人士友善店家
                             </div>
                         <!-- ===========輸入欄位開始================ -->
                         <div style="margin-bottom: 30px;">
