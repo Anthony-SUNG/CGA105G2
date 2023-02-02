@@ -30,7 +30,7 @@
                         <div
                                 class="row d-flex justify-content-center align-items-center h-100 p-4">
                             <div class="col-xl-9">
-                                <h1 class="text-white text-center m-5">Member Registration</h1>
+                                <h1 class="text-white text-center m-5">🔆基本資料</h1>
                                 <div class="card" style="border-radius: 15px;">
                                     <div class="card-body p-4">
                                         <%-- 錯誤表列 --%>
@@ -43,6 +43,7 @@
                                             </ul>
                                         </c:if>
                                         <Form method="post"
+                                              enctype="multipart/form-data"
                                               action="${pageContext.request.contextPath}/Member/MemberServlet"
                                               name="updatee">
                                             <div class="row align-items-center pt-4 pb-3">
@@ -52,7 +53,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" name="MEM_NAME"
                                                            class="form-control form-control-lg"
-                                                           id="memberr-fullname" value=${ Member.memName }/>
+                                                           id="memberr-fullname" value=${ Member.memName }>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -63,7 +64,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" name="MEM_ACC"
                                                            class="form-control form-control-lg"
-                                                           id="memberr-accountid" value=${ Member.memAcc }/>
+                                                           id="memberr-accountid" value=${ Member.memAcc }>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -74,7 +75,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" name="MEM_RECIPIENT"
                                                            class="form-control form-control-lg"
-                                                           id="memberr-recipient" value=${ Member.memRecipient }/>
+                                                           id="memberr-recipient" value=${ Member.memRecipient }>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -85,7 +86,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" name="MEM_TW_ID"
                                                            class="form-control form-control-lg"
-                                                           id="memberr-identitycard" value=${ Member.memTwId }/>
+                                                           id="memberr-identitycard" value=${ Member.memTwId }>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -96,7 +97,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="date" name="MEM_BIRTHDAY"
                                                            class="form-control form-control-lg"
-                                                           id="memberr-birthday" value=${ Member.memBirthday }/>
+                                                           id="memberr-birthday" value=${ Member.memBirthday }>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -107,7 +108,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" name="MEM_PHONE"
                                                            class="form-control form-control-lg"
-                                                           id="memberr-phonenumber" value=${ Member.memPhone }/>
+                                                           id="memberr-phonenumber" value=${ Member.memPhone }>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -128,7 +129,7 @@
                                                 </select>
                                                     <input type="text" name="MEM_ADDRESS"
                                                            class="form-control form-control-lg"
-                                                           id="memberstore-address"/>
+                                                           id="memberstore-address" value=${ Member.memAddress }>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -140,7 +141,7 @@
                                                     <input type="email" name="MEM_MAIL"
                                                            class="form-control form-control-lg"
                                                            placeholder="example@example.com"
-                                                           id="memberr-emailaddress" value=${ Member.memMail }/>
+                                                           id="memberr-emailaddress" value=${ Member.memMail }>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -162,7 +163,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input class="form-control form-control-lg" name="MEM_PIC"
                                                            id="formFileLg" type="file" id="memberr-uploadphoto"
-                                                           value=${ Member.memPic }/>
+                                                           value=${ Member.memPic }>
                                                     <div class="small text-muted mt-2">Upload your photo
                                                         sticker
                                                     </div>
@@ -205,6 +206,7 @@
     $("#pageSubmenu4").removeClass("collapse");
     $("#pageSubmenu4 a:contains(🔆基本資料)").closest("a").addClass("active disabled bg-white topage");
 </script>
+<script src="https://demeter.5fpro.com/tw/zipcode-selector.js"></script>
 
 </body>
 </html>

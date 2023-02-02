@@ -123,18 +123,7 @@
         <%@ include file="/front-end/Member/01h/nav/navin02.jsp" %>
         <!-- nav end -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 my-5">
-            <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">🔆修改文章頁面</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group mr-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                    </div>
-                </div>
-            </div>
             <!-- =======================會員頭像======================= -->
-
             <div class="row justify-content-center">
                 <div class="col-7 mb-10">
                     <div class="postmember_info"
@@ -230,9 +219,9 @@
                         <!-- ==============標記tag================== -->
 							<div class="tag" style="margin-top: 5px;display: flex;background-color: rgb(82, 206, 156);color: white;border-radius:15px ;font-size: 22px;font-weight: 1000;padding: 5px;padding-left: 10px;">
                                 店家標籤:
-                                <input type="checkbox" value="銀髮族友善店家" name="artTag" id="tb22_status" style="margin-left: 10px;zoom: 180%;">&nbsp;銀髮族友善店家󠀠
-                                <input type="checkbox" value="寵物友善店家" name="artTag" id="tb22_status" style="margin-left: 10px;zoom: 180%;">&nbsp;寵物友善店家
-                                <input type="checkbox" value="殘障人士友善店家" name="artTag" id="tb22_status" style="margin-left: 10px;zoom: 180%;">&nbsp;殘障人士友善店家
+                                <input type="checkbox" value="銀髮族友善店家" name="artTag"  style="margin-left: 10px;zoom: 180%;">&nbsp;銀髮族友善店家󠀠
+                                <input type="checkbox" value="寵物友善店家" name="artTag"  style="margin-left: 10px;zoom: 180%;">&nbsp;寵物友善店家
+                                <input type="checkbox" value="殘障人士友善店家" name="artTag"  style="margin-left: 10px;zoom: 180%;">&nbsp;殘障人士友善店家
                             </div>
                         <!-- ===========輸入欄位開始================ -->
                         <div style="margin-bottom: 30px;">

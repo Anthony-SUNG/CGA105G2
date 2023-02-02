@@ -1,20 +1,20 @@
-<%@page import="java.util.Date"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="com.member.model.Member.pojo.Member"%>
-<%@page import="com.member.model.service.MemberService"%>
+<%@page import="java.util.Date" %>
+<%@page import="java.text.SimpleDateFormat" %>
+<%@page import="com.member.model.Member.pojo.Member" %>
+<%@page import="com.member.model.service.MemberService" %>
 <%@page import="com.art.model.Article.pojo.Article" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <%
-	Article article = (Article)request.getAttribute("article");
-	Integer memId   = (Integer) request.getSession().getAttribute("memId");
-	MemberService memberService = new MemberService();
-	Member member = memberService.getById(memId);
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	String today = sdf.format(new Date());
-	pageContext.setAttribute("member", member);
+    Article article = (Article) request.getAttribute("article");
+    Integer memId = (Integer) request.getSession().getAttribute("memId");
+    MemberService memberService = new MemberService();
+    Member member = memberService.getById(memId);
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String today = sdf.format(new Date());
+    pageContext.setAttribute("member", member);
 %>
 
 <!DOCTYPE html>
@@ -74,7 +74,7 @@
             cursor: pointer !important;
             font-size: 32px !important;
             padding: 8px 3px !important;
-            transition: color 0.5s !important; 
+            transition: color 0.5s !important;
         }
 
         .storescore {
@@ -144,384 +144,236 @@
                 </div>
             </div>
             <!-- =======================會員頭像======================= -->
-				<!-- =======================會員頭像======================= -->
-
-				<div class="row justify-content-center">
-					<div class="col-7 mb-10">
-						<div class="postmember_info"
-							style="display: flex; margin-top: 30px;">
-							<div class="postmember_img">
-							<c:if test="${not empty member.memPic}">
-								<img src="/CGA105G2/assets/images/men.png"
-									style="width: 65px; height: 60px; border-radius: 80%; border: 1px solid rgb(255, 216, 87);">
-							</c:if>
-							<c:if test="${empty member.memPic}">
-                            	 <img src="https://i.pinimg.com/564x/07/c4/72/07c4720d19a9e9edad9d0e939eca304a.jpg" alt="" style="width: 65px; height: 60px; border-radius: 80%; border: 1px solid rgb(255, 216, 87);">
-                            		</c:if>
-							</div>
-							<div class="postmember_text" style="margin-left: 5px;">
+            <div class="row justify-content-center">
+                <div class="col-7 mb-10">
+                    <div class="postmember_info"
+                         style="display: flex; margin-top: 30px;">
+                        <div class="postmember_img">
+                            <c:if test="${not empty member.memPic}">
+                                <img src="/CGA105G2/assets/images/men.png"
+                                     style="width: 65px; height: 60px; border-radius: 80%; border: 1px solid rgb(255, 216, 87);">
+                            </c:if>
+                            <c:if test="${empty member.memPic}">
+                                <img src="https://i.pinimg.com/564x/07/c4/72/07c4720d19a9e9edad9d0e939eca304a.jpg"
+                                     alt=""
+                                     style="width: 65px; height: 60px; border-radius: 80%; border: 1px solid rgb(255, 216, 87);">
+                            </c:if>
+                        </div>
+                        <div class="postmember_text" style="margin-left: 5px;">
 
 								<span class="postmember_name" style="font-size: 20px;">
-									${member.memName} </span>
-								<div>
-									<time><%= today %></time>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-				<!-- ==================發文開始======================= -->
-				<div class="row justify-content-center">
-					<div class="col-7 mb-10 shadow "
-						style="padding: 30px; border: 3px solid rgba(208, 208, 208, 0.644); border-radius: 20px;">
-						<div class="poststore_info"
-							style="display: flex; margin-top: 10px;">
-							<div class="poststore_img">
-								<img src="/CGA105G2/assets/images/ex1.jpg"
-									style="width: 65px; height: 60px; border: 1px solid rgb(255, 216, 87);">
-
-							</div>
-							<div class="poststore_text"
-								style="margin-left: 5px; align-items: center; display: flex;">
-
-								<span class="post_name"
-									style="font-size: 30px; font-weight: 1000;"> 劉媽媽小吃店 </span>
-
-							</div>
-						</div>
-						<!-- ===================店家評分星星================== -->
-						<!-- star rating -->
-						<form method="post" action="ArtServlet" name ="form1" enctype="multipart/form-data">
-							<div class="rating-wrapper pt-3">
-								<div>
-									<input type="hidden" name="memId" value="${member.memId}">
-									<input type="hidden" name="storeId" value="5">
-									<span
-										style="font-size: 22px; font-weight: 600; background-color: antiquewhite; margin-left: 20px; line-height: 60px;"></span>
-									<!-- star 5 -->
-									<input type="radio" id="5-star-rating" class="storescore"
-										name="artScore" value="5"> <label
-										for="5-star-rating" class="star-rating storescorelabel">
-										<i class="fa fa-star d-inline-block"></i>
-									</label>
-
-									<!-- star 4 -->
-									<input type="radio" id="4-star-rating" class="storescore"
-										name="artScore" value="4"> <label
-										for="4-star-rating" class="star-rating star storescorelabel">
-										<i class="fa fa-star d-inline-block"></i>
-									</label>
-
-									<!-- star 3 -->
-									<input type="radio" id="3-star-rating" class="storescore"
-										name="artScore" value="3"> <label
-										for="3-star-rating" class="star-rating star storescorelabel">
-										<i class="fa fa-star d-inline-block"></i>
-									</label>
-
-									<!-- star 2 -->
-									<input type="radio" class="storescore" id="2-star-rating"
-										name="artScore" value="2"> <label
-										for="2-star-rating" class="star-rating star storescorelabel">
-										<i class="fa fa-star d-inline-block"></i>
-									</label>
-
-									<!-- star 1 -->
-									<input type="radio" id="1-star-rating" class="storescore"
-										name="artScore" value="1"> <label
-										for="1-star-rating" class="star-rating star storescorelabel">
-										<i class="fa fa-star d-inline-block"></i>
-									</label> <span
-										style="font-size: 22px; font-weight: 600; background-color: antiquewhite;">:評分</span>
-								</div>
-							</div>
-
-
-							<!-- ==============標記tag================== -->
-							<div class="tag" style="margin-top: 5px;display: flex;background-color: rgb(82, 206, 156);color: white;border-radius:15px ;font-size: 22px;font-weight: 1000;padding: 5px;padding-left: 10px;">
-                                店家標籤:
-                                <input type="checkbox" value="銀髮族友善店家" name="artTag" id="tb22_status" style="margin-left: 10px;zoom: 180%;">&nbsp;銀髮族友善店家󠀠
-                                <input type="checkbox" value="寵物友善店家" name="artTag" id="tb22_status" style="margin-left: 10px;zoom: 180%;">&nbsp;寵物友善店家
-                                <input type="checkbox" value="殘障人士友善店家" name="artTag" id="tb22_status" style="margin-left: 10px;zoom: 180%;">&nbsp;殘障人士友善店家
+                                    ${member.memName} </span>
+                            <div>
+                                <time><%= today %>
+                                </time>
                             </div>
-							<!-- ===========輸入欄位開始================ -->
-							<div style="margin-bottom: 30px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ==================發文開始====================== -->
+            <div class="row justify-content-center">
+                <div class="col-7 mb-10 shadow "
+                     style="padding: 30px; border: 3px solid rgba(208, 208, 208, 0.644); border-radius: 20px;">
+                    <div class="poststore_info"
+                         style="display: flex; margin-top: 10px;">
+                        <div class="poststore_img">
+                            <img src="/CGA105G2/assets/images/ex1.jpg"
+                                 style="width: 65px; height: 60px; border: 1px solid rgb(255, 216, 87);">
 
-								<div>
-									<input type="text" name="artHeader"  id="tb22_title" placeholder="文章標題"
-									value="<%= (article==null)? "" : article.getArtHeader()%>"
-										class="form-control" style="width: 100%; margin: 20px 0px;">
-								</div>
-								<div class="mb-5">
-									<input type="text" placeholder="給店家的評語" name="artText" id="tb22_comment"
-									value="<%= (article==null)? "" : article.getArtText()%>"
-										 style="width: 100%; height: 150px;"
-										class="form-control">
-								</div>
-								</div>
-								<!-- ==============插入圖片開始================= -->
-								<div class="image-upload">
-									<input type="file" name="artImg" id="logo"
-									value="<%= (article==null)? "" : article.getArtImg()%>"
-										onchange="fileValue(this)"> <label for="logo"
-										class="upload-field" id="file-label">
-										<div class="file-thumbnail">
-											<img id="image-preview"
-												src="https://www.btklsby.go.id/images/placeholder/basic.png"
-												alt="">
-											<h3 id="filename">上傳圖片</h3>
+                        </div>
+                        <div class="poststore_text"
+                             style="margin-left: 5px; align-items: center; display: flex;">
+								<span class="post_name"
+                                      style="font-size: 30px; font-weight: 1000;">${StoreName}</span>
+                        </div>
+                    </div>
+                    <!-- ===================店家評分星星================== -->
+                    <!-- star rating -->
+                    <form method="post" action="<%=request.getContextPath()%>/front-end/Member/art/ArtServlet"  enctype="multipart/form-data">
+                        <div class="rating-wrapper pt-3">
+                            <div>
+                                <input type="hidden" name="memId" value="${member.memId}">
+                                <input type="hidden" name="storeId" value="${sid}">
+                                <span   style="font-size: 22px; font-weight: 600; background-color: antiquewhite; margin-left: 20px; line-height: 60px;"></span>
+                                <!-- star 5 -->
+                                <input type="radio" id="5-star-rating" class="storescore"
+                                       name="artScore" value="5"> <label
+                                    for="5-star-rating" class="star-rating storescorelabel">
+                                <i class="fa fa-star d-inline-block"></i>
+                            </label>
 
-										</div>
-									</label>
-								</div>
-								<!-- ==================發表評論開始====================== -->
-								<div class="post_btn"
-									style="display: flex; justify-content: flex-end">
-									<button type="reset" class="btn-secondary" @click="backHome"
-										@submit.prevent style="background-color: gray;">取消</button>
-									<button type="submit" class="btn-secondary" @click="uploadData"
-										@submit.prevent style="margin-left: 10px">發表評論</button>
-									<input type="hidden" name="action" value="insertArt">
-								</div>
-						</form>
-						<%-- 錯誤表列 --%>
-						<c:if test="${not empty errorMsgs}">
-							<ul style = "list-style: none;font-weight: 900;;text-align: center;font-size: 22px;">
-								<c:forEach var="message" items="${errorMsgs}">
-									<li style="color: red">！！${message}！！</li>
-								</c:forEach>
-							</ul>
-						</c:if>
-						<%-- 錯誤表列 --%>
-					</div>
-				</div>
-		</div>
+                                <!-- star 4 -->
+                                <input type="radio" id="4-star-rating" class="storescore"
+                                       name="artScore" value="4"> <label
+                                    for="4-star-rating" class="star-rating star storescorelabel">
+                                <i class="fa fa-star d-inline-block"></i>
+                            </label>
 
+                                <!-- star 3 -->
+                                <input type="radio" id="3-star-rating" class="storescore"
+                                       name="artScore" value="3"> <label
+                                    for="3-star-rating" class="star-rating star storescorelabel">
+                                <i class="fa fa-star d-inline-block"></i>
+                            </label>
 
-		<!-- =================發文結束======================= -->
+                                <!-- star 2 -->
+                                <input type="radio" class="storescore" id="2-star-rating"
+                                       name="artScore" value="2"> <label
+                                    for="2-star-rating" class="star-rating star storescorelabel">
+                                <i class="fa fa-star d-inline-block"></i>
+                            </label>
 
-
-		</main>
-	</div>
-	</div>
-
-	<!-- main -->
-
-	<!-- footer start -->
-	<section class="footer bg-warning"
-		style="width: 100%; position: relative; bottom: 0; top: 30%">
-		<div class="container">
-			<!-- 三張小圖 -->
-			<div
-				class="d-flex align-items-stretch justify-content-md-center py-10">
-				<!-- 地址 -->
-				<div class="card border-0 bg-secondary mb-4 ml-lg-9 w-25">
-					<div class="card-body py-17 px-10 text-center">
-						<div class="card-icon mb-6">
-							<i class="material-icons">map</i>
-						</div>
-						<div
-							class="fs-1 lh-1 my-5 font-family-secondary text-uppercase font-weight-bold letter-spacing-caption text-muted">
-							Our address</div>
-						<p class="mb-0 text-body">
-							桃園市中壢區復興路46號9樓<br />Hollow Lane. NY 11706.
-						</p>
-					</div>
-				</div>
-				<!-- 電話 -->
-				<div class="card border-0 bg-secondary mb-4 ml-lg-9 w-25">
-					<div class="card-body py-17 px-10 text-center">
-						<div class="card-icon mb-6">
-							<i class="material-icons">phone</i>
-						</div>
-						<div
-							class="fs-1 lh-1 my-5 font-family-secondary text-uppercase font-weight-bold letter-spacing-caption text-muted">
-							連絡電話</div>
-						<p class="mb-0 text-body">0800-087-087</p>
-					</div>
-				</div>
-				<!-- 營業時間 -->
-				<div class="card border-0 bg-secondary mb-4 ml-lg-9 w-25">
-					<div class="card-body py-17 px-10 text-center">
-						<div class="card-icon mb-6">
-							<i class="material-icons">access_time</i>
-						</div>
-						<div
-							class="fs-1 lh-1 my-5 font-family-secondary text-uppercase font-weight-bold letter-spacing-caption text-muted">
-							營業時間</div>
-						<p class="mb-0 text-body">11:00 AM - 9:00 PM</p>
-					</div>
-				</div>
-			</div>
-			<!-- 跳轉到社群連結 -->
-			<div class="d-flex align-items-center justify-content-center">
-				<a href="home.html" class="footer-brand">FoodMap</a>
-				<div class="brand-icons-list ml-10 ml-sm-20">
-					<!-- FB圖案 -->
-					<a href="#"
-						class="brand-icon brand-icon-circle brand-icon-facebook"> <i
-						class="fa fa-facebook-f"></i>
-					</a>
-					<!-- twitter圖案 -->
-					<a href="#" class="brand-icon brand-icon-circle brand-icon-twitter">
-						<i class="fa fa-twitter "></i>
-					</a>
-					<!-- ig圖案-->
-					<a href="#"
-						class="brand-icon brand-icon-circle brand-icon-instagram"> <i
-						class="fa fa-pinterest-p"></i>
-					</a>
-				</div>
-			</div>
-			<!-- 頁底文字 -->
-			<small class="d-flex align-items-center justify-content-center"
-				style="margin: 0px -10px 0px -10px;"> TibaMe CGA105_2
-				MapFood <a href="#" data-toggle="smooth-scroll"
-				data-target="#page-start-anchor"> <i
-					class="material-icons text-black">arrow_upward</i>
-			</a>
-			</small>
-		</div>
-	</section>
-	<!-- footer end -->
-
-	<script src="/CGA105G2/assets/js/vendor.js"></script>
-	<script src="/CGA105G2/assets/js/polyfills.js"></script>
-	<script src="/CGA105G2/assets/js/app.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+                                <!-- star 1 -->
+                                <input type="radio" id="1-star-rating" class="storescore"
+                                       name="artScore" value="1"> <label
+                                    for="1-star-rating" class="star-rating star storescorelabel">
+                                <i class="fa fa-star d-inline-block"></i>
+                            </label> <span
+                                    style="font-size: 22px; font-weight: 600; background-color: antiquewhite;">:評分</span>
+                            </div>
+                        </div>
 
 
-	<!-- Bootstrap 4.6.2 & Vue 3 & jquery 3.4.1-->
+                        <!-- ==============標記tag================== -->
+                        <div class="tag"
+                             style="margin-top: 5px;display: flex;background-color: rgb(82, 206, 156);color: white;border-radius:15px ;font-size: 22px;font-weight: 1000;padding: 5px;padding-left: 10px;">
+                            店家標籤:
+                            <input type="checkbox" value="銀髮族友善店家" name="artTag"
+                                   style="margin-left: 10px;zoom: 180%;">&nbsp;銀髮族友善店家󠀠
+                            <input type="checkbox" value="寵物友善店家" name="artTag"
+                                   style="margin-left: 10px;zoom: 180%;">&nbsp;寵物友善店家
+                            <input type="checkbox" value="殘障人士友善店家" name="artTag"
+                                   style="margin-left: 10px;zoom: 180%;">&nbsp;殘障人士友善店家
+                        </div>
+                        <!-- ===========輸入欄位開始================ -->
+                        <div style="margin-bottom: 30px;">
 
-	<!-- Bootstrap js -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-		crossorigin="anonymous"></script>
-	<script>
-        $(document).ready(function () {
+                            <div>
+                                <input type="text" name="artHeader" id="tb22_title" placeholder="文章標題"
+                                       value="<%= (article==null)? "" : article.getArtHeader()%>"
+                                       class="form-control" style="width: 100%; margin: 20px 0px;">
+                            </div>
+                            <div class="mb-5">
+                                <input type="text" placeholder="給店家的評語" name="artText" id="tb22_comment"
+                                       value="<%= (article==null)? "" : article.getArtText()%>"
+                                       style="width: 100%; height: 150px;"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <!-- ==============插入圖片開始================= -->
+                        <div class="image-upload">
+                            <input type="file" name="artImg" id="logo"
+                                   value="<%= (article==null)? "" : article.getArtImg()%>"
+                                   onchange="fileValue(this)"> <label for="logo"
+                                                                      class="upload-field" id="file-label">
+                            <div class="file-thumbnail">
+                                <img id="image-preview"
+                                     src="https://www.btklsby.go.id/images/placeholder/basic.png"
+                                     alt="">
+                                <h3 id="filename">上傳圖片</h3>
 
-            new ClipboardJS('.btn');
+                            </div>
+                        </label>
+                        </div>
+                        <!-- ==================發表評論開始====================== -->
+                        <div class="post_btn"
+                             style="display: flex; justify-content: flex-end">
+                            <button type="reset" class="btn-secondary" @click="backHome"
+                                    @submit.prevent style="background-color: gray;">取消
+                            </button>
+                            <button type="submit" class="btn-secondary" @click="uploadData"
+                                    @submit.prevent style="margin-left: 10px">發表評論
+                            </button>
+                            <input type="hidden" name="action" value="insertArt">
+                        </div>
+                    </form>
+                    <%-- 錯誤表列 --%>
+                    <c:if test="${not empty errorMsgs}">
+                        <ul style="list-style: none;font-weight: 900;;text-align: center;font-size: 22px;">
+                            <c:forEach var="message" items="${errorMsgs}">
+                                <li style="color: red">！！${message}！！</li>
+                            </c:forEach>
+                        </ul>
+                    </c:if>
+                    <%-- 錯誤表列 --%>
+                </div>
+            </div>
+        </main>
+    </div>
 
-        });
-        const list = [
-            {
-                CODE_ID: 1,
-                STORE_NAME: '麥當勞-中正店',
-                CODE_OFF: 20,
-                CODE_NUM: 'MYC20',
-                CODE_NTIME: 2022 - 12 - 31
-            },
-            {
-                CODE_ID: 2,
-                STORE_NAME: '阿雄麵店',
-                CODE_OFF: 35,
-                CODE_NUM: 'YC35',
-                CODE_NTIME: 2022 - 12 - 30
-            },
-            {
-                CODE_ID: 3,
-                STORE_NAME: '鑫艷',
-                CODE_OFF: 2000,
-                CODE_NUM: 'HaHa0101',
-                CODE_NTIME: '2023-01-01'
-            }
-        ];
-        render(list);
-        function render(list) {
-            // 定義變數，在使用變數
-            const codetbody = document.querySelector('.code_tbody');
-            codetbody.innerHTML = '';
-            for (let item of list) {
-                codetbody.innerHTML += `
-             <tr>
-              <td><button type="button" class="btn btn-dark p-0 " data-clipboard-action="copy" data-clipboard-target="#clipboardExample${item.CODE_ID}">Copy</button></td>
-              <td>${item.STORE_NAME}</td>
-              <td>$${item.CODE_OFF}</td>
-              <td id="clipboardExample${item.CODE_ID}">${item.CODE_NUM}</td>
-              <td>${item.CODE_NTIME}</td>
-            </tr>
-`;
-            }
+
+    <!-- =================發文結束======================= -->
+
+
+</div>
+</div>
+<!-- main -->
+<!-- footer start -->
+<%@ include file="/front-end/Member/01h/footerin.jsp" %>
+<!-- footer end -->
+<!-- ==================上傳圖片js=================== -->
+<script>
+    function fileValue(value) {
+        const path = value.value;
+        const extenstion = path.split('.').pop();
+        if (extenstion == "jpg" || extenstion == "svg" || extenstion == "jpeg" || extenstion == "png" || extenstion == "gif" || extenstion == "JPG" || extenstion == "PNG" || extenstion == "JPEG") {
+            document.getElementById('image-preview').src = window.URL.createObjectURL(value.files[0]);
+            const filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
+            document.getElementById("filename").innerHTML = filename;
+        } else {
+            alert("檔案格式錯誤，請上傳圖片格式為JPG、PNG、JPEG、SVG")
         }
-    </script>
-	<!-- Vue -->
-	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-	<script>
-        const { createApp } = Vue;
-
-        createApp({
-            data() {
-                return {
-                    message: "Hello Vue!",
-                };
-            },
-        }).mount("#app");
-    </script>
-	<!-- ==================上傳圖片js=================== -->
-	<script>
-        function fileValue(value) {
-            const path = value.value;
-            const extenstion = path.split('.').pop();
-            if(extenstion == "jpg" || extenstion == "svg" || extenstion == "jpeg" || extenstion == "png"|| extenstion == "gif" ||extenstion == "JPG" ||extenstion == "PNG" ||extenstion == "JPEG" ){
-        document.getElementById('image-preview').src = window.URL.createObjectURL(value.files[0]);
-                const filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
-                document.getElementById("filename").innerHTML = filename;
-    }else{
-      alert("檔案格式錯誤，請上傳圖片格式為JPG、PNG、JPEG、SVG")
     }
-}
-// =====================上傳圖片js結束============================
-    </script>
 
-	<!-- stickey bar: -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
+    // =====================上傳圖片js結束============================
+</script>
 
-	<script>
-        let a = new StickySidebar("#sidebar", {
-            topSpacing: 40,
-            bottomSpacing: 20,
-            containerSelector: ".container",
-            innerWrapperSelector: ".sidebar__inner"
-        });
-    </script>
-     <!-- =====================店家標籤Js==================== -->
-    <script>
-        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].addEventListener('change', function() {
-                var checkboxGroup = this.parentNode.parentNode;
-                var checkboxesInGroup = checkboxGroup.querySelectorAll('input[type="checkbox"]');
-                for (var j = 0; j < checkboxesInGroup.length; j++) {
-                    if (checkboxesInGroup[j] !== this) {
-                        checkboxesInGroup[j].checked = false;
-                    }
+<!-- stickey bar: -->
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
+
+<script>
+    let a = new StickySidebar("#sidebar", {
+        topSpacing: 40,
+        bottomSpacing: 20,
+        containerSelector: ".container",
+        innerWrapperSelector: ".sidebar__inner"
+    });
+</script>
+<!-- =====================店家標籤Js==================== -->
+<script>
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].addEventListener('change', function () {
+            var checkboxGroup = this.parentNode.parentNode;
+            var checkboxesInGroup = checkboxGroup.querySelectorAll('input[type="checkbox"]');
+            for (var j = 0; j < checkboxesInGroup.length; j++) {
+                if (checkboxesInGroup[j] !== this) {
+                    checkboxesInGroup[j].checked = false;
                 }
-            });
-        }
-    </script>
-    <script>
-//     var textarea = document.getElementById("tb22_comment");
-//     var placeholder = "給店家的評語";
-//     textarea.value = placeholder;
-//     textarea.style.color = "gray";
+            }
+        });
+    }
+</script>
+<script>
+    //     var textarea = document.getElementById("tb22_comment");
+    //     var placeholder = "給店家的評語";
+    //     textarea.value = placeholder;
+    //     textarea.style.color = "gray";
 
-//     textarea.addEventListener("focus", function(){
-//         if (this.value === placeholder) {
-//             this.value = "";
-//             this.style.color = "black";
-//         }
-//     });
-//     textarea.addEventListener("blur", function(){
-//         if (this.value === "") {
-//             this.value = placeholder;
-//             this.style.color = "gray";
-//         }
-//     });
+    //     textarea.addEventListener("focus", function(){
+    //         if (this.value === placeholder) {
+    //             this.value = "";
+    //             this.style.color = "black";
+    //         }
+    //     });
+    //     textarea.addEventListener("blur", function(){
+    //         if (this.value === "") {
+    //             this.value = placeholder;
+    //             this.style.color = "gray";
+    //         }
+    //     });
 </script>
 </body>
 

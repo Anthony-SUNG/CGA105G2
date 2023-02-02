@@ -38,7 +38,7 @@
             <div class="row" style="max-width: 1400px">
                 <nav class="navbar navbar-expand-lg navbar-light fs-md-6" id="header-navbar">
                     <!-- @*Navbar(白色)*@ -->
-                    <a class="navbar-brand font-weight-bold" href="/index.jsp">
+                    <a class="navbar-brand font-weight-bold" href="/CGA105G2/index.jsp">
                         <img src="/CGA105G2/assets/images/Logo.PNG" style="width: 100px; height: 100px" alt="" />FoodMap</a>
                     <!--            ps-->
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

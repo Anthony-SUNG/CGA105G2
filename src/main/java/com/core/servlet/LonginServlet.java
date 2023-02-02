@@ -404,6 +404,127 @@ public class LonginServlet extends HttpServlet {
 			out.write(member.getMemPic());
 			out.close();
 		}
+		//  forget1(update)  	-------------------------------------------------------------------------------------------------------------------------------
+		if ("forget1".equals(action)) { // 來自addEmp.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			request.setAttribute("errorMsgs", errorMsgs);
+
+			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+
+			String memacc = request.getParameter("MEM_ACC").trim();
+			String mempwd = request.getParameter("MEM_PWD").trim();
+			String mempwd2 = request.getParameter("MEM_PWD2").trim();
+			if (memacc == null || memacc.trim().length() == 0) {
+				errorMsgs.add("帳號請勿空白");
+			}
+
+			if (mempwd == null || mempwd.trim().length() == 0) {
+				errorMsgs.add("密碼請勿空白");
+			}
+
+			if (mempwd2 == null || mempwd2.trim().length() == 0) {
+				errorMsgs.add("確認密碼請勿空白");
+			}
+
+			if (!mempwd2.equals(mempwd)) {
+				errorMsgs.add("確認密碼請與密碼相同");
+			}
+
+			Member Member = new Member();
+			Member.setMemAcc(memacc);
+			Member.setMemPwd(mempwd);
+
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				request.setAttribute("Member", Member); // 含有輸入格式錯誤的empVO物件,也存入req
+				RequestDispatcher failureView = request
+						.getRequestDispatcher("/front-end/Member/member/forget1.jsp");
+				failureView.forward(request, response);
+				return;
+			}
+
+			/*************************** 2.開始新增資料 ***************************************/
+			MemberService memSvc = new MemberService();
+			Member = memSvc.forget1(memacc, mempwd);
+			Member member1 = memSvc.signin(memacc, mempwd);
+			Integer memid = member1.getMemId();
+			if (memid == 0) {
+				errorMsgs.add("查無帳號");
+				RequestDispatcher failureView = request.getRequestDispatcher("/front-end/Member/member/forget1.jsp");
+				failureView.forward(request, response);
+				return;// 程式中斷
+			}
+
+			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+			String url = "/front-end/Member/member/memberLognIn.jsp";
+			RequestDispatcher successView = request.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+			successView.forward(request, response);
+
+		}
+
+		//  forget2(update)  	-------------------------------------------------------------------------------------------------------------------------------
+		if ("forget2".equals(action)) { // 來自addEmp.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			request.setAttribute("errorMsgs", errorMsgs);
+
+			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+
+			String storeacc = request.getParameter("STORE_ACC").trim();
+			String storepwd = request.getParameter("STORE_PWD").trim();
+			String storepwd2 = request.getParameter("STORE_PWD2").trim();
+			if (storeacc == null || storeacc.trim().length() == 0) {
+				errorMsgs.add("帳號請勿空白");
+			}
+
+			if (storepwd == null || storepwd.trim().length() == 0) {
+				errorMsgs.add("密碼請勿空白");
+			}
+
+			if (storepwd2 == null || storepwd2.trim().length() == 0) {
+				errorMsgs.add("確認密碼請勿空白");
+			}
+
+			if (!storepwd2.equals(storepwd)) {
+				errorMsgs.add("確認密碼請與密碼相同");
+			}
+
+			Store Store = new Store();
+			Store.setStoreAcc(storeacc);
+			Store.setStorePwd(storepwd);
+
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				request.setAttribute("Store", Store); // 含有輸入格式錯誤的empVO物件,也存入req
+				RequestDispatcher failureView = request
+						.getRequestDispatcher("/front-end/Member/member/forget2.jsp");
+				failureView.forward(request, response);
+				return;
+			}
+
+			/*************************** 2.開始新增資料 ***************************************/
+			StoreService strSvc = new StoreService();
+			Store = strSvc.forget1(storeacc, storepwd);
+			Store store1 = strSvc.signin(storeacc, storepwd);
+			Integer storeid = store1.getStoreId();
+			if (storeid == 0) {
+				errorMsgs.add("查無帳號");
+				RequestDispatcher failureView = request.getRequestDispatcher("/front-end/Member/member/forget2.jsp");
+				failureView.forward(request, response);
+				return;// 程式中斷
+			}
+
+			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+			String url = "/front-end/Member/member/memberLognIn.jsp";
+			RequestDispatcher successView = request.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+			successView.forward(request, response);
+
+		}
 
 
 

@@ -574,14 +574,11 @@ public class FoodorderServlet extends HttpServlet {
 				req.setAttribute("peopleNum1", peopleNum1);
 				req.setAttribute("dateInput", dateInput);
 				req.setAttribute("time1", time1);
-
 				req.setAttribute("errorMsgs", errorMsgs);
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-end/Member/food_order/setFoodOrderInfo.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/Member/food_order/setFoodOrderInfo.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
-
 			// 先查詢該日訂單人數上限是否已滿，如果已滿一樣要把資料設回去 讓前端在重輸
 			// 利用service
 			FoodorderService foodorderSvc = new FoodorderService();
@@ -619,21 +616,18 @@ public class FoodorderServlet extends HttpServlet {
 				req.setAttribute("peopleNum1", peopleNum1);
 				req.setAttribute("dateInput", dateInput);
 				req.setAttribute("time1", time1);
-
 				req.setAttribute("errorMsgs", errorMsgs);
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/front-end/Member/food_order/setFoodOrderInfo.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
-
 			// 到這都正常  準備將資料放進session 讓後面餐點跟優惠劵 一併到時候到結帳頁面 在寫入 訂單 跟 訂單明細
 			session.setAttribute("foodorder_name", nameInput);
 			session.setAttribute("foodorder_phone", phoneInput);
 			session.setAttribute("foodorder_peopleNum", peopleNum1);
 			session.setAttribute("foodorder_time", time1 + ":00");
 			session.setAttribute("foodorder_date", dateInput);
-
 			// 準備下一頁資料
 			List<Meal> allMealbyStoreidStatus = foodorderSvc.getAllMealbyStoreidStatus(storeid, 1);
 			req.setAttribute("list", allMealbyStoreidStatus);
@@ -651,11 +645,9 @@ public class FoodorderServlet extends HttpServlet {
 				req.setAttribute("nameInput", nameInput);
 				req.setAttribute("phoneInput", phoneInput);
 				req.setAttribute("storename", orderShopName);
-
 				req.setAttribute("peopleNum1", peopleNum1);
 				req.setAttribute("dateInput", dateInput);
 				req.setAttribute("time1", time1);
-
 				req.setAttribute("errorMsgs", errorMsgs);
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/front-end/Member/food_order/setFoodOrderInfo.jsp");

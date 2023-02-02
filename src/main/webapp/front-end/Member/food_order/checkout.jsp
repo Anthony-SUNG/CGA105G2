@@ -23,7 +23,7 @@
       <div class="container mt-17 mb-17">
         <div class="col-md-9  card shadow m-5">
           <h1 class=" m-5 text-center">結帳</h1>
-          <form METHOD="post" action="<%=request.getContextPath()%>/front-end/store/food_order/food_order.do"
+          <form METHOD="post" action="<%=request.getContextPath()%>/front-end/Member/food_order/food_order.do"
             style="padding: 10px 100px;" autocomplete="off">
             <div class="input-group input-group-lg mb-5">
               <span class="input-group-text" >店家名稱 : </span>
