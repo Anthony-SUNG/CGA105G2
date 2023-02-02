@@ -10,11 +10,15 @@ import javax.servlet.http.*;
 
 import com.goods.model.Goods.pojo.Goods;
 import com.goods.model.service.GoodsService;
+import com.member.model.Member.pojo.Member;
+import com.member.model.service.MemberService;
+import com.point.model.Point.pojo.Point;
 import com.point.model.PointGoods.pojo.PointGoods;
 import com.point.model.PointOrder.pojo.PointOrder;
 import com.point.model.service.PointGoodsService;
 
 import com.point.model.service.PointOrderService;
+import com.point.model.service.PointService;
 @WebServlet("/PointServlet")
 @MultipartConfig
 public class PointServlet extends HttpServlet {
@@ -29,8 +33,8 @@ public class PointServlet extends HttpServlet {
 		String action = req.getParameter("action");
 
 		Integer storeId = (Integer) req.getSession().getAttribute("storeId");
-		Integer memberId = (Integer) req.getSession().getAttribute("memId");
-		Integer orderId = (Integer) req.getSession().getAttribute("orderId");
+		Integer memId = (Integer) req.getSession().getAttribute("memId");
+		Integer empId   = (Integer) req.getSession().getAttribute("empId");
 
 		if ("getOne_For_Display".equals(action)) {
 
@@ -240,6 +244,52 @@ public class PointServlet extends HttpServlet {
 			req.setAttribute("pointorder", pointorder); 
 			String url = "/back-end/pointgood/backPointOrder.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); 
+			successView.forward(req, res);
+		}
+		
+		if ("listPoint".equals(action)) {
+			PointService pointSvc = new PointService();
+			List<Point> list = pointSvc.getAllMem(memId);
+			System.out.println(list.toString());
+			
+			MemberService memSvc = new MemberService();
+			Member Member = memSvc.meminfo(memId);
+			req.setAttribute("list",list);
+			req.setAttribute("Member", Member);
+			String url = "/front-end/Member/point/listPoint.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+			}
+		
+		if ("exchangeRewards".equals(action)) {
+			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			Integer pdId = Integer.valueOf(req.getParameter("pdId").trim());
+			PointGoodsService pointGoodsSvc = new PointGoodsService();
+			PointGoods pointgoods = pointGoodsSvc.getPointGood(pdId);
+			
+			MemberService memSvc = new MemberService();
+			Member member = memSvc.meminfo(memId);
+			member.setMemPoint(member.getMemPoint());
+			
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-end/Member/point/listPointGood.jsp");
+				failureView.forward(req, res);
+				return;//程式中斷
+				}
+			
+			
+			PointService pointSvc = new PointService();
+			Point point = pointSvc.addPoint(memId ,"兌換商品", pointgoods.getPdPrice());
+			
+			member = memSvc.updatememPoint(memId,(member.getMemPoint()-pointgoods.getPdPrice()));
+			
+			PointOrderService pointorderSvc = new PointOrderService();
+			PointOrder pointorder = pointorderSvc.addPointOrder(memId, pdId, pointgoods.getPdPrice(), null, 0, null, empId);
+			
+			String url = "/front-end/Member/point/point.do?action=listPoint";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
 	}

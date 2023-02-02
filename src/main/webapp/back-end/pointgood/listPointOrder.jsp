@@ -17,7 +17,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
   <title>💰point</title>
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"/>
+  <!-- jquery 3.4.1  css -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+
+  <link rel="stylesheet" href="/CGA105G2/assets/css/vendor.css"/>
+  <link rel="stylesheet" href="/CGA105G2/assets/css/style.css"/>
+  <link rel="stylesheet" href="/CGA105G2/assets/custom.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
   <style>
+    body {
+      height: 100%;
+    }
+
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    a {
+      color: black;
+    }
+
     /* 商品名稱 */
     .fw-bolder {
       font-size: 1.3rem;
@@ -59,9 +96,40 @@
  <!-- main -->
   <div class="container-fluid p-0">
     <div class="row">
-        <!-- nav start -->
-        <%@ include file="/back-end/01h/nav/navin02.jsp" %>
-        <!-- nav end -->
+      <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <div class="p-4 pt-5">
+          <ul class="list-unstyled components mb-5">
+            <li class="mb-5 mt-5">
+              <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown fs-md-6">
+                <h3>🔻訂單管理</h3>
+              </a>
+              <ul class="collapse list-unstyled " id="pageSubmenu2">
+                <li>
+                  <hr><a href="/CGA105G2/back-end/pointgood/backPointOrder.jsp" class="nav-link">🔆待出貨訂單</a>
+                </li>
+                <li>
+                  <a href="/CGA105G2/back-end/pointgood/listPointOrder.jsp" class="nav-link disabled bg-white"  style="color: #216a51;">🔆訂單總覽</a>
+                </li>
+                <hr>
+                </li>
+              </ul>
+            </li>
+            <li class="mb-5 mt-5">
+              <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown">
+                <h3>🔻商品管理</h3>
+              </a>
+              <ul class="list-unstyled" id="pageSubmenu3">
+                <li>
+                  <hr><a href="/CGA105G2/back-end/pointgood/addPointGood.jsp" class="nav-link">🔆新增商品</a>
+                </li>
+                <li><a href="/CGA105G2/back-end/pointgood/listPointGood.jsp" class="nav-link">🔆商品總覽</a></li>
+                <hr>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 p-0">
         <section class="py-5">
         <div
@@ -83,10 +151,9 @@
                                 <th>商品編號</th>
                                 <th>單價</th>
                                 <th>備註</th>
-<!--                                 <th>狀態</th> -->
                                 <th>新增日期</th>
                                 <th>出貨日期</th>
-                                <th>員工編號</th>
+<!--                                 <th>員工編號</th> -->
                                 </tr>
                         </thead>
                         <tbody class="code_tbody">
@@ -97,10 +164,9 @@
 								<td>${PointOrder.pdId}</td>
 								<td>${PointOrder.poPrice}</td>
 								<td>${PointOrder.poText}</td>
-<%-- 								<td>${PointOrder.poStatus}</td> --%>
 								<td>${PointOrder.poTime}</td>
 								<td>${PointOrder.poUtime}</td>
-								<td>${PointOrder.empId}</td>
+<%-- 								<td>${PointOrder.empId}</td> --%>
 		</tr>
 	</c:forEach>
                         </tbody>
@@ -124,39 +190,31 @@
 <!-- footer start -->
 <%@ include file="/back-end/01h/footerin.jsp" %>
 <!-- footer end -->
+  <script src="/CGA105G2/assets/js/vendor.js"></script>
+  <script src="/CGA105G2/assets/js/polyfills.js"></script>
+  <script src="/CGA105G2/assets/js/app.js"></script>
+
+  <!-- Bootstrap 4.6.2 & Vue 3 & jquery 3.4.1-->
+
+  <!-- Bootstrap js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+    crossorigin="anonymous"></script>
   <script>
-      $("a:contains(📔商城)").closest("a").addClass("active disabled topage");
-      $("a:contains(🔻訂單管理)").closest("a").attr("aria-expanded", "true");
-      $("#pageSubmenu2").addClass("show");
-      $("#pageSubmenu2 a:contains(🔆訂單總覽)").closest('a').addClass("active disabled bg-white topage");
-  </script>
-  <script>
-      const list=[];
-      <c:forEach var="empRoot" items="${empRoot}">
-      list.push(${empRoot.rootId});
-      </c:forEach>
-      for (let e of list){
-          switch (e){
-              case 1:
-                  $("#a2").removeClass("disabled");
-                  $("#a3").removeClass("disabled");
-                  $("#a4").removeClass("disabled");
-                  $("#a5").removeClass("disabled");
-                  break;
-              case 2:
-                  $("#a2").removeClass("disabled");
-                  break;
-              case 3:
-                  $("#a3").removeClass("disabled");
-                  break;
-              case 4:
-                  $("#a4").removeClass("disabled");
-                  break;
-              case 5:
-                  $("#a5").removeClass("disabled");
-                  break;
-          }
+    window.addEventListener("DOMContentLoaded", function (event) {
+      <c:forEach var="empRoot" items="${empRoot}" >
+      let e =${empRoot.rootId};
+      if (e === 2) {
+        $("#a1").attr('class', 'nav-link text-uppercase');
+      } else if (e === 3) {
+        $("#a2").attr('class', 'nav-link text-uppercase');
+      } else if (e === 4) {
+        $("#a3").attr('class', 'nav-link text-uppercase');
+      } else if (e === 5) {
+        $("#a4").attr('class', 'nav-link text-uppercase');
       }
+      </c:forEach>
+    });
   </script>
 
 </body>
