@@ -1,4 +1,10 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.store.model.Store.pojo.Store" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+	Store store = (Store) request.getAttribute("store");
+%>
 
 
 <!DOCTYPE html>
@@ -16,7 +22,16 @@
 
 <body>
 <!-- header start -->
-<%@ include file="/back-end/01h/headerin.jsp" %>
+<c:if test="${storeId > 0}">
+	<%@ include file="/front-end/store/01h/headerin.jsp" %>
+</c:if>
+<c:if test="${memId > 0}">
+	<%@ include file="/front-end/Member/01h/headerin.jsp" %>
+</c:if>
+
+<c:if test="${ (memId ==0)&& (storeId == 0)&& (empId == 0)}">
+	<%@ include file="/front-end/Member/01h/headerout.jsp" %>
+</c:if>
 <!-- header end -->
 <!-- main -->
 	<div class="container-fluid container">

@@ -4,7 +4,6 @@
 
 <%
     Store store = (Store) request.getAttribute("store");
-//安安 哈哈0901
 %>
 
 <!DOCTYPE html>

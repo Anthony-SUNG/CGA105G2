@@ -1,3 +1,4 @@
 /target/
 /src/main/resources/hibernate.cfg.xml
 /CGA105G2/.gitignore
+/out/artifacts/CGA105G2/CGA105G2.war

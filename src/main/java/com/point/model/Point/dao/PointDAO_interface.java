@@ -1,7 +1,8 @@
 package com.point.model.Point.dao;
 
-import com.point.model.Point.pojo.Point;
 import java.util.List;
+
+import com.point.model.Point.pojo.Point;
 
 public interface PointDAO_interface {
 

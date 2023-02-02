@@ -1,6 +1,7 @@
 package com.foodorder.model.Reserva.dao.impl;
 
-
+import com.code.model.Code.pojo.Code;
+import com.core.common.Common;
 import com.core.util.HibernateUtil;
 import com.foodorder.model.Reserva.dao.ReservaDAO_interface;
 import com.foodorder.model.Reserva.pojo.Reserva;
@@ -31,7 +32,7 @@ public class ReservaHibernateDAO implements ReservaDAO_interface {
 	            //開啟交易
 	            Transaction tx=session.beginTransaction();
 	            //交易物件
-	            NativeQuery<?> nativeQuery = session.createNativeQuery("INSERT INTO cga105g2.reserva (STORE_ID, MEM_ID, REN_NAME, REN_PHONE, REN_TIME, REN_DATE, REN_HEADCOUNT, CODE_ID, REN_PRICE, REN_FPRICE) VALUES(:STORE_ID, :MEM_ID, :REN_NAME, :REN_PHONE, :REN_TIME, :REN_DATE, :REN_HEADCOUNT, :CODE_ID, :REN_PRICE, :REN_FPRICE)")
+	            NativeQuery<?> nativeQuery = session.createNativeQuery("INSERT INTO reserva (STORE_ID, MEM_ID, REN_NAME, REN_PHONE, REN_TIME, REN_DATE, REN_HEADCOUNT, CODE_ID, REN_PRICE, REN_FPRICE) VALUES(:STORE_ID, :MEM_ID, :REN_NAME, :REN_PHONE, :REN_TIME, :REN_DATE, :REN_HEADCOUNT, :CODE_ID, :REN_PRICE, :REN_FPRICE)")
 	            		.setParameter("STORE_ID", reservaVO.getStoreId())
 	            		.setParameter("MEM_ID", reservaVO.getMemId())
 	            		.setParameter("REN_NAME", reservaVO.getRenName())
@@ -253,6 +254,36 @@ public class ReservaHibernateDAO implements ReservaDAO_interface {
 	public void insertWithReservaDetails(Reserva reservaVO, List list) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Reserva> getBymemIdrenStatus(Integer memid, Integer renstatus) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateRenstatusByRenid(Integer renid, Integer renstatus) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<Reserva> getBymemId(Integer memid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reserva> getBystoreId(Integer storeid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reserva> getBystoreIdrenStatus(Integer storeid, Integer renstatus) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

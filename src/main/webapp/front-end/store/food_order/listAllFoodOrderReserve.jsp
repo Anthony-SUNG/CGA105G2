@@ -13,17 +13,18 @@
 
 <body>
 <!-- header start -->
-<%@ include file="/front-end/Member/01h/headerin.jsp" %>
+<%@ include file="/front-end/store/01h/headerin.jsp" %>
 <!-- header end -->
+
 <!-- main -->
 <div class="container-fluid">
     <div class="row">
         <!-- nav start -->
-        <%@ include file="/front-end/Member/01h/nav/navin04.jsp" %>
+        <%@ include file="/front-end/store/01h/nav/navin01.jsp" %>
         <!-- nav end -->
         <main role="main" class="col-md-9">
             <div class="table-responsive" style="overflow: hidden !important;">
-                <h1 class="h2">會員預約查詢</h1>
+                <h1 class="h2">🔆訂位預約</h1>
                 <table id="code" class="table table-striped display" style="text-align:center;">
                 </table>
             </div>
@@ -32,31 +33,29 @@
 </div>
 <!-- main -->
 <!-- footer start -->
-<%@ include file="/front-end/Member/01h/footerin.jsp" %>
+<%@ include file="/front-end/store/01h/footerin.jsp" %>
 <!-- footer end -->
 <!-- sidebar menu Class -->
 <script>
-    $("a:contains(🗃️管理)").closest("a").addClass("active disabled topage");
+    $("a:contains(🚩訂位)").closest("a").addClass("active disabled topage");
     $("a:contains(🔻訂位)").closest("a").attr("data-toggle", "show");
     $("#pageSubmenu3").removeClass("collapse");
-    $("#pageSubmenu3 a:contains(🔆預約查詢)").closest("a").addClass("active disabled bg-white topage");
+    $("#pageSubmenu3 a:contains(🔆訂位預約)").closest("a").addClass("active disabled bg-white topage");
 </script>
+
+
 
 <script>
 
     //     var data_test = `[
-    //       {"REN_ID":"1","REN_NAME":"周盟鎮","REN_PHONE":"0987654321","REN_TIME":"11:00","REN_STATUS":"已預約","REN_DATE":"2023-01-01","REN_HEADCOUNT":"4","MEAL_NAME_LIST":"牛排套餐*1, 豬排套餐*1","REN_FPRICE":"2000","STORE_NAME":"貴族世家"}
+    //       {"REN_ID":"1","MEM_NAME":"","MEM_PHONE":"","REN_NAME":"周盟鎮","REN_PHONE":"0987654321","REN_TIME":"11:00","REN_STATUS":"已預約","REN_DATE":"2023-01-01","REN_HEADCOUNT":"4","MEAL_NAME_LIST":"牛排套餐*1, 豬排套餐*1","REN_FPRICE":"2000"}
     //     ]`;
     var data_test = `${foodorderListInfo}`;
 
     function filter_state(data) {
-        console.log("aaaa");
-        console.log(data);
         let filter_data = JSON.parse(data).filter(function (entry) {
             return entry.REN_STATUS === '已預約';
         });
-        console.log(filter_data);
-        var aa = filter_data;
         return filter_data;
     }
 
@@ -103,9 +102,10 @@
             "columns": [
                 {data: null, title: ""},
                 {data: 'REN_ID', title: "訂單編號"},
+                {data: 'MEM_NAME', title: "會員姓名"},
+                {data: 'MEM_PHONE', title: "會員電話"},
                 {data: 'REN_NAME', title: "姓名"},
                 {data: 'REN_PHONE', title: "電話"},
-                {data: 'STORE_NAME', title: "店家"},
                 {data: 'REN_DATE', title: "日期"},
                 {data: 'REN_TIME', title: "時段"},
                 {data: 'REN_HEADCOUNT', title: "人數"},
@@ -118,7 +118,7 @@
             ],
             "columnDefs": [
                 {
-                    targets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], // 第一欄
+                    targets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], // 第一欄
                     createdCell: function (cell, cellData, rowData, rowIndex, colIndex) {
                         if (colIndex === 0) {
                             i = i + 1;
@@ -135,35 +135,38 @@
                             cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 4) {
-                            cell.setAttribute('style', `width:10%`);
+                            cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 5) {
-                            cell.setAttribute('style', `width:20%`);
+                            cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 6) {
-                            cell.setAttribute('style', `width:5%`);
+                            cell.setAttribute('style', `width:15%`);
                         }
                         if (colIndex === 7) {
                             cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 8) {
-                            cell.setAttribute('style', `width:20%`);
+                            cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 9) {
-                            cell.setAttribute('style', `width:5%`);
+                            cell.setAttribute('style', `width:20%`);
                         }
                         if (colIndex === 10) {
                             cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 11) {
+                            cell.setAttribute('style', `width:5%`);
+                        }
+                        if (colIndex === 12) {
                             cell.innerHTML = `
-                          <FORM METHOD="post" ACTION="food_order.do" >
-                            <input type="hidden" name="deleteid" value="\${data_test[i-1].REN_ID}">
-                            <input type="hidden" name="action" value="Member_order_delete_button">
-                            <input type="submit" class="btn btn-danger btn-sm" value="取消">
-                          </FORM>
-                          `;
-                            cell.setAttribute('style', `width:10%`);
+                              <FORM METHOD="post" ACTION="food_order.do" >
+                                <input type="hidden" name="deleteid" value="\${data_test[i-1].REN_ID}">
+                                <input type="hidden" name="action" value="Store_order_delete_button">
+                                <input type="submit" class="btn btn-danger btn-sm" value="取消">
+                              </FORM>
+                           `;
+                            cell.setAttribute('style', `width:15%`);
                         }
                     }
 

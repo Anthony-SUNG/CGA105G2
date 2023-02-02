@@ -23,7 +23,7 @@
         <!-- nav end -->
         <main role="main" class="col-md-9">
             <div class="table-responsive" style="overflow: hidden !important;">
-                <h1 class="h2">會員預約查詢</h1>
+                <h1 class="h2">🔆訂位紀錄</h1>
                 <table id="code" class="table table-striped display" style="text-align:center;">
                 </table>
             </div>
@@ -39,9 +39,8 @@
     $("a:contains(🗃️管理)").closest("a").addClass("active disabled topage");
     $("a:contains(🔻訂位)").closest("a").attr("data-toggle", "show");
     $("#pageSubmenu3").removeClass("collapse");
-    $("#pageSubmenu3 a:contains(🔆預約查詢)").closest("a").addClass("active disabled bg-white topage");
+    $("#pageSubmenu3 a:contains(🔆訂位紀錄)").closest("a").addClass("active disabled bg-white topage");
 </script>
-
 <script>
 
     //     var data_test = `[
@@ -52,9 +51,7 @@
     function filter_state(data) {
         console.log("aaaa");
         console.log(data);
-        let filter_data = JSON.parse(data).filter(function (entry) {
-            return entry.REN_STATUS === '已預約';
-        });
+        let filter_data = JSON.parse(data);
         console.log(filter_data);
         var aa = filter_data;
         return filter_data;
@@ -156,13 +153,29 @@
                             cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 11) {
-                            cell.innerHTML = `
-                          <FORM METHOD="post" ACTION="food_order.do" >
-                            <input type="hidden" name="deleteid" value="\${data_test[i-1].REN_ID}">
-                            <input type="hidden" name="action" value="Member_order_delete_button">
-                            <input type="submit" class="btn btn-danger btn-sm" value="取消">
-                          </FORM>
-                          `;
+//                           console.log(data_test[i-1]);
+//                           console.log(data_test[i-1].SCORE_INPUT);
+                            if (data_test[i - 1].SCORE_INPUT === "1") {
+                                cell.innerHTML = `
+							    <FORM METHOD="post" ACTION="food_order.do" >
+							      <input type="hidden" name="listAllFoodOrderScoreMemid" value="\${data_test[i-1].MEM_ID}">
+							      <input type="hidden" name="listAllFoodOrderScoreStoreid" value="\${data_test[i-1].STORE_ID}">
+							      <input type="hidden" name="action" value="">
+							      <input type="submit" class="btn btn-danger btn-sm" value="評分">
+							    </FORM>
+							 `;
+                            }
+                            if (data_test[i - 1].SCORE_INPUT === "0") {
+                                cell.innerHTML = ``;
+                            }
+//                           cell.innerHTML = `
+//                           <FORM METHOD="post" ACTION="food_order.do" >
+//                             <input type="hidden" name="listAllFoodOrderScoreMemid" value="\${data_test[i-1].MEM_ID}">
+//                             <input type="hidden" name="listAllFoodOrderScoreStoreid" value="\${data_test[i-1].STROE_ID}">
+//                             <input type="hidden" name="action" value="">
+//                             <input type="submit" class="btn btn-danger btn-sm" value="評分">
+//                           </FORM>
+//                           `;
                             cell.setAttribute('style', `width:10%`);
                         }
                     }
