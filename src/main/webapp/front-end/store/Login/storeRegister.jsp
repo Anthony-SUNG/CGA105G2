@@ -230,7 +230,7 @@ a {
 										</div>
 										<div class="col-md-9 pe-5">
 
-											<input type="email" class="form-control form-control-lg"
+											<input type="text" class="form-control form-control-lg"
 												placeholder="Holder's Name" id="memberstore-name" name="STORE_COM_ADDRESS" />
 
 										</div>
@@ -244,7 +244,7 @@ a {
 										</div>
 										<div class="col-md-9 pe-5">
 
-											<input type="email" class="form-control form-control-lg"
+											<input type="text" class="form-control form-control-lg"
 												placeholder="Holder's Phone" id="memberstore-phone" name="STORE_PHONE2" />
 
 										</div>
@@ -258,7 +258,7 @@ a {
 										</div>
 										<div class="col-md-9 pe-5">
 
-											<input type="email" class="form-control form-control-lg"
+											<input type="text" class="form-control form-control-lg"
 												placeholder="Holder's Identity Card"
 												id="memberstore-identitycard" name="STORE_TW_ID" />
 

@@ -280,7 +280,7 @@
       codetbody.innerHTML += `
 	               <tr id="tr\${item.STORE_ID}">
 	                     <td class="p-0" style="vertical-align:middle;">
-	                     	<Form METHOD="post" ACTION="/CGA105G2/StoreServlet">
+	                     	<Form METHOD="post" ACTION="/CGA105G2/LonginServlet">
 		                      	<input type="hidden"  name="action" value="updatest1">
 		                      	<input type="hidden"  name="STORE_ID" value="\${item.STORE_ID}">
 		                        <button class="btn btn-dark p-0 w-25">✔</button>

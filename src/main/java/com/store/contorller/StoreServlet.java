@@ -339,6 +339,77 @@ public class StoreServlet extends HttpServlet {
 				successView.forward(request, response);
 
 			}
+			
+//			update2(store info) ------------------------------------------------------------------------------------------------------------
+			
+			
+			if ("update2".equals(action)) { // 來自addEmp.jsp的請求
+
+				Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+				request.setAttribute("errorMsgs", errorMsgs);
+
+				String storeaddress = request.getParameter("STORE_ADDRESS").trim();
+				if (storeaddress == null || storeaddress.trim().length() == 0) {
+					errorMsgs.put("STORE_ADDRESS", "*店家地址請勿空白");
+				}
+				String storeacc = request.getParameter("STORE_ACC").trim();
+				if (storeacc == null || storeacc.trim().length() == 0) {
+					errorMsgs.put("STORE_ACC", "帳號請勿空白");
+				}
+
+				String storehours = request.getParameter("STORE_HOURS").trim();
+				if (storehours == null || storehours.trim().length() == 0) {
+					errorMsgs.put("STORE_HOURS", "帳號請勿空白");
+				}
+
+				String storecomid = request.getParameter("STORE_COM_ID").trim();
+				if (!storecomid.trim().matches("^[0-9]{8}$")) {
+					errorMsgs.put("STORE_COM_ID", "統編格式不正確");
+				}
+				
+				String storephone1 = request.getParameter("STORE_PHONE1").trim();
+				
+				String storemail = request.getParameter("STORE_MAIL").trim();
+				if (!storemail.trim().matches("^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z]+$")) {
+					errorMsgs.put("STORE_MAIL", "email格式不正確");
+				}
+				
+				String storetext = request.getParameter("STORE_TEXT").trim();
+				String storeweb = request.getParameter("STORE_WEB").trim();
+				
+				String storecomaddress = request.getParameter("STORE_COM_ADDRESS").trim();
+				if (storecomaddress == null || storecomaddress.trim().length() == 0) {
+					errorMsgs.put("STORE_COM_ADDRESS", "帳號請勿空白");
+				}
+				
+				String storetwid = request.getParameter("STORE_TW_ID").trim();
+				if (storetwid == null || storetwid.trim().length() == 0) {
+					errorMsgs.put("STORE_TW_ID", "身分證請勿空白");
+				}else if (!storetwid.trim().matches("^[a-zA-Z]\\d{9}$")) {
+					errorMsgs.put("STORE_TW_ID", "身分證格式不正確");
+				}
+
+				String storephone2 = request.getParameter("STORE_PHONE2").trim();
+				
+
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = request
+							.getRequestDispatcher("/front-end/store/Login/storeRegister2.jsp");
+					failureView.forward(request, response);
+					return;
+				}
+				
+				Integer storeid =(Integer) request.getSession().getAttribute("storeId");
+				
+				StoreService strsrv = new StoreService();
+				strsrv.update(storeid, storeaddress, storeacc, storehours, storecomid, storephone1, storemail, storetext, 
+						storeweb, storecomaddress, storephone2, storetwid);
+
+				String url = "/front-end/store/Login/success.jsp";
+				RequestDispatcher successView = request.getRequestDispatcher(url);
+				successView.forward(request, response);
+
+			}
 
 	}
 

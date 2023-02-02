@@ -141,7 +141,7 @@ a {
 
 
 								<Form method="post"
-									action="${pageContext.request.contextPath}/StoreServlet"
+									action="${pageContext.request.contextPath}/LonginServlet"
 									>
 											
 									<div class="row align-items-center pt-4 pb-3">

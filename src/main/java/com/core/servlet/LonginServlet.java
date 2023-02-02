@@ -3,6 +3,8 @@ package com.core.servlet;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import org.json.simple.JSONArray;
+
 import com.art.model.Article.pojo.Article;
 import com.art.model.service.ArtService;
 import com.emp.model.Employee.pojo.Employee;
@@ -664,6 +666,46 @@ public class LonginServlet extends HttpServlet {
 						successView.forward(request, response);
 
 					}
+					
+//					searchstore1 ------------------------------------------------------------------------------------------------------------
+					if ("searchstore1".equals(action)) {
+						Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+						request.setAttribute("errorMsgs", errorMsgs);
+						
+						String storecity = request.getParameter("STORE_CITY").trim();
+						String storedistrict = request.getParameter("STORE_DISTRICT").trim();
+						
+						StoreService strsrv = new StoreService();
+						JSONArray json = strsrv.getAllByAddress(storecity, storedistrict); 
+						String errorString="";
+						if (json.size()==0){               
+			                    errorString="目前"+storecity+storedistrict+"沒有店家可以申請，若有疑問請聯絡客服";
+			                }
+						request.setAttribute("list_out",json);
+						String url = "/front-end/store/Login/storeRegister0.2.jsp";			
+						RequestDispatcher successView = request.getRequestDispatcher(url); 
+			            successView.forward(request, response);
+					}
+//					update1 ------------------------------------------------------------------------------------------------------------
+					
+					if ("updatest1".equals(action)) {
+						Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+						request.setAttribute("errorMsgs", errorMsgs);
+						
+						Integer storeid = Integer.valueOf(request.getParameter("STORE_ID").trim());
+						
+						StoreService strsrv = new StoreService();
+						Store store = strsrv.getById(storeid); 
+						String errorString="";
+						
+						request.setAttribute("Store",store);
+						request.setAttribute("storeId",storeid);
+						String url = "/front-end/store/Login/storeRegister.jsp";			
+						RequestDispatcher successView = request.getRequestDispatcher(url); 
+			            successView.forward(request, response);
+					}
+					
+
 
 
 
