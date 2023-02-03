@@ -151,7 +151,7 @@ a {
 										</div>
 										<div class="col-md-9 pe-5">
 
-											<input type="text" class="form-control form-control-lg"
+											<input type="text"disabled class="form-control form-control-lg"
 												id="memberstore-storename" name="STORE_NAME" value=${ Store.storeName } />
 
 										</div>

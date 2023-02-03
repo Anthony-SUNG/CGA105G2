@@ -698,15 +698,73 @@ public class LonginServlet extends HttpServlet {
 						Store store = strsrv.getById(storeid); 
 						String errorString="";
 						
-						request.setAttribute("Store",store);
-						request.setAttribute("storeId",storeid);
+						request.getSession().setAttribute("Store",store);
+						request.getSession().setAttribute("storeId",storeid);
 						String url = "/front-end/store/Login/storeRegister.jsp";			
 						RequestDispatcher successView = request.getRequestDispatcher(url); 
 			            successView.forward(request, response);
 					}
 					
+//					inserts(store info) ------------------------------------------------------------------------------------------------------------
+					
+					
+					
+					if ("inserts".equals(action)) { // 來自addEmp.jsp的請求
 
+						Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+						request.setAttribute("errorMsgs", errorMsgs);
 
+						String storeacc = request.getParameter("STORE_ACC").trim();
+						if (storeacc == null || storeacc.trim().length() == 0) {
+							errorMsgs.put("STORE_ACC", "帳號請勿空白");
+						}
+
+						String storepwd = request.getParameter("STORE_PWD").trim();
+						if (storepwd == null || storepwd.trim().length() == 0) {
+							errorMsgs.put("STORE_PWD", "密碼請勿空白");
+						}
+						
+						String storepwd2 = request.getParameter("STORE_PWD2").trim();
+						if (storepwd2 == null || storepwd2.trim().length() == 0) {
+							errorMsgs.put("STORE_PWD2", "確認密碼請勿空白");
+						}
+						
+						if (!storepwd2.equals(storepwd)) {
+							errorMsgs.put("STORE_PWD2", "確認密碼請與密碼相同");
+						}				
+						
+						String storephone1 = request.getParameter("STORE_PHONE1").trim();
+						
+						String storecomaddress = request.getParameter("STORE_COM_ADDRESS").trim();
+						if (storecomaddress == null || storecomaddress.trim().length() == 0) {
+							errorMsgs.put("STORE_COM_ADDRESS", "申請人姓名請勿空白");
+						}
+						
+						String storetwid = request.getParameter("STORE_TW_ID").trim();
+						if (storetwid == null || storetwid.trim().length() == 0) {
+							errorMsgs.put("STORE_TW_ID", "身分證請勿空白");
+						}else if (!storetwid.trim().matches("^[a-zA-Z]\\d{9}$")) {
+							errorMsgs.put("STORE_TW_ID", "身分證格式不正確");
+						}
+
+						String storephone2 = request.getParameter("STORE_PHONE2").trim();
+						
+
+						if (!errorMsgs.isEmpty()) {
+							RequestDispatcher failureView = request
+									.getRequestDispatcher("/front-end/store/Login/storeRegister.jsp");
+							failureView.forward(request, response);
+							return;
+						}				
+						Integer storeid = (Integer) request.getSession().getAttribute("storeId");
+						StoreService strsrv = new StoreService();
+						strsrv.inserts(storeid, storeacc, storepwd, storephone1, storecomaddress, storephone2, storetwid);
+
+						String url = "/front-end/Member/member/memberLognIn.jsp";
+						RequestDispatcher successView = request.getRequestDispatcher(url);
+						successView.forward(request, response);
+
+					}
 
 
 

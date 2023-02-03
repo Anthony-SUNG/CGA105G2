@@ -157,7 +157,7 @@
                                             </div>
                                             <div class="form-group d-md-flex">
                                                 <div class="w-50 text-left">
-                                                    <label class="checkbox-wrap checkbox-primary mb-0">註冊</label>
+                                                    <a href="/CGA105G2//front-end/store/Login/storeRegister0.jsp">註冊</a>
                                                 </div>
                                                 <div class="w-50 text-md-right">
                                                     <a href="/CGA105G2/front-end/Member/member/forget2.jsp">忘記密碼</a>
