@@ -698,8 +698,8 @@ public class LonginServlet extends HttpServlet {
 						Store store = strsrv.getById(storeid); 
 						String errorString="";
 						
-						request.getSession().setAttribute("Store",store);
-						request.getSession().setAttribute("storeId",storeid);
+						request.setAttribute("Store",store);
+						request.setAttribute("storeId",storeid);
 						String url = "/front-end/store/Login/storeRegister.jsp";			
 						RequestDispatcher successView = request.getRequestDispatcher(url); 
 			            successView.forward(request, response);
@@ -713,12 +713,14 @@ public class LonginServlet extends HttpServlet {
 
 						Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 						request.setAttribute("errorMsgs", errorMsgs);
+						
+						Integer storeid = Integer.valueOf(request.getParameter("STORE_ID").trim());
 
 						String storeacc = request.getParameter("STORE_ACC").trim();
 						if (storeacc == null || storeacc.trim().length() == 0) {
 							errorMsgs.put("STORE_ACC", "帳號請勿空白");
 						}
-
+						
 						String storepwd = request.getParameter("STORE_PWD").trim();
 						if (storepwd == null || storepwd.trim().length() == 0) {
 							errorMsgs.put("STORE_PWD", "密碼請勿空白");
@@ -748,7 +750,9 @@ public class LonginServlet extends HttpServlet {
 						}
 
 						String storephone2 = request.getParameter("STORE_PHONE2").trim();
-						
+						if (storephone2 == null || storephone2.trim().length() == 0) {
+							errorMsgs.put("STORE_PHONE2", "申請人電話請勿空白");
+						}
 
 						if (!errorMsgs.isEmpty()) {
 							RequestDispatcher failureView = request
@@ -756,13 +760,21 @@ public class LonginServlet extends HttpServlet {
 							failureView.forward(request, response);
 							return;
 						}				
-						Integer storeid = (Integer) request.getSession().getAttribute("storeId");
 						StoreService strsrv = new StoreService();
-						strsrv.inserts(storeid, storeacc, storepwd, storephone1, storecomaddress, storephone2, storetwid);
+						if(strsrv.getByAcc(storeacc)) {
+							errorMsgs.put("STORE_ACC", "帳號名稱已被註冊");
+							RequestDispatcher failureView = request
+									.getRequestDispatcher("/front-end/store/Login/storeRegister.jsp");
+							failureView.forward(request, response);
+							return;
+						}else {
+							strsrv.inserts(storeid, storeacc, storepwd, storephone1, storecomaddress, storephone2, storetwid);
 
 						String url = "/front-end/Member/member/memberLognIn.jsp";
 						RequestDispatcher successView = request.getRequestDispatcher(url);
 						successView.forward(request, response);
+						}
+						
 
 					}
 

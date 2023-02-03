@@ -144,6 +144,7 @@ a {
 									action="${pageContext.request.contextPath}/LonginServlet"
 									name="addfrom">
 									<div class="row align-items-center pt-4 pb-3">
+									
 										<div class="col-md-3 ps-5">
 
 											<h3 class="mb-0">店家名稱</h3>
@@ -152,8 +153,8 @@ a {
 										<div class="col-md-9 pe-5">
 
 											<input type="text"disabled class="form-control form-control-lg"
-												id="memberstore-storename" name="STORE_NAME" value=${ Store.storeName } />
-
+												id="memberstore-storename" name="STORE_NAME" value=${ Store.storeName } >
+											<a style="color: red">${ errorMsgs.STORE_NAME}</a>
 										</div>
 									</div>
 									<hr class="mx-n3">
@@ -168,7 +169,7 @@ a {
 
 											<input type="text" class="form-control form-control-lg"
 												id="memberstore-accountid" name="STORE_ACC" />
-
+											<a style="color: red">${ errorMsgs.STORE_ACC}</a>
 										</div>
 									</div>
 
@@ -178,13 +179,13 @@ a {
 										<div class="col-md-3 ps-5">
 
 											<h3 class="mb-0">密碼</h3>
-
+							
 										</div>
 										<div class="col-md-9 pe-5">
 
 											<input type="text" class="form-control form-control-lg"
 												id="memberstore-password" name="STORE_PWD" />
-
+											<a style="color: red">${ errorMsgs.STORE_PWD}</a>
 										</div>
 									</div>
 
@@ -193,13 +194,13 @@ a {
 										<div class="col-md-3 ps-5">
 
 											<h3 class="mb-0">確認密碼</h3>
-
+												
 										</div>
 										<div class="col-md-9 pe-5">
 
 											<input type="text" class="form-control form-control-lg"
 												id="memberstore-confirmpassword" name="STORE_PWD2" />
-
+											<a style="color: red">${ errorMsgs.STORE_PWD2}</a>
 										</div>
 									</div>
 
@@ -214,8 +215,8 @@ a {
 										<div class="col-md-9 pe-5">
 
 											<input type="text" class="form-control form-control-lg"
-												id="memberstore-phonenumber" name="STORE_PHONE1"  value=${ Store.storePhone1 } />
-
+												id="memberstore-phonenumber" name="STORE_PHONE1"  value=${ Store.storePhone1 } >
+											<a style="color: red">${ errorMsgs.STORE_PHONE1}</a>
 										</div>
 									</div>
 
@@ -226,12 +227,12 @@ a {
 										<div class="col-md-3 ps-5">
 
 											<h3 class="mb-0">申請人姓名</h3>
-
 										</div>
 										<div class="col-md-9 pe-5">
 
 											<input type="text" class="form-control form-control-lg"
 												placeholder="Holder's Name" id="memberstore-name" name="STORE_COM_ADDRESS" />
+											<a style="color: red">${ errorMsgs.STORE_COM_ADDRESS}</a>
 
 										</div>
 									</div>
@@ -240,12 +241,12 @@ a {
 										<div class="col-md-3 ps-5">
 
 											<h3 class="mb-0">申請人電話</h3>
-
 										</div>
 										<div class="col-md-9 pe-5">
 
 											<input type="text" class="form-control form-control-lg"
 												placeholder="Holder's Phone" id="memberstore-phone" name="STORE_PHONE2" />
+											<a style="color: red">${ errorMsgs.STORE_PHONE2}</a>
 
 										</div>
 									</div>
@@ -254,14 +255,14 @@ a {
 										<div class="col-md-3 ps-5">
 
 											<h3 class="mb-0">身分證字號</h3>
-
+											
 										</div>
 										<div class="col-md-9 pe-5">
 
 											<input type="text" class="form-control form-control-lg"
 												placeholder="Holder's Identity Card"
 												id="memberstore-identitycard" name="STORE_TW_ID" />
-
+											<a style="color: red">${ errorMsgs.STORE_TW_ID}</a>
 										</div>
 									</div>
 
@@ -270,6 +271,7 @@ a {
 
 									<hr class="mx-n3">
 									<div class="px-5 py-4 ">
+									<input type="hidden" name="STORE_ID" value=${ storeId}>
 									<input type="hidden" name="action" value="inserts">
 										<button type="submit"
 											class="btn btn-block btn-primary btn-lg fs-5">Send

@@ -27,4 +27,5 @@ public interface StoreDAO_interface {
 	public void updateplan(Integer storeId);
 	public void updateplan2(Integer storeId);
 	public void inserts(Store store);
+	public boolean getByAcc(String storeacc);
 }
