@@ -24,7 +24,7 @@ tmp/
 *.bak
 *.swp
 *~.nib
-*
+*.war
 local.properties
 .settings/
 .loadpath
