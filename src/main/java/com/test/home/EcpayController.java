@@ -31,23 +31,22 @@ public class EcpayController extends HttpServlet {
         // 檢查後台: 信用卡收單 - 交易明細 - 查詢
         domain = new AllInOne("");
         AioCheckOutOneTime obj = new AioCheckOutOneTime();
-
         // 從 view 獲得資料，依照 https://developers.ecpay.com.tw/?p=2866 獲得必要的參數
         // MerchantTradeNo  : 必填 特店訂單編號 (不可重複，因此需要動態產生)
         obj.setMerchantTradeNo(new String("salon" + System.currentTimeMillis()));
         // MerchantTradeDate  : 必填 特店交易時間 yyyy/MM/dd HH:mm:ss
         obj.setMerchantTradeDate(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date()));
         // TotalAmount  : 必填 交易金額
-        obj.setTotalAmount("1900");
+        obj.setTotalAmount((String) req.getSession().getAttribute("foodorder_totalCodeMoney"));
         // TradeDesc  : 必填 交易描述
-        obj.setTradeDesc("Thank you");
+        obj.setTradeDesc("StoreID:"+(String) req.getSession().getAttribute("foodorder_storeId"));
         // ItemName  : 必填 商品名稱
-        obj.setItemName("Salon Service");
+        obj.setItemName("FoodMap Buy Eat");
         // ReturnURL   : 必填  我用不到所以是隨便填一個英文字
         obj.setReturnURL("a");
         // OrderResultURL   : 選填 消費者完成付費後。重新導向的位置
         obj.setOrderResultURL("http://localhost:8081/CGA105G2/index.jsp");
-        obj.setNeedExtraPaidInfo("Y");
+        obj.setNeedExtraPaidInfo("N");
 
 
         // 回傳form訂單 並自動將使用者導到 綠界

@@ -24,16 +24,16 @@
 			<div class="container mt-17 mb-17">
 				<div class="col-md-9  card shadow m-5">
 					<h1 class=" m-5 text-center">綠界支付</h1>
-					<form METHOD="post" action="/CGA105G2/ECpay"
-						style="padding: 10px 100px;" autocomplete="off">
+					<form id="idFormAioCheckOut" METHOD="post" action="${pageContext.request.contextPath}/front-end/Member/food_order/food_order.do"
+						style="padding: 10px 100px;">
 						<input type="hidden" name="ServiceURL"
-							value="https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5"
-							class="form-control" />
+							   value="https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5"
+							   class="form-control"/>
 						<input type="hidden" name="MerchantTradeNo" value="oikidA0000001"
-							class="form-control" />
+							class="form-control"/>
 						<input
 							type="hidden" name="MerchantTradeDate" value="2017/06/30 00:00:00"
-							class="form-control" />
+							class="form-control"/>
 						<input
 							type="hidden" name="PaymentType" value="aio" class="form-control" />
 						<input
@@ -46,8 +46,8 @@
 							type="hidden" name="ReturnURL"
 							value="http://tn.sly-ha.com.tw/demo/hoyo/ECPay.php"
 							class="form-control" />
-						<input
-							type="hidden" name="ChoosePayment" value="ALL" />
+						<input type="hidden" name="ChoosePayment" value="ALL" />
+						<input type="hidden" name="action" value="ecpay" />
 						<button type="submit" class="btn btn-warning mb-1 btn-block fs-5 mb-10">綠界線上支付</button>
 					</form>
 				</div>

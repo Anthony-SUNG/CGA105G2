@@ -97,7 +97,6 @@
 
 
 <script>
-
     var total_count = 0;
     var total_coint_limit = parseInt(${foodorder_peopleNum});// jsp取得人數
     var total_money = 0;
