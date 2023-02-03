@@ -505,7 +505,6 @@ public class StoreDAO implements StoreDAO_interface {
 
     }
 
-
 	@Override
 	public void update3(Store store) {
 		String sql = "UPDATE cga105g2.store set STORE_PWD=? where STORE_ACC=?";
@@ -520,7 +519,7 @@ public class StoreDAO implements StoreDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		}
-
+		
 	}
 
 	@Override
@@ -537,8 +536,69 @@ public class StoreDAO implements StoreDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		}
-
+		
 	}
+
+	@Override
+	public void updateplan(Integer storeId) {
+		String sql = "UPDATE cga105g2.store set STORE_PLAN=? where STORE_ID=?";
+		try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY)) {
+
+			pstmt.setInt(1, 1);
+			pstmt.setInt(2, storeId);
+
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		}
+	}
+	
+	@Override
+	public void updateplan2(Integer storeId) {
+		String sql = "UPDATE cga105g2.store set STORE_PLAN=? where STORE_ID=?";
+		try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY)) {
+
+			pstmt.setInt(1, 2);
+			pstmt.setInt(2, storeId);
+
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		}
+	}
+
+	@Override
+	public void inserts(Store Store) {
+		String sql = "UPDATE cga105g2.store set STORE_PHONE1=?,STORE_ACC=?,STORE_PWD=?,STORE_COM_ADDRESS=?,STORE_TW_ID=?,STORE_PHONE2=? where STORE_ID = ?";
+        try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+             PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+                     ResultSet.CONCUR_READ_ONLY)) {
+
+            pstmt.setString(1, Store.getStorePhone1());
+            pstmt.setString(2, Store.getStoreAcc());
+            pstmt.setString(3, Store.getStorePwd());
+            pstmt.setString(4, Store.getStoreComAddress());
+            pstmt.setString(5, Store.getStoreTwId());
+            pstmt.setString(6, Store.getStorePhone2());
+            pstmt.setInt(7, Store.getStoreId());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException se) {
+            throw new RuntimeException("A database error occured. " + se.getMessage());
+
+        }
+		
+	}
+
+
+
+
+
 
 
 }

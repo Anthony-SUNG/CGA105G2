@@ -24,4 +24,7 @@ public interface StoreDAO_interface {
     public void update2(Store Store);
 	public void update3(Store store);
 	public void update4(Store store);
+	public void updateplan(Integer storeId);
+	public void updateplan2(Integer storeId);
+	public void inserts(Store store);
 }

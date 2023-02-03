@@ -3,6 +3,8 @@ package com.core.servlet;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import org.json.simple.JSONArray;
+
 import com.art.model.Article.pojo.Article;
 import com.art.model.service.ArtService;
 import com.emp.model.Employee.pojo.Employee;
@@ -189,13 +191,28 @@ public class LonginServlet extends HttpServlet {
 				failureView.forward(request, response);
 				return;// 程式中斷
 			}
-			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-
+			/*************************** 判斷狀態 *************/
+			Integer storestatus = storeSvc.getById(storeid).getStoreStatus();
+			Integer storeplan = storeSvc.getById(storeid).getStorePlan();
+			if (storestatus != 2) {
+				errorMsgS.add("帳號審核中");
+				RequestDispatcher failureView = request.getRequestDispatcher("/front-end/Member/member/memberLognIn.jsp");
+				failureView.forward(request, response);
+				return;// 程式中斷
+			}
 			request.getSession().setAttribute("storeId", storeid);
 			request.getSession().setAttribute("StoreName", storeSvc.getById(storeid).getStoreName());
-			String url = "/index.jsp";
-			RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
-			successView.forward(request, response);
+			
+			if (storeplan == 0 || storeplan.equals(null)) {				
+				String url = "/front-end/store/Login/forgetplan.jsp";	
+				RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+				successView.forward(request, response);
+			}else {
+				String url = "/index.jsp";
+				RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+				successView.forward(request, response);
+			}
+			
 		}
 		// signin emp -------------------------------------------------------------------------------------------------------------------------------
 		if ("login".equals(action)) {
@@ -526,10 +543,228 @@ public class LonginServlet extends HttpServlet {
 
 		}
 
+		
+		
+	//  forget1(update)  	-------------------------------------------------------------------------------------------------------------------------------
+			if ("forget1".equals(action)) { // 來自addEmp.jsp的請求
 
+				List<String> errorMsgs = new LinkedList<String>();
+				// Store this set in the request scope, in case we need to
+				// send the ErrorPage view.
+				request.setAttribute("errorMsgs", errorMsgs);
 
+				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/			
 
+				String memacc = request.getParameter("MEM_ACC").trim();
+				String mempwd = request.getParameter("MEM_PWD").trim();
+				String mempwd2 = request.getParameter("MEM_PWD2").trim();
+				if (memacc == null || memacc.trim().length() == 0) {
+					errorMsgs.add("帳號請勿空白");
+				}
 
+				if (mempwd == null || mempwd.trim().length() == 0) {
+					errorMsgs.add("密碼請勿空白");
+				}
+
+				if (mempwd2 == null || mempwd2.trim().length() == 0) {
+					errorMsgs.add("確認密碼請勿空白");
+				}
+				
+				if (!mempwd2.equals(mempwd)) {
+					errorMsgs.add("確認密碼請與密碼相同");
+				}
+				
+				Member Member = new Member();
+				Member.setMemAcc(memacc);
+				Member.setMemPwd(mempwd);				
+
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					request.setAttribute("Member", Member); // 含有輸入格式錯誤的empVO物件,也存入req
+					RequestDispatcher failureView = request
+							.getRequestDispatcher("/front-end/Member/member/forget1.jsp");
+					failureView.forward(request, response);
+					return;
+				}
+
+				/*************************** 2.開始新增資料 ***************************************/
+				MemberService memSvc = new MemberService();
+				Member = memSvc.forget1(memacc, mempwd);
+				Member member1 = memSvc.signin(memacc, mempwd);
+				Integer memid = member1.getMemId();
+				if (memid == 0) {
+					errorMsgs.add("查無帳號");
+					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/Member/member/forget1.jsp");
+					failureView.forward(request, response);
+					return;// 程式中斷
+				}
+
+				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+				String url = "/front-end/Member/member/memberLognIn.jsp";
+				RequestDispatcher successView = request.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				successView.forward(request, response);
+
+			}
+
+		//  forget2(update)  	-------------------------------------------------------------------------------------------------------------------------------
+					if ("forget2".equals(action)) { // 來自addEmp.jsp的請求
+
+						List<String> errorMsgs = new LinkedList<String>();
+						// Store this set in the request scope, in case we need to
+						// send the ErrorPage view.
+						request.setAttribute("errorMsgs", errorMsgs);
+
+						/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/			
+
+						String storeacc = request.getParameter("STORE_ACC").trim();
+						String storepwd = request.getParameter("STORE_PWD").trim();
+						String storepwd2 = request.getParameter("STORE_PWD2").trim();
+						if (storeacc == null || storeacc.trim().length() == 0) {
+							errorMsgs.add("帳號請勿空白");
+						}
+
+						if (storepwd == null || storepwd.trim().length() == 0) {
+							errorMsgs.add("密碼請勿空白");
+						}
+
+						if (storepwd2 == null || storepwd2.trim().length() == 0) {
+							errorMsgs.add("確認密碼請勿空白");
+						}
+						
+						if (!storepwd2.equals(storepwd)) {
+							errorMsgs.add("確認密碼請與密碼相同");
+						}
+						
+						Store Store = new Store();
+						Store.setStoreAcc(storeacc);
+						Store.setStorePwd(storepwd);				
+
+						// Send the use back to the form, if there were errors
+						if (!errorMsgs.isEmpty()) {
+							request.setAttribute("Store", Store); // 含有輸入格式錯誤的empVO物件,也存入req
+							RequestDispatcher failureView = request
+									.getRequestDispatcher("/front-end/Member/member/forget2.jsp");
+							failureView.forward(request, response);
+							return;
+						}
+
+						/*************************** 2.開始新增資料 ***************************************/
+						StoreService strSvc = new StoreService();
+						Store = strSvc.forget1(storeacc, storepwd);
+						Store store1 = strSvc.signin(storeacc, storepwd);
+						Integer storeid = store1.getStoreId();
+						if (storeid == 0) {
+							errorMsgs.add("查無帳號");
+							RequestDispatcher failureView = request.getRequestDispatcher("/front-end/Member/member/forget2.jsp");
+							failureView.forward(request, response);
+							return;// 程式中斷
+						}
+
+						/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+						String url = "/front-end/Member/member/memberLognIn.jsp";
+						RequestDispatcher successView = request.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+						successView.forward(request, response);
+
+					}
+					
+//					searchstore1 ------------------------------------------------------------------------------------------------------------
+					if ("searchstore1".equals(action)) {
+						Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+						request.setAttribute("errorMsgs", errorMsgs);
+						
+						String storecity = request.getParameter("STORE_CITY").trim();
+						String storedistrict = request.getParameter("STORE_DISTRICT").trim();
+						
+						StoreService strsrv = new StoreService();
+						JSONArray json = strsrv.getAllByAddress(storecity, storedistrict); 
+						String errorString="";
+						if (json.size()==0){               
+			                    errorString="目前"+storecity+storedistrict+"沒有店家可以申請，若有疑問請聯絡客服";
+			                }
+						request.setAttribute("list_out",json);
+						String url = "/front-end/store/Login/storeRegister0.2.jsp";			
+						RequestDispatcher successView = request.getRequestDispatcher(url); 
+			            successView.forward(request, response);
+					}
+//					update1 ------------------------------------------------------------------------------------------------------------
+					
+					if ("updatest1".equals(action)) {
+						Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+						request.setAttribute("errorMsgs", errorMsgs);
+						
+						Integer storeid = Integer.valueOf(request.getParameter("STORE_ID").trim());
+						
+						StoreService strsrv = new StoreService();
+						Store store = strsrv.getById(storeid); 
+						String errorString="";
+						
+						request.getSession().setAttribute("Store",store);
+						request.getSession().setAttribute("storeId",storeid);
+						String url = "/front-end/store/Login/storeRegister.jsp";			
+						RequestDispatcher successView = request.getRequestDispatcher(url); 
+			            successView.forward(request, response);
+					}
+					
+//					inserts(store info) ------------------------------------------------------------------------------------------------------------
+					
+					
+					
+					if ("inserts".equals(action)) { // 來自addEmp.jsp的請求
+
+						Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+						request.setAttribute("errorMsgs", errorMsgs);
+
+						String storeacc = request.getParameter("STORE_ACC").trim();
+						if (storeacc == null || storeacc.trim().length() == 0) {
+							errorMsgs.put("STORE_ACC", "帳號請勿空白");
+						}
+
+						String storepwd = request.getParameter("STORE_PWD").trim();
+						if (storepwd == null || storepwd.trim().length() == 0) {
+							errorMsgs.put("STORE_PWD", "密碼請勿空白");
+						}
+						
+						String storepwd2 = request.getParameter("STORE_PWD2").trim();
+						if (storepwd2 == null || storepwd2.trim().length() == 0) {
+							errorMsgs.put("STORE_PWD2", "確認密碼請勿空白");
+						}
+						
+						if (!storepwd2.equals(storepwd)) {
+							errorMsgs.put("STORE_PWD2", "確認密碼請與密碼相同");
+						}				
+						
+						String storephone1 = request.getParameter("STORE_PHONE1").trim();
+						
+						String storecomaddress = request.getParameter("STORE_COM_ADDRESS").trim();
+						if (storecomaddress == null || storecomaddress.trim().length() == 0) {
+							errorMsgs.put("STORE_COM_ADDRESS", "申請人姓名請勿空白");
+						}
+						
+						String storetwid = request.getParameter("STORE_TW_ID").trim();
+						if (storetwid == null || storetwid.trim().length() == 0) {
+							errorMsgs.put("STORE_TW_ID", "身分證請勿空白");
+						}else if (!storetwid.trim().matches("^[a-zA-Z]\\d{9}$")) {
+							errorMsgs.put("STORE_TW_ID", "身分證格式不正確");
+						}
+
+						String storephone2 = request.getParameter("STORE_PHONE2").trim();
+						
+
+						if (!errorMsgs.isEmpty()) {
+							RequestDispatcher failureView = request
+									.getRequestDispatcher("/front-end/store/Login/storeRegister.jsp");
+							failureView.forward(request, response);
+							return;
+						}				
+						Integer storeid = (Integer) request.getSession().getAttribute("storeId");
+						StoreService strsrv = new StoreService();
+						strsrv.inserts(storeid, storeacc, storepwd, storephone1, storecomaddress, storephone2, storetwid);
+
+						String url = "/front-end/Member/member/memberLognIn.jsp";
+						RequestDispatcher successView = request.getRequestDispatcher(url);
+						successView.forward(request, response);
+
+					}
 
 
 

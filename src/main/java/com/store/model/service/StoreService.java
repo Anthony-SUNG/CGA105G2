@@ -201,5 +201,36 @@ public class StoreService {
 
 		return store;
 	}
+	public Store updateplan(Integer storeId) {
+		Store store = new Store();
+
+		store.setStoreId(storeId);
+		dao.updateplan(storeId);
+
+		return store;
+	}
+	
+	public Store updateplan2(Integer storeId) {
+		Store store = new Store();
+
+		store.setStoreId(storeId);
+		dao.updateplan2(storeId);
+
+		return store;
+	}
+
+	public void inserts(Integer storeId, String storeacc, String storepwd, String storephone1,
+			String storecomaddress, String storephone2, String storetwid) {
+		Store Store = new Store();
+		Store.setStoreId(storeId);
+		Store.setStoreAcc(storeacc);
+		Store.setStorePwd(storepwd);
+		Store.setStorePhone1(storephone1);
+		Store.setStoreComAddress(storecomaddress);
+		Store.setStorePhone2(storephone2);
+		Store.setStoreTwId(storetwid);
+		dao.inserts(Store);
+		
+	}
 
 }
