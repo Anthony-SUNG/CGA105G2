@@ -69,8 +69,7 @@
                             <div class="col mb-5">
                                 <div class="card h-100">
                                     <!--Product image -->
-                                    <img src="${pageContext.request.contextPath}/back-end/pointgood/point.do?action=getPdImg&pdId=${PointGoods.pdId}"
-                                         width=260px height=300px>
+                                    <img src="${pageContext.request.contextPath}/PointServlet?action=getPdImg&pdId=${PointGoods.pdId}" width= 260px height= 300px >
                                     <!-- Product details-->
                                     <div class="card-body p-4">
                                         <div class="text-center">

@@ -10,6 +10,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.member.model.Member.pojo.Member;
 import com.store.model.Store.pojo.Store;
+import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutOneTime;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,8 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import java.io.Serial;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -32,7 +36,10 @@ import java.util.Set;
 
 @WebServlet(urlPatterns = { "/front-end/store/food_order/food_order.do", "/front-end/Member/food_order/food_order.do" })
 public class FoodorderServlet extends HttpServlet {
+	@Serial
 	private static final long serialVersionUID = 1L;
+
+	public static AllInOne domain;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
@@ -49,9 +56,7 @@ public class FoodorderServlet extends HttpServlet {
 			// 取得店家id，這邊照理來說應該要在session可以取到，因為最前面進入店家
 			// 現在先模擬自己set進去 再get出來 之後前面頁面有set過 *這邊set要移除*
 			HttpSession session = req.getSession();
-//			session.setAttribute("storeId", 6);
 			Integer storeid = (Integer) session.getAttribute("storeId");
-
 			// 利用service取資料
 			// 1.清單資料
 			FoodorderService foodorderSvc = new FoodorderService();
@@ -71,13 +76,6 @@ public class FoodorderServlet extends HttpServlet {
 			if (storeInfo.getStoreEtable() != null) {
 				orderlimit = storeInfo.getStoreEtable();
 			}
-			// 測試json
-//		    Meal meal1 = new Meal(2,2);
-//		    Meal meal2 = new Meal(3,3);
-//		    List<Meal> list2 = new ArrayList<Meal>();
-//		    list2.add(meal1);
-//		    list2.add(meal2);
-//		    String jsonString = JSON.toJSONString(list2);
 			// 轉交資料
 			req.setAttribute("list", list); // 資料庫取出的list物件,存入req
 			req.setAttribute("timestr", timestr);// 尚未寫邏輯
@@ -574,14 +572,11 @@ public class FoodorderServlet extends HttpServlet {
 				req.setAttribute("peopleNum1", peopleNum1);
 				req.setAttribute("dateInput", dateInput);
 				req.setAttribute("time1", time1);
-
 				req.setAttribute("errorMsgs", errorMsgs);
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-end/Member/food_order/setFoodOrderInfo.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/Member/food_order/setFoodOrderInfo.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
-
 			// 先查詢該日訂單人數上限是否已滿，如果已滿一樣要把資料設回去 讓前端在重輸
 			// 利用service
 			FoodorderService foodorderSvc = new FoodorderService();
@@ -619,21 +614,18 @@ public class FoodorderServlet extends HttpServlet {
 				req.setAttribute("peopleNum1", peopleNum1);
 				req.setAttribute("dateInput", dateInput);
 				req.setAttribute("time1", time1);
-
 				req.setAttribute("errorMsgs", errorMsgs);
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/front-end/Member/food_order/setFoodOrderInfo.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
-
 			// 到這都正常  準備將資料放進session 讓後面餐點跟優惠劵 一併到時候到結帳頁面 在寫入 訂單 跟 訂單明細
 			session.setAttribute("foodorder_name", nameInput);
 			session.setAttribute("foodorder_phone", phoneInput);
 			session.setAttribute("foodorder_peopleNum", peopleNum1);
 			session.setAttribute("foodorder_time", time1 + ":00");
 			session.setAttribute("foodorder_date", dateInput);
-
 			// 準備下一頁資料
 			List<Meal> allMealbyStoreidStatus = foodorderSvc.getAllMealbyStoreidStatus(storeid, 1);
 			req.setAttribute("list", allMealbyStoreidStatus);
@@ -651,11 +643,9 @@ public class FoodorderServlet extends HttpServlet {
 				req.setAttribute("nameInput", nameInput);
 				req.setAttribute("phoneInput", phoneInput);
 				req.setAttribute("storename", orderShopName);
-
 				req.setAttribute("peopleNum1", peopleNum1);
 				req.setAttribute("dateInput", dateInput);
 				req.setAttribute("time1", time1);
-
 				req.setAttribute("errorMsgs", errorMsgs);
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/front-end/Member/food_order/setFoodOrderInfo.jsp");
@@ -699,7 +689,6 @@ public class FoodorderServlet extends HttpServlet {
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
-
 			Integer totalMoney = 0;
 			for (int i = 0; i<allMealbyStoreidStatus.size(); i++) {
 				Map oneMeal = new LinkedHashMap();
@@ -743,65 +732,7 @@ public class FoodorderServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}
-
 		if ("checkout".equals(action)) {
-			HttpSession session = req.getSession();
-			Integer storeid = (Integer) session.getAttribute("foodorder_storeId");
-			Integer memid = (Integer) session.getAttribute("memId");
-			String name = (String) session.getAttribute("foodorder_name");
-			String phone = (String) session.getAttribute("foodorder_phone");
-			Integer peopleNum = Integer.parseInt((String) session.getAttribute("foodorder_peopleNum"));
-			String time = (String) session.getAttribute("foodorder_time");
-			String date = (String) session.getAttribute("foodorder_date");
-			Integer codeMoney = (Integer) session.getAttribute("foodorder_codeMoney");
-			Integer codeId = null;
-			if (session.getAttribute("foodorder_codeId") != null) {
-				codeId = (Integer) session.getAttribute("foodorder_codeId");
-				System.out.println("codeid:" + codeId);
-			}
-			Integer totalMoney = (Integer) session.getAttribute("foodorder_totalMoney");
-			Integer totalCodeMoney = (Integer) session.getAttribute("foodorder_totalCodeMoney");
-			List<Map> mealList = (List<Map>) session.getAttribute("foodorder_mealList");
-			System.out.println(name);
-			System.out.println(phone);
-			System.out.println(peopleNum);
-			System.out.println(date);
-			System.out.println(codeMoney);
-			System.out.println(totalMoney);
-			System.out.println(totalCodeMoney);
-			for (int i = 0; i < mealList.size(); i++) {
-				System.out.println(mealList.get(i));
-			}
-			// 利用service
-			FoodorderService foodorderSvc = new FoodorderService();
-			// 先把rdQuantity是0的去除
-			for (int i = 0; i < mealList.size(); i++) {
-				if ((Integer) mealList.get(i).get("rdQuantity") == 0) {
-					mealList.remove(i);
-				}
-			}
-			if (session.getAttribute("foodorder_codeId") == null) {
-				Reserva reserva = new Reserva(storeid, memid, name, phone, time, Date.valueOf(date), peopleNum,
-						totalMoney, totalCodeMoney);
-				foodorderSvc.insertReservaReservaDetail(reserva, mealList);
-			} else {
-				Integer codeid = (Integer) session.getAttribute("foodorder_codeId");
-				Reserva reserva = new Reserva(storeid, memid, name, phone, time, Date.valueOf(date), peopleNum, codeid,
-						totalMoney, totalCodeMoney);
-				foodorderSvc.insertReservaReservaDetail(reserva, mealList);
-			}
-
-			// 訂完餐 要跳轉哪頁?
-			// 跳轉到結帳頁
-//			String url = "/test.jsp";
-//			String url = "/front-end/Member/food_order/checkout2.jsp";
-//			RequestDispatcher successView = req.getRequestDispatcher(url);
-//			successView.forward(req, res);
-
-		}
-
-
-//		if ("checkout_final".equals(action)) {
 //			HttpSession session = req.getSession();
 //			Integer storeid = (Integer) session.getAttribute("foodorder_storeId");
 //			Integer memid = (Integer) session.getAttribute("memId");
@@ -847,15 +778,110 @@ public class FoodorderServlet extends HttpServlet {
 //						totalMoney, totalCodeMoney);
 //				foodorderSvc.insertReservaReservaDetail(reserva, mealList);
 //			}
-//
-//			// 訂完餐 要跳轉哪頁?
-//			// 跳轉到結帳頁
-////			String url = "/test.jsp";
-//			String url = "http://localhost:8081/CGA105G2/index.jsp";
-//			RequestDispatcher successView = req.getRequestDispatcher(url);
-//			successView.forward(req, res);
-//
-//		}
+			String url = "/front-end/Member/food_order/checkout2.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+
+		}
+		if ("ecpay".equals(action)) {
+			// 根據表單建立收款連結 (中文編碼有問題)
+			// 使用者跳轉至綠界的交易流程網站
+			// 按照流程輸入卡號..... (中文編碼!)
+			// 測試卡號: 一般信用卡測試卡號 : 4311-9522-2222-2222 安全碼 : 222
+			// 信用卡測試有效月/年：輸入的 MM/YYYY 值請大於現在當下時間的月年，
+			// 例如在 2016/04/20 當天作測試，請設定 05/2016(含)之後的有效月年，否則回應刷卡失敗。
+			// 手機請輸入正確，因為會傳驗證碼
+			// 檢查後台: 信用卡收單 - 交易明細 - 查詢
+			domain = new AllInOne("");
+			AioCheckOutOneTime obj = new AioCheckOutOneTime();
+			// 從 view 獲得資料，依照 https://developers.ecpay.com.tw/?p=2866 獲得必要的參數
+			// MerchantTradeNo  : 必填 特店訂單編號 (不可重複，因此需要動態產生)
+			obj.setMerchantTradeNo(new String("salon" + System.currentTimeMillis()));
+			// MerchantTradeDate  : 必填 特店交易時間 yyyy/MM/dd HH:mm:ss
+			obj.setMerchantTradeDate(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date()));
+			// TotalAmount  : 必填 交易金額
+			Integer money= (Integer) req.getSession().getAttribute("foodorder_totalCodeMoney");
+			obj.setTotalAmount(String.valueOf(money));
+			// TradeDesc  : 必填 交易描述
+			Integer sID= (Integer) req.getSession().getAttribute("foodorder_storeId");
+			obj.setTradeDesc("StoreID:"+sID);
+			// ItemName  : 必填 商品名稱
+			obj.setItemName("FoodMap Buy Eat");
+			// ReturnURL   : 必填  我用不到所以是隨便填一個英文字
+			obj.setReturnURL("a");
+			// OrderResultURL   : 選填 消費者完成付費後。重新導向的位置
+			String url = "http://localhost:8081/CGA105G2/front-end/Member/food_order/food_order.do?action=checkout_final";
+			obj.setOrderResultURL(url);
+			obj.setNeedExtraPaidInfo("N");
+			// 回傳form訂單 並自動將使用者導到 綠界
+			String form = domain.aioCheckOut(obj, null);
+			System.out.println(form);
+			res.setCharacterEncoding("UTF-8");
+			res.getWriter().print("<html><body>" + form + "</body></html>");
+		}
+
+		if ("checkout_final".equals(action)) {
+			HttpSession session = req.getSession();
+			Integer storeid = (Integer) session.getAttribute("foodorder_storeId");
+			Integer memid = (Integer) session.getAttribute("memId");
+			String name = (String) session.getAttribute("foodorder_name");
+			String phone = (String) session.getAttribute("foodorder_phone");
+			Integer peopleNum = Integer.parseInt((String) session.getAttribute("foodorder_peopleNum"));
+			String time = (String) session.getAttribute("foodorder_time");
+			String date = (String) session.getAttribute("foodorder_date");
+			Integer codeMoney = (Integer) session.getAttribute("foodorder_codeMoney");
+			Integer codeId = null;
+			if (session.getAttribute("foodorder_codeId") != null) {
+				codeId = (Integer) session.getAttribute("foodorder_codeId");
+				System.out.println("codeid:" + codeId);
+			}
+			Integer totalMoney = (Integer) session.getAttribute("foodorder_totalMoney");
+			Integer totalCodeMoney = (Integer) session.getAttribute("foodorder_totalCodeMoney");
+			List<Map> mealList = (List<Map>) session.getAttribute("foodorder_mealList");
+//			System.out.println(name);
+//			System.out.println(phone);
+//			System.out.println(peopleNum);
+//			System.out.println(date);
+//			System.out.println(codeMoney);
+//			System.out.println(totalMoney);
+//			System.out.println(totalCodeMoney);
+//			for (int i = 0; i < mealList.size(); i++) {
+//				System.out.println(mealList.get(i));
+//			}
+			// 利用service
+			FoodorderService foodorderSvc = new FoodorderService();
+			// 先把rdQuantity是0的去除
+			System.out.println("size"+mealList.size());
+			List<Map> mealListTemp = new ArrayList<Map>();
+			for (int i = 0; i < mealList.size(); i++) {
+//				System.out.println("#############");
+//				System.out.println(i);
+				if ((Integer) mealList.get(i).get("rdQuantity") != 0) {
+					mealListTemp.add(mealList.get(i));
+//					System.out.println(mealList.get(i).get("mealName"));
+//					System.out.println(mealList.get(i).get("rdQuantity"));
+//					mealList.remove(i);
+				}
+				System.out.println("size"+mealListTemp.size());
+				System.out.println("#############");
+			}
+			mealList = mealListTemp;
+			if (session.getAttribute("foodorder_codeId") == null) {
+				Reserva reserva = new Reserva(storeid, memid, name, phone, time, Date.valueOf(date), peopleNum,
+						totalMoney, totalCodeMoney);
+				foodorderSvc.insertReservaReservaDetail(reserva, mealList);
+			} else {
+				Integer codeid = (Integer) session.getAttribute("foodorder_codeId");
+				Reserva reserva = new Reserva(storeid, memid, name, phone, time, Date.valueOf(date), peopleNum, codeid,
+						totalMoney, totalCodeMoney);
+				foodorderSvc.insertReservaReservaDetail(reserva, mealList);
+			}
+			// 訂完餐 要跳轉哪頁?
+			// 跳轉到結帳頁
+			String url = "/front-end/Member/food_order/food_order.do?action=listAllFoodOrder";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
 //////////////////////////////////////////////member 查詢訂位訂餐 ////////////////////
 		if ("listAllFoodOrder".equals(action)) {
 			HttpSession session = req.getSession();
@@ -973,7 +999,6 @@ public class FoodorderServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}
-
 		if ("listFoodOrderScore".equals(action)) {
 			HttpSession session = req.getSession();
 			// 這邊之後要拿掉
@@ -1112,12 +1137,7 @@ public class FoodorderServlet extends HttpServlet {
 					Member memberInfo = foodorderSvc.getmemberById(reservaList.get(i).getMemId());
 					onedata.put("MEM_NAME", memberInfo.getMemName());
 					onedata.put("MEM_PHONE", memberInfo.getMemPhone());
-
-
-
-
 					System.out.println(onedata);
-
 				}
 			}
 			GsonBuilder builder = new GsonBuilder();
@@ -1187,12 +1207,7 @@ public class FoodorderServlet extends HttpServlet {
 					Member memberInfo = foodorderSvc.getmemberById(reservaList.get(i).getMemId());
 					onedata.put("MEM_NAME", memberInfo.getMemName());
 					onedata.put("MEM_PHONE", memberInfo.getMemPhone());
-
-
-
-
 					System.out.println(onedata);
-
 				}
 			}
 			GsonBuilder builder = new GsonBuilder();
@@ -1252,12 +1267,7 @@ public class FoodorderServlet extends HttpServlet {
 					Member memberInfo = foodorderSvc.getmemberById(reservaList.get(i).getMemId());
 					onedata.put("MEM_NAME", memberInfo.getMemName());
 					onedata.put("MEM_PHONE", memberInfo.getMemPhone());
-
-
-
-
 					System.out.println(onedata);
-
 				}
 			}
 			GsonBuilder builder = new GsonBuilder();

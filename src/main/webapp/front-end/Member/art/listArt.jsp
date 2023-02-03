@@ -137,9 +137,7 @@
                         <div class="col-md-12"
                              style="height: 100px;font-size: 20px;font-weight: 800;margin-top: 5px;">
                             自我簡介:
-
                             <div>
-
                                 ${member.memText}
                             </div>
                         </div>
@@ -159,7 +157,6 @@
                 </div>
 
                 <%} else { %>
-
 
                 <c:forEach var="articlelist" items="${list}">
                     <div class="container bg-white mt-10 p-8">

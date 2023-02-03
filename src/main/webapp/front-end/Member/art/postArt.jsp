@@ -144,8 +144,6 @@
                 </div>
             </div>
             <!-- =======================會員頭像======================= -->
-            <!-- =======================會員頭像======================= -->
-
             <div class="row justify-content-center">
                 <div class="col-7 mb-10">
                     <div class="postmember_info"
@@ -173,9 +171,7 @@
                     </div>
                 </div>
             </div>
-
-
-            <!-- ==================發文開始======================= -->
+            <!-- ==================發文開始====================== -->
             <div class="row justify-content-center">
                 <div class="col-7 mb-10 shadow "
                      style="padding: 30px; border: 3px solid rgba(208, 208, 208, 0.644); border-radius: 20px;">
@@ -188,21 +184,18 @@
                         </div>
                         <div class="poststore_text"
                              style="margin-left: 5px; align-items: center; display: flex;">
-
 								<span class="post_name"
-                                      style="font-size: 30px; font-weight: 1000;"> 劉媽媽小吃店 </span>
-
+                                      style="font-size: 30px; font-weight: 1000;">${StoreName}</span>
                         </div>
                     </div>
                     <!-- ===================店家評分星星================== -->
                     <!-- star rating -->
-                    <form method="post" action="ArtServlet" name="form1" enctype="multipart/form-data">
+                    <form method="post" action="<%=request.getContextPath()%>/front-end/Member/art/ArtServlet"  enctype="multipart/form-data">
                         <div class="rating-wrapper pt-3">
                             <div>
                                 <input type="hidden" name="memId" value="${member.memId}">
-                                <input type="hidden" name="storeId" value="5">
-                                <span
-                                        style="font-size: 22px; font-weight: 600; background-color: antiquewhite; margin-left: 20px; line-height: 60px;"></span>
+                                <input type="hidden" name="storeId" value="${sid}">
+                                <span   style="font-size: 22px; font-weight: 600; background-color: antiquewhite; margin-left: 20px; line-height: 60px;"></span>
                                 <!-- star 5 -->
                                 <input type="radio" id="5-star-rating" class="storescore"
                                        name="artScore" value="5"> <label
@@ -319,82 +312,6 @@
 <!-- footer start -->
 <%@ include file="/front-end/Member/01h/footerin.jsp" %>
 <!-- footer end -->
-
-<script src="/CGA105G2/assets/js/vendor.js"></script>
-<script src="/CGA105G2/assets/js/polyfills.js"></script>
-<script src="/CGA105G2/assets/js/app.js"></script>
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
-
-
-<!-- Bootstrap 4.6.2 & Vue 3 & jquery 3.4.1-->
-
-<!-- Bootstrap js -->
-<script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-        crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function () {
-
-        new ClipboardJS('.btn');
-
-    });
-    const list = [
-        {
-            CODE_ID: 1,
-            STORE_NAME: '麥當勞-中正店',
-            CODE_OFF: 20,
-            CODE_NUM: 'MYC20',
-            CODE_NTIME: 2022 - 12 - 31
-        },
-        {
-            CODE_ID: 2,
-            STORE_NAME: '阿雄麵店',
-            CODE_OFF: 35,
-            CODE_NUM: 'YC35',
-            CODE_NTIME: 2022 - 12 - 30
-        },
-        {
-            CODE_ID: 3,
-            STORE_NAME: '鑫艷',
-            CODE_OFF: 2000,
-            CODE_NUM: 'HaHa0101',
-            CODE_NTIME: '2023-01-01'
-        }
-    ];
-    render(list);
-
-    function render(list) {
-        // 定義變數，在使用變數
-        const codetbody = document.querySelector('.code_tbody');
-        codetbody.innerHTML = '';
-        for (let item of list) {
-            codetbody.innerHTML += `
-             <tr>
-              <td><button type="button" class="btn btn-dark p-0 " data-clipboard-action="copy" data-clipboard-target="#clipboardExample${item.CODE_ID}">Copy</button></td>
-              <td>${item.STORE_NAME}</td>
-              <td>$${item.CODE_OFF}</td>
-              <td id="clipboardExample${item.CODE_ID}">${item.CODE_NUM}</td>
-              <td>${item.CODE_NTIME}</td>
-            </tr>
-`;
-        }
-    }
-</script>
-<!-- Vue -->
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<script>
-    const {createApp} = Vue;
-
-    createApp({
-        data() {
-            return {
-                message: "Hello Vue!",
-            };
-        },
-    }).mount("#app");
-</script>
 <!-- ==================上傳圖片js=================== -->
 <script>
     function fileValue(value) {

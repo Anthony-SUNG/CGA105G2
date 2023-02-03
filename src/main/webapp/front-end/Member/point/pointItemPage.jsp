@@ -32,7 +32,7 @@
                     <div class="   my-5">
                         <div class="row gx-4 gx-lg-5 align-items-center">
                             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" height="500px" width="300px"
-                                                       src="${pageContext.request.contextPath}/back-end/pointgood/point.do?action=getPdImg&pdId=${param.pdId}"
+                                                       src="${pageContext.request.contextPath}/PointServlet?action=getPdImg&pdId=${param.pdId}"
                                                        alt="..."/></div>
                             <div class="col-md-6">
                                 <h1 class="display-5 fw-bolder">${param.pdName}</h1>
