@@ -47,6 +47,7 @@ public class IdFilter extends HttpFilter {
 				requestPath.matches(".*Register.*")||requestPath.matches(".*PassWord.*")||requestPath.matches(".*search.*")||
 				requestPath.matches(".*Page.*")||requestPath.matches(".*addStandBy.*")||requestPath.matches(".*standby.*")||
 				requestPath.matches(".*ECpay.*")||requestPath.matches(".*employeeLogin.jsp.*")||requestPath.matches(".*adServlet.*")
+				||requestPath.matches(".*forget.*")
 		){
 			System.out.println("doFilter-3區");
 			System.out.println("免登入區");

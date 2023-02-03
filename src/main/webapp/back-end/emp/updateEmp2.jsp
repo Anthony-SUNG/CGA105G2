@@ -1,7 +1,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.emp.model.Employee.dao.impl.*" %>
 <%@ page import="com.emp.model.Employee.pojo.*" %>
-<%@ page import="com.emp.model.service.EmployeeService" %>
+<%@ page import="com.emp.model.service.*" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -46,7 +46,7 @@
             <% EmployeeService empSvc = new EmployeeService();
                 List<Employee> list = empSvc.all();
                 pageContext.setAttribute("list", list);%>
-            <div class="table-responsive ">
+            <div class="table-responssive ">
                 <table class="table table-striped text-center ">
                     <thead class="col-3">
                     <tr class="col-3">

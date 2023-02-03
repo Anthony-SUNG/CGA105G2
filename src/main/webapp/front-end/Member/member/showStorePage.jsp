@@ -1,15 +1,12 @@
-<%@page import="java.util.List" %>
-<%@page import="com.subs.model.Subscribe.pojo.Subscribe" %>
-<%@page import="com.subs.model.service.SubsService" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.subs.model.Subscribe.pojo.Subscribe" %>
+<%@ page import="com.subs.model.service.*" %>
 <%@ page import="com.store.model.Store.pojo.Store" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
-<%
-
-%>
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -103,7 +100,7 @@
                             <p class="store_information" style="font-size: 20px;">營業時間 | 12:00-13:00</p>
                         </div>
                         <!-- ==============訂閱按鈕開始====================== -->
-                        <div class="subscribe_div" , style="margin-top: 10px;">
+                        <div class="subscribe_div"  style="margin-top: 10px;">
 
                             <c:if test="${subslist.size() == 0}">
                                 <form method="post" action="/CGA105G2/MyFavoriteServlet" name="">

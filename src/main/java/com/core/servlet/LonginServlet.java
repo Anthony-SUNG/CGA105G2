@@ -322,7 +322,6 @@ public class LonginServlet extends HttpServlet {
 			request.setAttribute("subslist", subslist);
 //			request.setAttribute("StoreScore", StoreScore);
 			String url = "/front-end/Member/member/showStorePage.jsp";
-
 			RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 showStorePage.jsp
 			successView.forward(request, response);
 		}
