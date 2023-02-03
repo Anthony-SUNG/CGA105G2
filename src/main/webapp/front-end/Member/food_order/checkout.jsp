@@ -98,7 +98,7 @@
 	                  <th scope="row"><%= i %></th>
 	                  <td>${mealVO.mealId}</td>
 	                  <td>${mealVO.mealName}</td>
-	                  <td id="money_<%= i %>">${mealVO.mealPrice}</td>
+	                  <td id="money_<%= i %>">${mealVO.pdPrice}</td>
 	                  <td>${mealVO.rdQuantity}</td>
 	                </tr>
 	                <% i = i+1; %>

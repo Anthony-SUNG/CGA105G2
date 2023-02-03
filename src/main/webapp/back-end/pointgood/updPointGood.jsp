@@ -60,7 +60,7 @@
                 <div class="card card-body shadow bg-cyan-20 "
                      style="border-radius: 20px;">
                     <h1 class="text-center mt-5">🔆修改商品</h1>
-                    <FORM METHOD="post" ACTION="point.do" name="form1"
+                    <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/PointServlet" name="form1"
                           enctype="multipart/form-data">
                         <div class="col-8 mx-auto">
                             <img src="${pageContext.request.contextPath}/PointServlet?action=getPdImg&pdId=${param.pdId}"

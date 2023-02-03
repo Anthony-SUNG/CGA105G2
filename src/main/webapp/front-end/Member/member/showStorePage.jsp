@@ -158,7 +158,7 @@
                         <a href="">
                             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/standby">
                                 <input type="hidden" name="foodorder_storeId" value="${store.storeId}">
-                                <input type="hidden" name="action" value="Member_order_button">
+                                <input type="hidden" name="action" value="insertSta">
                                 <button id="store_standby" type="button" class="btn btn-success btn-block"
                                         style="font-size:28px;border:0;">線上候位
                                 </button>
