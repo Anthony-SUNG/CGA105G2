@@ -20,6 +20,8 @@ import com.art.model.Article.pojo.Article;
 import com.art.model.service.ArtService;
 import com.member.model.Member.pojo.Member;
 import com.member.model.service.MemberService;
+import com.point.model.Point.pojo.Point;
+import com.point.model.service.PointService;
 import com.store.model.Store.dao.StoreDAO_interface;
 import com.store.model.Store.dao.impl.StoreDAO;
 import com.store.model.Store.pojo.Store;
@@ -45,7 +47,7 @@ public class ArtServlet extends HttpServlet{
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 			storeId = Integer.valueOf(req.getParameter("storeId").trim());
 			Integer artScore = null;
-			try {								//這個好像沒用
+			try {
 				artScore = Integer.valueOf(req.getParameter("artScore").trim());
 			} catch (NumberFormatException e) {
 				errorMsgs.add("請給評分");
@@ -77,22 +79,32 @@ public class ArtServlet extends HttpServlet{
 			article.setArtImg(artImg);
 			article.setArtScore(artScore);
 			article.setArtTag(artTag);
+			//   ====================增加點數=======================
+			String pointChange = req.getParameter("pointChange");
+			Integer pointNumber = Integer.valueOf(req.getParameter("pointNumber").trim());
+			Point point = new Point();
+			point.setMemId(memId);
+			point.setPointChange(pointChange);
+			point.setPointNumber(pointNumber);
+			// ====================增加點數=======================
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("article", article); // 含有輸入格式錯誤的empVO物件,也存入req //保留key-in錯誤的資料
+				req.setAttribute("toResult",false);
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/front-end/Member/art/postArt.jsp"); //如果不為空 回到此頁重新輸入
 				failureView.forward(req, res);
 				return;
 			}
-			System.out.print("bbb");
 			/***************************2.開始新增資料***************************************/
 			ArtService artSvc = new ArtService();
+			PointService pointservice = new PointService();
 			article = artSvc.addArt(memId, storeId, artHeader, artText, artImg, artScore, artTag);
+			point = pointservice.addPoint(memId, pointChange, pointNumber); //增加點數成功
+			req.setAttribute("toResult",true);
 			/***************************3.新增完成,準備轉交(Send the Success view)***********/   //要set東西進去 另一個頁面才抓得到
-			String url = "/front-end/Member/art/listArt.jsp";
+			String url = "/front-end/Member/art/postArt.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交
-			successView.forward(req, res);	
-			System.out.print("ccc");
+			successView.forward(req, res);
 		}
 		if("getPhoto".equals(action)) { //秀文章圖片
 			OutputStream out = res.getOutputStream();
@@ -183,9 +195,6 @@ public class ArtServlet extends HttpServlet{
 			String url = "/front-end/Member/art/postArt.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listArt.jsp
 			successView.forward(req, res);
-
 		}
-
-
 	}
 }

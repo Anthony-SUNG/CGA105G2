@@ -3,7 +3,6 @@
 <%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
@@ -83,7 +82,6 @@
                             <label class="font-weight-bold fs-6 ">上傳圖片:</label> <input
                                 type="file" name="pdImg" class="form-control ">
                         </div>
-
                         <div class="col-8 mx-auto my-10 text-center">
                             <label class="font-weight-bold fs-6 float-left mt-9">商品狀態
                                 :</label>
@@ -107,7 +105,6 @@
             </div>
         </main>
     </div>
-
 </div>
 <!-- main -->
 <!-- footer start -->
@@ -147,54 +144,5 @@
         }
     }
 </script>
-
 </body>
-
-</html>
-
-
-<html>
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>修改商品</title>
-
-    <style>
-        table#table-1 {
-            background-color: #CCCCFF;
-            border: 2px solid black;
-            text-align: center;
-        }
-
-        table#table-1 h4 {
-            color: red;
-            display: block;
-            margin-bottom: 1px;
-        }
-
-        h4 {
-            color: blue;
-            display: inline;
-        }
-    </style>
-
-    <style>
-        table {
-            width: 450px;
-            background-color: white;
-            margin-top: 1px;
-            margin-bottom: 1px;
-        }
-
-        table, th, td {
-            border: 0px solid #CCCCFF;
-        }
-
-        th, td {
-            padding: 1px;
-        }
-    </style>
-
-</head>
-
-
 </html>

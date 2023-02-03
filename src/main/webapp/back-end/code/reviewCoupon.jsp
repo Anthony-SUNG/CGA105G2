@@ -5,19 +5,14 @@
     JSONArray list = (JSONArray) request.getAttribute("list_out");
     JSONArray empaccs = (JSONArray) request.getAttribute("empaccs");
 %>
-
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>後台</title>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/back-end/01h/headerin.jsp" %>
@@ -68,17 +63,17 @@
 <!-- sidebar menu Class -->
 <script>
     $("a:contains(✔️審核)").closest("a").addClass("active disabled topage");
-    $("a:contains(🔻店家優惠券)").closest("a").attr("aria-expanded","true");
+    $("a:contains(🔻店家優惠券)").closest("a").attr("aria-expanded", "true");
     $("#pageSubmenu5").addClass("show");
     $("#pageSubmenu5 a:contains(🔆待審核)").closest('a').addClass("active disabled bg-white topage");
 </script>
 <script>
-    const list=[];
+    const list = [];
     <c:forEach var="empRoot" items="${empRoot}">
     list.push(${empRoot.rootId});
     </c:forEach>
-    for (let e of list){
-        switch (e){
+    for (let e of list) {
+        switch (e) {
             case 1:
                 $("#a2").removeClass("disabled");
                 $("#a3").removeClass("disabled");
@@ -115,6 +110,7 @@
         </c:forEach>
         </c:if>
     ];
+
     function option(emplist, root) {
         if (root == 1) {
             const empselect = document.querySelectorAll('.empselect');
@@ -123,10 +119,10 @@
                 for (let e of emplist) {
                     i.innerHTML += `<option value=\${e.EMP_ID} >\${e.EMP_ACC}</option>`;
                 }
-
             }
         }
     }
+
     function render(list, root) {
         // 定義變數，在使用變數
         const codetbody = document.querySelector('.code_tbody');
@@ -174,6 +170,7 @@
             }
         }
     }
+
     render(codelist, root);
     option(emplist, root);
 </script>

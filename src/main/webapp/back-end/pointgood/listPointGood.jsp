@@ -10,14 +10,11 @@
 %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>💰point</title>
-
     <style>
         /* 商品名稱 */
         .fw-bolder {
@@ -52,7 +49,6 @@
         }
     </style>
 </head>
-
 <body>
 <div id="page-start-anchor"></div>
 <!-- header start -->
@@ -73,9 +69,10 @@
                                    end="<%=pageIndex+rowsPerPage-1%>">
                             <div class="col mb-5">
                                 <div class="card h-100">
-                                    <!-- 										Product image -->
+                                    <!--Product image -->
                                     <a>
-                                        <img src="${pageContext.request.contextPath}/PointServlet?action=getPdImg&pdId=${PointGoods.pdId}" width= 260px height= 300px >
+                                        <img src="${pageContext.request.contextPath}/PointServlet?action=getPdImg&pdId=${PointGoods.pdId}"
+                                             width=260px height=300px>
                                     </a>
                                     <!-- Product details-->
                                     <div class="card-body p-4">
@@ -93,12 +90,10 @@
                                                 <FORM METHOD="post"
                                                       ACTION="${pageContext.request.contextPath}/PointServlet"
                                                       style="margin-bottom: 0px;">
-                                                    <input class="btn btn-outline-dark mt-auto fs-4"
-                                                           type="submit" value="修改商品"> <input type="hidden"
-                                                                                                  name="pdId"
-                                                                                                  value="${PointGoods.pdId}">
-                                                    <input
-                                                            type="hidden" name="action" value="getOne_For_Update">
+                                                    <input class="btn btn-outline-dark mt-auto fs-4" type="submit"
+                                                           value="修改商品"> <input type="hidden" name="pdId"
+                                                                                    value="${PointGoods.pdId}">
+                                                    <input type="hidden" name="action" value="getOne_For_Update">
                                                 </FORM>
                                             </td>
                                         </div>
@@ -109,7 +104,6 @@
                     </div>
                 </div>
             </section>
-
             <br>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <nav aria-label="Page navigation example   justify-content-center" class="m-5 ">
@@ -118,10 +112,8 @@
                     </ul>
                 </nav>
             </div>
-
         </main>
     </div>
-
 </div>
 <!-- main -->
 <!-- footer start -->
@@ -161,7 +153,5 @@
         }
     }
 </script>
-
 </body>
-
 </html>

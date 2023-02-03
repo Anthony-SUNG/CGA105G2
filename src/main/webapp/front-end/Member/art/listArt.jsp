@@ -9,7 +9,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <%
     Integer memId = (Integer) request.getSession().getAttribute("memId");
     MemberService memberService = new MemberService();
@@ -20,15 +19,12 @@
     pageContext.setAttribute("list", list);
 
 %>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>🗃️管理</title>
     <link rel="stylesheet" href="/CGA105G2/assets/css/profile.css">
     <script src="https://kit.fontawesome.com/2c6d23848b.js" crossorigin="anonymous"></script>
@@ -91,7 +87,6 @@
         }
     </style>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/front-end/Member/01h/headerin.jsp" %>
@@ -111,12 +106,10 @@
                     <div class="profile-header-content">
                         <div class="profile-header-img mb-1">
                             <c:if test="${not empty member.memPic}">
-                                <img src="${pageContext.request.contextPath}/LonginServlet?action=getOtherMemberPhoto&memId=${member.memId}"
-                                     alt=""/>
+                                <img src="${pageContext.request.contextPath}/LonginServlet?action=getOtherMemberPhoto&memId=${member.memId}"/>
                             </c:if>
                             <c:if test="${empty member.memPic}">
-                                <img src="https://i.pinimg.com/564x/07/c4/72/07c4720d19a9e9edad9d0e939eca304a.jpg"
-                                     alt=""/>
+                                <img src="https://i.pinimg.com/564x/07/c4/72/07c4720d19a9e9edad9d0e939eca304a.jpg"/>
                             </c:if>
                         </div>
                         <div class="profile-header-info">
@@ -128,24 +121,17 @@
                             <button class="btn btn-sm btn-primary mb-4 " style="font-size: 17px;">聊天室</button>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="container bg-white mt-10 p-8">
-
                     <div class="row">
-                        <div class="col-md-12"
-                             style="height: 100px;font-size: 20px;font-weight: 800;margin-top: 5px;">
+                        <div class="col-md-12" style="height: 100px;font-size: 20px;font-weight: 800;margin-top: 5px;">
                             自我簡介:
                             <div>
                                 ${member.memText}
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <!-- POST1 -->
-                <!--                     這邊要開始for each -->
                 <% if (list == null || list.size() == 0) { %>
                 <div class="container bg-white mt-10 p-8">
                     <div class="row">
@@ -155,12 +141,9 @@
                         </div>
                     </div>
                 </div>
-
                 <%} else { %>
-
                 <c:forEach var="articlelist" items="${list}">
                     <div class="container bg-white mt-10 p-8">
-
                         <div class="row">
                             <div class="col-md-12" style="font-size: 20px;font-weight: 800;margin-top: 5px;">
                                 <!-- ====個人圖片==== -->
@@ -175,40 +158,28 @@
                                                  alt=""
                                                  style="width:70px ; height:65px;border-radius: 80%;border: 1px solid rgb(255, 216, 87);">
                                         </c:if>
-
                                     </div>
                                     <div class="postmember_text mt-3" style="margin-left: 5px;line-height: 26px;">
-        
-                                        <span class="postmember_name" style="font-size: 25px;">
-                                                ${member.memName}
-                                        </span>
-                                        <div>
-                                            <p style="font-size: 14px;color: rgb(104, 104, 104);"><fmt:formatDate
-                                                    value="${articlelist.artTime}" pattern="yyyy-MM-dd"/></p>
-                                        </div>
+                                        <span class="postmember_name" style="font-size: 25px;">${member.memName}</span>
+                                        <div><p style="font-size: 14px;color: rgb(104, 104, 104);"><fmt:formatDate
+                                                value="${articlelist.artTime}" pattern="yyyy-MM-dd"/></p></div>
                                     </div>
                                     <!-- ==================評分跟店家頭像===================== -->
                                     <div class="ml-5" style="margin-top: 14px;">
-                                        <span style="font-size: 20px;padding: 5px 15px;border-radius:15px ;background-color: rgb(255, 112, 60);">
-                                        ${articlelist.artScore} <i class="fa-solid fa-star"
-                                                                   style="color: rgb(249, 249, 106);"></i>
-
-                                        </span>
+                                        <span style="font-size: 20px;padding: 5px 15px;border-radius:15px ;background-color: rgb(255, 112, 60);">${articlelist.artScore} <i
+                                                class="fa-solid fa-star" style="color: rgb(249, 249, 106);"></i></span>
                                     </div>
                                     <div class="poststore_info ml-8" style="display: flex;">
                                         <div class="poststore_img">
                                             <img src="/CGA105G2/assets/images/ex1.jpg"
                                                  style="width:65px ; height:60px;border: 1px solid rgb(255, 216, 87);">
-
                                         </div>
                                         <div class="poststore_text"
                                              style="margin-left: 5px;align-items: center;display: flex;">
                                             <a href="/CGA105G2/LonginServlet?action=StorePage&SearchstoreId=${articlelist.store.storeId}">
-                                            <span class="post_name" style="font-size: 30px;font-weight: 1000;">
-                                                    ${articlelist.store.storeName}
-                                            </span>
+                                                <span class="post_name"
+                                                      style="font-size: 30px;font-weight: 1000;">${articlelist.store.storeName}</span>
                                             </a>
-
                                         </div>
                                         <c:if test="${not empty articlelist.artTag}">
                                         <span
@@ -216,8 +187,6 @@
                                         </span>
                                         </c:if>
                                     </div>
-
-
                                     <!-- ===============評分跟店家頭像和form表單在這============================ -->
                                     <div style="position: absolute;right: 20px;top: 5px;">
                                         <form method="post" action="ArtServlet" name="form1"
@@ -237,7 +206,6 @@
                                          style="max-width:600px;max-height:450px">
                                 </div>
                                 <ul class="profile-header-tab nav nav-tabs mt-5">
-
                                     <li class="nav-item">
                                         <a href="https://line.me/R/msg/text/?${article.artHeader}%0D%0A/CGA105G2/front-end/Member/art/listArt.jsp">
                                             <button class=" btn btn-outline-primary align-items-center"
@@ -247,7 +215,6 @@
                                             </button>
                                         </a>
                                     </li>
-
                                 </ul>
                             </div>
                         </div>
@@ -258,10 +225,8 @@
                     ;
                 %>
                 <!--                     這邊要結束for each -->
-
             </div>
             <!-- =================我的最愛結束======================= -->
-
         </main>
     </div>
 </div>
@@ -291,7 +256,6 @@
         });
     });
 </script>
-
 <!-- ==========================button特效開始======================= -->
 <script>
     const button = document.querySelectorAll('.button');
@@ -300,9 +264,7 @@
             button[i].classList.toggle('liked')
         })
     }
-
     const aaa = document.querySelectorAll('.aaa');
-
     for (let i = 0; i < button.length; i++) {
         button[i].addEventListener('click', function () {
             if (aaa[i].innerHTML == "已收藏")
@@ -311,13 +273,10 @@
                 aaa[i].innerHTML = "已收藏";
         })
     }
-
 </script>
 <!-- ==========================button特效結束======================= -->
-
 <!-- stickey bar: -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
-
 <script>
     let a = new StickySidebar("#sidebar", {
         topSpacing: 40,
@@ -327,5 +286,4 @@
     });
 </script>
 </body>
-
 </html>

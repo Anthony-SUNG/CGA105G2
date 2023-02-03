@@ -1,9 +1,8 @@
-<%@page import="java.util.List" %>
-<%@page import="com.followmem.model.FollowMem.pojo.FollowMem" %>
-<%@page import="com.followmem.model.service.FollowMemService" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.followmem.model.FollowMem.pojo.FollowMem" %>
+<%@ page import="com.followmem.model.service.FollowMemService" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%
     Integer memId1 = (Integer) request.getSession().getAttribute("memId");
     FollowMem followMem = new FollowMem();
@@ -11,16 +10,12 @@
     List<FollowMem> list = followMemService.getAllByMemId1(memId1);
     pageContext.setAttribute("list", list);
 %>
-
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>🗃️管理</title>
     <style>
         /* ==========追蹤button=============== */
@@ -51,7 +46,6 @@
         }
     </style>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/front-end/Member/01h/headerin.jsp" %>
@@ -77,7 +71,6 @@
                             </button>
                         </a>
                     </div>
-
                     <div class="col-2 mr-10">
                         <a href="/CGA105G2/front-end/Member/saveArt/selectSaveArtByMember.jsp">
                             <button type="button" class="btn btn-block btn-info active"
@@ -85,8 +78,6 @@
                             </button>
                         </a>
                     </div>
-
-
                 </div>
             </div>
             <!-- ==============button切換頁面結束=============== -->
@@ -129,7 +120,6 @@
                                              alt=""
                                              style="width: 90%;height: 70%; border-radius: 60%;border: 1px solid rgb(255, 216, 87);">
                                     </c:if>
-
                                 </div>
                             </div>
                             <div class="col-md-5 border d-flex border-right-0">
@@ -160,9 +150,7 @@
                                     <input type="hidden" name="action" value="deleteFollow">
                                 </form>
                             </div>
-
                             <!-- =====================追蹤button結束=========================== -->
-
                         </div>
                     </li>
                 </c:forEach>
@@ -202,9 +190,7 @@
             button[i].classList.toggle('liked')
         })
     }
-
     const aaa = document.querySelectorAll('.aaa');
-
     for (let i = 0; i < button.length; i++) {
         button[i].addEventListener('click', function () {
             if (aaa[i].innerHTML == "已追蹤")
@@ -213,12 +199,10 @@
                 aaa[i].innerHTML = "已追蹤";
         })
     }
-
 </script>
 <!-- ==========================button特效結束======================= -->
 <!-- stickey bar: -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
-
 <script>
     let a = new StickySidebar("#sidebar", {
         topSpacing: 40,
@@ -228,5 +212,4 @@
     });
 </script>
 </body>
-
 </html>

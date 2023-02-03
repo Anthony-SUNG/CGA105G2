@@ -10,12 +10,10 @@
 %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>💰point</title>
     <style>
         /* 商品名稱 */
@@ -47,7 +45,6 @@
         }
     </style>
 </head>
-
 <body>
 <div id="page-start-anchor"></div>
 <!-- header start -->
@@ -101,9 +98,7 @@
             </div>
         </main>
     </div>
-
 </div>
-
 <!-- main -->
 <!-- footer start -->
 <%@ include file="/front-end/Member/01h/footerin.jsp" %>
@@ -115,17 +110,13 @@
     $("#pageSubmenu1 a:contains(🔆點數商品)").closest("a").addClass("active disabled bg-white topage");
 </script>
 <script>
-
     $(document).ready(function () {
-
         $("#pointgooditem").click(function () {
             //输入另一个页面的链接
             //我的跳转到controller中的toIntroduction这个方法中进行的页面跳转
             window.location.href = "pointItemPage.jsp";
         });
     });
-
 </script>
 </body>
-
 </html>

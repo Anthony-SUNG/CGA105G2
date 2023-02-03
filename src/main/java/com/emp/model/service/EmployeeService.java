@@ -11,6 +11,7 @@ import com.emp.model.EmployeeRoot.pojo.EmployeeRoot;
 import com.emp.model.Root.dao.RootDAO_interface;
 import com.emp.model.Root.dao.impl.RootJDBCDAO;
 import com.emp.model.Root.pojo.Root;
+import java.util.List;
 
 public class EmployeeService {
 	private EmployeeDAO_interface dao;
@@ -42,9 +43,12 @@ public class EmployeeService {
 		return dao.update(employee);
 		
 	}
+	public List<Employee> getAll()
+	{
+		return dao.getAll();
+	}
 	public List<Employee> all() {
 		return dao.getAll();
-
 	}
 	public List<Root>  getEmpRootAll() {
 		return  daoRoot.getAll();
@@ -58,4 +62,39 @@ public class EmployeeService {
 		return daoEmpRoot.findByEMP_ID(EMP_ID);
 	}
 
+    public List<EmployeeRoot> getRootAll()
+    {
+        return daoEmpRoot.getAll();
+    }
+
+    public void deleteRoot(Integer empId, Integer rootId)
+    {
+        daoEmpRoot.delete(empId, rootId);
+    }
+
+    public Root findByRootId(Integer ROOT_ID)
+    {
+        return daoRoot.findByRootId(ROOT_ID);
+    }
+
+    public void addEmpRoot(EmployeeRoot employeeRoot)
+    {
+    	List<EmployeeRoot> empRoot = daoEmpRoot.findByEMP_ID(employeeRoot.getEmpId());
+
+    	System.out.println(employeeRoot.getEmpId()+"編號");
+    	System.out.println(employeeRoot.getRootId()+"新增");
+    	System.out.println(empRoot);
+
+    	if(empRoot.isEmpty()) {
+    		daoEmpRoot.insert(employeeRoot);
+    	}
+    	for(EmployeeRoot er :empRoot) {
+    		System.out.println(er.getRootId()+"擁有");
+    		if(er.getRootId()==employeeRoot.getRootId()) {
+    			System.out.println("重複");
+    		}else {
+    			daoEmpRoot.insert(employeeRoot);
+    		}
+    	}
+    }
 }

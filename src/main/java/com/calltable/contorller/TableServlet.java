@@ -24,7 +24,6 @@ public class TableServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         doPost(req, res);
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
@@ -33,7 +32,6 @@ public class TableServlet extends HttpServlet {
         Integer storeId = (Integer) req.getSession().getAttribute("storeId");
         Integer memId   = (Integer) req.getSession().getAttribute("memId");
         Integer empId   = (Integer) req.getSession().getAttribute("empId");
-
         if("table".equals(action)){
             //進入網頁抓時段、桌數、動態產生網頁選項
             Store store=tbs.topage(storeId);
@@ -45,13 +43,13 @@ public class TableServlet extends HttpServlet {
             req.setAttribute("time",time);
             req.setAttribute("table",tablelist);
             String url = "/front-end/store/calltable/callTable.jsp";
-            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
         }
         //查詢訂位資訊
         if("search".equals(action)){
             String date= req.getParameter("date");
-            String totime=req.getParameter("totime");
+            String totime=req.getParameter("totime").trim();
             Map<String,JSONArray> ans=tbs.search(storeId,date,totime,0);
             Map<String,JSONArray> use=tbs.search(storeId,date,totime,2);
             JSONArray json=ans.get("json");
@@ -63,8 +61,9 @@ public class TableServlet extends HttpServlet {
             req.setAttribute("listq",json.size());
             req.setAttribute("tablehave",tablehave);
             req.setAttribute("usejson",usejson);
+            System.out.println(json.size());
             String url = "/TableServlet?action=table";
-            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
         }
         //重新整理
@@ -74,7 +73,7 @@ public class TableServlet extends HttpServlet {
             req.setAttribute("date",date);
             req.setAttribute("totime",totime);
             String url = "/TableServlet?action=search";
-            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
         }
         //帶位
@@ -90,7 +89,7 @@ public class TableServlet extends HttpServlet {
             pojo.setRenId(id);
             pojo.setRenTable(table);
             tbs.totable(pojo);
-            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
             return;
         }
@@ -108,7 +107,7 @@ public class TableServlet extends HttpServlet {
             pojo.setRenTable(table);
             tbs.totable(pojo);
             String url = "/TableServlet?action=search";
-            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
             return;
         }
@@ -125,15 +124,12 @@ public class TableServlet extends HttpServlet {
             pojo.setRenTable(table);
             tbs.totable(pojo);
             String url = "/TableServlet?action=search";
-            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
             return;
         }
         if ("tobuy".equals(action)){
 
         }
-
-
-
     }
 }

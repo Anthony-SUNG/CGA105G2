@@ -3,15 +3,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>🗃️管理</title>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/front-end/Member/01h/headerin.jsp" %>
@@ -94,8 +91,6 @@
     $("#pageSubmenu3").removeClass("collapse");
     $("#pageSubmenu3 a:contains(🔆訂位預約)").closest("a").addClass("active disabled bg-white topage");
 </script>
-
-
 <script>
     var total_count = 0;
     var total_coint_limit = parseInt(${foodorder_peopleNum});// jsp取得人數
@@ -112,7 +107,6 @@
         }
         ;
     })
-
     document.getElementById(`tr_detail_${i}`).querySelectorAll('td')[3].querySelectorAll('button')[1].addEventListener('click', function () {
         let count = document.getElementById(`count_${i}`).value;
         if (total_count < total_coint_limit) {
@@ -125,5 +119,4 @@
     </c:forEach>
 </script>
 </body>
-
 </html>

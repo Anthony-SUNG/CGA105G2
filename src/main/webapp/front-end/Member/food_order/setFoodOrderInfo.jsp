@@ -2,15 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>🗃️管理</title>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/front-end/Member/01h/headerin.jsp" %>
@@ -91,7 +88,6 @@
                 </form>
             </div>
         </div>
-
     </div>
 </div>
 </div>
@@ -140,6 +136,7 @@
     });
     document.addEventListener('DOMContentLoaded', selectEventListener);
     let select_time_temp = 0;
+
     function selectEventListener(event) {
         if (select_time_temp == 0) {
             for (let order_time of order_time_list) {
@@ -157,7 +154,5 @@
     }
 </script>
 <script src="https://kit.fontawesome.com/e952f26fd6.js" crossorigin="anonymous"></script>
-
 </body>
-
 </html>

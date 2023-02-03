@@ -33,7 +33,6 @@ public class TableService {
         JSONObject obj=null;
         ReservaJDBCDAO reservaJDBCDAO=new ReservaJDBCDAO();
         List<Reserva> Rlist= reservaJDBCDAO.getByStoreIdRendate(storeId,date,time,stat);
-        List<Reserva> Rlist2= reservaJDBCDAO.getByStoreIdRendate(storeId,date,time,2);
         JSONArray tablehave=new JSONArray();
         for (Reserva e :Rlist){
             //table:reserva
@@ -74,6 +73,7 @@ public class TableService {
             obj.put("DETAIL",json2);
             json.add(obj);
         }
+        List<Reserva> Rlist2= reservaJDBCDAO.getByStoreIdRendate(storeId,date,time,2);
         for (Reserva i :Rlist2){
             if (i.getRenTable()>0){
                 tablehave.add(i.getRenTable());

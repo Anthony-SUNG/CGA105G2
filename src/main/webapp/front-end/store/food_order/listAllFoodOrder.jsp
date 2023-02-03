@@ -1,21 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>店家首頁</title>
 </head>
 <body>
 <!-- header start -->
 <%@ include file="/front-end/store/01h/headerin.jsp" %>
 <!-- header end -->
-
 <!-- main -->
 <div class="container-fluid">
     <div class="row">
@@ -42,19 +38,13 @@
     $("#pageSubmenu3").removeClass("collapse");
     $("#pageSubmenu3 a:contains(🔆訂位總覽)").closest("a").addClass("active disabled bg-white topage");
 </script>
+<script>
+    var data_test = `${foodorderListInfo}`;
 
-
-  <script>
-
-//     var data_test = `[
-//       {"REN_ID":"1","MEM_NAME":"","MEM_PHONE":"","REN_NAME":"周盟鎮","REN_PHONE":"0987654321","REN_TIME":"11:00","REN_STATUS":"已預約","REN_DATE":"2023-01-01","REN_HEADCOUNT":"4","MEAL_NAME_LIST":"牛排套餐*1, 豬排套餐*1","REN_FPRICE":"2000"}
-//     ]`;
-	var data_test = `${foodorderListInfo}`;
-    function filter_state(data){
-      let filter_data = JSON.parse(data);
-      return filter_data;
+    function filter_state(data) {
+        let filter_data = JSON.parse(data);
+        return filter_data;
     }
-
 
     function table_test(data_test) {
         let i = 0;
@@ -63,67 +53,65 @@
             data: data_test,
             // 設定資料欄位區塊(columns),
             "columns": [
-                { data: null,title: "" },
-                { data: 'REN_ID',title: "訂單編號" },
-                { data: 'MEM_NAME',title: "會員姓名"},
-                { data: 'MEM_PHONE',title: "會員電話"},
-                { data: 'REN_NAME',title: "姓名"},
-                { data: 'REN_PHONE',title: "電話" },
-                { data: 'REN_DATE',title: "日期" },
-                { data: 'REN_TIME',title: "時段" },
-                { data: 'REN_HEADCOUNT',title: "人數" },
-                { data: 'MEAL_NAME_LIST',title: "餐點" },
-                { data: 'REN_FPRICE',title: "金額" },
-                { data: 'REN_STATUS',title: "狀態" },
+                {data: null, title: ""},
+                {data: 'REN_ID', title: "訂單編號"},
+                {data: 'MEM_NAME', title: "會員姓名"},
+                {data: 'MEM_PHONE', title: "會員電話"},
+                {data: 'REN_NAME', title: "姓名"},
+                {data: 'REN_PHONE', title: "電話"},
+                {data: 'REN_DATE', title: "日期"},
+                {data: 'REN_TIME', title: "時段"},
+                {data: 'REN_HEADCOUNT', title: "人數"},
+                {data: 'MEAL_NAME_LIST', title: "餐點"},
+                {data: 'REN_FPRICE', title: "金額"},
+                {data: 'REN_STATUS', title: "狀態"},
             ],
-            "columnDefs":[
+            "columnDefs": [
                 {
-                    targets: [0,1,2,3,4,5,6,7,8,9,10,11], // 第一欄
+                    targets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], // 第一欄
                     createdCell: function (cell, cellData, rowData, rowIndex, colIndex) {
-                        if(colIndex===0){
-                          i = i+1;
-                          cell.innerHTML = `\${i}`
-                          cell.setAttribute('style',`width:5%`);
+                        if (colIndex === 0) {
+                            i = i + 1;
+                            cell.innerHTML = `\${i}`
+                            cell.setAttribute('style', `width:5%`);
                         }
-                        if(colIndex===1){
-                          cell.setAttribute('style',`width:5%`);
+                        if (colIndex === 1) {
+                            cell.setAttribute('style', `width:5%`);
                         }
-                        if(colIndex===2){
-                          cell.setAttribute('style',`width:10%`);
+                        if (colIndex === 2) {
+                            cell.setAttribute('style', `width:10%`);
                         }
-                        if(colIndex===3){
-                          cell.setAttribute('style',`width:5%`);
+                        if (colIndex === 3) {
+                            cell.setAttribute('style', `width:5%`);
                         }
-                        if(colIndex===4){
-                            cell.setAttribute('style',`width:10%`);
+                        if (colIndex === 4) {
+                            cell.setAttribute('style', `width:10%`);
                         }
-                        if(colIndex===5){
-                            cell.setAttribute('style',`width:5%`);
+                        if (colIndex === 5) {
+                            cell.setAttribute('style', `width:5%`);
                         }
-                        if(colIndex===6){
-                          cell.setAttribute('style',`width:15%`);
+                        if (colIndex === 6) {
+                            cell.setAttribute('style', `width:15%`);
                         }
-                        if(colIndex===7){
-                          cell.setAttribute('style',`width:5%`);
+                        if (colIndex === 7) {
+                            cell.setAttribute('style', `width:5%`);
                         }
-                        if(colIndex===8){
-                            cell.setAttribute('style',`width:5%`);
+                        if (colIndex === 8) {
+                            cell.setAttribute('style', `width:5%`);
                         }
-                        if(colIndex===9){
-                          cell.setAttribute('style',`width:25%`);
+                        if (colIndex === 9) {
+                            cell.setAttribute('style', `width:25%`);
                         }
-                        if(colIndex===10){
-                          cell.setAttribute('style',`width:5%`);
+                        if (colIndex === 10) {
+                            cell.setAttribute('style', `width:5%`);
                         }
-                        if(colIndex===11){
-                          cell.setAttribute('style',`width:5%`);
+                        if (colIndex === 11) {
+                            cell.setAttribute('style', `width:5%`);
                         }
                     }
-
                 },
             ],
             // 設定欄位元素定義區塊(columnDefs),
-
             /*設定屬性(預設功能)區塊*/
             searching: true, // 預設為true 搜尋功能，若要開啟不用特別設定
             paging: true, // 預設為true 分頁功能，若要開啟不用特別設定
@@ -173,7 +161,6 @@
                 },
             },
         });
-
     }
 
     let filter_data = filter_state(data_test);
@@ -183,7 +170,6 @@
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script>
     const {createApp} = Vue;
-
     createApp({
         data() {
             return {
@@ -194,7 +180,6 @@
 </script>
 <!-- stickey bar: -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
-
 <script>
     let a = new StickySidebar("#sidebar", {
         topSpacing: 40,
@@ -204,5 +189,4 @@
     });
 </script>
 </body>
-
 </html>

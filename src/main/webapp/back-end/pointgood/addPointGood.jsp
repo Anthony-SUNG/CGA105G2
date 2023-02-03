@@ -4,13 +4,11 @@
 <%@ page import="com.point.model.PointGoods.*" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>💰point</title>
     <style>
         /* 商品名稱 */
@@ -47,7 +45,6 @@
         }
     </style>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/back-end/01h/headerin.jsp" %>
@@ -101,14 +98,10 @@
                             </button>
                         </div>
                     </form>
-
                 </div>
             </div>
-
-
         </main>
     </div>
-
 </div>
 <!-- main -->
 <!-- footer start -->
@@ -148,7 +141,5 @@
         }
     }
 </script>
-
 </body>
-
 </html>

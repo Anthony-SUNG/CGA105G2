@@ -7,19 +7,14 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>後台</title>
-
 </head>
 <body>
 <!-- header start -->
 <%@ include file="/back-end/01h/headerout.jsp" %>
 <!-- header end -->
-
 <!-- main -->
 <div class="container-fluid">
     <div class="row">
-        <!-- nav start -->
-<%--        <%@ include file="/back-end/01h/nav/navout.jsp" %>--%>
-        <!-- nav end -->
         <main role="main" class="col-md-9 m-sm-auto col-lg-10 pl-md-4 shadow">
             <div class=" d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-15 mt-5 border-bottom">
                 <h1 class="h2">🔆員工登入</h1>
@@ -56,7 +51,6 @@
     </div>
 </div>
 <!-- main -->
-
 <!-- footer start -->
 <%@ include file="/back-end/01h/footerin.jsp" %>
 <!-- footer end -->
@@ -64,7 +58,6 @@
 <script>
     $("a:contains(🚪Sign in)").closest("a").addClass("active disabled topage");
 </script>
-
 <script>
     var inputAcc = document.getElementById('inputAcc');
     var inputPwd = document.getElementById('inputPwd');
@@ -92,13 +85,8 @@
         ;
     };
     $(document).ready(function () {
-
         new ClipboardJS('.btn');
-
     });
 </script>
-
-
-
 </body>
 </html>

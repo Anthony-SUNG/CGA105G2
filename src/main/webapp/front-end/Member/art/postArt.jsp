@@ -5,8 +5,6 @@
 <%@page import="com.art.model.Article.pojo.Article" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <%
     Article article = (Article) request.getAttribute("article");
     Integer memId = (Integer) request.getSession().getAttribute("memId");
@@ -16,16 +14,13 @@
     String today = sdf.format(new Date());
     pageContext.setAttribute("member", member);
 %>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>🗃️管理</title>
     <style>
         body {
@@ -121,7 +116,6 @@
         /* ==================上傳圖片css結束======================= */
     </style>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/front-end/Member/01h/headerin.jsp" %>
@@ -133,8 +127,7 @@
         <%@ include file="/front-end/Member/01h/nav/navin02.jsp" %>
         <!-- nav end -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 my-5">
-            <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">🔆發文頁面</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
@@ -160,7 +153,6 @@
                             </c:if>
                         </div>
                         <div class="postmember_text" style="margin-left: 5px;">
-
 								<span class="postmember_name" style="font-size: 20px;">
                                     ${member.memName} </span>
                             <div>
@@ -180,7 +172,6 @@
                         <div class="poststore_img">
                             <img src="/CGA105G2/assets/images/ex1.jpg"
                                  style="width: 65px; height: 60px; border: 1px solid rgb(255, 216, 87);">
-
                         </div>
                         <div class="poststore_text"
                              style="margin-left: 5px; align-items: center; display: flex;">
@@ -190,40 +181,39 @@
                     </div>
                     <!-- ===================店家評分星星================== -->
                     <!-- star rating -->
-                    <form method="post" action="<%=request.getContextPath()%>/front-end/Member/art/ArtServlet"  enctype="multipart/form-data">
+                    <form method="post" action="<%=request.getContextPath()%>/front-end/Member/art/ArtServlet"
+                          enctype="multipart/form-data">
                         <div class="rating-wrapper pt-3">
                             <div>
                                 <input type="hidden" name="memId" value="${member.memId}">
                                 <input type="hidden" name="storeId" value="${sid}">
-                                <span   style="font-size: 22px; font-weight: 600; background-color: antiquewhite; margin-left: 20px; line-height: 60px;"></span>
+                                <input type="hidden" name="pointChange" value="完成訂單評論">
+                                <input type="hidden" name="pointNumber" value="10">
+                                <span style="font-size: 22px; font-weight: 600; background-color: antiquewhite; margin-left: 20px; line-height: 60px;"></span>
                                 <!-- star 5 -->
                                 <input type="radio" id="5-star-rating" class="storescore"
                                        name="artScore" value="5"> <label
                                     for="5-star-rating" class="star-rating storescorelabel">
                                 <i class="fa fa-star d-inline-block"></i>
                             </label>
-
                                 <!-- star 4 -->
                                 <input type="radio" id="4-star-rating" class="storescore"
                                        name="artScore" value="4"> <label
                                     for="4-star-rating" class="star-rating star storescorelabel">
                                 <i class="fa fa-star d-inline-block"></i>
                             </label>
-
                                 <!-- star 3 -->
                                 <input type="radio" id="3-star-rating" class="storescore"
                                        name="artScore" value="3"> <label
                                     for="3-star-rating" class="star-rating star storescorelabel">
                                 <i class="fa fa-star d-inline-block"></i>
                             </label>
-
                                 <!-- star 2 -->
                                 <input type="radio" class="storescore" id="2-star-rating"
                                        name="artScore" value="2"> <label
                                     for="2-star-rating" class="star-rating star storescorelabel">
                                 <i class="fa fa-star d-inline-block"></i>
                             </label>
-
                                 <!-- star 1 -->
                                 <input type="radio" id="1-star-rating" class="storescore"
                                        name="artScore" value="1"> <label
@@ -233,8 +223,6 @@
                                     style="font-size: 22px; font-weight: 600; background-color: antiquewhite;">:評分</span>
                             </div>
                         </div>
-
-
                         <!-- ==============標記tag================== -->
                         <div class="tag"
                              style="margin-top: 5px;display: flex;background-color: rgb(82, 206, 156);color: white;border-radius:15px ;font-size: 22px;font-weight: 1000;padding: 5px;padding-left: 10px;">
@@ -248,7 +236,6 @@
                         </div>
                         <!-- ===========輸入欄位開始================ -->
                         <div style="margin-bottom: 30px;">
-
                             <div>
                                 <input type="text" name="artHeader" id="tb22_title" placeholder="文章標題"
                                        value="<%= (article==null)? "" : article.getArtHeader()%>"
@@ -301,11 +288,7 @@
             </div>
         </main>
     </div>
-
-
     <!-- =================發文結束======================= -->
-
-
 </div>
 </div>
 <!-- main -->
@@ -328,11 +311,8 @@
 
     // =====================上傳圖片js結束============================
 </script>
-
 <!-- stickey bar: -->
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
 <script>
     let a = new StickySidebar("#sidebar", {
         topSpacing: 40,
@@ -356,25 +336,34 @@
         });
     }
 </script>
+<!-- ====================alert start============================= -->
 <script>
-    //     var textarea = document.getElementById("tb22_comment");
-    //     var placeholder = "給店家的評語";
-    //     textarea.value = placeholder;
-    //     textarea.style.color = "gray";
+    function addCupAlert() {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-outline-primary m-5 fs-5',
+            },
+            buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+            position: 'middle',
+            icon: 'success',
+            title: '新增成功',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
 
-    //     textarea.addEventListener("focus", function(){
-    //         if (this.value === placeholder) {
-    //             this.value = "";
-    //             this.style.color = "black";
-    //         }
-    //     });
-    //     textarea.addEventListener("blur", function(){
-    //         if (this.value === "") {
-    //             this.value = placeholder;
-    //             this.style.color = "gray";
-    //         }
-    //     });
+    let toResult = null;
+    toResult =
+    <%= request.getAttribute("toResult") %>
+    if (toResult == true) {
+        // alert(toResult);
+        addCupAlert();
+        toResult = null;
+    }
+    ;
 </script>
+<!-- ====================alert end============================= -->
 </body>
-
 </html>

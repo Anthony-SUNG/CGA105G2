@@ -229,8 +229,13 @@ public class StoreService {
 		Store.setStoreComAddress(storecomaddress);
 		Store.setStorePhone2(storephone2);
 		Store.setStoreTwId(storetwid);
+		Store.setStoreStatus(1);
 		dao.inserts(Store);
 		
+	}
+
+	public boolean getByAcc(String storeacc) {
+		return dao.getByAcc(storeacc);
 	}
 
 }

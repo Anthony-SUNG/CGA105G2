@@ -2,15 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>🗃️管理</title>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/front-end/Member/01h/headerin.jsp" %>
@@ -42,10 +39,6 @@
     $("#pageSubmenu3 a:contains(🔆訂位紀錄)").closest("a").addClass("active disabled bg-white topage");
 </script>
 <script>
-
-    //     var data_test = `[
-    //       {"REN_ID":"1","REN_NAME":"周盟鎮","REN_PHONE":"0987654321","REN_TIME":"11:00","REN_STATUS":"已預約","REN_DATE":"2023-01-01","REN_HEADCOUNT":"4","MEAL_NAME_LIST":"牛排套餐*1, 豬排套餐*1","REN_FPRICE":"2000","STORE_NAME":"貴族世家"}
-    //     ]`;
     var data_test = `${foodorderListInfo}`;
 
     function filter_state(data) {
@@ -56,40 +49,6 @@
         var aa = filter_data;
         return filter_data;
     }
-
-
-    // function deleteFun(jj){
-    //   // post後端取回已修改資料庫訊號
-    //   let name = document.getElementById(`name${jj}`).innerHTML;
-    //   let shop = document.getElementById(`shop${jj}`).innerHTML;
-    //   let count = document.getElementById(`count${jj}`).innerHTML;
-    //   let date_time = document.getElementById(`date_time${jj}`).innerHTML;
-    //   let time = document.getElementById(`time_frame${jj}`).innerHTML;
-
-
-    //   //1. 把資料整理往後送
-    //   let post_data = {
-    //     data:[{"name":`${name}`,"shop":`${shop}`,"count":`${count}`,"date_time":`${date_time}`,"time":`${time}`}]
-    //   };
-    //   console.log(post_data.data[0]);
-    //   alert(`${post_data.data[0]}`);
-    //   //取回後送更改狀態是否OK
-    //   let return_state = 'ok';
-    //   if(return_state==='ok'){
-    //       //2. 該筆資料前端隱藏
-    //       // document.getElementById(`name${jj}`).parentElement.setAttribute('style','display: none;');
-    //       console.log(jj-1);
-    //       console.log(filter_data);
-    //       filter_data.splice(jj-1,1);
-    //       $('#code').DataTable.fnDestroy;
-    //       table_test(filter_data);
-
-    //       alert("已取消");
-    //   }else{
-    //     alert('不能取消');
-    //   }
-
-    // }
 
     function table_test(data_test) {
         let i = 0;
@@ -153,8 +112,6 @@
                             cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 11) {
-//                           console.log(data_test[i-1]);
-//                           console.log(data_test[i-1].SCORE_INPUT);
                             if (data_test[i - 1].SCORE_INPUT === "1") {
                                 cell.innerHTML = `
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/Member/art/ArtServlet" >
@@ -168,22 +125,12 @@
                             if (data_test[i - 1].SCORE_INPUT === "0") {
                                 cell.innerHTML = ``;
                             }
-//                           cell.innerHTML = `
-//                           <FORM METHOD="post" ACTION="food_order.do" >
-//                             <input type="hidden" name="listAllFoodOrderScoreMemid" value="\${data_test[i-1].MEM_ID}">
-//                             <input type="hidden" name="listAllFoodOrderScoreStoreid" value="\${data_test[i-1].STROE_ID}">
-//                             <input type="hidden" name="action" value="">
-//                             <input type="submit" class="btn btn-danger btn-sm" value="評分">
-//                           </FORM>
-//                           `;
                             cell.setAttribute('style', `width:10%`);
                         }
                     }
-
                 },
             ],
             // 設定欄位元素定義區塊(columnDefs),
-
             /*設定屬性(預設功能)區塊*/
             searching: true, // 預設為true 搜尋功能，若要開啟不用特別設定
             paging: true, // 預設為true 分頁功能，若要開啟不用特別設定
@@ -233,13 +180,10 @@
                 },
             },
         });
-
     }
 
     let filter_data = filter_state(data_test);
     $(document).ready(table_test(filter_data));
-
-
 </script>
 <!-- Vue -->
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -254,11 +198,8 @@
         },
     }).mount("#app");
 </script>
-
-
 <!-- stickey bar: -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
-
 <script>
     let a = new StickySidebar("#sidebar", {
         topSpacing: 40,
@@ -268,5 +209,4 @@
     });
 </script>
 </body>
-
 </html>

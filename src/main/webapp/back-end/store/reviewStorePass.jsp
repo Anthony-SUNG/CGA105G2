@@ -4,10 +4,8 @@
 <%
     JSONArray list_stat = (JSONArray) request.getAttribute("list_stat");
 %>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
@@ -41,7 +39,7 @@
 <!-- sidebar menu Class -->
 <script>
     $("a:contains(✔️審核)").closest("a").addClass("active disabled topage");
-    $("a:contains(🔻店家帳號)").closest("a").attr("data-toggle","show");
+    $("a:contains(🔻店家帳號)").closest("a").attr("data-toggle", "show");
     $("#pageSubmenu2").removeClass("collapse");
     $("#pageSubmenu2 a:contains(🔆已審核)").closest("a").addClass("active disabled bg-white topage");
 </script>
@@ -52,7 +50,7 @@
     $(document).ready(function () {
         const dataSet = [];
         <c:forEach var="store" items="${list_stat}">
-            dataSet.push(${store});
+        dataSet.push(${store});
         </c:forEach>
         $('#store').DataTable({
             // 設定資料來源區塊(data or ajax….等),
@@ -132,12 +130,12 @@
     });
 </script>
 <script>
-    const list=[];
+    const list = [];
     <c:forEach var="empRoot" items="${empRoot}">
     list.push(${empRoot.rootId});
     </c:forEach>
-    for (let e of list){
-        switch (e){
+    for (let e of list) {
+        switch (e) {
             case 1:
                 $("#a2").removeClass("disabled");
                 $("#a3").removeClass("disabled");
@@ -160,5 +158,4 @@
     }
 </script>
 </body>
-
 </html>

@@ -10,25 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/SubsServlet")
 public class SubsServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-	public void doGet(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
-		doPost(req, res);
-	}
+    private static final long serialVersionUID = 1L;
 
-	public void doPost(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
-		
-		req.setCharacterEncoding("UTF-8");
-		String action = req.getParameter("action");
-		Integer memId   = (Integer) req.getSession().getAttribute("memId");
-		
-		if ("insertArt".equals(action)) {
-			
-			/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-			
-		}
+    public void doGet(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException {
+        doPost(req, res);
+    }
 
-}
+    public void doPost(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        String action = req.getParameter("action");
+        Integer memId = (Integer) req.getSession().getAttribute("memId");
+        if ("insertArt".equals(action)) {
+        }
+    }
 }

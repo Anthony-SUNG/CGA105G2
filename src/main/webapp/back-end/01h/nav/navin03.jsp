@@ -30,7 +30,7 @@
                 <ul class="collapse list-unstyled" id="pageSubmenu3">
                     <li>
                         <hr>
-                        <a href="/CGA105G2/back-end/emp/updateEmpAuthorization2.jsp" class="nav-link">🔆權限設定</a>
+                        <a href="/CGA105G2/back-end/emp/updateEmpAuthorization2.jsp" class="nav-link">🔆權限查詢</a>
                     </li>
                     <li><a href="/CGA105G2/back-end/emp/addEmpAuthorization2.jsp" class="nav-link">🔆新增權限</a>
                     </li>

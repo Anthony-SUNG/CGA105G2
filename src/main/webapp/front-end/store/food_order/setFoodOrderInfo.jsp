@@ -2,20 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>店家首頁</title>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/front-end/store/01h/headerin.jsp" %>
 <!-- header end -->
-
 <!-- main -->
 <div class="container-fluid">
     <div class="row">
@@ -151,8 +147,6 @@
                                value="送出">
                     </form>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -211,7 +205,5 @@
         document.getElementById("orderRule").setAttribute("style", "display: none;");
     });
 </script>
-
 </body>
-
 </html>

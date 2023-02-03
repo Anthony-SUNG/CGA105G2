@@ -1,21 +1,15 @@
 <%@page import="com.art.model.Article.pojo.Article" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <%
     // Article article = (Article)request.getAttribute("article");
 %>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>🗃️管理</title>
     <style>
         body {
@@ -64,7 +58,7 @@
             cursor: pointer !important;
             font-size: 32px !important;
             padding: 8px 3px !important;
-            transition: color 0.5s !important; 
+            transition: color 0.5s !important;
         }
 
         .storescore {
@@ -111,7 +105,6 @@
         /* ==================上傳圖片css結束======================= */
     </style>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/front-end/Member/01h/headerin.jsp" %>
@@ -130,24 +123,22 @@
                          style="display: flex; margin-top: 30px;">
                         <div class="postmember_img">
                             <c:if test="${not empty member.memPic}">
-                            <img src="${pageContext.request.contextPath}/LonginServlet?action=getOtherMemberPhoto&memId=${member.memId}"
-                                 style="width: 60px; height: 60px; border-radius: 80%; border: 1px solid rgb(255, 216, 87);">
-						</c:if>
-						<c:if test="${empty member.memPic}">
-                            	 <img src="https://i.pinimg.com/564x/07/c4/72/07c4720d19a9e9edad9d0e939eca304a.jpg" alt="" style="width: 60px; height: 60px; border-radius: 80%; border: 1px solid rgb(255, 216, 87);">
-                            		</c:if>
-
+                                <img src="${pageContext.request.contextPath}/LonginServlet?action=getOtherMemberPhoto&memId=${member.memId}"
+                                     style="width: 60px; height: 60px; border-radius: 80%; border: 1px solid rgb(255, 216, 87);">
+                            </c:if>
+                            <c:if test="${empty member.memPic}">
+                                <img src="https://i.pinimg.com/564x/07/c4/72/07c4720d19a9e9edad9d0e939eca304a.jpg"
+                                     alt=""
+                                     style="width: 60px; height: 60px; border-radius: 80%; border: 1px solid rgb(255, 216, 87);">
+                            </c:if>
                         </div>
                         <div class="postmember_text mt-6" style="margin-left: 5px;font-weight:1000">
-
 								<span class="postmember_name" style="font-size: 20px;">
                                     ${param.memberName} </span>
                         </div>
                     </div>
                 </div>
             </div>
-
-
             <!-- ==================發文開始======================= -->
             <div class="row justify-content-center">
                 <div class="col-7 mb-10 shadow "
@@ -157,14 +148,11 @@
                         <div class="poststore_img">
                             <img src="/CGA105G2/assets/images/ex1.jpg"
                                  style="width: 65px; height: 60px; border: 1px solid rgb(255, 216, 87);">
-
                         </div>
                         <div class="poststore_text"
                              style="margin-left: 5px; align-items: center; display: flex;">
-
 								<span class="post_name"
                                       style="font-size: 30px; font-weight: 1000;"> ${param.storeName} </span>
-
                         </div>
                     </div>
                     <!-- ===================店家評分星星================== -->
@@ -174,37 +162,31 @@
                             <div>
                                 <input type="hidden" name="memId" value="${param.memId}">
                                 <input type="hidden" name="storeId" value="${param.storeId}">
-                                <span
-                                        style="font-size: 22px; font-weight: 600; background-color: antiquewhite; margin-left: 20px; line-height: 60px;">
-										</span>
+                                <span style="font-size: 22px; font-weight: 600; background-color: antiquewhite; margin-left: 20px; line-height: 60px;"></span>
                                 <!-- star 5 -->
                                 <input type="radio" id="5-star-rating" class="storescore"
                                        name="artScore" value="5"> <label
                                     for="5-star-rating" class="star-rating storescorelabel">
                                 <i class="fa fa-star d-inline-block"></i>
                             </label>
-
                                 <!-- star 4 -->
                                 <input type="radio" id="4-star-rating" class="storescore"
                                        name="artScore" value="4"> <label
                                     for="4-star-rating" class="star-rating star storescorelabel">
                                 <i class="fa fa-star d-inline-block"></i>
                             </label>
-
                                 <!-- star 3 -->
                                 <input type="radio" id="3-star-rating" class="storescore"
                                        name="artScore" value="3"> <label
                                     for="3-star-rating" class="star-rating star storescorelabel">
                                 <i class="fa fa-star d-inline-block"></i>
                             </label>
-
                                 <!-- star 2 -->
                                 <input type="radio" class="storescore" id="2-star-rating"
                                        name="artScore" value="2"> <label
                                     for="2-star-rating" class="star-rating star storescorelabel">
                                 <i class="fa fa-star d-inline-block"></i>
                             </label>
-
                                 <!-- star 1 -->
                                 <input type="radio" id="1-star-rating" class="storescore"
                                        name="artScore" value="1"> <label
@@ -214,18 +196,19 @@
                                     style="font-size: 22px; font-weight: 600; background-color: antiquewhite;">:評分</span>
                             </div>
                         </div>
-
-
                         <!-- ==============標記tag================== -->
-							<div class="tag" style="margin-top: 5px;display: flex;background-color: rgb(82, 206, 156);color: white;border-radius:15px ;font-size: 22px;font-weight: 1000;padding: 5px;padding-left: 10px;">
-                                店家標籤:
-                                <input type="checkbox" value="銀髮族友善店家" name="artTag"  style="margin-left: 10px;zoom: 180%;">&nbsp;銀髮族友善店家󠀠
-                                <input type="checkbox" value="寵物友善店家" name="artTag"  style="margin-left: 10px;zoom: 180%;">&nbsp;寵物友善店家
-                                <input type="checkbox" value="殘障人士友善店家" name="artTag"  style="margin-left: 10px;zoom: 180%;">&nbsp;殘障人士友善店家
-                            </div>
+                        <div class="tag"
+                             style="margin-top: 5px;display: flex;background-color: rgb(82, 206, 156);color: white;border-radius:15px ;font-size: 22px;font-weight: 1000;padding: 5px;padding-left: 10px;">
+                            店家標籤:
+                            <input type="checkbox" value="銀髮族友善店家" name="artTag"
+                                   style="margin-left: 10px;zoom: 180%;">&nbsp;銀髮族友善店家󠀠
+                            <input type="checkbox" value="寵物友善店家" name="artTag"
+                                   style="margin-left: 10px;zoom: 180%;">&nbsp;寵物友善店家
+                            <input type="checkbox" value="殘障人士友善店家" name="artTag"
+                                   style="margin-left: 10px;zoom: 180%;">&nbsp;殘障人士友善店家
+                        </div>
                         <!-- ===========輸入欄位開始================ -->
                         <div style="margin-bottom: 30px;">
-
                             <div>
                                 <input type="text" name="artHeader" id="tb22_title" placeholder="文章標題"
                                        value="${param.artHeader}"
@@ -249,7 +232,6 @@
                                      src="https://www.btklsby.go.id/images/placeholder/basic.png"
                                      alt="">
                                 <h3 id="filename">修改圖片</h3>
-
                             </div>
                         </label>
                         </div>
@@ -281,10 +263,7 @@
         </main>
     </div>
 </div>
-
 <!-- =================發文結束======================= -->
-
-
 <!-- main -->
 <!-- footer start -->
 <%@ include file="/front-end/Member/01h/footerin.jsp" %>
@@ -292,7 +271,6 @@
 <script>
     $("a:contains(🌟)").closest("a").addClass("active disabled topage");
 </script>
-
 <!-- ==================上傳圖片js=================== -->
 <script>
     function fileValue(value) {
@@ -309,11 +287,8 @@
 
     // =====================上傳圖片js結束============================
 </script>
-
 <!-- stickey bar: -->
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
 <script>
     let a = new StickySidebar("#sidebar", {
         topSpacing: 40,
@@ -322,20 +297,19 @@
         innerWrapperSelector: ".sidebar__inner"
     });
 </script>
-    <script>
-        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].addEventListener('change', function() {
-                var checkboxGroup = this.parentNode.parentNode;
-                var checkboxesInGroup = checkboxGroup.querySelectorAll('input[type="checkbox"]');
-                for (var j = 0; j < checkboxesInGroup.length; j++) {
-                    if (checkboxesInGroup[j] !== this) {
-                        checkboxesInGroup[j].checked = false;
-                    }
+<script>
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].addEventListener('change', function () {
+            var checkboxGroup = this.parentNode.parentNode;
+            var checkboxesInGroup = checkboxGroup.querySelectorAll('input[type="checkbox"]');
+            for (var j = 0; j < checkboxesInGroup.length; j++) {
+                if (checkboxesInGroup[j] !== this) {
+                    checkboxesInGroup[j].checked = false;
                 }
-            });
-        }
-    </script>
+            }
+        });
+    }
+</script>
 </body>
-
 </html>

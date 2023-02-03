@@ -4,18 +4,14 @@
 <%
     Code code = (Code) request.getAttribute("Code");
 %>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>🗃️管理</title>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/front-end/store/01h/headerin.jsp" %>
@@ -31,7 +27,6 @@
                      style="border: 2px solid rgba(19, 6, 197, 0.089); border-radius: 30px;">
                 <div class="col-12 col-lg-8 mb-14 mb-lg-0 container">
                     <h1 class="text-center mt-5">🔆新增優惠券</h1>
-
                     <%-- 錯誤表列 --%>
                     <c:if test="${not empty errorMsgs}">
                         <font style="color:red">請修正以下錯誤:</font>
@@ -41,7 +36,6 @@
                             </c:forEach>
                         </ul>
                     </c:if>
-
                     <form class="row mt-17" METHOD="post" ACTION="/CGA105G2/CodeServlet" id="CodeServlet">
                         <div class="col-12 col-sm-6 my-5">
                             <div class="form-group">

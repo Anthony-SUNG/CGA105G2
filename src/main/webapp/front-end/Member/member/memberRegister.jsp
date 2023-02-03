@@ -1,19 +1,13 @@
-<%@page import="com.member.model.Member.pojo.Member" %>
+<%@ page import="com.member.model.Member.pojo.Member" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>🗃️管理</title>
-
-
 </head>
 <body>
 <!-- header start -->
@@ -26,15 +20,11 @@
     </div>
 </section>
 <div class="container mb-17 p-4">
-    <section class="shadow p-4"
-             style="background-color: #2779e2; border-radius: 35px;">
+    <section class="shadow p-4" style="background-color: #2779e2; border-radius: 35px;">
         <div class="container p-4">
-            <div
-                    class="row d-flex justify-content-center align-items-center h-100 p-4">
+            <div class="row d-flex justify-content-center align-items-center h-100 p-4">
                 <div class="col-xl-9">
-
                     <h1 class="text-white text-center m-5">Member Registration</h1>
-
                     <div class="card" style="border-radius: 15px;">
                         <div class="card-body p-4">
                             <%-- 錯誤表列 --%>
@@ -46,142 +36,95 @@
                                     </c:forEach>
                                 </ul>
                             </c:if>
-
                             <Form method="post"
                                   action="${pageContext.request.contextPath}/LonginServlet"
                                   name="addfrom">
-
-
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-
                                         <h4 class="mb-0">用戶名稱</h4>
-
                                     </div>
                                     <div class="col-md-9 pe-5">
-
                                         <input type="text" name="MEM_NAME"
                                                class="form-control form-control-lg" id="memberr-fullname"/>
-
                                     </div>
                                 </div>
-
                                 <hr class="mx-n3">
-
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-
                                         <h4 class="mb-0">帳號名稱</h4>
-
                                     </div>
                                     <div class="col-md-9 pe-5">
-
                                         <input type="text" name="MEM_ACC"
                                                class="form-control form-control-lg" id="memberr-accountid"/>
-
                                     </div>
                                 </div>
-
                                 <hr class="mx-n3">
-
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-
                                         <h4 class="mb-0">密碼</h4>
-
                                     </div>
                                     <div class="col-md-9 pe-5">
-
                                         <input type="text" name="MEM_PWD"
                                                class="form-control form-control-lg" id="memberr-password"/>
-
                                     </div>
                                 </div>
-
                                 <hr class="mx-n3">
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-
                                         <h4 class="mb-0">確認密碼</h4>
-
                                     </div>
                                     <div class="col-md-9 pe-5">
-
                                         <input type="text" name="MEM_PWD2"
                                                class="form-control form-control-lg"
                                                id="memberr-confirmpassword"/>
-
                                     </div>
                                 </div>
-
                                 <hr class="mx-n3">
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-
                                         <h4 class="mb-0">真實姓名</h4>
-
                                     </div>
                                     <div class="col-md-9 pe-5">
-
                                         <input type="text" name="MEM_RECIPIENT"
                                                class="form-control form-control-lg" id="memberr-recipient"/>
-
                                     </div>
                                 </div>
-
                                 <hr class="mx-n3">
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-
                                         <h4 class="mb-0">身分證字號</h4>
-
                                     </div>
                                     <div class="col-md-9 pe-5">
-
                                         <input type="text" name="MEM_TW_ID"
                                                class="form-control form-control-lg"
                                                id="memberr-identitycard"/>
-
                                     </div>
                                 </div>
-
                                 <hr class="mx-n3">
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-
                                         <h4 class="mb-0">出生日期</h4>
-
                                     </div>
                                     <div class="col-md-9 pe-5">
-
                                         <input type="date" name="MEM_BIRTHDAY"
                                                class="form-control form-control-lg" id="memberr-birthday"/>
-
                                     </div>
                                 </div>
-
                                 <hr class="mx-n3">
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-
                                         <h4 class="mb-0">電話號碼</h4>
-
                                     </div>
                                     <div class="col-md-9 pe-5">
-
                                         <input type="text" name="MEM_PHONE"
                                                class="form-control form-control-lg"
                                                id="memberr-phonenumber"/>
-
                                     </div>
                                 </div>
-
                                 <hr class="mx-n3">
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-
                                         <h4 class="mb-0">地址</h4>
-
                                     </div>
                                     <div class="col-md-9 pe-5">
                                         <input class="js-demeter-tw-zipcode-selector"
@@ -189,33 +132,23 @@
                                                placeholder="請輸入郵遞區號" value="22048"> <select
                                             id="city4" placeholder="請選擇縣市" name="MEM_CITY"></select> <select
                                             id="dist4" placeholder="請選擇鄉鎮區" name="MEM_DISTRICT"></select>
-
                                         <input type="text" name="MEM_ADDRESS"
                                                class="form-control form-control-lg"
                                                id="memberstore-address"/>
                                     </div>
                                 </div>
-
-
                                 <hr class="mx-n3">
-
                                 <div class="row align-items-center py-3">
                                     <div class="col-md-3 ps-5">
-
                                         <h4 class="mb-0">Email</h4>
-
                                     </div>
                                     <div class="col-md-9 pe-5">
-
                                         <input type="email" name="MEM_MAIL"
                                                class="form-control form-control-lg"
                                                placeholder="example@example.com" id="memberr-emailaddress"/>
-
                                     </div>
                                 </div>
-
                                 <hr class="mx-n3">
-
                                 <div class="px-5 py-4 ">
                                     <input type="hidden" name="action" value="insert">
                                     <button type="submit"
@@ -223,16 +156,13 @@
                                         application
                                     </button>
                                 </div>
-
                             </FORM>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
-
 </div>
 <a
         class="d-block btn btn-outline-danger  position-fixed position-bottom-10  position-right-10 text-center"
@@ -252,13 +182,9 @@
 <script>
     $("a:contains(🥙註冊)").closest("a").addClass("active disabled topage");
     $(document).ready(function () {
-
         new ClipboardJS('.btn');
-
     });
-
 </script>
 <script src="https://demeter.5fpro.com/tw/zipcode-selector.js"></script>
 </body>
-
 </html>

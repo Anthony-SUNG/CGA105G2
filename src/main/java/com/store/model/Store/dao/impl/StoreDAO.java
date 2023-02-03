@@ -573,7 +573,7 @@ public class StoreDAO implements StoreDAO_interface {
 
 	@Override
 	public void inserts(Store Store) {
-		String sql = "UPDATE cga105g2.store set STORE_PHONE1=?,STORE_ACC=?,STORE_PWD=?,STORE_COM_ADDRESS=?,STORE_TW_ID=?,STORE_PHONE2=? where STORE_ID = ?";
+		String sql = "UPDATE cga105g2.store set STORE_PHONE1=?,STORE_ACC=?,STORE_PWD=?,STORE_COM_ADDRESS=?,STORE_TW_ID=?,STORE_PHONE2=?,STORE_STATUS=? where STORE_ID = ?";
         try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
              PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                      ResultSet.CONCUR_READ_ONLY)) {
@@ -584,7 +584,8 @@ public class StoreDAO implements StoreDAO_interface {
             pstmt.setString(4, Store.getStoreComAddress());
             pstmt.setString(5, Store.getStoreTwId());
             pstmt.setString(6, Store.getStorePhone2());
-            pstmt.setInt(7, Store.getStoreId());
+            pstmt.setInt(7, Store.getStoreStatus());
+            pstmt.setInt(8, Store.getStoreId());
 
             pstmt.executeUpdate();
 
@@ -595,10 +596,41 @@ public class StoreDAO implements StoreDAO_interface {
 		
 	}
 
+	@Override
+	public boolean getByAcc(String storeacc) {
+		String sql = "SELECT * FROM cga105g2.store where STORE_ACC = ?";
+
+        Store store = null;
+        try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+             PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+                     ResultSet.CONCUR_READ_ONLY)) {
+
+            pstmt.setString(1, storeacc);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                // memberVO 也稱為 Domain objects
+                store = new Store();
+                store.setStoreId(rs.getInt("STORE_ID"));
+            }
+
+        } catch (SQLException se) {
+            throw new RuntimeException("A database error occured. " + se.getMessage());
+        }
+		if(store == null) {
+        return false;
+		}else {
+			return true;
+		}
+
+
+	}}
 
 
 
 
 
 
-}
+
+

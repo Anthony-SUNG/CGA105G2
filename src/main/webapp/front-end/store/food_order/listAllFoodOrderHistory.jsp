@@ -1,16 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <html class="no-js" lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
   <title>店家首頁</title>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/front-end/store/01h/headerin.jsp" %>
@@ -31,10 +27,6 @@
       </main>
     </div>
   </div>
-
-
-
-
   <!-- main -->
   <!-- footer start -->
   <%@ include file="/front-end/store/01h/footerin.jsp" %>
@@ -46,7 +38,6 @@
     $("#pageSubmenu3").removeClass("collapse");
     $("#pageSubmenu3 a:contains(🔆訂位總覽)").closest("a").addClass("active disabled bg-white topage");
   </script>
-
   <script>
     const data_test =
             [
@@ -146,7 +137,6 @@
                 },
             ],
             // 設定欄位元素定義區塊(columnDefs),
-
             /*設定屬性(預設功能)區塊*/
             searching: true, // 預設為true 搜尋功能，若要開啟不用特別設定
             paging: true, // 預設為true 分頁功能，若要開啟不用特別設定
@@ -203,7 +193,6 @@
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script>
     const { createApp } = Vue;
-
     createApp({
       data() {
         return {
@@ -213,5 +202,4 @@
     }).mount("#app");
   </script>
 </body>
-
 </html>

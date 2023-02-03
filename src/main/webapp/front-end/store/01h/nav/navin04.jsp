@@ -78,9 +78,8 @@
                 <ul class="collapse list-unstyled" id="pageSubmenu7">
                     <li>
                         <hr>
-                        <a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆餐廳資料</a>
+                        <a href="/CGA105G2/front-end/store/Login/storeRegister2.jsp" class="nav-link">🔆帳號設定</a>
                     </li>
-                    <li><a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆帳號資料</a></li>
                     <li><a href="/CGA105G2/front-end/store/Login/changepwd2.jsp" class="nav-link">🔆變更密碼</a>
                         <hr>
                     </li>

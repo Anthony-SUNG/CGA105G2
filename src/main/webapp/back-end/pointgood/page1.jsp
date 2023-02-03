@@ -6,7 +6,6 @@
     int pageIndexArray[]=null;
     int pageIndex=0; 
 %>
-
 <%  
     rowNumber=list.size();
     if (rowNumber%rowsPerPage !=0)

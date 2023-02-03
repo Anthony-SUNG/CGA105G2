@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="/CGA105G2/assets/custom.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
-
     <!-- jquery 3.4.1  css -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -83,11 +82,6 @@
     </div>
 </section>
 <!-- header end -->
-
-
-
-
-
 <script src="/CGA105G2/assets/js/vendor.js"></script>
 <script src="/CGA105G2/assets/js/polyfills.js"></script>
 <script src="/CGA105G2/assets/js/app.js"></script>

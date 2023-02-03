@@ -1,15 +1,12 @@
-<%@page import="com.member.model.Member.pojo.Member" %>
+<%@ page import="com.member.model.Member.pojo.Member" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>🗃️管理</title>
 </head>
 <body>
@@ -24,11 +21,9 @@
         <!-- nav end -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 my-5">
             <div class="container mb-17 p-4">
-                <section class="shadow p-4"
-                         style="background-color: #2779e2; border-radius: 35px;">
+                <section class="shadow p-4" style="background-color: #2779e2; border-radius: 35px;">
                     <div class="container p-4">
-                        <div
-                                class="row d-flex justify-content-center align-items-center h-100 p-4">
+                        <div class="row d-flex justify-content-center align-items-center h-100 p-4">
                             <div class="col-xl-9">
                                 <h1 class="text-white text-center m-5">🔆變更密碼</h1>
                                 <div class="card" style="border-radius: 15px;">
@@ -51,8 +46,7 @@
                                                 </div>
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" name="MEM_PWD"
-                                                           class="form-control form-control-lg"
-                                                           />
+                                                           class="form-control form-control-lg"/>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -62,8 +56,7 @@
                                                 </div>
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" name="MEM_PWD2"
-                                                           class="form-control form-control-lg"
-                                                            />
+                                                           class="form-control form-control-lg"/>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -73,15 +66,14 @@
                                                 </div>
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" name="MEM_PWD3"
-                                                           class="form-control form-control-lg"
-                                                           />
+                                                           class="form-control form-control-lg"/>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
                                             <div class="px-5 py-4 ">
                                                 <input type="hidden" name="action" value="chgpwd">
-                                                <button type="submit"
-                                                        class="btn btn-block btn-primary btn-lg fs-5">Update
+                                                <button type="submit" class="btn btn-block btn-primary btn-lg fs-5">
+                                                    Update
                                                 </button>
                                             </div>
                                         </FORM>
@@ -91,13 +83,10 @@
                         </div>
                     </div>
                 </section>
-
             </div>
         </main>
     </div>
 </div>
-
-<!-- to the top  -->
 <a
         class="d-block btn btn-outline-danger  position-fixed position-bottom-10  position-right-10 text-center"
         href="#" data-toggle="smooth-scroll" data-target="#page-start-anchor"
@@ -114,6 +103,5 @@
     $("#pageSubmenu4").removeClass("collapse");
     $("#pageSubmenu4 a:contains(🔆變更密碼)").closest("a").addClass("active disabled bg-white topage");
 </script>
-
 </body>
 </html>

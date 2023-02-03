@@ -5,17 +5,13 @@
 <%@ page import="com.point.model.service.PointGoodsService" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>💰point</title>
 </head>
-
 <body>
-
 <div id="page-start-anchor"></div>
 <!-- header start -->
 <%@ include file="/front-end/Member/01h/headerin.jsp" %>
@@ -43,7 +39,6 @@
                                     <ul>
                                         <li>${param.pdText}</li>
                                     </ul>
-
                                 </div>
                                 <div class="d-flex p-4">
                                     <button class="btn btn-outline-dark flex-shrink-0 ml-4 fs-3 mt-5" type="button"
@@ -51,7 +46,6 @@
                                         <i class="bi-cart-fill me-1 "></i>
                                         立即兌換
                                     </button>
-
                                 </div>
                             </div>
                         </div>
@@ -61,9 +55,7 @@
         </form>
     </div>
 </div>
-
 <!-- main -->
-
 <!-- to the top  -->
 <a class="d-block btn btn-outline-danger  position-fixed position-bottom-10  position-right-10" href="#"
    data-toggle="smooth-scroll" data-target="#page-start-anchor" style="z-index:1;">
@@ -79,8 +71,6 @@
     $("#pageSubmenu1").removeClass("collapse");
     $("#pageSubmenu1 a:contains(🔆點數商品)").closest("a").addClass("active disabled bg-white topage");
 </script>
-
-
 <!-- sticky-sidebar -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
 <script>
@@ -90,10 +80,7 @@
         containerSelector: ".container",
         innerWrapperSelector: ".sidebar__inner"
     });
-
 </script>
-
-
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
@@ -105,7 +92,6 @@
             },
             buttonsStyling: false
         })
-
         swalWithBootstrapButtons.fire({
             title: '確定要兌換嗎?',
             text: "兌換候無法退貨!",
@@ -125,8 +111,5 @@
         })
     }
 </script>
-
-
 </body>
-
 </html>

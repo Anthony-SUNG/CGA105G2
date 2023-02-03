@@ -21,60 +21,53 @@ import com.member.model.service.MemberService;
 
 public class frontSelectServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
-		String action = req.getParameter("action");
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        String action = req.getParameter("action");
+        Integer storeId = (Integer) req.getSession().getAttribute("storeId");
+        Integer memberId = (Integer) req.getSession().getAttribute("memId");
+        Integer orderId = (Integer) req.getSession().getAttribute("orderId");
+        if ("getOneMember".equals(action)) {
+            String memberInput = req.getParameter("memberInput").trim();
+            List<String> errorMsgs = new LinkedList<String>();
+            if (memberInput == null || memberInput.length() == 0) {
+                RequestDispatcher failView = req.getRequestDispatcher("/back-end/frontSelect/frontSelect.jsp");
+                failView.forward(req, resp);
+                return;
+            }
+            if (!errorMsgs.isEmpty()) {
+                RequestDispatcher failureView = req
+                        .getRequestDispatcher("<%=request.getContextPath()%>/back-end/frontSelect/frontSelect.jsp");
+                failureView.forward(req, resp);
+                return;// 程式中斷
+            }
+            memberId = Integer.valueOf(memberInput);
+            MemberService memberSvc = new MemberService();
+            Member member = memberSvc.getById(memberId);
+            if (member == null) {
+                RequestDispatcher failView = req.getRequestDispatcher("/back-end/frontSelect/frontSelect.jsp");
+                failView.forward(req, resp);
+                return;
+            }
+            if (!errorMsgs.isEmpty()) {
+                RequestDispatcher failureView = req
+                        .getRequestDispatcher("<%=request.getContextPath()%>/back-end/frontSelect/frontSelect.jsp");
+                failureView.forward(req, resp);
+                return;// 程式中s斷
+            }
+            req.setAttribute("member", member);
+            String url = "/back-end/frontSelect/frontSelectOne.jsp";
+            RequestDispatcher success = req.getRequestDispatcher(url);
+            success.forward(req, resp);
+        }
+    }
 
-		Integer storeId = (Integer) req.getSession().getAttribute("storeId");
-		Integer memberId = (Integer) req.getSession().getAttribute("memId");
-		Integer orderId = (Integer) req.getSession().getAttribute("orderId");
-
-		if ("getOneMember".equals(action)) {
-			String memberInput = req.getParameter("memberInput").trim();
-			List<String> errorMsgs = new LinkedList<String>();
-			if (memberInput == null || memberInput.length() == 0) {
-				RequestDispatcher failView = req.getRequestDispatcher("/back-end/frontSelect/frontSelect.jsp");
-				failView.forward(req, resp);
-				return;
-			}
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("<%=request.getContextPath()%>/back-end/frontSelect/frontSelect.jsp");
-				failureView.forward(req, resp);
-				return;// 程式中斷
-			}
-			memberId = Integer.valueOf(memberInput);
-			MemberService memberSvc = new MemberService();
-			Member member = memberSvc.getById(memberId);
-
-			if (member == null) {
-				RequestDispatcher failView = req.getRequestDispatcher("/back-end/frontSelect/frontSelect.jsp");
-				failView.forward(req, resp);
-				return;
-			}
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("<%=request.getContextPath()%>/back-end/frontSelect/frontSelect.jsp");
-				failureView.forward(req, resp);
-				return;// 程式中s斷
-			}
-
-			req.setAttribute("member", member);
-			String url = "/back-end/frontSelect/frontSelectOne.jsp";
-			RequestDispatcher success = req.getRequestDispatcher(url);
-			success.forward(req, resp);
-
-		}
-
-	}
-
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doPost(req, resp);
-
-	}
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
 
 }

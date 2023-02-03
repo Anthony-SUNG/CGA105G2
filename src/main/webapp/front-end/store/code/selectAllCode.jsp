@@ -4,18 +4,14 @@
 <%
     JSONArray list = (JSONArray) request.getAttribute("list_store");
 %>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>店家首頁</title>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/front-end/store/01h/headerin.jsp" %>
@@ -27,8 +23,7 @@
         <%@ include file="/front-end/store/01h/nav/navin04.jsp" %>
         <!-- nav end -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 mt-10 mb-10">
-            <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">🔆總覽優惠券</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
@@ -56,8 +51,6 @@
         </main>
     </div>
 </div>
-
-
 <!-- main -->
 <!-- footer start -->
 <%@ include file="/front-end/store/01h/footerin.jsp" %>
@@ -142,11 +135,8 @@
         alert(list[i].CODE_NUM);
     }
 </script>
-
-
 <!-- stickey bar: -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
-
 <script>
     let a = new StickySidebar("#sidebar", {
         topSpacing: 40,
@@ -204,8 +194,5 @@
     }
     ;
 </script>
-
-
 </body>
-
 </html>

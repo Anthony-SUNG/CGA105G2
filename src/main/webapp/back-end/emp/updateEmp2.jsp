@@ -27,37 +27,25 @@
         <%@ include file="/back-end/01h/nav/navin03.jsp" %>
         <!-- nav end -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-            <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-15 border-bottom">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-15 border-bottom">
                 <h1 class="h2">🔆員工查詢</h1>
 
             </div>
-            <form METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/emp/test">
-                <div class="input-group">
-                    <input type="search" class="form-control rounded" placeholder="搜尋員工"
-                           aria-label="Search" aria-describedby="search-addon" name="employee"/>
-                           
-                    <input type="hidden" name="action" value="getOne">
-                    <button type="submit" class="btn btn-outline-dark"
-                            data-mdb-ripple-color="dark">search
-                    </button>
-                </div>
-            </form>
             <% EmployeeService empSvc = new EmployeeService();
-                List<Employee> list = empSvc.all();
+                List<Employee> list = empSvc.getAll();
                 pageContext.setAttribute("list", list);%>
             <div class="table-responsive ">
-                <table class="table table-striped text-center ">
-                    <thead class="col-3">
+                <table class="table table-striped text-center " id="table1" style="width:100%">
+                    <thead class="col-3 ">
                     <tr class="col-3">
-                        <td>員工狀態</td>
-                        <td>員工編號</td>
-                        <td>員工帳號</td>
-                        <td>員工密碼</td>
-                        <td>員工職等</td>
-                        <td>新增日期</td>
-                        <td>修改日期</td>
-                        <td>修改</td>
+                        <td class="text-center">員工狀態</td>
+                        <td class="text-center">員工編號</td>
+                        <td class="text-center">員工帳號</td>
+                        <td class="text-center">員工密碼</td>
+                        <td class="text-center">員工職等</td>
+                        <td class="text-center">新增日期</td>
+                        <td class="text-center">修改日期</td>
+                        <td class="text-center">修改</td>
                     </tr>
                     </thead>
                     <tbody class="code_tbody col-3">
@@ -65,8 +53,8 @@
                     <% for (int i = 0; i < list.size(); i++) {
                         emp = list.get(i); %>
 
-                    <tr class="col-3">
-                        <td di="status">
+                    <tr class="col-3" >
+                        <td>
                             <%=(emp.getEmpStatus() == 0) ? "在職" : "離職" %>
                         </td>
                         <td>
@@ -89,7 +77,7 @@
                         </td>
                         <td>
                             <FORM METHOD="post"
-                                  ACTION="<%=request.getContextPath()%>/back-end/emp/test"
+                                  ACTION="<%=request.getContextPath()%>/EmployeeServlet"
                                   style="margin-bottom: 0px;">
                                 <input type="submit" value="修改"> <input
                                     type="hidden" name="empId"
@@ -105,18 +93,6 @@
             </div>
 
 
-            <nav aria-label="Page navigation example" class="d-flex justify-content-center"
-                 style="padding: 10px 0 25px">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#"
-                                             aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-                    </a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a></li>
-                </ul>
-            </nav>
         </main>
         <section class="jumbotron jumbotron-fluid mb-0 bg-secondary">
 
@@ -173,6 +149,14 @@
                 break;
         }
     }
+</script>
+<script>
+	$(document).ready(function () {
+    	$('#table1').DataTable({
+   			 "info":false,
+			 "lengthMenu": [5, 10, 15]
+    	});
+    });
 </script>
 </body>
 

@@ -1,15 +1,12 @@
-<%@page import="com.member.model.Member.pojo.Member" %>
+<%@ page import="com.member.model.Member.pojo.Member" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>🗃️管理</title>
 </head>
 <body>
@@ -183,13 +180,10 @@
                         </div>
                     </div>
                 </section>
-
             </div>
         </main>
     </div>
 </div>
-
-<!-- to the top  -->
 <a
         class="d-block btn btn-outline-danger  position-fixed position-bottom-10  position-right-10 text-center"
         href="#" data-toggle="smooth-scroll" data-target="#page-start-anchor"
@@ -207,6 +201,5 @@
     $("#pageSubmenu4 a:contains(🔆基本資料)").closest("a").addClass("active disabled bg-white topage");
 </script>
 <script src="https://demeter.5fpro.com/tw/zipcode-selector.js"></script>
-
 </body>
 </html>
