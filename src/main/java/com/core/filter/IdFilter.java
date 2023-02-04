@@ -1,5 +1,7 @@
 package com.core.filter;
 
+import com.pushmesg.model.service.pgService;
+import com.store.model.Store.dao.impl.StoreDAO;
 import com.store.model.service.StoreService;
 
 import javax.servlet.FilterChain;
@@ -8,7 +10,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.crypto.Data;
 import java.io.IOException;
+import java.sql.Date;
 
 //PageFilter這個類別被標記為 @WebFilter("/*") 代表所有請求都會通過這個。
 @WebFilter("/*")
@@ -33,6 +37,13 @@ public class IdFilter extends HttpFilter {
         if (sId >= 1) {
             StoreService storeSvc = new StoreService();
             storeplan = storeSvc.getById(sId).getStorePlan();
+            request.setAttribute("storeplan",storeplan);
+        }
+        Integer notify=0;
+        if (mId >= 1) {
+            pgService pgs=new pgService();
+            notify= pgs.see(mId);
+            request.setAttribute("notify",notify);
         }
 //		存在cookie方法
 //		Cookie cookie = new Cookie("username", "John");
@@ -54,23 +65,36 @@ public class IdFilter extends HttpFilter {
         ) {
             System.out.println("doFilter-1區:免登入區");
             chain.doFilter(request, response);
+
         } else if (sId >= 1 && (storeplan == 0 || storeplan.equals(null))) {
             System.out.println("else-1區:未購買方案區");
+            Integer plan3q =new StoreDAO().getByplan();
+            request.setAttribute("plan3q",plan3q);
             String url = "/front-end/store/Login/forgetplan.jsp";
             request.getRequestDispatcher(url).forward(request, response);
-        } else if ((requestPath.matches(".*/back-end/.*") && eId >= 1) ||
-                (requestPath.matches(".*/front-end/Member/.*") && mId >= 1) ||
-                ((requestPath.matches(".*/front-end/store/.*") && sId >= 1 && storeplan >= 1)) ||
+
+        } else if ((requestPath.matches(".*/back-end/.*") && eId >= 1)) {
+            System.out.println("doFilter-2區:後台登入區");
+            chain.doFilter(request, response);
+
+        } else if ((requestPath.matches(".*/front-end/Member/.*") && mId >= 1)) {
+            System.out.println("doFilter-3區:會員登入區");
+            chain.doFilter(request, response);
+
+        }else if (((requestPath.matches(".*/front-end/store/.*") && sId >= 1 && storeplan >= 1)) ||
                 ((requestPath.matches(".*StoreStart_blank.*") && sId >= 1 && storeplan >= 1))) {
-            System.out.println("doFilter-2區:已登入區");
+            System.out.println("doFilter-4區:店家登入區");
+            long miliseconds = System.currentTimeMillis();
+            int day=(new Date(miliseconds)).getDate();
+            request.setAttribute("planday",day);
             chain.doFilter(request, response);
 
         } else if (requestPath.matches(".*Servlet") && (eId >= 1 || sId >= 1 || mId >= 1)) {
-            System.out.println("doFilter-3區:Servlet跳轉區");
+            System.out.println("doFilter-5區:Servlet跳轉區");
             chain.doFilter(request, response);
 
         } else if (requestPath.matches(".*css") || requestPath.matches(".*js") || requestPath.matches(".*assets.*")) {
-            System.out.println("doFilter-4區:css&js區");
+            System.out.println("doFilter-6區:css&js區");
             chain.doFilter(request, response);
 
         } else if (requestPath.matches(".*/back-end/.*") && eId <= 0) {
@@ -78,12 +102,15 @@ public class IdFilter extends HttpFilter {
             request.getRequestDispatcher("/back-end/emp/employeeLogin.jsp").forward(request, response);
 
         } else if ((sId >= 1) && (mId >= 1)) {
-            System.out.println("doFilter-5區:後台區");
+            System.out.println("doFilter-7區:後台區");
             chain.doFilter(request, response);
-        } else {
-            System.out.println("else-3區:else區");
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        } else if (requestPath.matches(".*/CGA105G2/")) {
+            System.out.println("doFilter-8區:首頁區");
+            chain.doFilter(request, response);
         }
-
+        else {
+            System.out.println("else-3區:else區");
+            request.getRequestDispatcher("/front-end/Member/member/memberLognIn.jsp").forward(request, response);
+        }
     }
 }

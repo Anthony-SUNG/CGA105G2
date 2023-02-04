@@ -26,6 +26,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/front-end/store/code/selectAllCode.jsp" value="file://$PROJECT_DIR$/src/main/webapp/front-end/store/code" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/front-end/store/food_order/addFoodOrderByFood.jsp" value="file://$PROJECT_DIR$/src/main/webapp/front-end/store/food_order" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/front-end/store/goods/listAllGoods.jsp" value="file://$PROJECT_DIR$/src/main/webapp/front-end/store/goods" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/front-end/store/pushmesg/addpg.jsp" value="file://$PROJECT_DIR$/src/main/webapp/front-end/store/pushmesg" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
       </map>
     </option>

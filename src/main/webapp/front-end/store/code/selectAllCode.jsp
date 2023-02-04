@@ -184,9 +184,8 @@
 
     let toResult = null;
     let comm = null;
-    comm = <%= request.getAttribute("comm") %>
-        toResult =
-    <%= request.getAttribute("ans") %>
+    comm = <%= request.getAttribute("comm") %>;
+    toResult =<%= request.getAttribute("ans") %>;
     if (toResult != null) {
         // alert(toResult);
         addCupAlert(toResult, comm);

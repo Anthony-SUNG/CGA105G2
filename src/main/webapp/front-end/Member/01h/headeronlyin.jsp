@@ -29,8 +29,6 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                            <div class="navbar-spacer"></div>
-                            <div class="navbar-spacer"></div>
                             <li class="nav-item">
                                 <a class="nav-link text-uppercase" data-toggle="none" href="/CGA105G2/BlankPage/contactUs.jsp">
                                     📭聯繫我們
@@ -52,8 +50,14 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-uppercase " data-toggle="none" href="/CGA105G2/CodeServlet?action=memCodeAllU">
-                                    🗃️管理
+                                <a class="nav-link text-uppercase " data-toggle="none" href="/CGA105G2/CodeServlet?action=memCodeAllU">🗃️管理
+                                    <c:if test="${notify >0}">
+                                    <button class="position-relative border-0 bg-warning">
+                                        <span class="position-absolute position-bottom-1 position-left-0 rounded-pill badge bg-danger">
+                                                ${notify}<span class="visually-hidden">unread messages</span>
+                                        </span>
+                                    </button>
+                                    </c:if>
                                 </a>
                             </li>
                             <li class="nav-item">

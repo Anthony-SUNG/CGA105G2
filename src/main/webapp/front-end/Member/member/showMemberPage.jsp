@@ -151,8 +151,34 @@
                                         <input type="hidden" name="SearchMemberId" value="${member2.memId}">
                                     </form>
                                 </c:if>
-                                <button class="btn btn-sm btn-primary mb-4 ml-5" style="font-size: 17px;">聊天室
+                                <button type="button" class="btn btn-sm btn-primary mb-4 ml-5" data-toggle="modal"
+                                        data-target="#exampleModalCenter" style="font-size: 17px;">
+                                    聊天室
                                 </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle" style="color: black">與${member2.memName}的聊天室</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" style="color: black">
+                                                此處塞訊息
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form class="col-12 flex-nowrap">
+                                                    <input  type="text"   class="col-10" style="height:35px" name="message">
+                                                    <button type="button" class="col-1 btn btn-primary p-0" style="height:35px;background-color: #ffc107; ">🗣️</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -330,5 +356,12 @@
         innerWrapperSelector: ".sidebar__inner"
     });
 </script>
+<script>
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+</script>
+
+
 </body>
 </html>

@@ -80,7 +80,7 @@
 </div>
 <!-- main -->
 <!-- footer start -->
-<%@ include file="/back-end/01h/footerin.jsp" %>
+<%@ include file="/front-end/Member/01h/footerin.jsp" %>
 <!-- footer end -->
 <!-- sidebar menu Class -->
 <script>

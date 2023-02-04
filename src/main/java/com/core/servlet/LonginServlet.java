@@ -3,6 +3,7 @@ package com.core.servlet;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.pushmesg.model.service.pgService;
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutOneTime;
 import org.json.simple.JSONArray;
@@ -158,7 +159,7 @@ public class LonginServlet extends HttpServlet {
             /*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
             request.getSession().setAttribute("memberName", memSvc.getById(memid).getMemName());
             request.getSession().setAttribute("memId", memid);
-            String url = "/index.jsp";
+            String url ="/LonginServlet?action=todo";
             RequestDispatcher successView = request.getRequestDispatcher(url);
             successView.forward(request, response);
         }
@@ -242,6 +243,14 @@ public class LonginServlet extends HttpServlet {
             session.setAttribute("loginEmployee", employee);
             session.setAttribute("empRoot", empRoot);
             session.setAttribute("empId", empId);
+            String url = "/index.jsp";
+            RequestDispatcher successView = request.getRequestDispatcher(url);
+            successView.forward(request, response);
+        }
+        if ("todo".equals(action)){
+            pgService pgs=new pgService();
+            Integer notify= pgs.see((Integer) request.getSession().getAttribute("memId"));
+            request.setAttribute("notify",notify);
             String url = "/index.jsp";
             RequestDispatcher successView = request.getRequestDispatcher(url);
             successView.forward(request, response);
@@ -688,10 +697,13 @@ public class LonginServlet extends HttpServlet {
             // OrderResultURL   : 選填 消費者完成付費後。重新導向的位置
             String url=null;
             if (plan==1){
-                url = "http://localhost:8081/CGA105G2/LonginServlet?action=plan1";
+                url = "http://localhost:8081/CGA105G2/LonginServlet?action=plan1&storeId="+sID;
             }
             if (plan==2){
-                url = "http://localhost:8081/CGA105G2/LonginServlet?action=plan2";
+                url = "http://localhost:8081/CGA105G2/LonginServlet?action=plan2&storeId="+sID;
+            }
+            if (plan==3){
+                url = "http://localhost:8081/CGA105G2/LonginServlet?action=plan3&storeId="+sID;
             }
             obj.setOrderResultURL(url);
             obj.setNeedExtraPaidInfo("N");
@@ -702,20 +714,33 @@ public class LonginServlet extends HttpServlet {
         }
         //  plan1(update)
         if ("plan1".equals(action)) {
-            Integer storeId = (Integer) request.getSession().getAttribute("storeId");
+            Integer storeId = Integer.valueOf(request.getParameter("storeId"));
+            request.getSession().setAttribute("storeId",storeId);
             request.setAttribute("toResult", true);
             StoreService strSvc = new StoreService();
-            Store Store = strSvc.updateplan(storeId);
+            Store Store = strSvc.updateplan(storeId,1);
             String url = "/front-end/store/food_order/food_order.do?action=food_order_button";
             RequestDispatcher successView = request.getRequestDispatcher(url);
             successView.forward(request, response);
         }
         //  plan2(update)
         if ("plan2".equals(action)) {
-            Integer storeId = (Integer) request.getSession().getAttribute("storeId");
+            Integer storeId = Integer.valueOf(request.getParameter("storeId"));
+            request.getSession().setAttribute("storeId",storeId);
             request.setAttribute("toResult", true);
             StoreService strSvc = new StoreService();
-            Store Store = strSvc.updateplan2(storeId);
+            Store Store = strSvc.updateplan(storeId,2);
+            String url = "/front-end/store/food_order/food_order.do?action=food_order_button";
+            RequestDispatcher successView = request.getRequestDispatcher(url);
+            successView.forward(request, response);
+        }
+        //  plan2(update)
+        if ("plan3".equals(action)) {
+            Integer storeId = Integer.valueOf(request.getParameter("storeId"));
+            request.getSession().setAttribute("storeId",storeId);
+            request.setAttribute("toResult", true);
+            StoreService strSvc = new StoreService();
+            Store Store = strSvc.updateplan(storeId,3);
             String url = "/front-end/store/food_order/food_order.do?action=food_order_button";
             RequestDispatcher successView = request.getRequestDispatcher(url);
             successView.forward(request, response);

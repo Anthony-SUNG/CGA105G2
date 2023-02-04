@@ -35,9 +35,9 @@
                                                         <h4 class="my-0 font-weight-normal">基礎方案</h4>
                                                     </div>
                                                     <div class="card-body">
-                                                        <h1 class="card-title pricing-card-title">
+                                                        <h2 class="card-title pricing-card-title">
                                                             $1,000 <small class="text-muted">/ 月</small>
-                                                        </h1>
+                                                        </h2>
                                                         <ul class="list-unstyled mt-3 mb-4">
                                                             <li>開啟訂位/候位功能</li>
                                                             <li>開啟商城功能</li>
@@ -51,35 +51,70 @@
                                                             <input type="hidden" name="plan" value=1>
                                                             <button type="submit"
                                                                     class="btn btn-lg btn-block btn-primary align-bottom">
-                                                                選擇一般會員
+                                                                選擇此方案
                                                             </button>
                                                         </Form>
                                                     </div>
                                                 </div>
                                                 <div class="card mb-4 box-shadow">
                                                     <div class="card-header">
-                                                        <h4 class="my-0 font-weight-normal">高級方案</h4>
+                                                        <h4 class="my-0 font-weight-normal">推播方案</h4>
                                                     </div>
                                                     <div class="card-body">
-                                                        <h1 class="card-title pricing-card-title">
+                                                        <h2 class="card-title pricing-card-title">
+                                                            $5,000 <small class="text-muted">/ 月</small>
+                                                        </h2>
+                                                        <ul class="list-unstyled mt-3 mb-4">
+                                                            <li>開啟訂位/候位功能</li>
+                                                            <li>開啟商城功能</li>
+                                                            <li>開啟優惠券功能</li>
+                                                            <li style="color: red">開啟推播功能</li>
+                                                        </ul>
+                                                        <Form method="post"
+                                                              action="${pageContext.request.contextPath}/LonginServlet">
+                                                            <input type="hidden" name="action" value="ecpay">
+                                                            <input type="hidden" name="planMoney" value=5000>
+                                                            <input type="hidden" name="plan" value=2>
+                                                            <button type="submit"
+                                                                    class="btn btn-lg btn-block btn-primary align-bottom">
+                                                                選擇此方案
+                                                            </button>
+                                                        </Form>
+                                                    </div>
+                                                </div>
+                                                <div class="card mb-4 box-shadow">
+                                                    <div class="card-header">
+                                                        <h4 class="my-0 font-weight-normal">廣告方案</h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <h2 class="card-title pricing-card-title">
                                                             $10,000<small class="text-muted">/ 月</small>
-                                                        </h1>
+                                                        </h2>
                                                         <ul class="list-unstyled mt-3 mb-4">
                                                             <li>開啟訂位/候位功能</li>
                                                             <li>開啟商城功能</li>
                                                             <li>開啟優惠券功能</li>
                                                             <li style="color: red">開啟廣告功能</li>
                                                         </ul>
+                                                        <c:if test="${plan3q > 0}">
                                                         <Form method="post"
                                                               action="${pageContext.request.contextPath}/LonginServlet">
                                                             <input type="hidden" name="action" value="ecpay">
                                                             <input type="hidden" name="planMoney" value=10000>
-                                                            <input type="hidden" name="plan" value=2>
+                                                            <input type="hidden" name="plan" value=3>
                                                             <button type="submit"
                                                                     class="btn btn-lg btn-block btn-primary align-bottom">
-                                                                選擇高級會員
+                                                                剩餘數量:${plan3q}<br>選擇此方案
                                                             </button>
                                                         </Form>
+                                                        </c:if>
+                                                        <c:if test="${plan3q == 0}">
+                                                            <button type="submit"
+                                                                    style="color: red"
+                                                                    class="btn btn-lg btn-block btn-primary align-bottom">
+                                                                剩餘數量:${plan3q}<br>已售完
+                                                            </button>
+                                                        </c:if>
                                                     </div>
                                                 </div>
                                             </div>

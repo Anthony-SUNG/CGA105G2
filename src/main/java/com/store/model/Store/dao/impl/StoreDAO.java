@@ -286,9 +286,7 @@ public class StoreDAO implements StoreDAO_interface {
 
             pstmt.setInt(1, storeStatus);
             pstmt.setInt(2, storeId);
-
             pstmt.executeUpdate();
-
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
@@ -298,35 +296,26 @@ public class StoreDAO implements StoreDAO_interface {
     @Override
     public void updateempId(Integer storeId, Integer empId) {
         String sql = "UPDATE cga105g2.store set EMP_ID=? where STORE_ID = ?";
-
         try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
              PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                      ResultSet.CONCUR_READ_ONLY)) {
-
             pstmt.setInt(1, empId);
             pstmt.setInt(2, storeId);
-
             pstmt.executeUpdate();
-
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
-
     }
 
     @Override
     public void updatePlan(Integer storeId, Integer storePlan) {
         String sql = "UPDATE cga105g2.store set STORE_PLAN=? where STORE_ID = ?";
-
         try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
              PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                      ResultSet.CONCUR_READ_ONLY)) {
-
             pstmt.setInt(1, storePlan);
             pstmt.setInt(2, storeId);
-
             pstmt.executeUpdate();
-
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
@@ -336,16 +325,12 @@ public class StoreDAO implements StoreDAO_interface {
     @Override
     public void updateNplan(Integer storeId, Integer storeNplan) {
         String sql = "UPDATE cga105g2.store set STORE_NPLAN=? where STORE_ID = ?";
-
         try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
              PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                      ResultSet.CONCUR_READ_ONLY)) {
-
             pstmt.setInt(1, storeNplan);
             pstmt.setInt(2, storeId);
-
             pstmt.executeUpdate();
-
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
@@ -355,18 +340,14 @@ public class StoreDAO implements StoreDAO_interface {
     @Override
     public void updateordersetting(Integer storeId, String storeEtime, Integer storeTable, Integer storeEtable) {
         String sql = "UPDATE cga105g2.store set STORE_ETIME=?,STORE_TABLE=?,STORE_ETABLE=? where STORE_ID = ?";
-
         try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
              PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                      ResultSet.CONCUR_READ_ONLY)) {
-
             pstmt.setString(1, storeEtime);
             pstmt.setInt(2, storeTable);
             pstmt.setInt(3, storeEtable);
             pstmt.setInt(4, storeId);
-
             pstmt.executeUpdate();
-
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
@@ -438,20 +419,15 @@ public class StoreDAO implements StoreDAO_interface {
     @Override
     public List<Store> getAllByAddress(String storeCity, String storeDistrict) {
         String sql = "SELECT * FROM cga105g2.store where STORE_CITY = ? AND STORE_DISTRICT = ?";
-
         List<Store> list = new ArrayList<Store>();
         Store store = null;
-
         storeCity=storeCity.replace("臺", "台");
         try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
              PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                      ResultSet.CONCUR_READ_ONLY)) {
-
             pstmt.setString(1, storeCity);
             pstmt.setString(2, storeDistrict);
-
             ResultSet rs = pstmt.executeQuery();
-
             while (rs.next()) {
                 // memberVO 也稱為 Domain objects
                 store = new Store();
@@ -464,8 +440,6 @@ public class StoreDAO implements StoreDAO_interface {
                 store.setStoreUrl(rs.getString("STORE_URL"));
                 list.add(store);
             }
-            // Handle any driver errors
-
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
@@ -478,11 +452,9 @@ public class StoreDAO implements StoreDAO_interface {
     public void update2(Store Store) {
         String sql = "UPDATE cga105g2.store set STORE_PHONE1=?,STORE_HOURS=?,STORE_ADDRESS=?,STORE_WEB=?,STORE_ACC=?,STORE_MAIL=?,STORE_COM_ID=?,STORE_COM_ADDRESS=?,"
                 + "STORE_TW_ID=?,STORE_PHONE2=?,STORE_TEXT=? where STORE_ID = ?";
-
         try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
              PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                      ResultSet.CONCUR_READ_ONLY)) {
-
             pstmt.setString(1, Store.getStorePhone1());
             pstmt.setString(2, Store.getStoreHours());
             pstmt.setString(3, Store.getStoreAddress());
@@ -495,9 +467,7 @@ public class StoreDAO implements StoreDAO_interface {
             pstmt.setString(10, Store.getStorePhone2());
             pstmt.setString(11, Store.getStoreText());
             pstmt.setInt(12, Store.getStoreId());
-
             pstmt.executeUpdate();
-
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
@@ -511,10 +481,8 @@ public class StoreDAO implements StoreDAO_interface {
 		try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
 				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_READ_ONLY)) {
-
 			pstmt.setString(1, store.getStorePwd());
 			pstmt.setString(2, store.getStoreAcc());
-
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -528,56 +496,34 @@ public class StoreDAO implements StoreDAO_interface {
 		try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
 				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_READ_ONLY)) {
-
 			pstmt.setString(1, store.getStorePwd());
 			pstmt.setInt(2, store.getStoreId());
-
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		}
 		
 	}
-
 	@Override
-	public void updateplan(Integer storeId) {
-		String sql = "UPDATE cga105g2.store set STORE_PLAN=? where STORE_ID=?";
+	public void updateplan(Integer storeId,Integer plan) {
+		String sql = "UPDATE cga105g2.store set STORE_PLAN=? ,STORE_NPLAN=? where STORE_ID=?";
 		try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
 				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_READ_ONLY)) {
-
-			pstmt.setInt(1, 1);
-			pstmt.setInt(2, storeId);
-
+			pstmt.setInt(1, plan);
+            pstmt.setInt(2, plan);
+			pstmt.setInt(3, storeId);
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		}
 	}
-	
-	@Override
-	public void updateplan2(Integer storeId) {
-		String sql = "UPDATE cga105g2.store set STORE_PLAN=? where STORE_ID=?";
-		try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
-				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-						ResultSet.CONCUR_READ_ONLY)) {
-
-			pstmt.setInt(1, 2);
-			pstmt.setInt(2, storeId);
-
-			pstmt.executeUpdate();
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-		}
-	}
-
 	@Override
 	public void inserts(Store Store) {
 		String sql = "UPDATE cga105g2.store set STORE_PHONE1=?,STORE_ACC=?,STORE_PWD=?,STORE_COM_ADDRESS=?,STORE_TW_ID=?,STORE_PHONE2=?,STORE_STATUS=? where STORE_ID = ?";
         try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
              PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                      ResultSet.CONCUR_READ_ONLY)) {
-
             pstmt.setString(1, Store.getStorePhone1());
             pstmt.setString(2, Store.getStoreAcc());
             pstmt.setString(3, Store.getStorePwd());
@@ -586,12 +532,9 @@ public class StoreDAO implements StoreDAO_interface {
             pstmt.setString(6, Store.getStorePhone2());
             pstmt.setInt(7, Store.getStoreStatus());
             pstmt.setInt(8, Store.getStoreId());
-
             pstmt.executeUpdate();
-
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. " + se.getMessage());
-
         }
 		
 	}
@@ -599,22 +542,17 @@ public class StoreDAO implements StoreDAO_interface {
 	@Override
 	public boolean getByAcc(String storeacc) {
 		String sql = "SELECT * FROM cga105g2.store where STORE_ACC = ?";
-
         Store store = null;
         try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
              PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                      ResultSet.CONCUR_READ_ONLY)) {
-
             pstmt.setString(1, storeacc);
-
             ResultSet rs = pstmt.executeQuery();
-
             while (rs.next()) {
                 // memberVO 也稱為 Domain objects
                 store = new Store();
                 store.setStoreId(rs.getInt("STORE_ID"));
             }
-
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
@@ -623,9 +561,28 @@ public class StoreDAO implements StoreDAO_interface {
 		}else {
 			return true;
 		}
+	}
+    public Integer getByplan() {
+        String sql = "SELECT * FROM cga105g2.store where STORE_NPLAN like ?";
+        Store store = new Store();
+        try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+             PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+                     ResultSet.CONCUR_READ_ONLY)) {
+            pstmt.setInt(1,3);
+            ResultSet rs = pstmt.executeQuery();
+            Integer q=0;
+            while (rs.next()) {
+                q+=1;
+            }
+            Integer orz=10-q;
+            return orz;
+        } catch (SQLException se) {
+            throw new RuntimeException("A database error occured. " + se.getMessage());
+            // Clean up JDBC resources
+        }
+    }
 
-
-	}}
+}
 
 
 

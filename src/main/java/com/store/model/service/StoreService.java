@@ -201,24 +201,12 @@ public class StoreService {
 
 		return store;
 	}
-	public Store updateplan(Integer storeId) {
+	public Store updateplan(Integer storeId,Integer plan) {
 		Store store = new Store();
-
 		store.setStoreId(storeId);
-		dao.updateplan(storeId);
-
+		dao.updateplan(storeId,plan);
 		return store;
 	}
-	
-	public Store updateplan2(Integer storeId) {
-		Store store = new Store();
-
-		store.setStoreId(storeId);
-		dao.updateplan2(storeId);
-
-		return store;
-	}
-
 	public void inserts(Integer storeId, String storeacc, String storepwd, String storephone1,
 			String storecomaddress, String storephone2, String storetwid) {
 		Store Store = new Store();
@@ -233,7 +221,6 @@ public class StoreService {
 		dao.inserts(Store);
 		
 	}
-
 	public boolean getByAcc(String storeacc) {
 		return dao.getByAcc(storeacc);
 	}

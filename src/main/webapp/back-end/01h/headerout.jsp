@@ -124,7 +124,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light fs-md-6"
                      id="header-navbar">
                     <!-- @*Navbar(白色)*@ -->
-                    <a class="navbar-brand font-weight-bold" href="/CGA105G2/back-end/frontSelect/frontSelect.jsp">
+                    <a class="navbar-brand font-weight-bold" href="/CGA105G2/index.jsp">
                         <img src="/CGA105G2/assets/images/Logo.PNG"
                              style="width: 100px; height: 100px" alt=""/>FoodMap
                     </a>
