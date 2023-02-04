@@ -157,9 +157,9 @@
                                     <!--<button class="btn btn-outline-info btn-lg fs-8 container" -->
                                     <!--style="border-radius: 20px;" onclick="addWaitAlert()">送出</button> -->
 
-                                    <input type="hidden" name="action" value="insertSta"> <input
-                                        type="submit" value="新增候位" disabled
-                                        title="目前店家尚未開放"
+                                    <input type="hidden" name="action" value="insertSta"> 
+                                    <input
+                                        type="submit" value="新增候位" 
                                         class="btn btn-outline-info btn=lg fs-7 text-center "
                                         style="border-radius: 20px; width: 300px;">
                                 </div>
@@ -212,7 +212,18 @@
         $.ajax({
             type:"POST",
             url:"/CGA105G2/standby",
-            data :{action:"addStaLoading"},
+            data :{action:"getStoreSts"},
+            dataType:"text",
+            success:function(data){
+                // console.log('loadingDone');
+                console.log(data);
+                if(data=="on"){
+                    console.log('on');
+                }
+                else{
+                    console.log('off');
+                }
+            }
             
 
         })

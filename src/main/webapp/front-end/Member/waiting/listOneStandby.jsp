@@ -1,12 +1,6 @@
 <%@page import="java.util.List"%>
-<%@ page
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
-<%@ taglib
-	prefix="c"
-	uri="http://java.sun.com/jsp/jstl/core"
-%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.sql.Timestamp"%>
 <%@ page import="com.waiting.model.dao.impl.StandbyDAO"%>
 <%@ page import="com.waiting.model.pojo.Standby"%>
@@ -14,59 +8,36 @@
 
 
 <!-- 123 -->
-
+<%
+StandbyService standbySvc = new StandbyService();
+Integer staCount = standbySvc.standByCount();
+%>
 
 <!DOCTYPE html>
-<html
-	class="no-js"
-	lang="en"
->
+<html class="no-js" lang="en">
 
 <head>
 <meta charset="utf-8" />
-<meta
-	http-equiv="x-ua-compatible"
-	content="ie=edge"
-/>
-<meta
-	name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no"
-/>
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
 <title>🗃️管理</title>
 <!-- Bootstrap css -->
-<link
-	rel="stylesheet"
+<link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
 	integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
-	crossorigin="anonymous"
-/>
+	crossorigin="anonymous" />
 <!-- jquery 3.4.1  css -->
-<link
-	rel="stylesheet"
-	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
->
-<link
-	rel="stylesheet"
-	href="/resources/demos/style.css"
->
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 
-<link
-	rel="stylesheet"
-	href="/CGA105G2/assets/css/vendor.css"
-/>
-<link
-	rel="stylesheet"
-	href="/CGA105G2/assets/css/style.css"
-/>
-<link
-	rel="stylesheet"
-	href="/CGA105G/assets/custom.css"
->
-<link
-	rel="stylesheet"
-	href="/CGA105G2/assets/fonts/font-awesome/css/font-awesome.css"
-/>
+<link rel="stylesheet" href="/CGA105G2/assets/css/vendor.css" />
+<link rel="stylesheet" href="/CGA105G2/assets/css/style.css" />
+<link rel="stylesheet" href="/CGA105G/assets/custom.css">
+<link rel="stylesheet"
+	href="/CGA105G2/assets/fonts/font-awesome/css/font-awesome.css" />
 <!-- <link rel="stylesheet" href="/CGA105G2/src/main/webapp/assets/css/carousel.css" /> -->
 
 
@@ -106,35 +77,22 @@ a {
 			<!-- nav start -->
 			<%@ include file="/front-end/Member/01h/nav/navin02.jsp"%>
 			<!-- nav end -->
-			<main
-				role="main "
-				class="col-md-9 ml-sm-auto col-lg-10 px-md-4 container "
-			>
-			<% Standby standbyVo =(Standby) request.getAttribute("standbyVo"); %>
+			<main role="main "
+				class="col-md-9 ml-sm-auto col-lg-10 px-md-4 container ">
+				<%
+				Standby standbyVo = (Standby) request.getAttribute("standbyVo");
+				%>
 				<div class="container col-lg-10 p-4">
 					<div class="justify-content-center col-lg-6 mx-auto p-4">
 						<h1 class="text-center text-red p-4">您已完成候位</h1>
-						<form
-							action=""
-							class="border p-10 text-center"
-						>
+						<form action="" class="border p-10 text-center">
+							<!-- <div class="mx-auto">
+								<label for="">你的號碼 :</label> <input type="text"
+									value="<%=standbyVo.getStaId()%>" name="" disabled size=3>
+							</div> -->
 							<div class="mx-auto">
-								<label for="">你的號碼 :</label> <input
-									type="text"
-									value="<%=standbyVo.getStaId() %>"
-									name=""
-									disabled
-									size=3
-								>
-							</div>
-							<div class="mx-auto">
-								<label for="">目前號碼 :</label> <input
-									type="text"
-									value="1"
-									name=""
-									disabled
-									size=3
-								>
+								<label for="">目前號碼 :</label> <input type="text" value="<%=staCount %>"
+									name="" disabled size=3>
 							</div>
 							<h1>請稍等叫號</h1>
 							<div id="result"></div>
@@ -144,7 +102,7 @@ a {
 
 				</div>
 
-	<canvas height=100></canvas>
+				<canvas height=100></canvas>
 			</main>
 
 		</div>
@@ -159,8 +117,7 @@ a {
 
 	<!-- stickey bar: -->
 	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"
-	></script>
+		src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
 
 	<script>
 		let a = new StickySidebar("#sidebar", {
@@ -174,6 +131,24 @@ a {
 	<!-- sweetalert2 -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script>
+		// $(document).ready(function() {
+		// 	$.ajax({
+		// 		type : "POST",
+		// 		url : "/CGA105G2/standby",
+		// 		data : {
+		// 			action : "getStaConut"
+		// 		},
+		// 		dataType : "text",
+		// 		success : function(data) {
+		// 			// console.log('loadingDone');
+		// 			console.log(data);
+
+		// 		}
+
+		// 	})
+
+		// });
+
 		function addStandBy() {
 			setTimeout(addStandByAlert(), 1000);
 		}
