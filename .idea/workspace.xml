@@ -10,7 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05ea3268-01ee-4778-8f96-c67efb4f3d2b" name="变更" comment="Anthony:&#10;1.帶位功能完成。&#10;2.動態註記顏色完成。&#10;3.訂單結束功能完成。">
+      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_1_21__03_53____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_1_21__03_53____.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.wst.common.component" beforeDir="false" afterPath="$PROJECT_DIR$/.settings/org.eclipse.wst.common.component" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/waiting/contorller/StandbyServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/waiting/contorller/StandbyServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/waiting/model/dao/impl/StandbyDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/waiting/model/dao/impl/StandbyDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/front-end/store/calltable/callTable.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/front-end/store/calltable/callTable.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,12 +34,16 @@
       </list>
     </option>
   </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
   </component>
   <component name="JpbToolWindowState">
@@ -78,31 +87,31 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/CGA105G2/CGA105G2/src/main/webapp/WEB-INF/lib&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17160279&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.25789472&quot;,
-    &quot;service.view.auto.scroll.to.source&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "last_opened_file_path": "C:/CGA105G2_GIT/CGA105G2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.17160279",
+    "project.structure.side.proportion": "0.25789472",
+    "service.view.auto.scroll.to.source": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\CGA105G2\CGA105G2\src\main\webapp\front-end\store\calltable" />
@@ -337,6 +346,7 @@
       <workItem from="1674246402487" duration="185000" />
       <workItem from="1674280801506" duration="414000" />
       <workItem from="1675128814915" duration="687000" />
+      <workItem from="1675395784160" duration="2508000" />
     </task>
     <task id="LOCAL-00001" summary="Anthony:&#10;1.hellow.java:新增測試文字">
       <created>1674199821016</created>
@@ -463,5 +473,9 @@
     <MESSAGE value="Anthony:&#10;1.店家帶位&#10;a.店家進入帶位頁面時，從資料庫收尋店家設定之訂位時段，桌數。&#10;b.店家依照日期時段收尋，回傳訂位資訊，訂位筆數，並使用差集剃除有設定座位之資料，產稱下拉選單。" />
     <MESSAGE value="Anthony:&#10;1.帶位功能完成。&#10;2.動態註記顏色完成。&#10;3.訂單結束功能完成。" />
     <option name="LAST_COMMIT_MESSAGE" value="Anthony:&#10;1.帶位功能完成。&#10;2.動態註記顏色完成。&#10;3.訂單結束功能完成。" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

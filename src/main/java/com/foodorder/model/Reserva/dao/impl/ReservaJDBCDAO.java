@@ -353,6 +353,55 @@ static {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		}
 	}
+		@Override
+	public void insertToSta(Reserva reservaVO) {
+		
+			// sql寫mySQL語法
+			String sql = "INSERT INTO cga105g2.reserva (STORE_ID, MEM_ID, REN_NAME, REN_PHONE, REN_TIME, REN_DATE, REN_HEADCOUNT, REN_PRICE, REN_FPRICE,REN_STATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			// JDBC_mySQL 講義P8 創建連線物件，可重複使用
+			System.out.println("2");
+			try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+				 // JDBC_mySQL 講義P15
+				 PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+							ResultSet.CONCUR_READ_ONLY)) {
+				// Class.forName("com.mysql.cj.jdbc.Driver"); 不用寫，請參考JDBC_mySQL 講義P7 JDBC
+				// 4.0開始會⾃動註冊，呼叫 Class.forName() 是之前載入JDBC Driver的⽅式，現在可以省略不寫
+				// 本專案jar檔為8.0.31版本
+				// 以下為寫pstmt.set內容
+				System.out.println("1");
+				pstmt.setInt(1, reservaVO.getStoreId());
+				pstmt.setInt(2, reservaVO.getMemId());
+				pstmt.setString(3, reservaVO.getRenName());
+				pstmt.setString(4, reservaVO.getRenPhone());
+				pstmt.setString(5, reservaVO.getRenTime());
+				pstmt.setDate(6, reservaVO.getRenDate());
+				pstmt.setInt(7, reservaVO.getRenHeadcount());
+				
+				pstmt.setInt(8, reservaVO.getRenPrice());
+				pstmt.setInt(9, reservaVO.getRenFprice());
+				pstmt.setInt(10, 2);
+				// 送出
+				pstmt.executeUpdate();
+				// 接收
+				// ResultSet rs=pstmt.executeQuery();
+				// while (rs.next()){
+				// new一個物件，set進去，方法將void改成回傳VO，最後return new出來的物件
+				// }
+				// getall則是在try外宣告一個List<VO> list=new ArrayList<VO>();
+				// 在此處while裡面的最後list.add(new的物件)
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. " + se.getMessage());
+				// Clean up JDBC resources
+			}
+		
+
+
+
+
+
+
+	}
 
 	public static void main(String[] args) {
 		ReservaJDBCDAO dao = new ReservaJDBCDAO();

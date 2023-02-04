@@ -8,6 +8,7 @@ import java.util.Map;
 
 public interface ReservaDAO_interface {
     public void insert(Reserva reservaVO);
+    public void insertToSta(Reserva reservaVO);
     public void update(Reserva reservaVO);
 //    public void delete(Integer REN_ID);
     public Reserva getById(Integer REN_ID);

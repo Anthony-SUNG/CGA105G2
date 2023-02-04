@@ -51,7 +51,7 @@ public class TableServlet extends HttpServlet {
         //查詢訂位資訊
         if("search".equals(action)){
             String date= req.getParameter("date");
-            String totime=req.getParameter("totime");
+            String totime=req.getParameter("totime").trim();
             Map<String,JSONArray> ans=tbs.search(storeId,date,totime,0);
             Map<String,JSONArray> use=tbs.search(storeId,date,totime,2);
             JSONArray json=ans.get("json");
