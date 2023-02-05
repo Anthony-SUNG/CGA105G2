@@ -3,15 +3,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>🗃️管理</title>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/front-end/Member/01h/headerin.jsp" %>
@@ -25,7 +22,7 @@
         <div class="container mt-17 mb-17">
             <div class="col-md-9  card shadow m-5">
                 <h1 class=" m-5 text-center">訂餐資訊</h1>
-                <form METHOD="post" action="<%=request.getContextPath()%>/front-end/store/food_order/food_order.do"
+                <form METHOD="post" action="<%=request.getContextPath()%>/front-end/Member/food_order/food_order.do"
                       class="p-4 ">
                     <table class="table" style="text-align:center; font-size: 20px;">
                         <thead class="thead-light">
@@ -94,16 +91,7 @@
     $("#pageSubmenu3").removeClass("collapse");
     $("#pageSubmenu3 a:contains(🔆訂位預約)").closest("a").addClass("active disabled bg-white topage");
 </script>
-
-
 <script>
-    let a = new StickySidebar("#sidebar", {
-        topSpacing: 40,
-        bottomSpacing: 20,
-        containerSelector: ".container",
-        innerWrapperSelector: ".sidebar__inner"
-    });
-
     var total_count = 0;
     var total_coint_limit = parseInt(${foodorder_peopleNum});// jsp取得人數
     var total_money = 0;
@@ -119,7 +107,6 @@
         }
         ;
     })
-
     document.getElementById(`tr_detail_${i}`).querySelectorAll('td')[3].querySelectorAll('button')[1].addEventListener('click', function () {
         let count = document.getElementById(`count_${i}`).value;
         if (total_count < total_coint_limit) {
@@ -132,5 +119,4 @@
     </c:forEach>
 </script>
 </body>
-
 </html>

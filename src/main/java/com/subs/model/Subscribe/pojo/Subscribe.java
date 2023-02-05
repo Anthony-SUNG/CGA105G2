@@ -50,5 +50,17 @@ public class Subscribe implements java.io.Serializable {
   public void setMemId(Integer memId) {
     this.memId = memId;
   }
+  
+  public com.store.model.Store.pojo.Store getStore() {
+	    com.store.model.service.StoreService storeSvc = new com.store.model.service.StoreService();
+	    com.store.model.Store.pojo.Store store = storeSvc.getById(storeId);
+	    return store;
+}
+
+public com.member.model.Member.pojo.Member getMember() {
+	    com.member.model.service.MemberService memSvc = new com.member.model.service.MemberService();
+	    com.member.model.Member.pojo.Member member = memSvc.getById(memId);
+	    return member;
+}
 
 }

@@ -3,12 +3,9 @@
 <%@ page import="com.emp.model.service.EmployeeService" %>
 <%@ page import="com.emp.model.Root.pojo.*" %>
 <%@ page import="java.util.*" %>
-
-
 <html>
 <head>
     <title>IBM Emp: Home</title>
-
     <style>
         table#table-1 {
             width: 450px;
@@ -31,14 +28,11 @@
             display: inline;
         }
     </style>
-
 </head>
 <body bgcolor='white'>
 <% EmployeeService empSvc = new EmployeeService();
     List<Root> list = empSvc.getEmpRootAll();
     pageContext.setAttribute("list", list); %>
-
-
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/emp/test">
     <b>選擇權限</b>
     <select size="1" name=getRootID>
@@ -51,7 +45,5 @@
     <input type="hidden" name="action" value="getRoot">
     <input type="submit" value="確定">
 </FORM>
-
-
 </body>
 </html>

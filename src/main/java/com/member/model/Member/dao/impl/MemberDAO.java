@@ -183,6 +183,7 @@ public class MemberDAO implements MemberDAO_interface {
 		}
 		return list;
 	}
+	
 
 	public List<Member> getAllByName(String memName) {
 		List<Member> list = new ArrayList<Member>();
@@ -192,6 +193,48 @@ public class MemberDAO implements MemberDAO_interface {
 				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_READ_ONLY)) {
 			pstmt.setString(1, memName);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// memberVO 也稱為 Domain objects
+				member = new Member();
+				member.setMemId(rs.getInt("MEM_ID"));
+				member.setMemStatus(rs.getInt("MEM_STATUS"));
+				member.setMemAcc(rs.getString("MEM_ACC"));
+				member.setMemPwd(rs.getString("MEM_PWD"));
+				member.setMemMail(rs.getString("MEM_MAIL"));
+				member.setMemPic(rs.getBytes("MEM_PIC"));
+				member.setMemName(rs.getString("MEM_NAME"));
+				member.setMemRecipient(rs.getString("MEM_RECIPIENT"));
+				member.setMemTwId(rs.getString("MEM_TW_ID"));
+				member.setMemBirthday(rs.getDate("MEM_BIRTHDAY"));
+				member.setMemPhone(rs.getString("MEM_PHONE"));
+				member.setMemPostalCode(rs.getInt("MEM_POSTAL_CODE"));
+				member.setMemCity(rs.getString("MEM_CITY"));
+				member.setMemDistrict(rs.getString("MEM_DISTRICT"));
+				member.setMemAddress(rs.getString("MEM_ADDRESS"));
+				member.setMemText(rs.getString("MEM_TEXT"));
+				member.setMemTime(rs.getTimestamp("MEM_TIME"));
+				member.setMemPoint(rs.getInt("MEM_POINT"));
+				list.add(member); // Store the row in the list
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		}
+		return list;
+	}
+	
+	@Override
+	public List<Member> getAllByAcc(String memAcc) {
+		List<Member> list = new ArrayList<Member>();
+		Member member = null;
+		String sql = "SELECT * FROM cga105g2.member where MEM_ACC like ?";
+		try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY)) {
+			pstmt.setString(1, "%" +memAcc+ "%");
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -261,6 +304,40 @@ public class MemberDAO implements MemberDAO_interface {
 			// Clean up JDBC resources
 		}
 		return member;
+	}
+
+	@Override
+	public void update3(Member member) {
+		String sql = "UPDATE cga105g2.member set MEM_PWD=? where MEM_ACC=?";
+		try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY)) {
+
+			pstmt.setString(1, member.getMemPwd());
+			pstmt.setString(2, member.getMemAcc());
+
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		}
+
+	}
+
+	@Override
+	public void update4(Member member) {
+		String sql = "UPDATE cga105g2.member set MEM_PWD=? where MEM_ID=?";
+		try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY)) {
+
+			pstmt.setString(1, member.getMemPwd());
+			pstmt.setInt(2, member.getMemId());
+
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		}
+
 	}
 
 }

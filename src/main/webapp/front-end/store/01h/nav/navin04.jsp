@@ -48,27 +48,24 @@
                     </li>
                 </ul>
             </li>
+            <c:if test="${storeplan >= 2}">
             <li class="my-3">
                 <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown fs-5">🔻推播管理</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu5">
                     <li>
                         <hr>
-                        <a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆新增推播訊息</a>
-                    </li>
-                    <li><a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆總覽推播訊息</a>
+                        <a href="/CGA105G2/front-end/store/pushmesg/addpg.jsp" class="nav-link">🔆新增推播訊息</a>
                         <hr>
                     </li>
                 </ul>
             </li>
+            </c:if>
             <li class="my-3">
-                <a href="#pageSubmenu6" data-toggle="collapse" aria-expanded="false" class="dropdown fs-5">🔻合約管理</a>
+                <a href="#pageSubmenu6" data-toggle="collapse" aria-expanded="false" class="dropdown fs-5">🔻方案管理</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu6">
                     <li>
                         <hr>
-                        <a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆合約查詢</a>
-                    </li>
-                    <li><a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆合約續約</a></li>
-                    <li><a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆新增廣告</a>
+                        <a href="/CGA105G2/front-end/store/Login/planchang.jsp" class="nav-link">🔆方案查詢</a>
                         <hr>
                     </li>
                 </ul>
@@ -79,10 +76,9 @@
                 <ul class="collapse list-unstyled" id="pageSubmenu7">
                     <li>
                         <hr>
-                        <a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆餐廳資料</a>
+                        <a href="/CGA105G2/front-end/store/Login/storeRegister2.jsp" class="nav-link">🔆帳號設定</a>
                     </li>
-                    <li><a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆帳號資料</a></li>
-                    <li><a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆變更密碼</a>
+                    <li><a href="/CGA105G2/front-end/store/Login/changepwd2.jsp" class="nav-link">🔆變更密碼</a>
                         <hr>
                     </li>
                 </ul>

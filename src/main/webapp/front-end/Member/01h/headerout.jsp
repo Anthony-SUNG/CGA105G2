@@ -3,8 +3,8 @@
 <html>
 <head>
     <!-- Bootstrap css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="/CGA105G2/assets/css/vendor.css"/>
     <link rel="stylesheet" href="/CGA105G2/assets/css/style.css"/>
     <link rel="stylesheet" href="/CGA105G2/assets/custom.css">
@@ -38,7 +38,7 @@
             <div class="row" style="max-width: 1400px">
                 <nav class="navbar navbar-expand-lg navbar-light fs-md-6" id="header-navbar">
                     <!-- @*Navbar(白色)*@ -->
-                    <a class="navbar-brand font-weight-bold" href="/index.jsp">
+                    <a class="navbar-brand font-weight-bold" href="/CGA105G2/index.jsp">
                         <img src="/CGA105G2/assets/images/Logo.PNG" style="width: 100px; height: 100px" alt="" />FoodMap</a>
                     <!--            ps-->
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -47,11 +47,6 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                            <div class="navbar-spacer"></div>
-                            <div class="navbar-spacer"></div>
-                            <div class="navbar-spacer"></div>
-                            <div class="navbar-spacer"></div>
-                            <div class="navbar-spacer"></div>
                             <li class="nav-item">
                                 <a class="nav-link text-uppercase" data-toggle="none" href="/CGA105G2/BlankPage/contactUs.jsp">
                                     📭聯繫我們
@@ -81,8 +76,8 @@
 <script src="/CGA105G2/assets/js/app.js"></script>
 <!-- Bootstrap 4.6.2 & Vue 3 & jquery 3.4.1-->
 <!-- Bootstrap js -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
 <!-- stickey bar: -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>

@@ -31,7 +31,6 @@ public class CodeServlet extends HttpServlet {
         Integer storeId = (Integer) req.getSession().getAttribute("storeId");
         Integer memId   = (Integer) req.getSession().getAttribute("memId");
         Integer empId   = (Integer) req.getSession().getAttribute("empId");
-
         if("addCode".equals(action)){
             List<String> errorMsgs = new LinkedList<String>();
             req.setAttribute("errorMsgs", errorMsgs);
@@ -48,11 +47,10 @@ public class CodeServlet extends HttpServlet {
             }
             java.sql.Date codeNtime = java.sql.Date.valueOf(req.getParameter("codeNtime").trim());
             String codeText = req.getParameter("codeText");
-
             Code code=codeSvc.todao(codeNum,codeOff,codeNtime,codeText);
             String url = "/front-end/store/code/addCode.jsp";
             if (!errorMsgs.isEmpty()) {
-                req.setAttribute("Code",code); // 含有輸入格式錯誤的empVO物件,也存入req
+                req.setAttribute("Code",code);
                 req.setAttribute("toResult",false);
                 RequestDispatcher failureView = req.getRequestDispatcher(url);
                 failureView.forward(req, res);
@@ -67,23 +65,23 @@ public class CodeServlet extends HttpServlet {
         }
         if("storeCodeAll".equals(action)){
             JSONArray json =codeSvc.storeCodeAll(storeId);
-            req.setAttribute("list_store", json); // 資料庫取出的empVO物件,存入req
+            req.setAttribute("list_store", json);
             String url = "/front-end/store/code/selectAllCode.jsp";
-            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
         }
         if("memCodeAllU".equals(action)){
             JSONArray json =codeSvc.memCodeAllU(memId);
-            req.setAttribute("list_memU", json); // 資料庫取出的empVO物件,存入req
+            req.setAttribute("list_memU", json);
             String url = "/front-end/Member/code/listAllCode.jsp";
-            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
         }
         if("memCodeAll".equals(action)){
             JSONArray json =codeSvc.memCodeAll(memId);
-            req.setAttribute("list_mem", json); // 資料庫取出的empVO物件,存入req
+            req.setAttribute("list_mem", json);
             String url = "/front-end/Member/code/selectCodeHistory.jsp";
-            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
         }
         if("reviewCoupon".equals(action)){
@@ -106,7 +104,7 @@ public class CodeServlet extends HttpServlet {
             req.setAttribute("empaccs",empaccs);
             req.setAttribute("root", root);
             req.setAttribute("list_out", json);
-            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
         }
         if("empTo".equals(action)){
@@ -115,7 +113,7 @@ public class CodeServlet extends HttpServlet {
             Boolean ans=codeSvc.toempId(codeid,toempId);
             req.setAttribute("ans",ans);
             String url = "/CodeServlet?action=reviewCoupon";
-            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
         }
         if("codestat".equals(action)){
@@ -124,15 +122,14 @@ public class CodeServlet extends HttpServlet {
             Boolean ans=codeSvc.tostat(codeid,status);
             req.setAttribute("ans",ans);
             String url = "/CodeServlet?action=reviewCoupon";
-            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
-            req.getRequestDispatcher(url).forward(req, res);
         }
         if("CouponPass".equals(action)){
             JSONArray json =codeSvc.statCodeAll();
-            req.setAttribute("list_stat", json); // 資料庫取出的empVO物件,存入req
-            String url = "back-end/code/reviewCouponPass.jsp";
-            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            req.setAttribute("list_stat", json);
+            String url = "/back-end/code/reviewCouponPass.jsp";
+            RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
         }
         if("send".equals(action)){
@@ -154,22 +151,10 @@ public class CodeServlet extends HttpServlet {
             req.setAttribute("list_store", json);
             req.setAttribute("ans", ans);
             String url = "/front-end/store/code/selectAllCode.jsp";
-            RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+            RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 

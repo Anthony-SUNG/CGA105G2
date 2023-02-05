@@ -1,35 +1,25 @@
-<%@page import="org.json.simple.JSONArray" %>
-<%@page import="com.store.model.service.StoreService" %>
-<%@page import="java.util.List" %>
-<%@page import="com.store.model.Store.pojo.Store" %>
+<%@ page import="org.json.simple.JSONArray" %>
+<%@ page import="com.store.model.service.StoreService" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.store.model.Store.pojo.Store" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    Store store = (Store) request.getAttribute("store");
-    Integer memId = 0;
-%>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>🗃️管理</title>
     <!-- Icon js -->
     <script src="https://kit.fontawesome.com/2c6d23848b.js" crossorigin="anonymous"></script>
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"/>
-
     <link rel="stylesheet" href="/CGA105G2/assets/css/vendor.css"/>
     <link rel="stylesheet" href="/CGA105G2/assets/css/style.css"/>
     <link rel="stylesheet" href="/CGA105G2/assets/custom.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
     <style>
         body {
             height: 100%;
@@ -126,7 +116,7 @@
             <%@ include file="/front-end/Member/01h/nav/navin00.jsp" %>
             <!-- nav end -->
         </c:if>
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 my-5" >
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 my-5">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">🔆搜尋結果</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
@@ -137,20 +127,23 @@
                 </div>
             </div>
             <!-- ====================搜尋頁面開始==================== -->
-            <ol style="list-style: none;" >
+            <ol style="list-style: none;">
                 <!--=================for each開始==================== -->
                 <c:forEach var="store" items="${list}">
                     <li id="search_result1">
                         <div class="row justify-content-center mt-10 mb-10">
                             <div class="col-md-3 border">
                                 <div class="position-relative snipimage" style="height: 200px;">
-                                    <img src="/assets/images/ex1.jpg" class="rounded img-fluid img-responsive" style="width: 100%;height: 100%;">
+                                    <!--==============這是google地圖====================== -->
+                                    <img src="https://via.placeholder.com/450x350"
+                                         class="rounded img-fluid img-responsive" style="width: 100%;height: 100%;">
                                 </div>
                             </div>
                             <div class="col-md-5 border">
                                 <div class="mt-2">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <span class="mb-1" style="font-size:35px;font-weight: 1000;">${store.storeName} </span>
+                                        <span class="mb-1"
+                                              style="font-size:35px;font-weight: 1000;">${store.storeName} </span>
                                     </div>
                                     <div class="total_information" style="font-size: 18px;">
                                         <div style="line-height: 35px;">
@@ -166,9 +159,6 @@
                                 </div>
                             </div>
                             <div class="col-md-2 border d-flex flex-column justify-content-end">
-                                <span style="font-size: 18px;padding: 5px 15px;border-radius:20px ;background-color: rgb(255, 92, 51);position:absolute;top: 20px;right: 20px;">4.7
-                                    <i class="fa-solid fa-star" style="color: rgb(249, 249, 106);"></i>
-                                </span>
                                 <form method="post" action="/CGA105G2/LonginServlet" name="form1">
                                     <button name="action" value="StorePage" type="submit"
                                             class="btn btn-success btn-block mt-5"
@@ -201,7 +191,6 @@
         </main>
     </div>
 </div>
-
 <!-- main -->
 <!-- footer start -->
 <%@ include file="/front-end/Member/01h/footerin.jsp" %>
@@ -217,16 +206,15 @@
         crossorigin="anonymous"></script>
 <script>
     $(document).ready(function () {
-
         new ClipboardJS('.btn');
-
     });
     $("a:contains(🌟)").closest("a").addClass("active disabled topage");
 </script>
-
 <!-- stickey bar: -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
-
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhKclAtJHGqNeIzBRjYLisnajuzq_PCcA&callback=initMap"></script>
+<!--     ===================google地圖結束======================== -->
 <script>
     let a = new StickySidebar("#sidebar", {
         topSpacing: 40,
@@ -236,5 +224,4 @@
     });
 </script>
 </body>
-
 </html>

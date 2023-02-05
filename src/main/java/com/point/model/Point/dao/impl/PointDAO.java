@@ -1,8 +1,7 @@
 package com.point.model.Point.dao.impl;
 
-import com.core.common.Common;
-import com.point.model.Point.dao.PointDAO_interface;
-import com.point.model.Point.pojo.Point;
+import static com.core.common.Common.PASSWORD;
+import static com.core.common.Common.USER;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,15 +10,18 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.core.common.Common.PASSWORD;
-import static com.core.common.Common.USER;
+import com.core.common.Common;
+import com.member.model.Member.pojo.Member;
+import com.point.model.Point.dao.PointDAO_interface;
+import com.point.model.Point.pojo.Point;
+import com.point.model.PointGoods.pojo.PointGoods;
 
 public class PointDAO implements PointDAO_interface {
 	@Override
 	public void insert(Point point) {
 		String sql = "INSERT INTO cga105g2.point (MEM_ID, POINT_CHANGE, POINT_NUMBER) VALUES (?, ?, ?)";
         try(Connection con= DriverManager.getConnection(Common.URL, USER, PASSWORD);
-			PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_READ_ONLY)) {
 			pstmt.setInt(1, point.getMemId());
 			pstmt.setString(2, point.getPointChange());
@@ -83,7 +85,7 @@ public class PointDAO implements PointDAO_interface {
 	@Override
 	public List<Point> getAll() {
 		List<Point> list = new ArrayList<Point>();
-		String sql = "SELECT POINT_ID, MEM_ID, POINT_CHANGE, POINT_NUMBER FROM cga105g2.point order by POINT_ID";
+		String sql = "SELECT POINT_ID, MEM_ID, POINT_CHANGE, POINT_NUMBER FROM cga105g2.point order by POINT_ID ";
         try(Connection con= DriverManager.getConnection(Common.URL, USER, PASSWORD);
 				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_READ_ONLY)) {
@@ -132,14 +134,14 @@ public class PointDAO implements PointDAO_interface {
 //		System.out.println(point3.getPointNumber());
 
 		// 查詢
-//		List<Point> list = dao.getAll();
-//		for (Point aPoint : list) {
-//			System.out.print(aPoint.getPointId() + ",");
-//			System.out.print(aPoint.getMemId() + ",");
-//			System.out.print(aPoint.getPointChange() + ",");
-//			System.out.print(aPoint.getPointNumber());
-//			System.out.println();
-//		}
+		List<Point> list = dao.getAll();
+		for (Point aPoint : list) {
+			System.out.print(aPoint.getPointId() + ",");
+			System.out.print(aPoint.getMemId() + ",");
+			System.out.print(aPoint.getPointChange() + ",");
+			System.out.print(aPoint.getPointNumber());
+			System.out.println();
+		}
 		
 		
 	}

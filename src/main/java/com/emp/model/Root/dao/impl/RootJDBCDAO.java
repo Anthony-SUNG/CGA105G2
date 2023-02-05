@@ -75,24 +75,33 @@ public class RootJDBCDAO implements RootDAO_interface {
 	}
 
 
-	public static void main(String[] args) {
+	public Root findByRootId(Integer integer) {
+		String find = "SELECT * FROM cga105g2.root where ROOT_ID LIKE  ? ";
+		Root rootvo = null;
+		ResultSet rs = null;
+		try (Connection con = DriverManager.getConnection(Common.URL, USER, PASSWORD);
+				PreparedStatement pstmt = con.prepareStatement(find, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY)) {
+			pstmt.setInt(1, integer);
 
-		RootJDBCDAO dao = new RootJDBCDAO();
-		// 關鍵字查詢
-		List<Root> rootVO3 = dao.findByROOT_TEXT("%網站%");
-		for (Root aEmp : rootVO3) {
-			System.out.print(aEmp.getRootId() + ",");
-			System.out.print(aEmp.getRootText() + " ");
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				rootvo = new Root();
+				rootvo.setRootId(rs.getInt("ROOT_ID"));
+				rootvo.setRootText(rs.getString("ROOT_TEXT"));
+			}
+
 		}
+		catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 
-		System.out.println("---------------------");
-
-		// 查詢全部
-		List<Root> list = dao.getAll();
-		for (Root aEmp : list) {
-			System.out.print(aEmp.getRootId() + ",");
-			System.out.print(aEmp.getRootText() + " ");
 		}
-
+		return rootvo;
+	}
+	public static void main(String args[ ]) {
+		RootJDBCDAO aa = new RootJDBCDAO();
+		aa.findByRootId(1);
+		System.out.println(aa);
 	}
 }

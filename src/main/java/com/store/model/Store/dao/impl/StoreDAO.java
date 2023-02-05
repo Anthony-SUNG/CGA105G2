@@ -286,9 +286,7 @@ public class StoreDAO implements StoreDAO_interface {
 
             pstmt.setInt(1, storeStatus);
             pstmt.setInt(2, storeId);
-
             pstmt.executeUpdate();
-
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
@@ -298,35 +296,26 @@ public class StoreDAO implements StoreDAO_interface {
     @Override
     public void updateempId(Integer storeId, Integer empId) {
         String sql = "UPDATE cga105g2.store set EMP_ID=? where STORE_ID = ?";
-
         try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
              PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                      ResultSet.CONCUR_READ_ONLY)) {
-
             pstmt.setInt(1, empId);
             pstmt.setInt(2, storeId);
-
             pstmt.executeUpdate();
-
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
-
     }
 
     @Override
     public void updatePlan(Integer storeId, Integer storePlan) {
         String sql = "UPDATE cga105g2.store set STORE_PLAN=? where STORE_ID = ?";
-
         try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
              PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                      ResultSet.CONCUR_READ_ONLY)) {
-
             pstmt.setInt(1, storePlan);
             pstmt.setInt(2, storeId);
-
             pstmt.executeUpdate();
-
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
@@ -336,16 +325,12 @@ public class StoreDAO implements StoreDAO_interface {
     @Override
     public void updateNplan(Integer storeId, Integer storeNplan) {
         String sql = "UPDATE cga105g2.store set STORE_NPLAN=? where STORE_ID = ?";
-
         try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
              PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                      ResultSet.CONCUR_READ_ONLY)) {
-
             pstmt.setInt(1, storeNplan);
             pstmt.setInt(2, storeId);
-
             pstmt.executeUpdate();
-
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
@@ -355,18 +340,14 @@ public class StoreDAO implements StoreDAO_interface {
     @Override
     public void updateordersetting(Integer storeId, String storeEtime, Integer storeTable, Integer storeEtable) {
         String sql = "UPDATE cga105g2.store set STORE_ETIME=?,STORE_TABLE=?,STORE_ETABLE=? where STORE_ID = ?";
-
         try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
              PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                      ResultSet.CONCUR_READ_ONLY)) {
-
             pstmt.setString(1, storeEtime);
             pstmt.setInt(2, storeTable);
             pstmt.setInt(3, storeEtable);
             pstmt.setInt(4, storeId);
-
             pstmt.executeUpdate();
-
         } catch (SQLException se) {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
@@ -434,130 +415,179 @@ public class StoreDAO implements StoreDAO_interface {
 
 
 
-    public static void main(String[] args) {
-        StoreDAO dao = new StoreDAO();
 
-        // 新增
-//		Store storeVO1 = new Store();
-//		storeVO1.setEmpId(1);
-//		storeVO1.setStoreName("素食");
-//		storeVO1.setStorePhone1("28888888");
-//		storeVO1.setStoreHours("基本每天");
-//		storeVO1.setStoreCity("桃園市");
-//		storeVO1.setStoreDistrict("中壢區");
-//		storeVO1.setStoreAddress("麥旁邊");
-//		storeVO1.setStoreUrl("https://maps.google.com/?cid=666666");
-//		storeVO1.setStoreWeb("https://www.facebook.com/%%%%%%%%%%");
-//		storeVO1.setStoreAcc("sufood");
-//		storeVO1.setStorePwd("123456");
-//		storeVO1.setStoreMail("sufood@gmail.com");
-//		storeVO1.setStoreComId("");
-//		storeVO1.setStoreComAddress("");
-//		storeVO1.setStoreTwId("");
-//		storeVO1.setStorePhone2("0966666666");
-//
-//		dao.insert(storeVO1);
-
-        // 修改
-//		Store storeVO2 = new Store();
-//		
-//		storeVO2.setEmpId(1);
-//		storeVO2.setStoreName("素食");
-//		storeVO2.setStorePhone1("28000000");
-//		storeVO2.setStoreHours("不開了");
-//		storeVO2.setStoreMap("66.66 ,66.66");
-//		storeVO2.setStoreCity("桃園市");
-//		storeVO2.setStoreDistrict("中壢區");
-//		storeVO2.setStoreAddress("麥旁邊");
-//		storeVO2.setStoreUrl("https://maps.google.com/?cid=666666");
-//		storeVO2.setStoreWeb("https://www.facebook.com/%%%%%%%%%%");
-//		storeVO2.setStoreAcc("sufood123");
-//		storeVO2.setStorePwd("123456789");
-//		storeVO2.setStoreMail("sufood@gmail.com");
-//		storeVO2.setStoreComId("");
-//		storeVO2.setStoreComAddress("");
-//		storeVO2.setStoreTwId("");
-//		storeVO2.setStorePhone2("0966666666");
-//		storeVO2.setStoreText("壞壞");
-//		storeVO2.setStorePlan(0);
-//		storeVO2.setStoreNplan(0);
-//		storeVO2.setStoreOntime(java.sql.Date.valueOf("2023-01-01"));
-//		storeVO2.setStoreEtime("");
-//		storeVO2.setStoreTable(55);
-//		storeVO2.setStoreEtable(55);
-//		storeVO2.setStoreId(377);
-//		
-//		dao.update(storeVO2);
-//
-//		// 刪除
-//		dao.delete(376);
-//
-//		// 查詢
-//		Store storeVO3 = dao.getById(1);
-//		System.out.print(storeVO3.getStoreId() + ",");
-//		System.out.print(storeVO3.getEmpId() + ",");
-//		System.out.print(storeVO3.getStoreStatus() + ",");
-//		System.out.print(storeVO3.getStoreName() + ",");
-//		System.out.print(storeVO3.getStorePhone1() + ",");
-//		System.out.print(storeVO3.getStoreHours() + ",");
-//		System.out.print(storeVO3.getStoreMap() + ",");
-//		System.out.print(storeVO3.getStoreCity() + ",");
-//		System.out.print(storeVO3.getStoreDistrict() + ",");
-//		System.out.print(storeVO3.getStoreAddress() + ",");
-//		System.out.print(storeVO3.getStoreUrl() + ",");
-//		System.out.print(storeVO3.getStoreWeb() + ",");
-//		System.out.print(storeVO3.getStoreAcc() + ",");
-//		System.out.print(storeVO3.getStorePwd() + ",");
-//		System.out.print(storeVO3.getStoreMail() + ",");
-//		System.out.print(storeVO3.getStoreComId() + ",");
-//		System.out.print(storeVO3.getStoreComAddress() + ",");
-//		System.out.print(storeVO3.getStoreTwId() + ",");
-//		System.out.print(storeVO3.getStorePhone2() + ",");
-//		System.out.print(storeVO3.getStoreText() + ",");
-//		System.out.print(storeVO3.getStorePlan() + ",");
-//		System.out.print(storeVO3.getStoreNplan() + ",");
-//		System.out.print(storeVO3.getStoreTime() + ",");
-//		System.out.print(storeVO3.getStoreOntime() + ",");
-//		System.out.print(storeVO3.getStoreRetime() + ",");
-//		System.out.print(storeVO3.getStoreEtime() + ",");
-//		System.out.print(storeVO3.getStoreTable() + ",");
-//		System.out.print(storeVO3.getStoreEtable() + ",");
-//		System.out.println("---------------------");
-//
-//		// 查詢
-        List<Store> list = dao.getAll();
-        for (Store astore : list) {
-            System.out.print(astore.getStoreId() + ",");
-            System.out.print(astore.getEmpId() + ",");
-            System.out.print(astore.getStoreStatus() + ",");
-            System.out.print(astore.getStoreName() + ",");
-            System.out.print(astore.getStorePhone1() + ",");
-            System.out.print(astore.getStoreHours() + ",");
-            System.out.print(astore.getStoreMap() + ",");
-            System.out.print(astore.getStoreCity() + ",");
-            System.out.print(astore.getStoreDistrict() + ",");
-            System.out.print(astore.getStoreAddress() + ",");
-            System.out.print(astore.getStoreUrl() + ",");
-            System.out.print(astore.getStoreWeb() + ",");
-            System.out.print(astore.getStoreAcc() + ",");
-            System.out.print(astore.getStorePwd() + ",");
-            System.out.print(astore.getStoreMail() + ",");
-            System.out.print(astore.getStoreComId() + ",");
-            System.out.print(astore.getStoreComAddress() + ",");
-            System.out.print(astore.getStoreTwId());
-            System.out.println();
+    @Override
+    public List<Store> getAllByAddress(String storeCity, String storeDistrict) {
+        String sql = "SELECT * FROM cga105g2.store where STORE_CITY = ? AND STORE_DISTRICT = ?";
+        List<Store> list = new ArrayList<Store>();
+        Store store = null;
+        storeCity=storeCity.replace("臺", "台");
+        try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+             PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+                     ResultSet.CONCUR_READ_ONLY)) {
+            pstmt.setString(1, storeCity);
+            pstmt.setString(2, storeDistrict);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                // memberVO 也稱為 Domain objects
+                store = new Store();
+                store.setStoreId(rs.getInt("STORE_ID"));
+                store.setStoreStatus(rs.getInt("STORE_STATUS"));
+                store.setStoreName(rs.getString("STORE_NAME"));
+                store.setStoreCity(rs.getString("STORE_CITY"));
+                store.setStoreDistrict(rs.getString("STORE_DISTRICT"));
+                store.setStoreAddress(rs.getString("STORE_ADDRESS"));
+                store.setStoreUrl(rs.getString("STORE_URL"));
+                list.add(store);
+            }
+        } catch (SQLException se) {
+            throw new RuntimeException("A database error occured. " + se.getMessage());
         }
+        return list;
 
-//		storeId修改storeStatus
-//		dao.updateStatus(4, 1);
-//		storeId修改empId
-//		dao.updateempId(4, 3);
-//		storeId修改目前/次月方案
-//		dao.updatePlan(4, 2);
-//		dao.updateNplan(4, 3);
-//		storeId修改時段/桌數/定位上限數	
-//		dao.updateordersetting(4, "11:00", 66, 56);
+
     }
 
+    @Override
+    public void update2(Store Store) {
+        String sql = "UPDATE cga105g2.store set STORE_PHONE1=?,STORE_HOURS=?,STORE_ADDRESS=?,STORE_WEB=?,STORE_ACC=?,STORE_MAIL=?,STORE_COM_ID=?,STORE_COM_ADDRESS=?,"
+                + "STORE_TW_ID=?,STORE_PHONE2=?,STORE_TEXT=? where STORE_ID = ?";
+        try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+             PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+                     ResultSet.CONCUR_READ_ONLY)) {
+            pstmt.setString(1, Store.getStorePhone1());
+            pstmt.setString(2, Store.getStoreHours());
+            pstmt.setString(3, Store.getStoreAddress());
+            pstmt.setString(4, Store.getStoreWeb());
+            pstmt.setString(5, Store.getStoreAcc());
+            pstmt.setString(6, Store.getStoreMail());
+            pstmt.setString(7, Store.getStoreComId());
+            pstmt.setString(8, Store.getStoreComAddress());
+            pstmt.setString(9, Store.getStoreTwId());
+            pstmt.setString(10, Store.getStorePhone2());
+            pstmt.setString(11, Store.getStoreText());
+            pstmt.setInt(12, Store.getStoreId());
+            pstmt.executeUpdate();
+        } catch (SQLException se) {
+            throw new RuntimeException("A database error occured. " + se.getMessage());
+        }
+
+
+    }
+
+	@Override
+	public void update3(Store store) {
+		String sql = "UPDATE cga105g2.store set STORE_PWD=? where STORE_ACC=?";
+		try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY)) {
+			pstmt.setString(1, store.getStorePwd());
+			pstmt.setString(2, store.getStoreAcc());
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		}
+		
+	}
+
+	@Override
+	public void update4(Store store) {
+		String sql = "UPDATE cga105g2.store set STORE_PWD=? where STORE_ID=?";
+		try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY)) {
+			pstmt.setString(1, store.getStorePwd());
+			pstmt.setInt(2, store.getStoreId());
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		}
+		
+	}
+	@Override
+	public void updateplan(Integer storeId,Integer plan) {
+		String sql = "UPDATE cga105g2.store set STORE_PLAN=? ,STORE_NPLAN=? where STORE_ID=?";
+		try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+				PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY)) {
+			pstmt.setInt(1, plan);
+            pstmt.setInt(2, plan);
+			pstmt.setInt(3, storeId);
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		}
+	}
+	@Override
+	public void inserts(Store Store) {
+		String sql = "UPDATE cga105g2.store set STORE_PHONE1=?,STORE_ACC=?,STORE_PWD=?,STORE_COM_ADDRESS=?,STORE_TW_ID=?,STORE_PHONE2=?,STORE_STATUS=? where STORE_ID = ?";
+        try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+             PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+                     ResultSet.CONCUR_READ_ONLY)) {
+            pstmt.setString(1, Store.getStorePhone1());
+            pstmt.setString(2, Store.getStoreAcc());
+            pstmt.setString(3, Store.getStorePwd());
+            pstmt.setString(4, Store.getStoreComAddress());
+            pstmt.setString(5, Store.getStoreTwId());
+            pstmt.setString(6, Store.getStorePhone2());
+            pstmt.setInt(7, Store.getStoreStatus());
+            pstmt.setInt(8, Store.getStoreId());
+            pstmt.executeUpdate();
+        } catch (SQLException se) {
+            throw new RuntimeException("A database error occured. " + se.getMessage());
+        }
+		
+	}
+
+	@Override
+	public boolean getByAcc(String storeacc) {
+		String sql = "SELECT * FROM cga105g2.store where STORE_ACC = ?";
+        Store store = null;
+        try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+             PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+                     ResultSet.CONCUR_READ_ONLY)) {
+            pstmt.setString(1, storeacc);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                // memberVO 也稱為 Domain objects
+                store = new Store();
+                store.setStoreId(rs.getInt("STORE_ID"));
+            }
+        } catch (SQLException se) {
+            throw new RuntimeException("A database error occured. " + se.getMessage());
+        }
+		if(store == null) {
+        return false;
+		}else {
+			return true;
+		}
+	}
+    public Integer getByplan() {
+        String sql = "SELECT * FROM cga105g2.store where STORE_NPLAN like ?";
+        Store store = new Store();
+        try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
+             PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+                     ResultSet.CONCUR_READ_ONLY)) {
+            pstmt.setInt(1,3);
+            ResultSet rs = pstmt.executeQuery();
+            Integer q=0;
+            while (rs.next()) {
+                q+=1;
+            }
+            Integer orz=10-q;
+            return orz;
+        } catch (SQLException se) {
+            throw new RuntimeException("A database error occured. " + se.getMessage());
+            // Clean up JDBC resources
+        }
+    }
 
 }
+
+
+
+
+
+
+
+

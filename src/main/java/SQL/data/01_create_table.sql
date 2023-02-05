@@ -217,8 +217,8 @@ CREATE TABLE `cga105g2`.`SUBSCRIBE` (
 -- S-2-9 訂位
 CREATE TABLE `cga105g2`.`RESERVA` (
   REN_ID        INT         NOT NULL AUTO_INCREMENT                     COMMENT '編號',
-  STORE_ID      INT                                                     COMMENT '店家編號',
-  MEM_ID        INT         NOT NULL                                    COMMENT '會員編號',
+  STORE_ID      INT         NOT NULL                                    COMMENT '店家編號',
+  MEM_ID        INT                                                     COMMENT '會員編號',
   REN_NAME      VARCHAR(50) NOT NULL                                    COMMENT '姓名',
   REN_PHONE     VARCHAR(50) NOT NULL                                    COMMENT '電話',
   REN_TIME      VARCHAR(50) NOT NULL                                    COMMENT '時段',

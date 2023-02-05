@@ -2,20 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>店家首頁</title>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/front-end/store/01h/headerin.jsp" %>
 <!-- header end -->
-
 <!-- main -->
 <div class="container-fluid">
     <div class="row">
@@ -90,7 +86,6 @@
     </div>
 </div>
 <!-- main -->
-<!-- main -->
 <!-- footer start -->
 <%@ include file="/front-end/store/01h/footerin.jsp" %>
 <!-- footer end -->
@@ -101,7 +96,32 @@
     $("#pageSubmenu2").removeClass("collapse");
     $("#pageSubmenu2 a:contains(🔆餐點與時段)").closest("a").addClass("active disabled bg-white topage");
 </script>
+<script>
+    function addCupAlert() {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-outline-primary m-5 fs-5',
+            },
+            buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+            position: 'middle',
+            icon: 'success',
+            title: '付款成功，請設定訂位資訊',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
 
+    let toResult = null;
+    toResult =
+    <%= request.getAttribute("toResult") %>
+    if (toResult == true) {
+        // alert(toResult);
+        addCupAlert();
+        toResult = null;
+    }
+    ;
+</script>
 </body>
-
 </html>

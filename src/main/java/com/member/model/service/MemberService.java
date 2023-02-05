@@ -13,7 +13,7 @@ public class MemberService {
 	public MemberService() {
 		dao = new MemberDAO();
 	}
-	
+
 	public Member topojo(String memName, String memAcc, String memPwd, String memrecipient, String memTwId,
 			Date memBirthday, String memPhone, Integer memPostalcode, String memCity, String memDistrict,
 			String memAddress, String memMail) {
@@ -57,7 +57,7 @@ public class MemberService {
 		return member;
 	}
 
-	public Member updateMem(Integer memId,String memName, String memAcc, String memrecipient, String memTwId,
+	public Member updateMem(Integer memId, String memName, String memAcc, String memrecipient, String memTwId,
 			Date memBirthday, String memPhone, Integer memPostalcode, String memCity, String memDistrict,
 			String memAddress, String memMail, String memText, byte[] memPic) {
 		Member member = new Member();
@@ -86,9 +86,13 @@ public class MemberService {
 		return dao.getAllByName(memName);
 	}
 
+	public List<Member> getMemberList() {
+		return dao.getAll();
+	}
+
 	public Member signin(String memAcc, String memPwd) {
-		Member member=new Member();
-		member=dao.signin(memAcc,memPwd);
+		Member member = new Member();
+		member = dao.signin(memAcc, memPwd);
 		return member;
 //		return dao.signin(memAcc, memPwd);
 	}
@@ -100,5 +104,28 @@ public class MemberService {
 
 	public Member getById(Integer memId) {
 		return dao.getById(memId);
+	}
+	public List<Member> getAllByAcc(String memAcc) {
+		return dao.getAllByAcc(memAcc);
+
+	}
+	public Member forget1(String memAcc, String memPwd) {
+		Member member = new Member();
+
+		member.setMemAcc(memAcc);
+		member.setMemPwd(memPwd);
+		dao.update3(member);
+
+		return member;
+	}
+
+	public Member changepwd(Integer memId, String memPwd) {
+		Member member = new Member();
+
+		member.setMemId(memId);
+		member.setMemPwd(memPwd);
+		dao.update4(member);
+
+		return member;
 	}
 }

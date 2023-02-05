@@ -1,23 +1,17 @@
 <%@ page import="com.emp.model.Employee.pojo.*" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%
     Employee employee = (Employee) request.getAttribute("employee"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>後台</title>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/back-end/01h/headerin.jsp" %>
@@ -33,10 +27,11 @@
                 <h1 class="h2">🔆員工資料修改</h1>
             </div>
             <div class=" shadow card-body  rounded mb-20 bg-secondary " id="div11" style="border-radius: 30px;">
-                <form METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/emp/test" name="form1">
+                <form METHOD="post" ACTION="<%=request.getContextPath()%>/EmployeeServlet" name="form1">
                     <div class="form-group ">
-                        <label >員工編號</label><br>
-                        <p><%=employee.getEmpId()%></p>
+                        <label>員工編號</label><br>
+                        <p><%=employee.getEmpId()%>
+                        </p>
                     </div>
                     <div class="form-group">
                         <label>員工狀態</label><br>
@@ -50,30 +45,31 @@
                         </td>
                     </div>
                     <div class="form-group">
-                        <label >員工帳號</label><br>
-                        <input type="TEXT" name="empacc" value=<%=employee.getEmpAcc()%>/>
+                        <label>員工帳號</label><br>
+                        <input type="TEXT" name="empacc" value=<%=employee.getEmpAcc()%>>
                     </div>
                     <div class="form-group">
                         <label>員工密碼</label><br>
-                        <input type="TEXT" name="emppwd" value=<%=employee.getEmpPwd()%>/>
+                        <input type="TEXT" name="emppwd" value=<%=employee.getEmpPwd()%>>
                     </div>
                     <div class="form-group">
-                        <label >員工權限</label><br>
+                        <label>員工權限</label><br>
                         <td><select size="1" name="empper">
                             <option value="<%=employee.getEmpPer()%>"><%=(employee.getEmpPer() == 0) ? "員工" : "主管"%>
                             </option>
                             <option value="<%=(employee.getEmpPer() == 0) ? "1" : "0"%>"><%=(employee.getEmpPer() == 1) ? "員工" : "主管"%>
                             </option>
-                        </select></td>
+                        </select>
+                        </td>
                     </div>
                     <div class="form-group">
-                        <label >新增時間</label><br>
+                        <label>新增時間</label><br>
                         <p><%=employee.getEmpTime()%>
                         </p>
                     </div>
                     <div class="form-group">
-                        <label for="aaa">修改時間</label><br>
-                        <input type="TEXT" name="emprtime" id="aaa" value="1111"></input>
+                        <label>修改時間</label><br>
+                        <input type="TEXT" name="emprtime" id="time" value=" "></input>
                     </div>
                     <input type="hidden" name="emptime" value="<%=employee.getEmpTime()%>">
                     <input type="hidden" name="empid" value="<%=employee.getEmpId()%>">
@@ -95,17 +91,17 @@
 <!-- sidebar menu Class -->
 <script>
     $("a:contains(🗃️管理)").closest("a").addClass("active disabled topage");
-    $("a:contains(🔻員工資料)").closest("a").attr("data-toggle","show");
+    $("a:contains(🔻員工資料)").closest("a").attr("data-toggle", "show");
     $("#pageSubmenu2").removeClass("collapse");
     $("#pageSubmenu2 a:contains(🔆員工查詢)").closest("a").addClass("active disabled bg-white topage");
 </script>
 <script>
-    const list=[];
+    const list = [];
     <c:forEach var="empRoot" items="${empRoot}">
     list.push(${empRoot.rootId});
     </c:forEach>
-    for (let e of list){
-        switch (e){
+    for (let e of list) {
+        switch (e) {
             case 1:
                 $("#a2").removeClass("disabled");
                 $("#a3").removeClass("disabled");
@@ -134,11 +130,9 @@
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-outline-primary m-5 fs-5',
-
             },
             buttonsStyling: false
         })
-
         swalWithBootstrapButtons.fire({
             position: 'middle',
             icon: 'success',
@@ -148,13 +142,11 @@
         })
     }
 
-
     var Today = new Date();
-    var inp = document.getElementById("aaa");
-    inp.setAttribute("value", Today.getFullYear() + "-" + Today.getMonth() + 1
+    console.log(Today.getMonth());
+    var inp = document.getElementById("time");
+    inp.setAttribute("value", Today.getFullYear() + "-" + (Today.getMonth() + 1)
         + "-" + Today.getDate());
 </script>
-
 </body>
-
 </html>

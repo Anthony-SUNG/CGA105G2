@@ -5,16 +5,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>後台</title>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/back-end/01h/headerin.jsp" %>
@@ -26,26 +22,19 @@
         <%@ include file="/back-end/01h/nav/navin03.jsp" %>
         <!-- nav end -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-            <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-15 border-bottom">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-15 border-bottom">
                 <h1 class="h2">🔆員工資料</h1>
-
             </div>
             <form METHOD="post"
                   ACTION="<%=request.getContextPath()%>/back-end/emp/test">
                 <div class="input-group">
                     <input type="search" class="form-control rounded"
                            placeholder="搜尋員工" aria-label="Search"
-                           aria-describedby="search-addon" name="employee"/> <input
-                        type="hidden" name="action" value="getOne">
-                    <button type="submit" class="btn btn-outline-dark"
-                            data-mdb-ripple-color="dark">search
-                    </button>
+                           aria-describedby="search-addon" name="employee"/>
+                    <input type="hidden" name="action" value="getOne">
+                    <button type="submit" class="btn btn-outline-dark" data-mdb-ripple-color="dark">search</button>
                 </div>
             </form>
-
-            <%-- <% --%>
-            <%-- %> --%>
             <%
                 Employee employee = (Employee) request.getAttribute("employee"); //EmpServlet.java(Concroller), 存入req的empVO物件
             %>
@@ -64,8 +53,6 @@
                     </tr>
                     </thead>
                     <tbody class="code_tbody col-3">
-
-
                     <tr class="col-3">
                         <td><%=(employee.getEmpStatus() == 0) ? "在職" : "離職" %>
                         </td>
@@ -85,10 +72,9 @@
                             <FORM METHOD="post"
                                   ACTION="<%=request.getContextPath()%>/back-end/emp/test"
                                   style="margin-bottom: 0px;">
-                                <input type="submit" value="修改"> <input type="hidden"
-                                                                          name="empId" value=<%=employee.getEmpId()%>>
-                                <input
-                                        type="hidden" name="action" value="getOne_For_Update">
+                                <input type="submit" value="修改">
+                                <input type="hidden" name="empId" value=<%=employee.getEmpId()%>>
+                                <input type="hidden" name="action" value="getOne_For_Update">
                             </FORM>
                         </td>
                     </tr>
@@ -98,19 +84,23 @@
             <nav aria-label="Page navigation example"
                  class="d-flex justify-content-center" style="padding: 10px 0 25px">
                 <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#"
-                                             aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-                    </a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#"
-                                             aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-                    </a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </main>
-        <section class="jumbotron jumbotron-fluid mb-0 bg-secondary">
-
-        </section>
+        <section class="jumbotron jumbotron-fluid mb-0 bg-secondary"></section>
     </div>
 </div>
 <!-- main -->
@@ -120,17 +110,17 @@
 <!-- sidebar menu Class -->
 <script>
     $("a:contains(🗃️管理)").closest("a").addClass("active disabled topage");
-    $("a:contains(🔻員工資料)").closest("a").attr("data-toggle","show");
+    $("a:contains(🔻員工資料)").closest("a").attr("data-toggle", "show");
     $("#pageSubmenu2").removeClass("collapse");
     $("#pageSubmenu2 a:contains(🔆員工查詢)").closest("a").addClass("active disabled bg-white topage");
 </script>
 <script>
-    const list=[];
+    const list = [];
     <c:forEach var="empRoot" items="${empRoot}">
     list.push(${empRoot.rootId});
     </c:forEach>
-    for (let e of list){
-        switch (e){
+    for (let e of list) {
+        switch (e) {
             case 1:
                 $("#a2").removeClass("disabled");
                 $("#a3").removeClass("disabled");
@@ -157,7 +147,5 @@
         this.value = 'Processing…';
     }
 </script>
-
 </body>
-
 </html>

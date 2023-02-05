@@ -5,19 +5,14 @@
     JSONArray list = (JSONArray) request.getAttribute("list_out");
     JSONArray empaccs = (JSONArray) request.getAttribute("empaccs");
 %>
-
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>後台</title>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/back-end/01h/headerin.jsp" %>
@@ -29,8 +24,7 @@
         <%@ include file="/back-end/01h/nav/navin01.jsp" %>
         <!-- nav end -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 my-5">
-            <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2 mt-5">🔆待審核</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">

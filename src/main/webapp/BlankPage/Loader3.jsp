@@ -1,17 +1,11 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-
-
     <style>
         @import url("https://fonts.googleapis.com/css?family=Amatic+SC");
 
@@ -289,27 +283,23 @@
         }
     </style>
 </head>
-
 <body>
-
-
-    <h1>BBQ啦..</h1>
-    <div id="cooking">
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div id="area">
-            <div id="sides">
-                <div id="pan"></div>
-                <div id="handle"></div>
-            </div>
-            <div id="pancake">
-                <div id="pastry"></div>
-            </div>
+<h1>BBQ啦..</h1>
+<div id="cooking">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div id="area">
+        <div id="sides">
+            <div id="pan"></div>
+            <div id="handle"></div>
+        </div>
+        <div id="pancake">
+            <div id="pastry"></div>
         </div>
     </div>
+</div>
 </body>
-
 </html>

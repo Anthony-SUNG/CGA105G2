@@ -1,98 +1,262 @@
+<%@ page import="com.order.model.Order.pojo.Order" %>
+<%@ page import="com.order.model.service.OrderService" %>
+<%@ page import="com.store.model.Store.pojo.Store" %>
+<%@ page import="com.store.model.service.StoreService" %>
+<%@ page import="com.member.model.Member.pojo.Member" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.member.model.service.MemberService" %>
+<%@ page import="com.goods.model.*" %>
+<%@ page import="com.member.model.*" %>
+<%@ page import="com.store.model.*" %>
+<%@ page import="com.order.model.*" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>後台</title>
 </head>
 <body>
 <!-- header start -->
 <%@ include file="/back-end/01h/headerin.jsp" %>
 <!-- header end -->
-
 <!-- main -->
-<div class="container-fluid">
-    <div class="row">
-        <main role="main" class="col-md-9 m-sm-auto col-lg-10 pl-md-4 shadow">
-            <div
-                    class=" d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-15 mt-5 border-bottom">
-                <h1 class="h2">🔆前台查詢</h1>
-
-            </div>
-            <div class="container">
-                <div class="card">
-                    <div class="m-10 ml-25">
-                        <form action="">
-                            <select class="custom-select col-md-10" aria-placeholder="選擇查尋項目">
-                                <option selected="" value="1">會員資料</option>
-                                <option value="2">店家資料</option>
-                                <option value="3">訂單資料</option>
-                                <option value="4">訂單明細</option>
-                            </select>
-                            <input type="submit" class="black btn btn-primary fs-5 p-4 " style="width: 147px;"
-                                   value="送出">
-                        </form>
+<div id="result"></div>
+<section class="scontainer-fluid my-14">
+    <div class="section-content text-center ">
+        <div class="d-flex justify-content-center justify-content align-items-center mb-12">
+            <div class="d-none d-md-block">
+                <div class="btn-group" id="btg">
+                    <div class="radio-buttons-group border-0 "
+                         data-toggle="shuffle-grid"
+                         data-target="#projects-grid">
+                        <button class="btn btn-light selected fs-4 bg-cyan-30 " data-value="member">會員查詢</button>
+                        <button class="btn btn-light fs-4 bg-cyan-30" data-value="store">店家查詢</button>
+                        <button class="btn btn-light fs-4 bg-cyan-30" data-value="order">訂單查詢</button>
                     </div>
-                    <table class="table mt-5">
-                        <thead class="thead-light text-center">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                            <th scope="col">Handle</th>
-                        </tr>
-                        </thead>
-                        <tbody class="text-center">
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
-
-            <div class="shuffle-grid-item hiddenBtn" data-groups="storeLogin" id="storeLogin1"
-                 style="display:none;">
-
-
+        </div>
+        <div class="shuffle-grid shuffle-grid-gap-14 shuffle-grid-cols-1 shuffle-grid-cols-md-1 shuffle-grid-cols-xl-1 m-5"
+             id="projects-grid">
+            <!--會員查詢-->
+            <div class="shuffle-grid-item " data-groups="member" id="member">
+                <section>
+                    <div class="container col-11">
+                        <div class="row justify-content-center">
+                            <form action="<%=request.getContextPath()%>/frontSelect"
+                                  method="POST"
+                                  class="mb-10">
+                                <div class="input-group">
+                                    <input type="search"
+                                           class="form-control rounded"
+                                           placeholder="輸入會員編號..."
+                                           aria-label="Search"
+                                           aria-describedby="search-addon"
+                                           name="memberInput"/>
+                                    <input type=hidden name="action" value="getOneMember">
+                                    <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-color="dark">
+                                        search
+                                    </button>
+                                </div>
+                            </form>
+                            <%
+                                MemberService memberSvc = new MemberService();
+                                List<Member> list = memberSvc.getMemberList();
+                                pageContext.setAttribute("list", list);
+                            %>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">會員編號</th>
+                                    <th scope="col">會員帳號</th>
+                                    <th scope="col">會員信箱</th>
+                                    <th scope="col">會員名稱</th>
+                                    <th scope="col">收件姓名</th>
+                                    <th scope="col">出生日期</th>
+                                    <th scope="col">註冊時間</th>
+                                    <th scope="col">會員點數</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <%
+                                    Member memberVo = new Member();
+                                %>
+                                <%
+                                    for (int i = 0; i < list.size(); i++) {
+                                        memberVo = list.get(i);
+                                %>
+                                <tr>
+                                    <th scope="row"><%=memberVo.getMemId()%>
+                                    </th>
+                                    <td><%=memberVo.getMemAcc()%>
+                                    </td>
+                                    <td><%=memberVo.getMemMail()%>
+                                    </td>
+                                    <td><%=memberVo.getMemName()%>
+                                    </td>
+                                    <td><%=memberVo.getMemRecipient()%>
+                                    </td>
+                                    <td><%=memberVo.getMemBirthday()%>
+                                    </td>
+                                    <td><%=memberVo.getMemTime()%>
+                                    </td>
+                                    <td><%=memberVo.getMemPoint()%>
+                                    </td>
+                                </tr>
+                                <%
+                                    }
+                                %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
             </div>
-            <canvas class="my-4 w-100" id="myChart" width="900" height="350"></canvas>
-        </main>
+            <!--店家查詢-->
+            <div class="shuffle-grid-item hiddenBtn" data-groups="store" id="store" style="display: none;">
+                <section>
+                    <div class="container col-11">
+                        <div class="row justify-content-center">
+                            <form action="<%=request.getContextPath()%>/frontSelect" method="POST" class="mb-10">
+                                <div class="input-group">
+                                    <input type="search" class="form-control rounded" placeholder="輸入店家編號..."
+                                           aria-label="Search" aria-describedby="search-addon"/>
+                                    <input type="hidden" name="action" value="getOneStore">
+                                    <button type="submit" class="btn btn-outline-warning" data-mdb-ripple-color="dark">
+                                        search
+                                    </button>
+                                </div>
+                            </form>
+                            <%
+                                StoreService storeSvc = new StoreService();
+                                List<Store> storeList = storeSvc.getStoreList();
+                                pageContext.setAttribute("storeList", storeList);
+                            %>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">店家編號</th>
+                                    <th scope="col">店家名稱</th>
+                                    <th scope="col" class="col-1">審核狀態</th>
+                                    <th scope="col">電話</th>
+                                    <th scope="col">店家地址</th>
+                                    <th scope="col">新增時間</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <%
+                                    Store storeVo = new Store();
+                                %>
+                                <%
+                                    for (int i = 0; i < storeList.size(); i++) {
+                                        storeVo = storeList.get(i);
+                                %>
+                                <tr>
+                                    <td><%=storeVo.getStoreId()%>
+                                    </td>
+                                    <td><%=storeVo.getStoreName()%>
+                                    </td>
+                                    <td>
+                                        <%
+                                            switch (storeVo.getStoreStatus()) {
+                                                case 0:
+                                                    out.print("未註冊");
+                                                    break;
+                                                case 1:
+                                                    out.print("審核中");
+                                                    break;
+                                                case 2:
+                                                    out.print("審核通過");
+                                                    break;
+                                                case 3:
+                                                    out.print("停權");
+                                                    break;
+                                            }
+                                        %>
+                                    </td>
+                                    <td><%=storeVo.getStorePhone1()%>
+                                    </td>
+                                    <td><%=storeVo.getStoreCity() + storeVo.getStoreDistrict() + storeVo.getStoreAddress()%>
+                                    </td>
+                                    <td><%=storeVo.getStoreTime()%>
+                                    </td>
+                                </tr>
+                                <%
+                                    }
+                                %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!--訂單查詢-->
+            <div class="shuffle-grid-item hiddenBtn" data-groups="order" id="order" style="display: none;">
+                <section>
+                    <div class="container col-lg-10">
+                        <div class="row justify-content-center">
+                            <form action="<%=request.getContextPath()%>/frontSelect" method="post" class="mb-10 ">
+                                <div class="input-group">
+                                    <input type="search" class="form-control rounded" placeholder="輸入訂單編號..."
+                                           aria-label="Search" aria-describedby="search-addon"/>
+                                    <input type="hidden" name="action" value="getOneOrder">
+                                    <button type="submit" class="btn btn-outline-info" data-mdb-ripple-color="dark">
+                                        search
+                                    </button>
+                                </div>
+                            </form>
+                            <%
+                                OrderService orderSvc = new OrderService();
+                                List<Order> orderList = orderSvc.getAll();
+                                pageContext.setAttribute("orderList", orderList);
+                            %>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">訂單編號</th>
+                                    <th scope="col">會員編號</th>
+                                    <th scope="col">店家</th>
+                                    <th scope="col">總金額</th>
+                                    <th scope="col">查看明細</th>
+                                </tr>
+                                </thead>
+                                <%
+                                    Order orderVo = new Order();
+                                %>
+                                <%
+                                    for (int i = 0; i < orderList.size(); i++) {
+                                        orderVo = orderList.get(i);
+                                %>
+                                <tbody>
+                                <tr class="text-center">
+                                    <th scope="row"><%=orderVo.getOrderId()%>
+                                    </th>
+                                    <td><%=orderVo.getMemId()%>
+                                    </td>
+                                    <td><%=orderVo.getStoreId()%>
+                                    </td>
+                                    <td><%=orderVo.getOrderPrice()%>
+                                    </td>
+                                    <td>
+                                        <button class=" btn-primary" onclick="addEmpAlert()">123</button>
+                                    </td>
+                                </tr>
+                                <%
+                                    }
+                                %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
-</div>
+</section>
 <!-- main -->
 <!-- footer start -->
 <%@ include file="/back-end/01h/footerin.jsp" %>
@@ -100,14 +264,37 @@
 <!-- sidebar menu Class -->
 <script>
     $("a:contains(前台查詢)").closest("a").addClass("active disabled topage");
+    $(document).ready(
+        $('#btg').hover(function () {
+            $(".hiddenBtn").css("display", "block");
+        })
+    );
+    function addEmpAlert() {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-outline-primary m-5 fs-5',
+            },
+            buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+            position: 'middle',
+            title: '訂單明細',
+            html: "<h2>訂單編號:1</h2>" +
+                "<h2>商品編號:1</h2>" +
+                "<h2>商品數量:3</h2>" +
+                "<h2>商品價格:200</h2>",
+            showConfirmButton: false,
+            timer: 10000
+        })
+    }
 </script>
 <script>
-    const list=[];
+    const list = [];
     <c:forEach var="empRoot" items="${empRoot}">
     list.push(${empRoot.rootId});
     </c:forEach>
-    for (let e of list){
-        switch (e){
+    for (let e of list) {
+        switch (e) {
             case 1:
                 $("#a2").removeClass("disabled");
                 $("#a3").removeClass("disabled");

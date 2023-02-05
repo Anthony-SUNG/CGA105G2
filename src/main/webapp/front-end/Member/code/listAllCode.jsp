@@ -1,22 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="org.json.simple.JSONArray" %>
-
 <%
     JSONArray list = (JSONArray) request.getAttribute("list_memU");
 %>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>🗃️管理</title>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/front-end/Member/01h/headerin.jsp" %>
@@ -65,7 +60,6 @@
     $("#pageSubmenu1").removeClass("collapse");
     $("#pageSubmenu1 a:contains(🔆有效優惠券)").closest("a").addClass("active disabled bg-white topage");
 </script>
-
 <script>
     const list = [
         <c:forEach var="code" items="${list_memU}">
@@ -93,8 +87,6 @@
         new ClipboardJS('.btn');
     });
     render(list);
-
-
 </script>
 </body>
 

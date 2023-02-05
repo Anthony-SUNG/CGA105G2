@@ -73,8 +73,8 @@ public class AdvertiseJDBCDAO implements Advertise_interface {
 			ResultSet rs = null;
 			try (Connection con= DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
 		            PreparedStatement pstmt=con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)){
-				rs = pstmt.executeQuery();
 				pstmt.setInt(1, advStatus);
+				rs = pstmt.executeQuery();
 				while (rs.next()) {
 					Advertise = new Advertise();
 					Advertise.setAdvId(rs.getInt("ADV_ID"));
@@ -193,11 +193,17 @@ public class AdvertiseJDBCDAO implements Advertise_interface {
 						+ se.getMessage());
 			} 
 		}
+	
+	
+	
+	
+	
 		public static void main(String[] args) {
-			try(InputStream in = Files.newInputStream(Path.of("images/men.png"))) {
-				byte[] buf = new byte[in.available()];
-				in.read(buf);//讀取圖片
-				AdvertiseJDBCDAO dao = new AdvertiseJDBCDAO();
+			AdvertiseJDBCDAO dao = new AdvertiseJDBCDAO();
+//			try(InputStream in = Files.newInputStream(Path.of("images/men.png"))) {
+//				byte[] buf = new byte[in.available()];
+//				in.read(buf);//讀取圖片
+//				AdvertiseJDBCDAO dao = new AdvertiseJDBCDAO();
 				Advertise Advertise = new Advertise();
 				
 //				Advertise.setStoreId(77);
@@ -212,19 +218,19 @@ public class AdvertiseJDBCDAO implements Advertise_interface {
 //				dao.delete(7);
 				
 				//getbyId
-//				Advertise = dao.getByAdvId(3);
-//                System.out.println("ADV_ID:"+Advertise.getAdvId());
-//                System.out.println("STORE_ID:"+Advertise.getStoreId());
-//                System.out.println("EMP_ID:"+Advertise.getEmpId());
-//                System.out.println("ADV_STATUS:"+Advertise.getAdvStatus());
-//                System.out.println("ADV_IMG:"+Advertise.getAdvImg());
-//                System.out.println("ADVE_TEXT:"+Advertise.getAdvText());
-//                System.out.println("ADV_TIME:"+Advertise.getAdvTime());
-//                System.out.println("ADV_STIME:"+Advertise.getAdvStime());
-//                System.out.println("ADV_NTIME:"+Advertise.getAdvNtime());
+				Advertise = dao.getByAdvId(1);
+                System.out.println("ADV_ID:"+Advertise.getAdvId());
+                System.out.println("STORE_ID:"+Advertise.getStoreId());
+                System.out.println("EMP_ID:"+Advertise.getEmpId());
+                System.out.println("ADV_STATUS:"+Advertise.getAdvStatus());
+                System.out.println("ADV_IMG:"+Advertise.getAdvImg());
+                System.out.println("ADVE_TEXT:"+Advertise.getAdvText());
+                System.out.println("ADV_TIME:"+Advertise.getAdvTime());
+                System.out.println("ADV_STIME:"+Advertise.getAdvStime());
+                System.out.println("ADV_NTIME:"+Advertise.getAdvNtime());
 				
 		        //getall
-//	            List<Advertise> list=dao.getAll();
+//	            List<Advertise> list=dao.getByStatus(1);	
 //	            for(Advertise e : list){
 //	                System.out.println("ADV_ID:"+e.getAdvId());
 //	                System.out.println("STORE_ID:"+e.getStoreId());
@@ -237,12 +243,11 @@ public class AdvertiseJDBCDAO implements Advertise_interface {
 //	                System.out.println("ADV_NTIME:"+e.getAdvNtime());
 //	                System.out.println("======================================");
 //	            }
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+//				
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
 
-			AdvertiseJDBCDAO dao = new AdvertiseJDBCDAO();
 
 			//修改
 //			dao.update(new Advertise(1,3));

@@ -2,15 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>🗃️管理</title>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/front-end/Member/01h/headerin.jsp" %>
@@ -24,7 +21,7 @@
         <div class="container mt-17 mb-17">
             <div class="col-md-9  card shadow m-5">
                 <h1 class=" m-5 text-center"><i class="fa-solid fa-user"></i>訂位資訊</h1>
-                <form METHOD="post" action="<%=request.getContextPath()%>/front-end/store/food_order/food_order.do"
+                <form METHOD="post" action="<%=request.getContextPath()%>/front-end/Member/food_order/food_order.do"
                       style="padding: 10px 100px;" autocomplete="off">
                     <div class="input-group input-group-lg mb-5">
                         <span class="input-group-text" id="inputGroup-sizing-lg1"><i class="fa-solid fa-store"></i>店家名稱 : </span>
@@ -91,7 +88,6 @@
                 </form>
             </div>
         </div>
-
     </div>
 </div>
 </div>
@@ -104,7 +100,7 @@
     $("a:contains(🗃️管理)").closest("a").addClass("active disabled topage");
     $("a:contains(🔻訂位)").closest("a").attr("data-toggle", "show");
     $("#pageSubmenu3").removeClass("collapse");
-    $("#pageSubmenu3 a:contains(🔆訂位預約)").closest("a").addClass("active disabled bg-white topage");
+    $("#pageSubmenu3 a:contains(🔆預約查詢)").closest("a").addClass("active disabled bg-white topage");
 </script>
 <script>
     var order_time_list = [
@@ -140,6 +136,7 @@
     });
     document.addEventListener('DOMContentLoaded', selectEventListener);
     let select_time_temp = 0;
+
     function selectEventListener(event) {
         if (select_time_temp == 0) {
             for (let order_time of order_time_list) {
@@ -157,7 +154,5 @@
     }
 </script>
 <script src="https://kit.fontawesome.com/e952f26fd6.js" crossorigin="anonymous"></script>
-
 </body>
-
 </html>

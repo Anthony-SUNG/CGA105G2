@@ -17,6 +17,14 @@ import java.util.List;
 
 public class StandbyDAO implements StandbyDAO_interface {
 
+	static {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void insert(Standby standbyVo) {
 		String INSERT_STMT = " INSERT INTO cga105g2.standby(`STORE_ID`, `STA_NAME`, `STA_PHONE`, `STA_NUMBER`) VALUES  (?, ?, ?, ?)";
@@ -56,8 +64,6 @@ public class StandbyDAO implements StandbyDAO_interface {
 			// Clean up JDBC resources
 		}
 	}
-
-
 
 	@Override
 	public void delete(Integer staId) {
@@ -154,7 +160,7 @@ public class StandbyDAO implements StandbyDAO_interface {
 
 			rs = pstm.executeQuery();
 			while (rs.next()) {
-				
+
 				staCount = rs.getInt(1);
 			}
 		} catch (SQLException e) {
@@ -171,15 +177,15 @@ public class StandbyDAO implements StandbyDAO_interface {
 //		java.util.Date utilDate = new java.util.Date();
 //
 //		java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(utilDate.getTime());
-		standbyVo.setStoreId(1);
-		standbyVo.setStaName("887");
-		standbyVo.setStaPhone("099990005");
-		standbyVo.setStaNumber(1);
-//		waitingVo1.setSta_time(sqlTimestamp);
-//		waitingVo1.setSta_status(1);
-
-		dao.insert(standbyVo);
-		System.out.println("insert ok");
+//		standbyVo.setStoreId(1);
+//		standbyVo.setStaName("887");
+//		standbyVo.setStaPhone("099990005");
+//		standbyVo.setStaNumber(1);
+////		waitingVo1.setSta_time(sqlTimestamp);
+////		waitingVo1.setSta_status(1);
+//
+//		dao.insert(standbyVo);
+//		System.out.println("insert ok");
 ////		
 
 //		// update
@@ -215,7 +221,6 @@ public class StandbyDAO implements StandbyDAO_interface {
 			System.out.println("------------------------");
 		}
 
-		
 //		count
 		System.out.println(dao.standByCount());
 	}

@@ -1,17 +1,12 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
-
-
 <style>
     @import url("https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap");
 
@@ -383,44 +378,37 @@
         }
     }
 </style>
-
 <body>
+<!-- about -->
+<div class="about">
+    <a class="bg_links social portfolio" href="https://www.rafaelalucas.com" target="_blank">
+        <span class="icon"></span>
+    </a>
+    <a class="bg_links social dribbble" href="https://dribbble.com/rafaelalucas" target="_blank">
+        <span class="icon"></span>
+    </a>
+    <a class="bg_links social linkedin" href="https://www.linkedin.com/in/rafaelalucas/" target="_blank">
+        <span class="icon"></span>
+    </a>
+    <a class="bg_links logo"></a>
+</div>
+<!-- end about -->
+<div class="content">
+    <div class="planet">
+        <div class="ring"></div>
+        <div class="cover-ring"></div>
+        <div class="spots">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
 
-    <!-- about -->
-    <div class="about">
-        <a class="bg_links social portfolio" href="https://www.rafaelalucas.com" target="_blank">
-            <span class="icon"></span>
-        </a>
-        <a class="bg_links social dribbble" href="https://dribbble.com/rafaelalucas" target="_blank">
-            <span class="icon"></span>
-        </a>
-        <a class="bg_links social linkedin" href="https://www.linkedin.com/in/rafaelalucas/" target="_blank">
-            <span class="icon"></span>
-        </a>
-        <a class="bg_links logo"></a>
-    </div>
-    <!-- end about -->
-
-    <div class="content">
-        <div class="planet">
-            <div class="ring"></div>
-            <div class="cover-ring"></div>
-            <div class="spots">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-
-            </div>
         </div>
-        <p>Loading...</p>
     </div>
-
-
-
+    <p>Loading...</p>
+</div>
 </body>
-
 </html>

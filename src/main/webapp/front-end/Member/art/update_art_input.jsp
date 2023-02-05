@@ -1,21 +1,15 @@
 <%@page import="com.art.model.Article.pojo.Article" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <%
     // Article article = (Article)request.getAttribute("article");
 %>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>🗃️管理</title>
     <style>
         body {
@@ -43,15 +37,15 @@
 
         /* ========button的樣式=============== */
         .btn-secondary {
-            font-family: "Noto Sans TC", sans-serif;
-            font-size: 18px;
-            letter-spacing: .05em;
-            border-radius: .75em;
-            font-weight: 500;
-            color: #FFFFFF;
-            background-color: #164570;
-            padding: 5px 13px;
-            cursor: pointer;
+            font-family: "Noto Sans TC", sans-serif !important;
+            font-size: 18px !important;
+            letter-spacing: .05em !important;
+            border-radius: .75em !important;
+            font-weight: 500 !important;
+            color: #FFFFFF !important;
+            background-color: #164570 !important;
+            padding: 5px 13px !important;
+            cursor: pointer !important;
         }
 
         /* ============星星的css============== */
@@ -60,22 +54,22 @@
         }
 
         .storescorelabel {
-            color: #E1E6F6;
-            cursor: pointer;
-            font-size: 32px;
-            padding: 8px 3px;
-            transition: color 0.5s;
+            color: #E1E6F6 !important;
+            cursor: pointer !important;
+            font-size: 32px !important;
+            padding: 8px 3px !important;
+            transition: color 0.5s !important;
         }
 
         .storescore {
-            height: 100%;
-            width: 100%;
-            display: none;
+            height: 100% !important;
+            width: 100% !important;
+            display: none !important;
         }
 
         .storescorelabel:hover, .storescorelabel:hover ~ .storescorelabel,
         .storescore:checked ~ label {
-            color: #ffe223;
+            color: #ffe223 !important;
         }
 
         /* ==================上傳圖片的css==================== */
@@ -88,30 +82,29 @@
         }
 
         .upload-field .file-thumbnail {
-            cursor: pointer;
-            border: 1px dashed #BBD9EC;
-            border-radius: 11px;
-            text-align: center;
-            padding: 10px 0px;
-            width: 100px;
-            height: 100px;
+            cursor: pointer !important;
+            border: 1px dashed #BBD9EC !important;
+            border-radius: 11px !important;
+            text-align: center !important;
+            padding: 10px 0px !important;
+            width: 100px !important;
+            height: 100px !important;
         }
 
         .upload-field .file-thumbnail img {
-            width: 50px;
+            width: 50px !important;
         }
 
         .upload-field .file-thumbnail h3 {
-            font-size: 15px;
-            color: #000000;
-            font-weight: 1000;
-            margin-top: 10px;
+            font-size: 15px !important;
+            color: #000000 !important;
+            font-weight: 1000 !important;
+            margin-top: 10px !important;
         }
 
         /* ==================上傳圖片css結束======================= */
     </style>
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/front-end/Member/01h/headerin.jsp" %>
@@ -123,37 +116,29 @@
         <%@ include file="/front-end/Member/01h/nav/navin02.jsp" %>
         <!-- nav end -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 my-5">
-            <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">🔆修改文章頁面</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group mr-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                    </div>
-                </div>
-            </div>
             <!-- =======================會員頭像======================= -->
-
             <div class="row justify-content-center">
                 <div class="col-7 mb-10">
                     <div class="postmember_info"
                          style="display: flex; margin-top: 30px;">
                         <div class="postmember_img">
-                            <img src="/CGA105G2/assets/images/men.png"
-                                 style="width: 65px; height: 60px; border-radius: 80%; border: 1px solid rgb(255, 216, 87);">
-
+                            <c:if test="${not empty member.memPic}">
+                                <img src="${pageContext.request.contextPath}/LonginServlet?action=getOtherMemberPhoto&memId=${member.memId}"
+                                     style="width: 60px; height: 60px; border-radius: 80%; border: 1px solid rgb(255, 216, 87);">
+                            </c:if>
+                            <c:if test="${empty member.memPic}">
+                                <img src="https://i.pinimg.com/564x/07/c4/72/07c4720d19a9e9edad9d0e939eca304a.jpg"
+                                     alt=""
+                                     style="width: 60px; height: 60px; border-radius: 80%; border: 1px solid rgb(255, 216, 87);">
+                            </c:if>
                         </div>
                         <div class="postmember_text mt-6" style="margin-left: 5px;font-weight:1000">
-
 								<span class="postmember_name" style="font-size: 20px;">
                                     ${param.memberName} </span>
                         </div>
                     </div>
                 </div>
             </div>
-
-
             <!-- ==================發文開始======================= -->
             <div class="row justify-content-center">
                 <div class="col-7 mb-10 shadow "
@@ -163,14 +148,11 @@
                         <div class="poststore_img">
                             <img src="/CGA105G2/assets/images/ex1.jpg"
                                  style="width: 65px; height: 60px; border: 1px solid rgb(255, 216, 87);">
-
                         </div>
                         <div class="poststore_text"
                              style="margin-left: 5px; align-items: center; display: flex;">
-
 								<span class="post_name"
                                       style="font-size: 30px; font-weight: 1000;"> ${param.storeName} </span>
-
                         </div>
                     </div>
                     <!-- ===================店家評分星星================== -->
@@ -180,37 +162,31 @@
                             <div>
                                 <input type="hidden" name="memId" value="${param.memId}">
                                 <input type="hidden" name="storeId" value="${param.storeId}">
-                                <span
-                                        style="font-size: 22px; font-weight: 600; background-color: antiquewhite; margin-left: 20px; line-height: 60px;">(5
-										/ 1)</span>
+                                <span style="font-size: 22px; font-weight: 600; background-color: antiquewhite; margin-left: 20px; line-height: 60px;"></span>
                                 <!-- star 5 -->
                                 <input type="radio" id="5-star-rating" class="storescore"
                                        name="artScore" value="5"> <label
                                     for="5-star-rating" class="star-rating storescorelabel">
                                 <i class="fa fa-star d-inline-block"></i>
                             </label>
-
                                 <!-- star 4 -->
                                 <input type="radio" id="4-star-rating" class="storescore"
                                        name="artScore" value="4"> <label
                                     for="4-star-rating" class="star-rating star storescorelabel">
                                 <i class="fa fa-star d-inline-block"></i>
                             </label>
-
                                 <!-- star 3 -->
                                 <input type="radio" id="3-star-rating" class="storescore"
                                        name="artScore" value="3"> <label
                                     for="3-star-rating" class="star-rating star storescorelabel">
                                 <i class="fa fa-star d-inline-block"></i>
                             </label>
-
                                 <!-- star 2 -->
                                 <input type="radio" class="storescore" id="2-star-rating"
                                        name="artScore" value="2"> <label
                                     for="2-star-rating" class="star-rating star storescorelabel">
                                 <i class="fa fa-star d-inline-block"></i>
                             </label>
-
                                 <!-- star 1 -->
                                 <input type="radio" id="1-star-rating" class="storescore"
                                        name="artScore" value="1"> <label
@@ -220,18 +196,19 @@
                                     style="font-size: 22px; font-weight: 600; background-color: antiquewhite;">:評分</span>
                             </div>
                         </div>
-
-
                         <!-- ==============標記tag================== -->
-                        <div class="tag" style="margin-top: 15px; display: flex;">
-                            <b><span
-                                    style="font-size: 16px; padding: 8px 15px; border-radius: 15px; margin-right: 5px; background-color: rgb(82, 206, 156); color: white;">#寵物友善店家</span></b>
-                            <b><span
-                                    style="font-size: 16px; padding: 8px 15px; border-radius: 15px; margin-right: 5px; background-color: rgb(82, 206, 156); color: white;">#銀髮族友善店家</span></b>
+                        <div class="tag"
+                             style="margin-top: 5px;display: flex;background-color: rgb(82, 206, 156);color: white;border-radius:15px ;font-size: 22px;font-weight: 1000;padding: 5px;padding-left: 10px;">
+                            店家標籤:
+                            <input type="checkbox" value="銀髮族友善店家" name="artTag"
+                                   style="margin-left: 10px;zoom: 180%;">&nbsp;銀髮族友善店家󠀠
+                            <input type="checkbox" value="寵物友善店家" name="artTag"
+                                   style="margin-left: 10px;zoom: 180%;">&nbsp;寵物友善店家
+                            <input type="checkbox" value="殘障人士友善店家" name="artTag"
+                                   style="margin-left: 10px;zoom: 180%;">&nbsp;殘障人士友善店家
                         </div>
                         <!-- ===========輸入欄位開始================ -->
                         <div style="margin-bottom: 30px;">
-
                             <div>
                                 <input type="text" name="artHeader" id="tb22_title" placeholder="文章標題"
                                        value="${param.artHeader}"
@@ -255,7 +232,6 @@
                                      src="https://www.btklsby.go.id/images/placeholder/basic.png"
                                      alt="">
                                 <h3 id="filename">修改圖片</h3>
-
                             </div>
                         </label>
                         </div>
@@ -287,10 +263,7 @@
         </main>
     </div>
 </div>
-
 <!-- =================發文結束======================= -->
-
-
 <!-- main -->
 <!-- footer start -->
 <%@ include file="/front-end/Member/01h/footerin.jsp" %>
@@ -298,7 +271,6 @@
 <script>
     $("a:contains(🌟)").closest("a").addClass("active disabled topage");
 </script>
-
 <!-- ==================上傳圖片js=================== -->
 <script>
     function fileValue(value) {
@@ -315,11 +287,8 @@
 
     // =====================上傳圖片js結束============================
 </script>
-
 <!-- stickey bar: -->
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
 <script>
     let a = new StickySidebar("#sidebar", {
         topSpacing: 40,
@@ -328,6 +297,19 @@
         innerWrapperSelector: ".sidebar__inner"
     });
 </script>
+<script>
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].addEventListener('change', function () {
+            var checkboxGroup = this.parentNode.parentNode;
+            var checkboxesInGroup = checkboxGroup.querySelectorAll('input[type="checkbox"]');
+            for (var j = 0; j < checkboxesInGroup.length; j++) {
+                if (checkboxesInGroup[j] !== this) {
+                    checkboxesInGroup[j].checked = false;
+                }
+            }
+        });
+    }
+</script>
 </body>
-
 </html>

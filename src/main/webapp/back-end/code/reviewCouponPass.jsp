@@ -4,19 +4,14 @@
 <%
     JSONArray list_stat = (JSONArray) request.getAttribute("list_stat");
 %>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>後台</title>
-
 </head>
-
 <body>
 <!-- header start -->
 <%@ include file="/back-end/01h/headerin.jsp" %>
@@ -44,7 +39,7 @@
 <!-- sidebar menu Class -->
 <script>
     $("a:contains(✔️審核)").closest("a").addClass("active disabled topage");
-    $("a:contains(🔻店家優惠券)").closest("a").attr("data-toggle","show");
+    $("a:contains(🔻店家優惠券)").closest("a").attr("data-toggle", "show");
     $("#pageSubmenu5").removeClass("collapse");
     $("#pageSubmenu5 a:contains(🔆已審核)").closest("a").addClass("active disabled bg-white topage");
 </script>
@@ -52,12 +47,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
 </script>
 <script>
-    const list=[];
+    const list = [];
     <c:forEach var="empRoot" items="${empRoot}">
     list.push(${empRoot.rootId});
     </c:forEach>
-    for (let e of list){
-        switch (e){
+    for (let e of list) {
+        switch (e) {
             case 1:
                 $("#a2").removeClass("disabled");
                 $("#a3").removeClass("disabled");

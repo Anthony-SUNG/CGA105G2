@@ -8,6 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.core.common.Common.PASSWORD;
+import static com.core.common.Common.USER;
+
 public class SmessageJDBCDAO implements SmessageDAO_interface {
 
 	@Override
@@ -24,7 +27,6 @@ public class SmessageJDBCDAO implements SmessageDAO_interface {
 		}
 
 	}
-
 	@Override
 	public List<Smessage> getById(Integer id) {
 		String sql = "SELECT SMESSAGE_ID, SUB_ID, SMESSAGE_TXET, SMESSAGE_TIME FROM cga105g2.smessage where SUB_ID=? order by SMESSAGE_TIME";
@@ -42,29 +44,22 @@ public class SmessageJDBCDAO implements SmessageDAO_interface {
 				smessage.setSmessageTxet(rs.getString("SMESSAGE_TXET"));
 				smessage.setSmessageTime(rs.getTimestamp("SMESSAGE_TIME"));
 				list.add(smessage);
-
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		}
 		return list;
 	}
-
-	public static void main(String[] args) {
-		SmessageJDBCDAO dao = new SmessageJDBCDAO();
-		// 新增
-//		Smessage smessage1 = new Smessage(3, "店家56發送第二次優惠碼給會員囉");
-//		dao.insert(smessage1);
-		// 查詢訂閱id=3的所有被推文且按照時間取
-		List<Smessage> list = dao.getById(3);
-		for (Smessage e : list) {
-			System.out.println(e.getSmessageId());
-			System.out.println(e.getSubId());
-			System.out.println(e.getSmessageTxet());
-			System.out.println(e.getSmessageTime());
-			System.out.println("======================================");
+	public void deleteById(Integer id) {
+		String sql="DELETE from cga105g2.smessage where SMESSAGE_ID=?";
+		try(Connection con= DriverManager.getConnection(Common.URL, USER, PASSWORD);
+			PreparedStatement pstmt=con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+			pstmt.setInt(1,id);
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		}
-
 	}
 
 }

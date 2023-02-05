@@ -16,4 +16,6 @@ public interface PointGoodsDAO_interface {
 
 	List<PointGoods> getAll();
 
+	List<PointGoods> getAlready();
+
 }

@@ -9,40 +9,13 @@
     pageContext.setAttribute("list", list);
 %>
 <!DOCTYPE html>
-
-
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
     <title>💰point</title>
     <style>
-        body {
-            height: 100%;
-        }
-
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
-        a {
-            color: black;
-        }
-
         /* 商品名稱 */
         .fw-bolder {
             font-size: 1.3rem;
@@ -74,6 +47,7 @@
 </head>
 
 <body>
+<div id="page-start-anchor"></div>
 <!-- header start -->
 <%@ include file="/front-end/Member/01h/headerin.jsp" %>
 <!-- header end -->
@@ -83,38 +57,15 @@
         <!-- nav start -->
         <%@ include file="/front-end/Member/01h/nav/navin01.jsp" %>
         <!-- nav end -->
-        <main role="main" class="main-content  col-md-9 ml-sm-auto col-lg-10 px-md-4 p-0">
-            <section class="section jarallax text-white" data-jarallax data-speed="0.2">
-                <!-- <img class="section-background-image jarallax-img" src="./images/tenor.gif" alt="background image" /> -->
-                <div class="section-background-color"
-                     style="background: linear-gradient(to right top, rgb(25, 182, 143), rgb(68, 100, 148)) rgb(25, 182, 143); padding-top: 120px; padding-bottom: 40px;">
-                </div>
-                <div class="section-content container d-flex flex-column align-items-center">
-            <span
-                    class="badge badge-pill badge-ghost fs-2 font-family-dark text-uppercase font-weight-bold letter-spacing-caption">
-              FoodMap
-            </span>
-                    <h1 class="mt-5 mb-17 fs-10 fs-md-10">點數商城</h1>
-                </div>
-            </section>
-
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 p-0">
             <section class="py-5">
-                <div
-                        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2 mt-5">💰點數查詢</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <div class="btn-group mr-2">
-                            <!--                             <button type="button" class="btn btn-sm btn-outline-info">Share</button> -->
-                            <!--                             <button type="button" class="btn btn-sm btn-outline-info">Export</button> -->
-                        </div>
-                    </div>
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2 mt-5">🔆點數查詢</h1>
                 </div>
                 <div class="table-responsive ">
                     <table class="table table-striped ">
                         <thead>
                         <tr>
-                            <th>編號</th>
-                            <th>會員編號</th>
                             <th>異動原因</th>
                             <th>異動點數</th>
                         </tr>
@@ -122,8 +73,6 @@
                         <tbody class="code_tbody">
                         <c:forEach var="Point" items="${list}">
                             <tr>
-                                <td>${Point.pointId}</td>
-                                <td>${Point.memId}</td>
                                 <td>${Point.pointChange}</td>
                                 <td>${Point.pointNumber}</td>
                             </tr>
@@ -133,32 +82,35 @@
                 </div>
                 <canvas class="my-4 w-100" id="myChart" width="900" height="150"></canvas>
             </section>
-
+            <br>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <nav aria-label="Page navigation example   justify-content-center" class="m-5 ">
+                    <ul class="pagination">
+                    </ul>
+                </nav>
+            </div>
         </main>
     </div>
 
 </div>
-
 <!-- main -->
 <!-- footer start -->
 <%@ include file="/front-end/Member/01h/footerin.jsp" %>
 <!-- footer end -->
-<!-- sticky-sidebar -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
 <script>
     $("a:contains(💰point)").closest("a").addClass("active disabled topage");
+    $("a:contains(💰點數商城)").closest("a").attr("data-toggle", "show");
+    $("#pageSubmenu1").removeClass("collapse");
+    $("#pageSubmenu1 a:contains(🔆點數查詢)").closest("a").addClass("active disabled bg-white topage");
 </script>
 <script>
-    let a = new StickySidebar("#sidebar", {
-        topSpacing: 30,
-        bottomSpacing: 20,
-        leftSpacing: 30,
-        containerSelector: ".container",
-        innerWrapperSelector: ".sidebar__inner"
+    $(document).ready(function () {
+        $("#pointgooditem").click(function () {
+            //输入另一个页面的链接
+            //我的跳转到controller中的toIntroduction这个方法中进行的页面跳转
+            window.location.href = "pointItemPage.jsp";
+        });
     });
-
 </script>
-
 </body>
-
 </html>

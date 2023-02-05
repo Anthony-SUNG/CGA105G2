@@ -15,9 +15,10 @@ public class PointGoodsService {
 		dao = new PointGoodsDAO();
 	}
 
-	public PointGoods addPointGood(String pdName, Integer pdPrice, String pdText, java.sql.Timestamp pdTime, java.sql.Timestamp pdRtime, Integer pdStatus) {
+	public PointGoods addPointGood(byte[] pdImg, String pdName, Integer pdPrice, String pdText, java.sql.Timestamp pdTime, java.sql.Timestamp pdRtime, Integer pdStatus) {
 
 		PointGoods pointgoods= new PointGoods();
+		pointgoods.setPdImg(pdImg);
 		pointgoods.setPdName(pdName);
 		pointgoods.setPdPrice(pdPrice);
 		pointgoods.setPdText(pdText);
@@ -29,9 +30,10 @@ public class PointGoodsService {
 		
 	}
 
-	public PointGoods updatePointGood(Integer pdId, String pdName, Integer pdPrice, String pdText, java.sql.Timestamp pdRtime, Integer pdStatus) {
+	public PointGoods updatePointGood(Integer pdId, byte[] pdImg, String pdName, Integer pdPrice, String pdText, java.sql.Timestamp pdRtime, Integer pdStatus) {
 		PointGoods pointgoods= new PointGoods();
 		pointgoods.setPdId(pdId);
+		pointgoods.setPdImg(pdImg);
 		pointgoods.setPdName(pdName);
 		pointgoods.setPdPrice(pdPrice);
 		pointgoods.setPdText(pdText);
@@ -53,5 +55,9 @@ public class PointGoodsService {
 	
 	public List<PointGoods> getAll() {
 		return dao.getAll();
+	}
+	
+	public List<PointGoods> getAlready() {
+		return dao.getAlready();
 	}
 }
