@@ -18,7 +18,7 @@
         <!-- nav start -->
         <%@ include file="/front-end/Member/01h/nav/navin04.jsp" %>
         <!-- nav end -->
-        <main role="main" class="col-md-9">
+        <main role="main">
             <div class="table-responsive" style="overflow: hidden !important;">
                 <h1 class="h2">🔆訂位紀錄</h1>
                 <table id="code" class="table table-striped display" style="text-align:center;">
