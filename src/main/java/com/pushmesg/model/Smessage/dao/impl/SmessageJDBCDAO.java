@@ -12,7 +12,13 @@ import static com.core.common.Common.PASSWORD;
 import static com.core.common.Common.USER;
 
 public class SmessageJDBCDAO implements SmessageDAO_interface {
-
+	static {
+		try {
+			Class.forName(Common.DriverName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public void insert(Smessage smessageVO) {
 		String sql = "INSERT INTO cga105g2.smessage (SUB_ID, SMESSAGE_TXET) VALUES (?,?);";

@@ -21,7 +21,13 @@ import com.point.model.PointOrder.dao.PointOrderDAO_interface;
 import com.point.model.PointOrder.pojo.PointOrder;
 
 public class PointOrderDAO implements PointOrderDAO_interface {
-
+	static {
+		try {
+			Class.forName(Common.DriverName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public void insert(PointOrder pointorder) {
 		String sql = "INSERT INTO cga105g2.point_order (MEM_ID, PD_ID, PO_PRICE, PO_TEXT, PO_STATUS, PO_TIME, EMP_ID) VALUES (?, ?, ?, ?, ?, ?, ?)";

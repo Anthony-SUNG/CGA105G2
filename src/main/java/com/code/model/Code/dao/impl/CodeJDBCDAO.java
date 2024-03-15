@@ -14,7 +14,7 @@ import static com.core.common.Common.USER;
 public class CodeJDBCDAO implements CodeDAO_interface {
     static {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(Common.DriverName);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -25,11 +25,8 @@ public class CodeJDBCDAO implements CodeDAO_interface {
         String sql="INSERT INTO cga105g2.code (STORE_ID,CODE_NUM,CODE_OFF,CODE_TEXT,CODE_NTIME) VALUES (?,?,?,?,?)";;
         //JDBC_mySQL 講義P8 創建連線物件，可重複使用
         try(Connection con= DriverManager.getConnection(Common.URL, USER, PASSWORD);
-            //JDBC_mySQL 講義P15
+
             PreparedStatement pstmt=con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
-            //Class.forName("com.mysql.cj.jdbc.Driver"); 不用寫，請參考JDBC_mySQL 講義P7 JDBC 4.0開始會⾃動註冊，呼叫 Class.forName() 是之前載入JDBC Driver的⽅式，現在可以省略不寫
-            //本專案jar檔為8.0.31版本
-            //以下為寫pstmt.set內容
             pstmt.setInt(1,pojo.getStoreId());
             pstmt.setString(2,pojo.getCodeNum());
             pstmt.setInt(3,pojo.getCodeOff());

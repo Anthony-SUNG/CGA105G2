@@ -10,7 +10,13 @@ import java.util.List;
 
 
 public class LikeArtJDBCDAO implements LikeArt_interface {
-	
+	static {
+		try {
+			Class.forName(Common.DriverName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public void insert(LikeArt LikeArt) {
 		String sql =

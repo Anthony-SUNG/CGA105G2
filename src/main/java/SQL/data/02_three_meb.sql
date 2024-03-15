@@ -17,11 +17,11 @@ INSERT INTO cga105g2.member (MEM_ACC, MEM_PWD, MEM_MAIL, MEM_NAME, MEM_RECIPIENT
 VALUES ('testuser8', 'testuser8', 'testuser8@gmail.com', '張舜鑫', '張舜鑫', 'A123456787', '2021-05-02', '0912345679', 330, '桃園市', '中壢區', '復興路53號');
 -- C-3-1 後台員工
 INSERT INTO cga105g2.employee (EMP_ACC,EMP_PWD)
-VALUES ("root1","root1");
+VALUES ('root1','root1');
 INSERT INTO cga105g2.employee (EMP_ACC,EMP_PWD)
-VALUES ("boss","boss");
+VALUES ('boss','boss');
 INSERT INTO cga105g2.employee (EMP_ACC,EMP_PWD)
-VALUES ("testemployee1","testemployee1");
+VALUES ('testemployee1','testemployee1');
 -- D-2-1 店家
 INSERT INTO cga105g2.store (STORE_ID, EMP_ID, STORE_STATUS, STORE_NAME, STORE_PHONE1, STORE_HOURS, STORE_MAP, STORE_CITY, STORE_DISTRICT, STORE_ADDRESS, STORE_URL, STORE_WEB, STORE_ACC, STORE_PWD, STORE_MAIL, STORE_COM_ID, STORE_COM_ADDRESS, STORE_TW_ID, STORE_PHONE2, STORE_TEXT, STORE_PLAN, STORE_NPLAN, STORE_TIME, STORE_ONTIME, STORE_RETIME, STORE_ETIME, STORE_TABLE, STORE_ETABLE) VALUES (1, null, 0, '嗜燒肉黑毛和牛專門店', '034251357', '星期一: 17:30 – 00:00,星期二: 17:30 – 00:00,星期三: 17:30 – 00:00,星期四: 17:30 – 00:00,星期五: 17:30 – 00:00,星期六: 12:00 – 00:00,星期日: 12:00 – 00:00', '(24.9580999,121.224358)', '桃園市', '中壢區', '裕民街5號', 'https://maps.google.com/?cid=5769929786543870134', 'http://shiyakiniku436.business.site/', null, null, null, null, null, null, null, null, null, null, '2022-12-26 23:40:37', null, '2022-12-26 23:40:37', null, null, null);
 INSERT INTO cga105g2.store (STORE_ID, EMP_ID, STORE_STATUS, STORE_NAME, STORE_PHONE1, STORE_HOURS, STORE_MAP, STORE_CITY, STORE_DISTRICT, STORE_ADDRESS, STORE_URL, STORE_WEB, STORE_ACC, STORE_PWD, STORE_MAIL, STORE_COM_ID, STORE_COM_ADDRESS, STORE_TW_ID, STORE_PHONE2, STORE_TEXT, STORE_PLAN, STORE_NPLAN, STORE_TIME, STORE_ONTIME, STORE_RETIME, STORE_ETIME, STORE_TABLE, STORE_ETABLE) VALUES (2, null, 0, 'Oh ! Yaki 日式精緻炭火燒肉 中壢店', '034270199', '星期一: 17:30 – 00:00,星期二: 17:30 – 00:00,星期三: 17:30 – 00:00,星期四: 17:30 – 00:00,星期五: 17:30 – 00:00,星期六: 11:30 – 00:00,星期日: 11:30 – 00:00', '(24.9577248,121.224048)', '桃園市', '中壢區', '延平路477號', 'https://maps.google.com/?cid=13212521156595546320', 'https://www.facebook.com/OhYaki-%E7%B2%BE%E7%B7%BB%E7%82%AD%E7%81%AB%E7%87%92%E8%82%89-%E4%B8%AD%E5%A3%A2%E5%BA%97-701676553535295/', null, null, null, null, null, null, null, null, null, null, '2022-12-26 23:40:37', null, '2022-12-26 23:40:37', null, null, null);

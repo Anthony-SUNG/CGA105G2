@@ -13,7 +13,7 @@ import java.util.Map;
 public class ReservaJDBCDAO implements ReservaDAO_interface {
     static {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(Common.DriverName);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -29,10 +29,7 @@ public class ReservaJDBCDAO implements ReservaDAO_interface {
                  // JDBC_mySQL 講義P15
                  PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                          ResultSet.CONCUR_READ_ONLY)) {
-                // Class.forName("com.mysql.cj.jdbc.Driver"); 不用寫，請參考JDBC_mySQL 講義P7 JDBC
-                // 4.0開始會⾃動註冊，呼叫 Class.forName() 是之前載入JDBC Driver的⽅式，現在可以省略不寫
-                // 本專案jar檔為8.0.31版本
-                // 以下為寫pstmt.set內容
+
                 System.out.println("1");
                 pstmt.setInt(1, reservaVO.getStoreId());
                 pstmt.setInt(2, reservaVO.getMemId());
@@ -68,10 +65,7 @@ public class ReservaJDBCDAO implements ReservaDAO_interface {
                  // JDBC_mySQL 講義P15
                  PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                          ResultSet.CONCUR_READ_ONLY)) {
-                // Class.forName("com.mysql.cj.jdbc.Driver"); 不用寫，請參考JDBC_mySQL 講義P7 JDBC
-                // 4.0開始會⾃動註冊，呼叫 Class.forName() 是之前載入JDBC Driver的⽅式，現在可以省略不寫
-                // 本專案jar檔為8.0.31版本
-                // 以下為寫pstmt.set內容
+
                 pstmt.setInt(1, reservaVO.getStoreId());
                 pstmt.setInt(2, reservaVO.getMemId());
                 pstmt.setString(3, reservaVO.getRenName());

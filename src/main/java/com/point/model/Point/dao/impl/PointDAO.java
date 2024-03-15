@@ -17,6 +17,13 @@ import com.point.model.Point.pojo.Point;
 import com.point.model.PointGoods.pojo.PointGoods;
 
 public class PointDAO implements PointDAO_interface {
+	static {
+		try {
+			Class.forName(Common.DriverName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public void insert(Point point) {
 		String sql = "INSERT INTO cga105g2.point (MEM_ID, POINT_CHANGE, POINT_NUMBER) VALUES (?, ?, ?)";

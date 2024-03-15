@@ -10,7 +10,13 @@ import java.util.List;
 
 
 public class SaveArtJDBCDAO implements SaveArt_interface {
-
+	static {
+		try {
+			Class.forName(Common.DriverName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public void insert(SaveArt SaveArt) {
 		String sql =

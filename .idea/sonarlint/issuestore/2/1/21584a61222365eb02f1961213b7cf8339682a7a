@@ -1,0 +1,74 @@
+
+†	java:S112/"FDefine and throw a dedicated exception instead of using a generic one.(Œ“„¶ÿÿÿÿÿJ$0f893c3a-2af5-4430-b144-5e0766e2acdb
+†	java:S112="FDefine and throw a dedicated exception instead of using a generic one.(Œ“„¶ÿÿÿÿÿJ$c2707f64-b704-4de7-b531-da8cdbd5472b
+†	java:S112X"FDefine and throw a dedicated exception instead of using a generic one.(Œ“„¶ÿÿÿÿÿJ$dd4220e5-3a67-4f28-b506-a5dd589f2d83
+‡	java:S112®"FDefine and throw a dedicated exception instead of using a generic one.(Œ“„¶ÿÿÿÿÿJ$adc5fe4a-6d6a-4926-8878-42d9636bc0bc
+‡	java:S112Ñ"FDefine and throw a dedicated exception instead of using a generic one.(Œ“„¶ÿÿÿÿÿJ$84540d2d-304c-4135-8348-3b023d29776a
+‡	java:S112í"FDefine and throw a dedicated exception instead of using a generic one.(Œ“„¶ÿÿÿÿÿJ$3bec4ebe-ce67-4707-b6e8-eaf7662cd7c3
+–
+java:S2293µ"YReplace the type specification in this constructor call with the diamond operator ("<>").(ëÇÒ‘J$919bea6e-e4b6-46f8-aef1-4e9c649381da
+–
+java:S2293Ú"YReplace the type specification in this constructor call with the diamond operator ("<>").(ëÇÒ‘J$353c18ff-4313-4ee6-83ef-4ebaf66945f2
+„
+java:S1192{"IDefine a constant instead of duplicating this literal "CODE_OFF" 4 times.(ˆÙ¡iJ$3e9249d1-423f-4509-b2fc-747ade0ff8fd
+Š
+java:S1192"HDefine a constant instead of duplicating this literal "CODE_ID" 4 times.(³òÒƒúÿÿÿÿJ$c08d4f9a-3b3a-44c1-91c9-595a13823f6a
+
+java:S1192«"KDefine a constant instead of duplicating this literal "CODE_NTIME" 4 times.(ò´”ÔşÿÿÿÿJ$f7121734-4aae-4b9b-a4c0-5470f0526a5a
+‡
+java:S1192¨"JDefine a constant instead of duplicating this literal "CODE_TEXT" 3 times.(¼õî¢J$7ee01a7a-9d9f-42fc-b38a-c6eb77aa05f7
+‹
+java:S1192£"IDefine a constant instead of duplicating this literal "STORE_ID" 3 times.(è—ÖşıÿÿÿÿJ$90f2c72b-6b15-4f80-b2fb-a85283b49a7f
+œ
+java:S1192/"[Define a constant instead of duplicating this literal "A database error occured. " 6 times.(Œ“„¶ÿÿÿÿÿJ$e525882f-3bd0-4fd1-aed6-17167d28f46e
+…
+java:S1192z"IDefine a constant instead of duplicating this literal "CODE_NUM" 5 times.(‹Ü·•J$eebb8747-83b7-466e-aaec-90acff4d50e9
+
+java:S1192§"LDefine a constant instead of duplicating this literal "CODE_STATUS" 3 times.(Ö­•ÙüÿÿÿÿJ$44fb77b9-4414-41ce-88c9-58456492476a
+‡
+java:S1192©"JDefine a constant instead of duplicating this literal "CODE_TIME" 3 times.(¢ÛÓ×J$4c313975-874b-481f-a9f6-84d3ed114ee9
+‰
+java:S1192¤"GDefine a constant instead of duplicating this literal "EMP_ID" 3 times.(¬¢÷šøÿÿÿÿJ$df245ffe-bbab-4211-8745-c2ec006c3629
+ˆ
+java:S1192ª"KDefine a constant instead of duplicating this literal "CODE_RTIME" 4 times.(±€ÉJ$a435cd4b-1fcd-4baa-a6d0-6d56b459f077
+Œ	java:S117F"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(íĞôùJ$f808d837-14a0-46b6-809a-50a98c063452
+Œ	java:S117G"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚§ó¨J$5c97d262-776d-4f14-a9a4-fbb6f6b841be
+Œ	java:S117i"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚§ó¨J$7aeee4b4-4827-4f9d-a70b-6be08f3cc31b
+•	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¬¿è…J$21d6e6c0-b1a4-4095-b60d-6548e30d94a3
+p
+java:S4925"-Remove this "Class.forName()", it is useless.(±È…‡8™íÌ‰ä1J$ac59c183-26e0-45c4-bfbd-af21d30f466f
+]
+java:S1116"Remove this empty statement.(éÀÎ«ÿÿÿÿÿJ$b04f17c5-c0e8-425c-9f4d-da1abad4bafe
+y
+java:S6437"6Revoke and change this password, as it is compromised.(êË¿»8œíÌ‰ä1J$4cdc246b-d958-4cb8-bee9-db9635424f05
+|	java:S125'"<This block of commented-out lines of code should be removed.(×ìŒùÿÿÿÿÿJ$705dcb93-8a69-4d9f-a415-668f5ae8bfbc
+y
+java:S64378"6Revoke and change this password, as it is compromised.(êË¿»8 íÌ‰ä1J$edbdeedf-4504-4461-a0ed-5a64492ba27e
+y
+java:S6437H"6Revoke and change this password, as it is compromised.(êË¿»8£íÌ‰ä1J$570d9456-2721-4fa6-9cc6-5b8448ad0767
+]
+java:S1116Q"Remove this empty statement.(ôŸìúÿÿÿÿJ$39448a96-17fd-43fb-ab38-afeff6a94141
+t
+java:S1854_"8Remove this useless assignment to local variable "code".(é²¿¼J$050c3db5-144b-43e3-8ac0-56773e7a0588
+y
+java:S6437u"6Revoke and change this password, as it is compromised.(êË¿»8®íÌ‰ä1J$c6acf6de-72f7-47a2-8a5d-f2de4a7a34f8
+z
+java:S6437ˆ"6Revoke and change this password, as it is compromised.(êË¿»8°íÌ‰ä1J$d7d252b7-a440-4212-bdfd-192606c56f80
+z
+java:S6437œ"6Revoke and change this password, as it is compromised.(êË¿»8²íÌ‰ä1J$730f3394-7fd3-477d-93db-9a64a515ac20
+z
+java:S6437¾"6Revoke and change this password, as it is compromised.(êË¿»8¶íÌ‰ä1J$cb542e3a-0836-4845-ba2f-ea2435ebc4a6
+z
+java:S6437Û"6Revoke and change this password, as it is compromised.(êË¿»8ºíÌ‰ä1J$c77101f0-8082-42f6-9613-8fc22fe02081
+}	java:S125ö"<This block of commented-out lines of code should be removed.(‘¾©üÿÿÿÿÿJ$bc288a96-4256-466c-8e72-64af6e9f21b4
+g	java:S106’"+Replace this use of System.out by a logger.(Àû¡ŒJ$390f6a73-6773-46f2-8744-11b4b2f885f1
+l	java:S106“"+Replace this use of System.out by a logger.(çõíÌùÿÿÿÿJ$7b855caf-c099-4d35-bbd8-2877b6c5f1a2
+g	java:S106”"+Replace this use of System.out by a logger.(ïœá’J$8959286b-d53c-4f13-b3c1-a74f314dee22
+g	java:S106•"+Replace this use of System.out by a logger.(ËøµŞJ$7980843d-f5a3-4d85-836c-a48a9d5e26ad
+g	java:S106–"+Replace this use of System.out by a logger.(®“Ä…J$ef97d889-8b6c-4161-a9b7-cc179a0e6a90
+l	java:S106—"+Replace this use of System.out by a logger.(Ê†ÒíûÿÿÿÿJ$20872b22-6c59-4bf1-b774-2fc12f3bd82d
+f	java:S106˜"+Replace this use of System.out by a logger.(½ÙŞMJ$7c8c6c5b-134c-40a0-a3a0-9d7c7a77fcdd
+g	java:S106™"+Replace this use of System.out by a logger.(“Ô¡J$8a6f34b7-72a7-4a05-bbed-74f18d2552fe
+l	java:S106š"+Replace this use of System.out by a logger.(š‡î«ıÿÿÿÿJ$c081be67-df3c-4af9-8995-7943addc0211
+l	java:S106›"+Replace this use of System.out by a logger.(Á›¾ÈøÿÿÿÿJ$18696c3d-bd2f-42a9-af60-a145483c288f
+g	java:S106œ"+Replace this use of System.out by a logger.(ÎªêãJ$6bbbbfad-d5eb-498e-856d-42916590d1fd

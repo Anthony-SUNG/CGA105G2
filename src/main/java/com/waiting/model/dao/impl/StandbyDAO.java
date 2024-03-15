@@ -1,5 +1,6 @@
 package com.waiting.model.dao.impl;
 
+import com.core.common.Common;
 import com.waiting.model.dao.StandbyDAO_interface;
 import com.waiting.model.pojo.Standby;
 
@@ -19,7 +20,7 @@ public class StandbyDAO implements StandbyDAO_interface {
 
 	static {
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName(Common.DriverName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

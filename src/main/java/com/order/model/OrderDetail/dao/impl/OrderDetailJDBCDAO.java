@@ -12,7 +12,13 @@ import static com.core.common.Common.PASSWORD;
 import static com.core.common.Common.USER;
 
 public class OrderDetailJDBCDAO implements OrderDetailDAO_interface {
-
+	static {
+		try {
+			Class.forName(Common.DriverName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public void insert(OrderDetail orderDetail){
 	final String sql =

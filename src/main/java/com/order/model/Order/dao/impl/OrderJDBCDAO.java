@@ -13,7 +13,13 @@ import static com.core.common.Common.USER;
 
 
 public class OrderJDBCDAO implements OrderDAO_interface {
-
+	static {
+		try {
+			Class.forName(Common.DriverName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public void insert(Order order) {
 		final String sql = "INSERT INTO cga105g2.order (mem_id,store_id,order_price,code_id,order_fre,order_fprice,order_text,order_otime) VALUES (?, ? ,?, ?, ?, ?, ?, ? )";

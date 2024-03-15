@@ -20,7 +20,13 @@ import com.point.model.PointGoods.dao.PointGoodsDAO_interface;
 import com.point.model.PointGoods.pojo.PointGoods;
 
 public class PointGoodsDAO implements PointGoodsDAO_interface {
-
+	static {
+		try {
+			Class.forName(Common.DriverName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public void insert(PointGoods pointgoods) {
 		String sql = "INSERT INTO cga105g2.point_goods (PD_IMG, PD_NAME, PD_PRICE, PD_TEXT, PD_TIME, PD_RTIME, PD_STATUS) VALUES (?, ?, ?, ?, ?, ?, ?)";

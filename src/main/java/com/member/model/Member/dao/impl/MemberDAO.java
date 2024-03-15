@@ -12,7 +12,7 @@ public class MemberDAO implements MemberDAO_interface {
 
 	static {
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName(Common.DriverName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
