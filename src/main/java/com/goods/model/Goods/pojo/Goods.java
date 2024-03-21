@@ -1,9 +1,20 @@
 package com.goods.model.Goods.pojo;
 
-import javax.persistence.*;
+import java.io.Serializable;
+
+
+import com.store.model.Store.pojo.Store;
+import com.store.model.service.StoreService;
+
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-public class Goods {
+public class Goods implements Serializable{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "GOODS_ID")
@@ -28,71 +39,69 @@ public class Goods {
   public Goods() {
   }
 
+  public com.store.model.Store.pojo.Store getStore() {
+	 com.store.model.service.StoreService storeService = new com.store.model.service.StoreService();
+	 com.store.model.Store.pojo.Store store = storeService.getById(storeId);
+	 return store;
+  }
 
   public Integer getGoodsId() {
-    return goodsId;
-  }
+	return goodsId;
+}
 
-  public void setGoodsId(Integer goodsId) {
-    this.goodsId = goodsId;
-  }
+public void setGoodsId(Integer goodsId) {
+	this.goodsId = goodsId;
+}
 
+public Integer getStoreId() {
+	return storeId;
+}
 
-  public Integer getStoreId() {
-    return storeId;
-  }
+public void setStoreId(Integer storeId) {
+	this.storeId = storeId;
+}
 
-  public void setStoreId(Integer storeId) {
-    this.storeId = storeId;
-  }
+public byte[] getGoodsImg() {
+	return goodsImg;
+}
 
+public void setGoodsImg(byte[] goodsImg) {
+	this.goodsImg = goodsImg;
+}
 
-  public byte[] getGoodsImg() {
-    return goodsImg;
-  }
+public String getGoodsName() {
+	return goodsName;
+}
 
-  public void setGoodsImg(byte[] goodsImg) {
-    this.goodsImg = goodsImg;
-  }
+public void setGoodsName(String goodsName) {
+	this.goodsName = goodsName;
+}
 
+public Integer getGoodsStatus() {
+	return goodsStatus;
+}
 
-  public String getGoodsName() {
-    return goodsName;
-  }
+public void setGoodsStatus(Integer goodsStatus) {
+	this.goodsStatus = goodsStatus;
+}
 
-  public void setGoodsName(String goodsName) {
-    this.goodsName = goodsName;
-  }
+public Integer getGoodsPrice() {
+	return goodsPrice;
+}
 
+public void setGoodsPrice(Integer goodsPrice) {
+	this.goodsPrice = goodsPrice;
+}
 
-  public Integer getGoodsStatus() {
-    return goodsStatus;
-  }
+public String getGoodsText() {
+	return goodsText;
+}
 
-  public void setGoodsStatus(Integer goodsStatus) {
-    this.goodsStatus = goodsStatus;
-  }
+public void setGoodsText(String goodsText) {
+	this.goodsText = goodsText;
+}
 
-
-  public Integer getGoodsPrice() {
-    return goodsPrice;
-  }
-
-  public void setGoodsPrice(Integer goodsPrice) {
-    this.goodsPrice = goodsPrice;
-  }
-
-
-  public String getGoodsText() {
-    return goodsText;
-  }
-
-  public void setGoodsText(String goodsText) {
-    this.goodsText = goodsText;
-  }
-
-
-  public java.sql.Timestamp getGoodsTime() {
+public java.sql.Timestamp getGoodsTime() {
     return goodsTime;
   }
 
@@ -109,4 +118,5 @@ public class Goods {
     this.goodsRtime = goodsRtime;
   }
 
+  
 }

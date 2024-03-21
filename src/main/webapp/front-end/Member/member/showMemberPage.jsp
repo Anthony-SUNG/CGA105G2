@@ -80,9 +80,93 @@
             cursor: pointer;
 
         }
+
+        .friend {
+            background: #eee;
+            float: left;
+        }
+
+        .me {
+            float: right;
+            background: #0084ff;
+            color: #fff;
+            border-bottom-right-radius: 30px;
+        }
+
+        .friend + .me {
+            border-bottom-right-radius: 5px;
+        }
+
+        .me + .me {
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 5px;
+        }
+
+        .me:last-of-type {
+            border-bottom-right-radius: 30px;
+        }
+
+        .message-area {
+            height: 70%;
+            resize: none;
+            box-sizing: border-box;
+            overflow: auto;
+            background-color: #ffffff;
+        }
+
+        .clearliststy {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .messagetoli {
+            display: inline-block;
+            clear: both;
+            padding: 8px;
+            border-radius: 30px;
+            margin-bottom: 2px;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .rowmmmm {
+            display: flex;
+            flex-wrap: nowrap;
+
+        }
+
+        .playgames {
+            margin: 0 auto;
+            text-align: center;
+            height: auto;
+            width: auto;
+
+        }
+
+
+        .playgames .contentmmm {
+            display: inline-block;
+            margin: 0 auto;
+            top: 10%;
+            position: relative;
+
+        }
+
+        .playgames > .rowmmmm {
+            display: flex;
+        }
+
+        .playgames .cell {
+            width: 200px;
+            height: 200px;
+            border: 5px solid black;
+            line-height: 0;
+        }
+
+
     </style>
 </head>
-<body>
+<body onunload="disconnect()">
 <c:if test="${memId > 0}">
     <!-- header start -->
     <%@ include file="/front-end/Member/01h/headerin.jsp" %>
@@ -115,7 +199,7 @@
                         <div class="profile-header-img mb-1">
                             <c:if test="${not empty member2.memPic}">
                                 <img src="${pageContext.request.contextPath}/LonginServlet?action=getOtherMemberPhoto&memId=${member2.memId}"
-                                     alt=""/>
+                                     alt="" style="width:100%;height:100%;"/>
                             </c:if>
                             <c:if test="${empty member2.memPic}">
                                 <img src="https://i.pinimg.com/564x/07/c4/72/07c4720d19a9e9edad9d0e939eca304a.jpg"
@@ -124,7 +208,7 @@
                         </div>
                         <div class="profile-header-info">
                             <div style="display: flex;">
-                                <h3 class="m-t-sm mt-5"
+                                <h3 class="m-t-sm mt-5" id="row"
                                     style="font-weight: 1000;font-size: 33px;">${member2.memName}</h3>
                                 <p class="m-t-sm mt-7 ml-4" style="color: rgb(215, 235, 68);">@${member2.memAcc}</p>
                             </div>
@@ -152,30 +236,59 @@
                                     </form>
                                 </c:if>
                                 <button type="button" class="btn btn-sm btn-primary mb-4 ml-5" data-toggle="modal"
-                                        data-target="#exampleModalCenter" style="font-size: 17px;">
+                                        data-target="#exampleModalCenter" id="imissyou" style="font-size: 17px;">
                                     聊天室
                                 </button>
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                <div class="modal fade"
+                                     id="exampleModalCenter" tabindex="-1" role="dialog"
                                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
+                                        <div class="modal-content ">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle" style="color: black">與${member2.memName}的聊天室</h5>
+                                                <h5 class="modal-title" id="statusOutput" class="statusOutput"
+                                                    style="color: black">${member2.memName}</h5>
+                                                <p style="color: rgb(68,140,235);" id="ststemg">:未上線</p>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body" style="color: black">
-                                                此處塞訊息
-                                            </div>
+                                            <div class="modal-body  message-area "
+                                                 style="color: black;overflow-y: auto;height: 50vh;"
+                                                 id="messagesArea"></div>
                                             <div class="modal-footer">
-                                                <form class="col-12 flex-nowrap">
-                                                    <input  type="text"   class="col-10" style="height:35px" name="message">
-                                                    <button type="button" class="col-1 btn btn-primary p-0" style="height:35px;background-color: #ffc107; ">🗣️</button>
-                                                </form>
+                                                <div class="col-12 flex-nowrap p-0 m-0">
+                                                    <input id="message" class="col-5" style="height:35px" type="text"
+                                                           aria-label="Search"
+                                                           placeholder="Message"
+                                                           onkeydown="if(event.keyCode == 13)sendMessage()" ;>
+                                                    <input type="submit" id="sendMessage"
+                                                           class="button col-2 btn btn-primary p-0" value="Send"
+                                                           onclick="sendMessage()" ;
+                                                           style="height:35px;background-color: #ffc107; ">
+                                                    <input type="button" id="connect"
+                                                           class="button col-2 btn btn-primary p-0" value="上線"
+                                                           onclick="connect()"
+                                                           style="height:35px;background-color: #ffc107; ">
+                                                    <input type="button" id="disconnect" aria-hidden="true"
+                                                           class="button col-2 btn btn-primary p-0" value="下線"
+                                                           onclick="disconnect()"
+                                                           style="height:35px;background-color: #ffc107; ">
+                                                </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-primary mb-4 ml-5" data-toggle="modal"
+                                        data-target="#exampleModalCenter1" style="font-size: 17px;">遊戲室
+                                </button>
+                                <div class="modal fade"
+                                     id="exampleModalCenter1" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered playgames" role="document">
+                                        <div class="modal-content mx-auto">
+                                            <%@ include file="/front-end/Member/member/hitgame.jsp" %>
                                         </div>
                                     </div>
                                 </div>
@@ -264,7 +377,8 @@
                                     </div>
                                     <ul class="profile-header-tab nav nav-tabs mt-5">
                                         <li class="nav-item">
-                                            <a href="https://line.me/R/msg/text/?${article.artHeader}%0D%0A/CGA105G2/front-end/Member/art/listArt.jsp">
+                                            <a class="todeepage"
+                                               href="${member2.memName}評論了${article.store.storeName}店：${article.artHeader} http://tibame.likktw.com:8081/CGA105G2/LonginServlet?action=MemberPage&SearchMemberId=${member2.memId}">
                                                 <button class=" btn btn-outline-primary align-items-center"
                                                         style="height: 46px; padding: 5px; border-radius: 0%;font-size: 20px;font-weight: 1000">
                                                     <i class="material-icons">share</i>
@@ -298,6 +412,7 @@
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
         crossorigin="anonymous"></script>
 <script>
+
     function liked() {
         const element = document.getElementById("like");
         element.classList.toggle("liked");
@@ -315,18 +430,6 @@
         });
     });
 </script>
-<!-- Vue -->
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<script>
-    const {createApp} = Vue;
-    createApp({
-        data() {
-            return {
-                message: "Hello Vue!",
-            };
-        },
-    }).mount("#app");
-</script>
 <!-- ==========================button特效開始======================= -->
 <script>
     const button = document.querySelectorAll('.button');
@@ -335,26 +438,33 @@
             button[i].classList.toggle('liked')
         })
     }
-    const aaa = document.querySelectorAll('.aaa');
-    for (let i = 0; i < button.length; i++) {
-        button[i].addEventListener('click', function () {
-            if (aaa[i].innerHTML == "已收藏")
-                aaa[i].innerHTML = "收藏";
-            else
-                aaa[i].innerHTML = "已收藏";
-        })
-    }
 </script>
 <!-- ==========================button特效結束======================= -->
-<!-- stickey bar: -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
 <script>
-    let a = new StickySidebar("#sidebar", {
-        topSpacing: 40,
-        bottomSpacing: 20,
-        containerSelector: ".container",
-        innerWrapperSelector: ".sidebar__inner"
-    });
+    function addCupAlert() {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-outline-primary m-5 fs-5',
+            },
+            buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+            position: 'middle',
+            icon: 'success',
+            title: '遊戲獎勵1點',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+
+    let toResult = null;
+    toResult =
+    <%= request.getAttribute("toResult") %>;
+    if (toResult == true) {
+        addCupAlert();
+        toResult = null;
+    }
+    ;
 </script>
 <script>
     $('#myModal').on('shown.bs.modal', function () {
@@ -362,6 +472,138 @@
     })
 </script>
 
+
+<script>
+
+    <%--======================    聊天室  ==================--%>
+    const host = window.location.host;//localhost
+    const path = window.location.pathname;//8081
+    const webCtx = path.substring(0, path.indexOf('/', 1));//CGA105G2
+    const MyPoint = "/FriendWS/${member1.memName}";
+    const URL = "ws://" + host + webCtx + MyPoint;
+    const endPointURL = URL.trim();
+    connect();
+    const statusOutput = $("#statusOutput");
+    const messagesArea = $("#messagesArea");
+    const self = '${member1.memName}';   //self是自己的意思
+    let friend = '${member2.memName}';
+    var webSocket;
+
+    ///載入區
+    function connect() {
+        // create a websocket
+        webSocket = new WebSocket(endPointURL);
+        webSocket.onopen = function (event) {
+            $("#sendMessage").prop("disabled", false);
+            $("#disconnect").prop("disabled", false);
+            console.log(JSON.parse(event.data))
+        };
+        webSocket.onmessage = function (event) {
+            const jsonObj = JSON.parse(event.data);
+            if ("open" === jsonObj.type) {
+                addListener();
+            } else if ("history" === jsonObj.type) { //歷史聊天紀錄
+                messagesArea.html("");
+                const ul = $('<ul>', {
+                    id: 'area',
+                    class: 'clearliststy',
+                    text: ''
+                });
+                messagesArea.append(ul);
+                // 這行的jsonObj.message是從redis撈出跟好友的歷史訊息，再parse成JSON格式處理
+                const messages = JSON.parse(jsonObj.message);
+                for (let i = 0; i < messages.length; i++) {
+                    const historyData = JSON.parse(messages[i]);
+                    const showMsg = historyData.message;
+                    const li = $('<li>', {
+                        id: '',
+                        class: 'messagetoli',
+                        text: ''
+                    });
+                    // 根據發送者是自己還是對方來給予不同的class名, 以達到訊息左右區分
+                    historyData.sender === self ? li.addClass("me") : li.addClass("friend"); //去看css style 有分左右聊天
+                    li.html(showMsg);
+                    ul.append(li);
+                }
+                messagesArea.scrollTop = messagesArea.scrollHeight;
+            } else if ("chat" === jsonObj.type) {	//線上的聊天
+                $("#ststemg").html(":已連線");
+                const li = $('<li>', {
+                    id: '',
+                    class: 'messagetoli',
+                    text: ''
+                });
+                jsonObj.sender === self ? li.addClass("me") : li.addClass("friend"); //去看css style 有分左右聊天
+                li.html(jsonObj.message);
+                $("#area").append(li);
+                messagesArea.scrollTop = messagesArea.scrollHeight;
+            } else if ("close" === jsonObj.type) {
+                addListener();
+            }
+        };
+        window.webSocket.onclose = function (event) {
+            console.log("Disconnected!");
+        };
+    }
+
+    //結束
+
+
+    // 註冊列表點擊事件並抓取好友名字以取得歷史訊息
+    function addListener() {
+        const container = $("#imissyou");
+        container.click(function (e) {
+            const jsonObj = {
+                "type": "history", //歷史聊天紀錄
+                "sender": self,	//自己
+                "receiver": friend, //對象
+                "message": ""		//先給空字串     //ChatMessage.java要對應
+            };
+            window.webSocket.send(JSON.stringify(jsonObj));	//轉成文字 用Websocket發送到後台
+        })
+    };
+
+    function sendMessage() {
+        friend = statusOutput.html();
+        const inputMessage = $("#message");
+        const message = inputMessage.val().trim();
+        if (message === "") {
+
+            inputMessage.focus();
+        } else {
+            var jsonObj = {
+                "type": "chat",
+                "sender": self,
+                "receiver": friend,
+                "message": message
+            };
+            window.webSocket.send(JSON.stringify(jsonObj));
+            inputMessage.val("");
+            inputMessage.focus();
+        }
+    }
+
+    function disconnect() {
+        $("#ststemg").html(":已下線");
+        webSocket.close();
+        $("#sendMessage").prop("disabled", true);
+        $("#disconnect").prop("disabled", true);
+    }
+
+    function updateFriendName(name) {
+        statusOutput.html(name);
+    }
+</script>
+<script>
+    <%--    將line分享連結轉utf-8--%>
+    $(document).ready(function () {
+        $(".todeepage").each(function () {
+            let href = $(this).attr("href");
+            const encodedHref = "https://social-plugins.line.me/lineit/share?text=" + encodeURIComponent(href)+"&from=line_scheme";
+            $(this).attr("href", encodedHref);
+        })
+    })
+</script>
 
 </body>
 </html>

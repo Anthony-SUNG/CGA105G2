@@ -1,6 +1,7 @@
 package com.foodorder.model.ReservaReservaDetailMeal.dao.impl;
 
 import com.core.common.Common;
+import com.core.entity.ErrorTitle;
 import com.foodorder.model.ReservaReservaDetailMeal.dao.ReservaReservaDetailMealDAO_interface;
 import com.foodorder.model.ReservaReservaDetailMeal.pojo.ReservaReservaDetailMeal;
 
@@ -8,14 +9,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservaReservaDetailMealJDBCDAO implements ReservaReservaDetailMealDAO_interface {
-	static {
-		try {
-			Class.forName(Common.DriverName);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+public class ReservaReservaDetailMealJDBCDAO extends Common implements ReservaReservaDetailMealDAO_interface {
+
 
 	@Override
 	public List<ReservaReservaDetailMeal> getById(Integer id, String chooseId) {
@@ -26,10 +21,8 @@ public class ReservaReservaDetailMealJDBCDAO implements ReservaReservaDetailMeal
 				+ "join cga105g2.store s on s.STORE_ID = r.STORE_ID\r\n"
 				+ "right join cga105g2.article a on a.STORE_ID = r.STORE_ID and a.MEM_ID = r.MEM_ID\r\n" + "where"
 				+ where + "\r\n" + "GROUP BY r.REN_ID;";
-		List<ReservaReservaDetailMeal> list = new ArrayList<ReservaReservaDetailMeal>();
-		try (Connection con = DriverManager.getConnection(Common.URL, Common.USER, Common.PASSWORD);
-			 PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-						ResultSet.CONCUR_READ_ONLY)) {
+		List<ReservaReservaDetailMeal> list = new ArrayList<>();
+		try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
 			pstmt.setInt(1, id);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -38,7 +31,6 @@ public class ReservaReservaDetailMealJDBCDAO implements ReservaReservaDetailMeal
 				reservaReservaDetailMeal.setRenName(rs.getString("REN_NAME"));
 				reservaReservaDetailMeal.setRenPhone(rs.getString("REN_PHONE"));
 				reservaReservaDetailMeal.setRenTime(rs.getString("REN_TIME"));
-
 				reservaReservaDetailMeal.setRenStatus(rs.getInt("REN_STATUS"));
 				reservaReservaDetailMeal.setRenDate(rs.getDate("REN_DATE"));
 				reservaReservaDetailMeal.setRenHeadcount(rs.getInt("REN_HEADCOUNT"));
@@ -46,33 +38,19 @@ public class ReservaReservaDetailMealJDBCDAO implements ReservaReservaDetailMeal
 				reservaReservaDetailMeal.setStoreName(rs.getString("STORE_NAME"));
 				reservaReservaDetailMeal.setArtScore(rs.getInt("ART_SCORE"));
 				list.add(reservaReservaDetailMeal);
-
 			}
+			con.commit();
+			con.close();
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+			logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+			try {
+				con.rollback();
+			} catch (SQLException r) {
+				logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+			}
 		}
 		return list;
-
 	}
 
-	public static void main(String[] args) {
-		ReservaReservaDetailMealJDBCDAO dao = new ReservaReservaDetailMealJDBCDAO();
-//		List<ReservaReservaDetailMeal> list1 = dao.getById(6, "STORE_ID");
-//		for (ReservaReservaDetailMeal e : list1) {
-//			System.out.println(e.getRenName());
-//			System.out.println(e.getRenDate());
-//			System.out.println(e.getStoreName());
-//			System.out.println("*******************************************");
-//		}
-		List<ReservaReservaDetailMeal> list1 = dao.getById(2, "MEM_ID");
-		System.out.println(list1.size());
-		for (ReservaReservaDetailMeal e : list1) {
-			System.out.println(e.getRenName());
-			System.out.println(e.getRenDate());
-			System.out.println(e.getStoreName());
-			System.out.println("*******************************************");
-		}
-
-	}
 
 }

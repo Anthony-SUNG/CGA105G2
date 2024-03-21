@@ -59,21 +59,23 @@
             <div class="container my-20 col-6 ">
                 <div class="card card-body shadow bg-cyan-20 "
                      style="border-radius: 20px;">
-                    <h1 class="text-center mt-5">🔆新增商品</h1>
-                    <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/PointServlet" name="form1"
+                    <h1 class="text-center mt-5">新增商品</h1>
+                    <FORM METHOD="post" ACTION="point.do" name="form1"
                           enctype="multipart/form-data">
                         <div class="col-8 mx-auto">
                             <label class="font-weight-bold fs-6 ">商品名稱:</label> <input
-                                type="TEXT" name="pdName" value="${param.pdName}"/>${errorMsgs.pdName}
+                                type="TEXT" name="pdName" value="${param.pdName}"/><br>${errorMsgs.pdName}
                         </div>
                         <div class="col-8 mx-auto">
                             <label class="font-weight-bold fs-6 ">商品單價:</label> <input
-                                type="TEXT" name="pdPrice" value="${param.pdPrice}"/>${errorMsgs.pdPrice}
+                                type="TEXT" name="pdPrice" value="${param.pdPrice}"/><br>${errorMsgs.pdPrice}
                         </div>
                         <div class="col-8 mx-auto">
-                            <label class="font-weight-bold fs-6 ">商品介紹:</label> <input
-                                type="TEXT" cols="40" rows="3" name="pdText" value="${param.pdText}"
-                                class="form-control">${errorMsgs.pdText}
+                            <label class="font-weight-bold fs-6 ">商品介紹:</label>
+                            <input
+                                    type="textarea" cols="40" rows="3" name="pdText" value="${param.pdText}"
+                                    style="width: 100%; height: 150px;"
+                                    class="form-control">${errorMsgs.pdText}
                         </div>
                         <div class="col-8 mx-auto">
                             <label class="font-weight-bold fs-6 ">上傳圖片:</label> <input
@@ -114,6 +116,16 @@
     $("#pageSubmenu3 a:contains(🔆新增商品)").closest('a').addClass("active disabled bg-white topage");
 </script>
 <script>
+    function already() {
+        var pdStatus = document.getElementById("pdStatus").value;
+        document.form1.pdStatus.value = 1;
+    };
+
+    function besold() {
+        var pdStatus = document.getElementById("pdStatus").value;
+        document.form1.pdStatus.value = 0;
+    };
+
     const list = [];
     <c:forEach var="empRoot" items="${empRoot}">
     list.push(${empRoot.rootId});

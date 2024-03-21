@@ -69,13 +69,13 @@
             </form>
             <h1 class="mt-5">訂位資訊</h1>
             <div class="jumbotron pt-4 pb-4" style="background-color: lightgray; width: 400px;">
-                <div><i class="fa-regular fa-clock"></i>開放時段 : <%= request.getAttribute("timestr") %>
+                <div>⏰開放時段 : <%= request.getAttribute("timestr") %>
                 </div>
                 <br>
-                <div><i class="fa-solid fa-table"></i>總桌數 : <%= request.getAttribute("tablecount") %>
+                <div>🪑總桌數 : <%= request.getAttribute("tablecount") %>
                 </div>
                 <br>
-                <div><i class="fa-solid fa-person"></i>訂位上限 : <%= request.getAttribute("orderlimit") %>
+                <div>🪑訂位上限 : <%= request.getAttribute("orderlimit") %>
                 </div>
             </div>
             <form METHOD="post" action="<%=request.getContextPath()%>/front-end/store/food_order/food_order.do">

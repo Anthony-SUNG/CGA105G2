@@ -121,6 +121,7 @@
                                 </div>
                                 <div class="col-md-2 border d-flex flex-column justify-content-center">
                                     <form method="post" action="/CGA105G2/LonginServlet" name="form1">
+                                        <input type="hidden" name="memId1" value="${memId}">
                                         <button name="action" value="MemberPage" type="submit"
                                                 class="btn btn-success btn-block mt-5"
                                                 style="font-size:28px;border:0;margin-bottom:10px;">進入頁面

@@ -36,7 +36,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-uppercase " data-toggle="none" href="/CGA105G2/front-end/Member/member/memberLognIn.jsp">
-                                    🚪Sing in
+                                    🚪Sign in
                                 </a>
                             </li>
                         </ul>

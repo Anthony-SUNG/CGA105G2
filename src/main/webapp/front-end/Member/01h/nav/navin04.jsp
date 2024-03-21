@@ -56,10 +56,7 @@
                 <ul class="collapse list-unstyled" id="pageSubmenu2">
                     <li>
                         <hr>
-                        <a href="/CGA105G2/BlankPage/Loader2.jsp" class="nav-link">🔆待出貨</a>
-                    </li>
-                    <li><a href="/CGA105G2/BlankPage/Loader2.jsp" class="nav-link">🔆待評價</a></li>
-                    <li><a href="/CGA105G2/BlankPage/Loader2.jsp" class="nav-link">🔆歷史查詢</a>
+                        <a href="<%=request.getContextPath() %>/front-end/Member/order/Member_order_listAll.jsp" class="nav-link">🔆訂單查詢</a>
                         <hr>
                     </li>
                 </ul>

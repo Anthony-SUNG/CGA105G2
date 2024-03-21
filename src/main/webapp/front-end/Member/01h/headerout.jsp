@@ -59,7 +59,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-uppercase " data-toggle="none" href="/CGA105G2/front-end/Member/member/memberLognIn.jsp">
-                                    🚪Sing in
+                                    🚪Sign in
                                 </a>
                             </li>
                         </ul>
@@ -79,16 +79,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
-<!-- stickey bar: -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
-<script>
-    let a = new StickySidebar("#sidebar", {
-        topSpacing: 40,
-        bottomSpacing: 20,
-        containerSelector: ".container",
-        innerWrapperSelector: ".sidebar__inner"
-    });
-</script>
+
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
@@ -117,6 +108,16 @@
         }
         ;
     };
+</script>
+<!-- stickey bar: -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
+<script>
+    let a = new StickySidebar("#sidebar", {
+        topSpacing: 40,
+        bottomSpacing: 20,
+        containerSelector: ".container",
+        innerWrapperSelector: ".sidebar__inner"
+    });
 </script>
 </body>
 </html>

@@ -22,36 +22,37 @@
         <!-- nav start -->
         <%@ include file="/front-end/Member/01h/nav/navin01.jsp" %>
         <!-- nav end -->
-        <FORM METHOD="post" ACTION="point.do" name="form1" enctype="multipart/form-data">
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-                <section class="py-5">
-                    <div class="   my-5">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <section class="py-5">
+                <div class="   my-5">
+                    <form METHOD="post" ACTION="point.do" name="form1" enctype="multipart/form-data">
                         <div class="row gx-4 gx-lg-5 align-items-center">
-                            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" height="500px" width="300px"
-                                                       src="${pageContext.request.contextPath}/PointServlet?action=getPdImg&pdId=${param.pdId}"
+                            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" width=520px height=600px"
+                                                       src="${pageContext.request.contextPath}/PointServlet?action=getPdImg&pdId=${pointgoods.pdId}"
                                                        alt="..."/></div>
                             <div class="col-md-6">
-                                <h1 class="display-5 fw-bolder">${param.pdName}</h1>
+                                <h1 class="display-5 fw-bolder">${pointgoods.pdName}</h1>
                                 <div class="fs-5 mb-5">
-                                    <span class="text-decoration-line-through">${param.pdPrice} <dfn>points</dfn></span>
+                                    <span class="text-decoration">${pointgoods.pdPrice}<dfn>points</dfn></span>
                                 </div>
                                 <div class="slogan" id="SloganContainer" itemprop="description">
                                     <ul>
-                                        <li>${param.pdText}</li>
+                                        <li>${pointgoods.pdText}</li>
                                     </ul>
                                 </div>
                                 <div class="d-flex p-4">
-                                    <button class="btn btn-outline-dark flex-shrink-0 ml-4 fs-3 mt-5" type="button"
-                                            onclick="exchangeAlert()">
-                                        <i class="bi-cart-fill me-1 "></i>
-                                        立即兌換
-                                    </button>
+                                    <form style="margin-bottom: 0px;">
+                                        <input class="btn btn-outline-dark mt-auto fs-4 goodbutton" type="button"
+                                               value="立即兌換">
+                                        <input type="hidden" name="pdId" value="${pointgoods.pdId}">
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </section>
-            </main>
+                    </form>
+                </div>
+            </section>
+        </main>
         </form>
     </div>
 </div>
@@ -84,32 +85,53 @@
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-    function exchangeAlert() {
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-outline-primary m-5 fs-5',
-                cancelButton: 'btn btn-outline-danger m-5 fs-5'
+    function ajax(a,callback) {
+        $.ajax({
+            type: "POST",
+            url: "/CGA105G2/PointServlet",
+            data: {
+                action: "exchangeRewards",
+                pdId: a,
             },
-            buttonsStyling: false
-        })
-        swalWithBootstrapButtons.fire({
-            title: '確定要兌換嗎?',
-            text: "兌換候無法退貨!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: '兌換',
-            cancelButtonText: '取消',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                swalWithBootstrapButtons.fire(
-                    '兌換成功',
-                    '',
-                    'success'
-                )
+            success: function (response) {
+                const list = JSON.parse(JSON.stringify(response))
+                const how = list.how.toString();
+                const text = list.see.toString();
+                callback(how, text);
             }
+        });
+    };
+    $(document).ready(function () {
+        $("input.goodbutton").click(function () {
+            var a = $(this).closest("form").find('input[name="pdId"]').val();
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-outline-primary m-5 fs-5',
+                    cancelButton: 'btn btn-outline-danger m-5 fs-5'
+                },
+                buttonsStyling: false
+            });
+            swalWithBootstrapButtons.fire({
+                title: '確定要兌換嗎?',
+                text: "兌換後無法退貨!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '兌換',
+                cancelButtonText: '取消',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    ajax(a, function (how, text) {
+                        swalWithBootstrapButtons.fire('',text,how);
+                    });
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire('','兌換不成立','error')
+                }
+            });
         })
-    }
+    });
 </script>
 </body>
 </html>

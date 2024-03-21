@@ -78,7 +78,7 @@
                                     <div class="card-body p-4">
                                         <div class="text-center">
                                             <!-- Product name-->
-                                            <h5 class="fw-bolder">${PointGoods.pdName}</h5>
+                                            <h5 class="fw-bolder">${PointGoods.pdName} ${(PointGoods.pdStatus==1) ? '' : '(未上架)'}</h5>
                                             <!-- Product price-->
                                             <span class="lrp_text_count">${PointGoods.pdPrice} <dfn>points</dfn></span>
                                         </div>
@@ -86,16 +86,16 @@
                                     <!-- Product actions-->
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                         <div class="text-center p-1">
-                                            <td>
-                                                <FORM METHOD="post"
-                                                      ACTION="${pageContext.request.contextPath}/PointServlet"
-                                                      style="margin-bottom: 0px;">
-                                                    <input class="btn btn-outline-dark mt-auto fs-4" type="submit"
-                                                           value="修改商品"> <input type="hidden" name="pdId"
-                                                                                    value="${PointGoods.pdId}">
-                                                    <input type="hidden" name="action" value="getOne_For_Update">
-                                                </FORM>
-                                            </td>
+                                            <FORM METHOD="post"
+                                                  ACTION="<%=request.getContextPath()%>/PointServlet"
+                                                  style="margin-bottom: 0px;">
+                                                <input class="btn btn-outline-dark mt-auto fs-4"
+                                                       type="submit" value="修改商品"> <input type="hidden"
+                                                                                              name="pdId"
+                                                                                              value="${PointGoods.pdId}">
+                                                <input
+                                                        type="hidden" name="action" value="getOne_For_Update">
+                                            </FORM>
                                         </div>
                                     </div>
                                 </div>
@@ -105,8 +105,8 @@
                 </div>
             </section>
             <br>
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <nav aria-label="Page navigation example   justify-content-center" class="m-5 ">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <nav aria-label="Page navigation example justify-content-center" class="m-5 ">
                     <ul class="pagination">
                         <%@ include file="page2.jsp" %>
                     </ul>

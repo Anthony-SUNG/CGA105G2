@@ -1,6 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.*" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -59,7 +59,7 @@
                 <div class="card card-body shadow bg-cyan-20 "
                      style="border-radius: 20px;">
                     <h1 class="text-center mt-5">🔆修改商品</h1>
-                    <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/PointServlet" name="form1"
+                    <FORM METHOD="post" ACTION="PointServlet" name="form1"
                           enctype="multipart/form-data">
                         <div class="col-8 mx-auto">
                             <img src="${pageContext.request.contextPath}/PointServlet?action=getPdImg&pdId=${param.pdId}"
@@ -74,8 +74,9 @@
                                 type="TEXT" name="pdPrice" value="${param.pdPrice}"/>${errorMsgs.pdPrice}
                         </div>
                         <div class="col-8 mx-auto">
-                            <label class="font-weight-bold fs-6 ">商品介紹:</label> <input
-                                type="TEXT" cols="40" rows="3" name="pdText" value="${param.pdText}"
+                            <label  class="font-weight-bold fs-6 ">商品介紹:</label> <input
+                                type="textarea" cols="40" rows="3" name="pdText" value="${param.pdText}"
+                                style="width: 100%; height: 150px;"
                                 class="form-control">${errorMsgs.pdText}
                         </div>
                         <div class="col-8 mx-auto">
@@ -117,6 +118,15 @@
     $("#pageSubmenu3 a:contains(🔆商品總覽)").closest('a').addClass("active disabled bg-white topage");
 </script>
 <script>
+    function already() {
+        var pdStatus = document.getElementById("pdStatus").value;
+        document.form1.pdStatus.value = 1;
+    };
+
+    function besold() {
+        var pdStatus = document.getElementById("pdStatus").value;
+        document.form1.pdStatus.value = 0;
+    };
     const list = [];
     <c:forEach var="empRoot" items="${empRoot}">
     list.push(${empRoot.rootId});

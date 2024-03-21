@@ -45,9 +45,9 @@
           </div>
           <div
                   class="fs-1 lh-1 my-5 font-family-secondary text-uppercase font-weight-bold letter-spacing-caption text-muted">
-            營業時間
+            聲明
           </div>
-          <p class="mb-0 text-body">11:00 AM - 9:00 PM</p>
+          <p class="mb-0 text-body">此網站為TibaMe_CGA105G2專案作品，購買商品均屬虛構行為，請勿使用真實信用卡。</p>
         </div>
       </div>
     </div>

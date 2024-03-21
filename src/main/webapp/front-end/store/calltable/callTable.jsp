@@ -1,20 +1,16 @@
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="java.sql.Timestamp" %>
-<%@ page import="com.waiting.model.service.StandbyService" %>
-<%@ page import="com.waiting.model.pojo.Standby" %>
+
 <%
-    StandbyService standbySvc = new StandbyService();
-    List<Standby> standbyList = standbySvc.getAll();
+    String selectedOption = (String) session.getAttribute("selectedOption");
+    String sts = (String) request.getAttribute("onOff");
 %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>店家首頁</title>
     <!-- Bootstrap css -->
     <link rel="stylesheet"
@@ -29,6 +25,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <style>
+        .cantttodo {
+            pointer-events: none;
+        }
+
+        .touseeating {
+            height: 100px !important;
+            background-color: rgba(253, 72, 72, 0.65);
+        }
+    </style>
 </head>
 <body>
 <!-- header start -->
@@ -144,19 +150,22 @@
                     <p class="form-control pt-5"
                        style="background-color: rgb(255, 201, 123); color: black;">候位表</p>
                 </div>
-                <div class="p-0 flex-grow-1" id="tablenumber" style="display: none">
-                    <div class="btn-group btn-group-toggle flex-grow-1"
-                         data-toggle="buttons">
-                        <label class="btn btn-secondary active" id="btmon"> <input
-                                type="radio" name="options" id="option1">on
-                        </label> <label class="btn btn-secondary" id="btmoff"> <input
-                            type="radio" name="options" id="option2" checked>off
-                    </label>
+                <form>
+                    <div class="p-0 flex-grow-1" id="tablenumber" style="display: none">
+                        <div class="btn-group btn-group-toggle flex-grow-1" data-toggle="buttons">
+                            <form>
+                                <label class="btn btn-secondary active" id="btmon" for="option1">
+                                    <input type="radio" name="optionsn" id="option1" value="on">on
+                                </label>
+                                <label class="btn btn-secondary" id="btmoff" for="option2">
+                                    <input type="radio" name="options" id="option2" value="off">off
+                                </label>
+                            </form>
+                        </div>
                     </div>
-                </div>
-                <div class="btn-group btn-group-toggle" style="display: none"
-                     id="tablewait">
-                    <div class="table-responsive ">
+                </form>
+                <div class=" btn-group btn-group-toggle" style="display: none" id="tablewait">
+                    <div class="table-responsive">
                         <table class="table table-striped m-0">
                             <thead>
                             <tr class="text-center">
@@ -172,49 +181,7 @@
                         <div class="section-content container ">
                             <div class="row">
                                 <div class="col-12 p-0">
-                                    <article class="faq p-0">
-                                        <c:forEach var="standbyVo" items="${standbyList}">
-                                            <header class="faq-header" data-toggle="collapse"
-                                                    data-target="#faq2-item-${standbyVo.staId}"
-                                                    aria-expanded="false">
-                                                <table class="table table-striped m-0">
-                                                    <tbody class="code_tbody">
-                                                    <tr class="text-center">
-                                                        <td class="col-5">${standbyVo.staPhone}</td>
-                                                        <td>${standbyVo.staName}</td>
-                                                        <td>${standbyVo.staNumber}位</td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                                <div class="faq-toggle" style="display: none">
-                                                    <i class="material-icons faq-toggle-closed">add</i> <i
-                                                        class="material-icons faq-toggle-open">remove</i>
-                                                </div>
-                                            </header>
-                                            <div class="faq-body collapse row mx-auto"
-                                                 id="faq2-item-${standbyVo.staId}"
-                                                 style="width: 100%; justify-content: center">
-                                                <form METHOD="post" id=noticeStandby
-                                                      ACTION="<%=request.getContextPath()%>/standby">
-                                                    <input type="submit" value="通知" onclick=""
-                                                           class="btn btn-outline-info" data-value="call"> <input
-                                                        type="hidden" name="staId" value="${standbyVo.staId}">
-                                                    <input type="hidden" name="staStatus"
-                                                           value="${standbyVo.staStatus}"> <input
-                                                        type="hidden" name="action" value="delete">
-                                                </form>
-                                                <form METHOD="post" id="checkStandby"
-                                                      ACTION="<%=request.getContextPath()%>/standby">
-                                                    <input class="btn btn-outline-info" data-value="come"
-                                                           onclick="" type="submit" value="報到d"> <input
-                                                        type="hidden" name="staId" value="${standbyVo.staId}">
-                                                    <input type="hidden" name="action" value="callStandby">
-                                                </form>
-                                            </div>
-
-                                        </c:forEach>
-
-                                    </article>
+                                    <article class="faq p-0" id="selectStandByResult"></article>
                                 </div>
                             </div>
                         </div>
@@ -233,16 +200,16 @@
                     <table class="table table-striped m-0">
                         <thead>
                         <tr class="text-center">
-                            <th class="col-4">桌號</th>
-                            <th class="col-4">姓名</th>
-                            <th class="col-4">人數</th>
+                            <th class="col-4 pl-2">桌號</th>
+                            <th class="col-3 pl-0">姓名</th>
+                            <th class="col-4 pl-0">人數</th>
                         </tr>
                         </thead>
                     </table>
                 </div>
             </div>
             <section class="section p-0 " id="faq3"
-                     style="overflow-y: scroll; height: 600px">
+                     style="overflow-y: scroll; height: 889px">
                 <div class="section-content container">
                     <div class="row">
                         <div class="col-12 p-0 nowuse">
@@ -273,9 +240,16 @@
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
-    const timelist = [<c:forEach var="time" items="${time}">'${time}', </c:forEach>];
+    //動態產生已設定的訂位時段
+    let timelisto = [<c:forEach var="time" items="${time}">'${time}', </c:forEach>];
+    let timelist = timelisto.filter(el => el);
+    list();
     $(function () {
         let currentDate = new Date();
+        $("#today").click(function () {
+            $("#datepicker").val(formatDate(currentDate));
+            list();
+        });
         $("#datepicker").datepicker({
             showButtonPanel: false,
             dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
@@ -284,6 +258,133 @@
             minDate: "0",
         });
     });
+
+
+    //動態產生右邊的桌圖區
+    let tables = JSON.parse(JSON.stringify(${table}));
+    tableview(tables);
+
+    //訂位資料
+    let foodorder = JSON.parse(JSON.stringify(${list}));
+    orderlist(foodorder);
+    //產生明細
+    detail(foodorder);
+
+
+    //現場用餐資料
+    let noworder = JSON.parse(JSON.stringify(${usejson}));
+    now(noworder);
+    //產生明細
+    detail(noworder);
+
+    //已經有設定坐位的桌號
+    let tablehave = JSON.parse(JSON.stringify(${tablehave}));
+    //將桌號加上顏色
+    tablecolor(tablehave);
+
+    //可以帶位的桌號
+    let cantable = $(tables).not(tablehave).toArray();
+    //將資料更新可以帶位的選項
+    tab(cantable);
+
+    // ajax-換座位
+    $(document).ready(function () {
+        $('.cantab').focusin(function () {
+            //改變前桌號
+            let tableB = Number($(this).val());
+            $(this).change(function () {
+                $(".table3CU").html("");
+                //產生框框
+                tableview(tables)
+                //取得訂單id
+                let reid = $(this).closest("form").find('input[name="toid"]').val();
+                //改變後桌號
+                let tableA = Number($(this).val());
+                let yy = "A" + tableA;
+                let aa = "#ordertab_" + reid;
+                //改字
+                $(aa).html(yy);
+                //更改隱藏input值
+                $(this).closest("form").find('input[name="tableid"]').val(tableA);
+                $.ajax({
+                    type: "POST",
+                    url: "/CGA105G2/TableServlet",
+                    data: {
+                        action: "totable",
+                        toid: reid,
+                        table: tableA,
+                        date: "${date}",
+                        totime: "${totime}",
+                    },
+                    success:function (response){
+                        //已經有設定坐位的桌號
+                        tablehave = JSON.parse(response);
+                        //將桌號加上顏色
+                        tablecolor(tablehave);
+                        //可以帶位的桌號
+                        cantable = $(tables).not(tablehave).toArray();
+                        //將資料更新可以帶位的選項
+                        tab(cantable);
+                    }
+                })
+            })
+        })
+    });
+    //離席
+    function toout(a) {
+        let x = "#article_" + a;
+        let inputval = "#inputtotal" + a;
+        let tableid = Number($(inputval).val());
+        $.ajax({
+            type: "POST",
+            url: "/CGA105G2/TableServlet",
+            data: {
+                toid: a,
+                action: "out",
+            },
+            success: function () {
+                $(x).remove();
+                //cantable加入
+                cantable.splice(1, 0, tableid);
+                cantable.sort(function(a, b) {return a - b;});
+                cantable.filter((item, index) => cantable.indexOf(item) === index);
+                //tablehave移除
+                let a1 = tablehave.indexOf(tableid);
+                tablehave.splice(a1, 1);
+                //產生顏色
+                tablecolor(tablehave);
+                //產生選項
+                tab(cantable);
+            },
+        });
+    };
+    //報到
+    function tocheckin(a) {
+        let text="#inputtotal" + a;
+        let x = "#article_" + a;
+        const b=$(text).val();
+        $.ajax({
+            type: "POST",
+            url: "/CGA105G2/TableServlet",
+            data: {
+                toid: a,
+                table: b,
+                action: "check",
+                date: "${date}",
+                totime: "${totime}",
+            },
+            success: function (response) {
+                $(x).remove();
+                const list = JSON.parse(JSON.stringify(response))
+                noworder = list;
+                now(noworder);
+                const cantable = $(tables).not(tablehave).toArray();
+                tab(cantable);
+            },
+        });
+    };
+
+
     $(function () {
         $("#datepicker").change(function () {
             list();
@@ -297,6 +398,7 @@
             $("#tablewait").css("display", "none");
         })
     });
+
     function list() {
         $("#Select01").html("<option class=\"btn btn-secondary form-control  p-0\" selected><c:if test="${totime !=null}">${totime}</c:if><c:if test="${totime ==null}">Time</c:if></option>");
         for (let e in timelist) {
@@ -304,14 +406,7 @@
             $("#Select01").append(option)
         }
     };
-    list();
-    $(function () {
-        let currentDate = new Date();
-        $("#today").click(function () {
-            $("#datepicker").val(formatDate(currentDate));
-            list();
-        });
-    });
+
     function formatDate(date) {
         let d = new Date(date),
             month = '' + (d.getMonth() + 1),
@@ -323,10 +418,8 @@
             day = '0' + day;
         return [year, month, day].join('-');
     };
-</script>
-<script>
-    const tables = [<c:forEach var="table" items="${table}">${table}, </c:forEach>];
-    //動態產生桌數
+
+    //動態產生右邊的桌圖區
     function tableview(tb) {
         // 定義變數，在使用變數
         const table3CU = document.querySelector('.table3CU');
@@ -348,23 +441,6 @@
             `;
         }
     };
-    tableview(tables);
-</script>
-<script>
-    const tablehave = [<c:forEach var="tablehave" items="${tablehave}">${tablehave}, </c:forEach>];
-    //查詢得到的資料
-    const foodorder = [
-        <c:forEach var="list" items="${list}">
-        ${list},
-        </c:forEach>
-    ];
-    const noworder = [
-        <c:forEach var="usejson" items="${usejson}">
-        ${usejson},
-        </c:forEach>
-    ];
-    //可以帶位的桌號-->cantab
-    const cantable = $(tables).not(tablehave).toArray();
     // 調整成今天才會顯示候位選項
     $(function () {
         $("#Select01").change(function () {
@@ -375,25 +451,28 @@
             }
         })
     });
-    $(function () {
-        $("#option1").click(function () {
-            $("#tablewait").css("display", "block");
-        });
-        $("#option2").click(function () {
-            $("#tablewait").css("display", "none");
-        })
-    });
+
     function orderlist(obder) {
         // 定義變數，在使用變數
+        let today = new Date();
+        let dd = today.getDay();
+        let searchdate=$("#datepicker").val();
+        let seardate =new Date(searchdate);
+        let finday=seardate.getDay();
+
         const toorder = document.querySelector('.toorder');
         toorder.innerHTML = '';
         for (let i of obder) {
             let a = "桌號";
+            let bb="button";
             if (i.TABLE > 0) {
                 a = i.TABLE;
             }
+            if(dd!==finday){
+                bb="hidden";
+            }
             toorder.innerHTML += `
-            <article class="faq p-0">
+            <article class="faq p-0" id="article_\${i.REN_ID}">
                                     <header class="faq-header" data-toggle="collapse"
                                             data-target="#faq1-item-\${i.REN_ID}" aria-expanded="false">
                                         <table class="table table-striped m-0">
@@ -413,15 +492,11 @@
                                     <div class="faq-body collapse" id="faq1-item-\${i.REN_ID}">
                                         <div class="card-body pt-0 pb-1" data-mh="gift-vouchers">
                                             <div>
-                                                <form METHOD="post" ACTION="/CGA105G2/TableServlet" class="d-flex col-12">
-                                                    <select class="btn btn-dark p-0 w-75 cantab" name="table">
-                                                        <option value=\${i.TABLE} selected>A\${a}</option>
-                                                        <option value=0>A桌號</option>
+                                                <form class="d-flex col-12" >
+                                                    <input type="hidden" name="tableid" id="inputtotal\${i.REN_ID}" value=\${i.TABLE} class="d-none">
+                                                    <select class="btn btn-dark p-0 w-100 cantab">
+                                                        <option value=\${i.TABLE} selected="selected">A\${a}</option>
                                                     </select>
-                                                    <input type="hidden" name="date" value="${date}" class="d-none">
-                                                    <input type="hidden" name="totime" value="${totime}" class="d-none">
-                                                    <button class="btn btn-dark p-0 w-25">✔</button>
-                                                    <input type="hidden" name="action" value="totable" class="d-none">
                                                     <input type="hidden" name="toid" value="\${i.REN_ID}" class="d-none">
                                                 </form>
                                             </div>
@@ -431,20 +506,16 @@
                                                 <div class="text-dark">TOTAL</div>
                                                 <div class="price-value fs-3">$\${i.PRICE}</div>
                                             </div>
-                                            <form METHOD="post" ACTION="/CGA105G2/TableServlet">
-                                                <input type="hidden" name="date" value="${date}" class="d-none">
-                                                <input type="hidden" name="totime" value="${totime}" class="d-none">
-                                                <input type="hidden" name="toid" value="\${i.REN_ID}" class="d-none">
-                                                <input type="hidden" name="table" value="\${i.TABLE}" class="d-none">
-                                                <button class="btn p-0 w-100 " style="background-color: rgba(253, 72, 72, 0.65); color: black;">報到</button>
-                                                <input type="hidden" name="action" value="check" class="d-none">
+                                            <form>
+                                                <input type=\${bb} class="btn p-0 w-100 " onclick="tocheckin(\${i.REN_ID},)" style="background-color: rgba(253, 72, 72, 0.65); color: black;" value="報到">
                                             </form>
                                         </div>
                                     </div>
                                 </article>
             `;
         }
-    }
+    };
+
     function now(ulist) {
         // 定義變數，在使用變數
         const useorder = document.querySelector('.nowuse');
@@ -454,20 +525,19 @@
             if (e.TABLE > 0) {
                 b = e.TABLE;
             }
-            let to = "out";
             let p = "離席"
-            if (e.PRICE == 0) {
-                p = "點餐";
-                to = "tobuy";
+            let to = "toout(" + e.REN_ID + "," + b + ")";
+            if (e.PRICE === 0) {
+                p = "點餐中";
             }
             useorder.innerHTML += `
-            <article class="faq p-0">
+            <article class="faq p-0" id="article_\${e.REN_ID}">
                                     <header class="faq-header" data-toggle="collapse"
                                             data-target="#faq1-item-\${e.REN_ID}" aria-expanded="false">
                                         <table class="table table-striped m-0">
                                             <tbody class="code_tbody">
                                             <tr class="text-center">
-                                                <td class="col-4">A\${e.TABLE}</td>
+                                                <td class="col-4" id="ordertab_\${e.REN_ID}">A\${e.TABLE}</td>
                                                 <td class="col-4">\${e.NAME}</td>
                                                 <td class="col-4">\${e.PepQ}位</td>
                                             </tr>
@@ -481,15 +551,11 @@
                                     <div class="faq-body collapse" id="faq1-item-\${e.REN_ID}">
                                         <div class="card-body pt-0 pb-1" data-mh="gift-vouchers">
                                             <div>
-                                                <form METHOD="post" ACTION="/CGA105G2/TableServlet" class="d-flex col-12">
-                                                    <select class="btn btn-dark p-0 w-75 cantab" name="table">
-                                                        <option value=\${e.TABLE} selected>A\${b}</option>
-                                                        <option value=0>A桌號</option>
+                                                <form class="d-flex col-12">
+                                                    <input type="hidden" name="tableid" id="inputtotal\${e.REN_ID}" value=\${e.TABLE} class="d-none">
+                                                    <select class="btn btn-dark p-0 w-100 cantab">
+                                                        <option value=\${e.TABLE} selected="selected">A\${b}</option>
                                                     </select>
-                                                    <input type="hidden" name="date" value="${date}" class="d-none">
-                                                    <input type="hidden" name="totime" value="${totime}" class="d-none">
-                                                    <button class="btn btn-dark p-0 w-25">✔</button>
-                                                    <input type="hidden" name="action" value="totable" class="d-none">
                                                     <input type="hidden" name="toid" value="\${e.REN_ID}" class="d-none">
                                                 </form>
                                             </div>
@@ -499,21 +565,21 @@
                                                 <div class="text-dark">TOTAL</div>
                                                 <div class="price-value fs-3">$\${e.PRICE}</div>
                                             </div>
-                                            <form METHOD="post" ACTION="/CGA105G2/TableServlet">
-                                                <input type="hidden" name="date" value="${date}" class="d-none">
-                                                <input type="hidden" name="totime" value="${totime}" class="d-none">
-                                                <input type="hidden" name="toid" value="\${e.REN_ID}" class="d-none">
-                                                <button class="btn p-0 w-100 " style="background-color: rgba(253, 72, 72, 0.65); color: black;">\${p}</button>
-                                                <input type="hidden" name="table" value="\${e.TABLE}" class="d-none">
-                                                <input type="hidden" name="action" value=\${to} class="d-none">
+                                            <form>
+                                                <input type="button"  id="ipbut_\${e.REN_ID}"  onclick=\${to} class="btn p-0 w-100" style="background-color: rgba(253, 72, 72, 0.65); color: black;" value="\${p}">
                                             </form>
                                         </div>
                                     </div>
                                 </article>
             `;
+            if (e.PRICE === 0) {
+                let str = "#ipbut_" + e.REN_ID;
+                $(str).addClass("cantttodo");
+            }
         }
     }
 
+    //生成明細
     function detail(oderD) {
         for (let e of oderD) {
             const detil = e.DETAIL;
@@ -526,99 +592,223 @@
         }
     }
 
+    //改變桌子顏色
     function tablecolor(tablehave) {
+        $(".touseeating").removeClass("touseeating");
         for (let e of tablehave) {
-            const id = "A" + e;
-            document.getElementById(id.toString()).setAttribute("style", "height: 100px !important; background-color: rgba(253, 72, 72, 0.65);");
+            let id = "#A" + e;
+            $(id).addClass("touseeating");
         }
     }
 
     function tab(list) {
-        const order = document.querySelectorAll('.cantab');
-        for (let i of order) {
+        list.sort(function(a, b) {return a - b;});
+        list.filter((item, index) => tablehave.indexOf(item) === index);
+        $(".cantab").each(function () {
+            let tableid = $(this).closest("form").find('input[name="tableid"]').val();
+            let text = `<option value=\${tableid} selected="selected">A\${tableid}</option>`;
             for (let e of list) {
-                i.innerHTML += `<option value=\${e} >A\${e}</option>`;
+                if (e === tableid) {
+                    continue;
+                }
+                text += `<option value=\${e} >A\${e}</option>`;
             }
-        }
-    }
-
-    orderlist(foodorder);
-    now(noworder);
-    tablecolor(tablehave);
-    detail(foodorder);
-    detail(noworder);
-    tab(cantable);
-
-
-    // 調整成今天才會顯示候位選項
-    $(function () {
-        $("#Select01").change(function () {
-            if ($("#Select01").val() === "Time") {
-                $("#tablenumber").css("display", "none");
-            } else {
-                $("#tablenumber").css("display", "flex");
-            }
+            $(this).html("");
+            $(this).html(text);
         })
-    });
+    };
+
 
 </script>
 <!-- 	==========候位============== -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    $('#option1').click(function () {
-        alert('123');
+    $(document).ready(function () {
+        let open =${open};
+        if (open == 1) {
+            $('#tablenumber').attr("style", "display: flex;");
+            $('#tablewait').attr("style", "display: block;");
+            let a = $("div#tablenumber").closest("form").find('label.active>input').attr("id");
+            if (a === option2) {
+                $('#btmoff').removeClass("active focus");
+            }
+            $('#btmon').addClass("active focus");
+            wattingsearch();
+        }
     });
-
-
-    // 通知
-    $("#noticeStandby").submit(function (event) {
-        event.preventDefault();
-        setTimeout(function () {
+    if ($('#option2').is(':checked')) {
+        $.ajax({
+            type: "POST",
+            url: "/CGA105G2/standby",
+            data: {action: "offStoreSts", onOff: "off"},
+        })
+    }
+    $('#option2').click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/CGA105G2/standby",
+            data: {action: "offStoreSts", onOff: "reset"},
+            success: function () {
+            }
+        })
+    });
+    // --------------------------
+    let onOff = <%=request.getAttribute("onOff") %>;
+    let onOff2 = <%=sts%>;
+    // onOff2=${sts}
+    // --------------------------
+    $(document).ready(function () {
+        var selectedOption = localStorage.getItem("selectedOption");
+        if (selectedOption) {
+            $("input[value='" + selectedOption + "']").prop("checked", true);
+        }
+        $("input[name='options']").change(function () {
+            localStorage.setItem("selectedOption", $(this).val());
+        });
+        let Stasts = $('input[name="options"]:checked').val();
+        if ($('#option2').is(':checked')) {
             $.ajax({
-                url: "/CGA105G2/standby",
                 type: "POST",
-                data: ("#noticeStandby").serialize(),
-
-            });
-
-        }, 300000);
-
+                url: "/CGA105G2/standby",
+                data: {action: "offStoreSts", onOff: "off"},
+            })
+        }
+        $('#option2').click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/CGA105G2/standby",
+                data: {action: "offStoreSts", onOff: "off"},
+            })
+        });
+        // ============Select===================
+        $('#option1').click(wattingsearch());
+        // ------------------------------------------
+        // ---------doc.ready--------
     });
+    // ---------doc.ready--------
+    //顯示時間
+    function showTime() {
+        let callVal = ('#callMem').val();
+        let sec = 10
+        setInterval(function () {
+            sec--;
+            if (sec <= 0) {
+                callMember();
+            }
+            callVal.val(sec);
+        }, 1000);
+    }
 
+    //通知
+    function callMember(a) {
+        let staId = a;
+        $.ajax({
+            type: "POST",
+            url: "/CGA105G2/standby",
+            data: {
+                action: "tocall",
+                toid: staId,
+            },
+            success: function () {
+            }
+        });
+        setTimeout(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/CGA105G2/standby",
+                    data: $('#noticeStandby').serialize(),
+                    success: function (data) {
+                        let idclass="#staHeader-"+staId;
+                        $(idclass).css("display", "none");
+                        $('#callMem').attr("disabled", "disabled");
+                        $("#option1").trigger('click');
+                    }
+                });
+            }, 10000
+        )
+    };
+    //報到
+    function checkMem(a) {
+        let idclass="#checkStandby-"+a;
+        $.ajax({
+            type: "POST",
+            url: "/CGA105G2/standby",
+            data: $(idclass).serialize(),
+            success: function (response) {
+                let idclass2="#staHeader-"+a;
+                $(idclass2).remove();
+                const list = JSON.parse(JSON.stringify(response))
+                noworder.push(list);
+                now(noworder);
+                const cantable = $(tables).not(tablehave).toArray();
+                tab(cantable);
+            },
+        });
+    };
 
+    //查詢候位資料庫
+    function wattingsearch() {
+        $.ajax({
+            type: "POST",
+            url: "/CGA105G2/standby",
+            data: {action: "selectStandBy", onOff: "on"},
+            dataType: "json",
+            success: function (data) {
+                let html = "";
+                for (let i = 0; i < data.length; i++) {
+                    html += `<div id="staHeader-\${data[i].staId}">
+                                  <header class="faq-header" data-toggle="collapse" data-target="#faq2-item-\${data[i].staId}"aria-expanded="false" >
+                                    <table class="table table-striped m-0">
+                                        <tbody class="code_tbody">
+                                            <tr class="text-center">
+                                                <td class="fs-2 col-5 p-2 py-3 my-auto align-middle">\${data[i].staPhone}</td>
+                                                <td class="col-4 pl-0 ">\${data[i].staName}</td>
+                                                <td class="">\${data[i].staNumber}位</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="faq-toggle" style="display: none">
+                                        <i class="material-icons faq-toggle-closed">add</i>
+                                        <i class="material-icons faq-toggle-open">remove</i>
+                                    </div>
+                                   </header>
+                                    <div class="faq-body collapse row mx-auto" id="faq2-item-\${data[i].staId}" style="width: 100%; justify-content: center">
+                                        <div class="radio-buttons-group w-100 justify-content-center">
+                                            <form  class="d-block">
+                                                <input type="button" id="callMem-\${data[i].staId}" value="通知" onclick="callMember(\${data[i].staId})" class="btn btn-outline-info w-auto text-dark btn-lg " data-value="call" >
+                                                <input type="submit" class ="d-none">
+                                                <input type="hidden" name="staId"  id="callStaId-\${data[i].staId}"   value="\${data[i].staId}">
+                                                <input type="hidden" name="staStatus" value="\${data[i].staStatus}">
+                                                <input type="hidden" name="action" value="delete">
+                                            </form>
+                                            <form id="checkStandby-\${data[i].staId}"  class="d-block">
+                                                <input type="button" id="checkMemBtn-\${data[i].staId}" value="報到" onclick="checkMem(\${data[i].staId})" class="btn btn-outline-info w-auto text-dark btn-lg" data-value="come" >
+                                                <input type="hidden" name="staId"  id="checkStaId-\${data[i].staId}"     value="\${data[i].staId}">
+                                                <input type="hidden" name="staName"    value="\${data[i].staName}">
+                                                <input type="hidden" name="staPhone"   value="\${data[i].staPhone}">
+                                                <input type="hidden" name="staNumber"  value="\${data[i].staNumber}">
+                                                <input type="hidden" name="date" value="${date}"     class="d-none">
+                                                <input type="hidden" name="totime" value="${totime}" class="d-none">
+                                                <input type="hidden" name="action" value="checkMem">
+                                                <input type= "submit" class="d-none">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>`;
+                }
+                $("#selectStandByResult").html(html);
+            }
+        });
+    }
 </script>
 
 <!-- Vue -->
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-    function addStandBy() {
-        setTimeout(addStandByAlert(), 1000);
-    }
-
-    function addStandByAlert() {
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-outline-primary m-5 fs-5',
-
-            },
-            buttonsStyling: false
-        })
-
-        swalWithBootstrapButtons.fire({
-            position: 'middle',
-            icon: 'success',
-            title: '登記成功',
-            showConfirmButton: false,
-            timer: 1500
-        })
-    }
-</script>
-<script>
     $("a:contains(🚩帶位)").closest("a").addClass("active disabled topage");
 </script>
-<script>
 
-</script>
 
 </body>
 

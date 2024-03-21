@@ -28,21 +28,9 @@
                 <ul class="collapse list-unstyled" id="pageSubmenu3">
                     <li>
                         <hr>
-                        <a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆待審核</a>
+                        <a href="/CGA105G2/adServlet?action=rootTest" class="nav-link">🔆待審核</a>
                     </li>
-                    <li><a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆已審核</a></li>
-                    <hr>
-                    </li>
-                </ul>
-            </li>
-            <li class="my-4">
-                <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown fs-md-6">🔻店家商品</a>
-                <ul class="collapse list-unstyled" id="pageSubmenu4">
-                    <li>
-                        <hr>
-                        <a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆待審核</a>
-                    </li>
-                    <li><a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆已審核</a></li>
+                    <li><a href="/CGA105G2/back-end/advertise/adPass.jsp" class="nav-link">🔆已審核</a></li>
                     <hr>
                     </li>
                 </ul>

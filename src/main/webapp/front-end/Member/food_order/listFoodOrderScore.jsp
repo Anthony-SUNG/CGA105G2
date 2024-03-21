@@ -18,7 +18,7 @@
         <!-- nav start -->
         <%@ include file="/front-end/Member/01h/nav/navin04.jsp" %>
         <!-- nav end -->
-        <main role="main" class="col-md-9">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 my-5">
             <div class="table-responsive" style="overflow: hidden !important;">
                 <h1 class="h2">🔆訂位紀錄</h1>
                 <table id="code" class="table table-striped display" style="text-align:center;">
@@ -75,6 +75,7 @@
             "columnDefs": [
                 {
                     targets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], // 第一欄
+                    className: "dt-head-center",
                     createdCell: function (cell, cellData, rowData, rowIndex, colIndex) {
                         if (colIndex === 0) {
                             i = i + 1;
@@ -150,7 +151,7 @@
             scrollCollapse: false, // 預設為false 是否開始滾軸功能控制X、Y軸
             scrollX: false,
             scrollY: false,
-            "dom": "<'row justify-content-start ml-0'f>" + "<'eight wide column'l>" + 'lrtip', // 設置搜尋div、頁碼div...等基本位置/外觀..等，詳細可看官網
+            "dom": "<'col-xs-2'f>" + "<'eight wide column'l>" + 'lrtip', // 設置搜尋div、頁碼div...等基本位置/外觀..等，詳細可看官網
             // 語言區塊(language),
             language: {
                 lengthMenu: "顯示 MENU 筆資料",
@@ -160,7 +161,7 @@
                 sInfoEmpty: "目前共有 0 筆紀錄",
                 sInfoFiltered: " ",
                 sInfoPostFix: "",
-                sSearch: "收尋",
+                sSearch: "搜尋",
                 sUrl: "",
                 sEmptyTable: "尚未有資料紀錄存在",
                 sLoadingRecords: "載入資料中...",

@@ -6,6 +6,7 @@
     int pageIndexArray[]=null;
     int pageIndex=0; 
 %>
+
 <%  
     rowNumber=list.size();
     if (rowNumber%rowsPerPage !=0)
@@ -20,7 +21,6 @@
 <%  try {
        whichPage = Integer.parseInt(request.getParameter("whichPage"));
        pageIndex=pageIndexArray[whichPage-1];
-       System.out.println("HI"+whichPage+pageIndex);
     } catch (NumberFormatException e) { //第一次執行的時候
        whichPage=1;
        pageIndex=0;

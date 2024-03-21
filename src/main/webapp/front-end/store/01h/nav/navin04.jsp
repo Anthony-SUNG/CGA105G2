@@ -16,7 +16,8 @@
                 <ul class="list-unstyled collapse" id="pageSubmenu2">
                     <li>
                         <hr>
-                        <a href="<%=request.getContextPath()%>/front-end/store/food_order/food_order.do?action=food_order_button" class="nav-link">🔆餐點與時段</a>
+                        <a href="<%=request.getContextPath()%>/front-end/store/food_order/food_order.do?action=food_order_button"
+                           class="nav-link">🔆餐點與時段</a>
                     </li>
                     <hr>
                     </li>
@@ -25,11 +26,7 @@
             <li class="my-3">
                 <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown fs-5">🔻商城管理</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu3">
-                    <li>
-                        <hr>
-                        <a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆新增商品</a>
-                    </li>
-                    <li><a href="/CGA105G2/BlankPage/Loader1.jsp" class="nav-link">🔆總覽商品</a>
+                    <li><hr><a href="<%=request.getContextPath()%>/front-end/Member/goods/goods.do?action=getStoreId_For_Display_store" class="nav-link">🔆總覽商品</a>
                         <hr>
                     </li>
                 </ul>
@@ -49,16 +46,17 @@
                 </ul>
             </li>
             <c:if test="${storeplan >= 2}">
-            <li class="my-3">
-                <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown fs-5">🔻推播管理</a>
-                <ul class="collapse list-unstyled" id="pageSubmenu5">
-                    <li>
-                        <hr>
-                        <a href="/CGA105G2/front-end/store/pushmesg/addpg.jsp" class="nav-link">🔆新增推播訊息</a>
-                        <hr>
-                    </li>
-                </ul>
-            </li>
+                <li class="my-3">
+                    <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false"
+                       class="dropdown fs-5">🔻推播管理</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu5">
+                        <li>
+                            <hr>
+                            <a href="/CGA105G2/front-end/store/pushmesg/addpg.jsp" class="nav-link">🔆新增推播訊息</a>
+                            <hr>
+                        </li>
+                    </ul>
+                </li>
             </c:if>
             <li class="my-3">
                 <a href="#pageSubmenu6" data-toggle="collapse" aria-expanded="false" class="dropdown fs-5">🔻方案管理</a>
@@ -76,7 +74,7 @@
                 <ul class="collapse list-unstyled" id="pageSubmenu7">
                     <li>
                         <hr>
-                        <a href="/CGA105G2/front-end/store/Login/storeRegister2.jsp" class="nav-link">🔆帳號設定</a>
+                        <a href="/CGA105G2/Member/StoreServlet?action=searchinfo" class="nav-link">🔆帳號設定</a>
                     </li>
                     <li><a href="/CGA105G2/front-end/store/Login/changepwd2.jsp" class="nav-link">🔆變更密碼</a>
                         <hr>

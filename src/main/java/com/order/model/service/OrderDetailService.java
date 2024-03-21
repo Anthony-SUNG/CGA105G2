@@ -6,53 +6,56 @@ import com.order.model.OrderDetail.dao.OrderDetailDAO_interface;
 import com.order.model.OrderDetail.dao.impl.OrderDetailJDBCDAO;
 import com.order.model.OrderDetail.pojo.OrderDetail;
 
-
 public class OrderDetailService {
 	private OrderDetailDAO_interface dao;
 
-	public  OrderDetailService() {
+	public OrderDetailService() {
 		dao = new OrderDetailJDBCDAO();
 	}
 
-	public OrderDetail addOrderDetail(Integer orderId, Integer goodsId, Integer detailQuantity,
-			Integer detailPrice) {
+	public OrderDetail addOrderDetail(Integer orderId, Integer goodsId, Integer detailQuantity) {
 
 		OrderDetail orderDetail = new OrderDetail();
 
 		orderDetail.setOrderId(orderId);
 		orderDetail.setGoodsId(goodsId);
 		orderDetail.setDetailQuantity(detailQuantity);
-		orderDetail.setDetailPrice(detailPrice);
 		
+
 		dao.insert(orderDetail);
-		
+
 		return orderDetail;
 	}
 
-	public OrderDetail updateOrderDetail(Integer orderId, Integer goodsId, Integer detailQuantity,
-			Integer detailPrice) {
+	public void addOrderDetail(OrderDetail orderDetail) {
+		dao.insert(orderDetail);
+	}
+
+	public OrderDetail updateOrderDetail(Integer orderId, Integer goodsId, Integer detailQuantity) {
 
 		OrderDetail orderDetail = new OrderDetail();
 
 		orderDetail.setOrderId(orderId);
 		orderDetail.setGoodsId(goodsId);
 		orderDetail.setDetailQuantity(detailQuantity);
-		orderDetail.setDetailPrice(detailPrice);
 		dao.update(orderDetail);
 
 		return orderDetail;
 	}
 
-	public void deleteOrderDetail(Integer orderDetailno,Integer orderDetailno2) {
-		dao.delete(orderDetailno,orderDetailno2);
+	public void updateOrderDetail(OrderDetail orderDetail) {
+		dao.update(orderDetail);
 	}
 
-	public OrderDetail getOneOrderDetail(Integer orderDetailno,Integer orderDetailno2) {
-		return dao.getById(orderDetailno,orderDetailno2);
+	public void deleteOrderDetail(Integer orderDetailno, Integer orderDetailno2) {
+		dao.delete(orderDetailno, orderDetailno2);
 	}
 
-	public List<OrderDetail> getAll() {
-		return dao.getAll();
+	public OrderDetail getOneOrderDetail(Integer orderDetailno, Integer orderDetailno2) {
+		return dao.getById(orderDetailno, orderDetailno2);
+	}
+
+	public List<OrderDetail> getAll(Integer orderDetailno) {
+		return dao.getAll(orderDetailno);
 	}
 }
-

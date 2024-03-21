@@ -1,31 +1,34 @@
 package com.goods.model.Cart.pojo;
 
-public class Cart implements java.io.Serializable{
+import java.util.HashMap;
+
+public  class Cart implements java.io.Serializable {
+
+	private String userId;// 會員編號
+	private final HashMap<Integer, HashMap<Integer, CartItem>> storeMap = new HashMap();// 所有會員各店家的購物車
+	private Integer CartsTotalPrice;// 所有購物車的總金額
+
+	public Cart() {}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public Integer getCartsTotalPrice() {
+		return CartsTotalPrice;
+	}
+
+	public void setCartsTotalPrice(Integer cartsTotalPrice) {
+		CartsTotalPrice = cartsTotalPrice;
+	}
+
+	public HashMap<Integer, HashMap<Integer,CartItem >> getStoreMap() {
+		return storeMap;
+	}
+
 	
-	private Integer memId;
-	private Integer goodsId;
-	private Integer cartNum;
-	
-	public Cart() {
-		
-	}
-	
-	public Integer getMemId() {
-		return memId;
-	}
-	public void setMemId(Integer memId) {
-		this.memId = memId;
-	}
-	public Integer getGoodsId() {
-		return goodsId;
-	}
-	public void setGoodsId(Integer goodsId) {
-		this.goodsId = goodsId;
-	}
-	public Integer getCartNum() {
-		return cartNum;
-	}
-	public void setCartNum(Integer cartNum) {
-		this.cartNum = cartNum;
-	}	
 }

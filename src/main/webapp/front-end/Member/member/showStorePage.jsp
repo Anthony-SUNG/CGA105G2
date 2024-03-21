@@ -82,43 +82,117 @@
                         <!-- ==============訂閱按鈕開始====================== -->
                         <div class="subscribe_div" , style="margin-top: 10px;">
                             <c:if test="${subslist.size() == 0}">
-                                <form method="post" action="/CGA105G2/MyFavoriteServlet" name="">
-                                    <input type="hidden" name="subStoreId" value="${store.storeId}">
-                                    <input type="hidden" name="subMemId" value="${member.memId}">
-                                    <button class="button button-like" type="submit" onclick="insertSubs()"
-                                            id="insertSubs">
-                                        <i class="fa fa-heart"></i>
-                                        <span>訂閱店家</span>
-                                    </button>
-                                    <input type="hidden" name="action" value="insertSubs">
-                                </form>
+
+                                <input type="hidden" name="subStoreId" value="${store.storeId}"
+                                       id="storeId">
+                                <input type="hidden" name="subMemId" value="${member.memId}"
+                                       id="memId">
+                                <button class="button button-like insertSubs" type="button"
+                                        name="insertSubs" id="subsbutton">
+                                    <i class="fa fa-heart"></i> <span id="subscribe_store">訂閱店家</span>
+                                </button>
+
                             </c:if>
                             <c:if test="${subslist.size() != 0 }">
-                                <form method="post" action="/CGA105G2/MyFavoriteServlet" name="">
-                                    <input type="hidden" name="subStoreId" value="${store.storeId}" id="subStoreId">
-                                    <input type="hidden" name="subMemId" value="${member.memId}" id="subMemId">
-                                    <button class="button button-like liked" type="submit" onclick="deleteSubs()"
-                                            id="deleteSubs">
-                                        <i class="fa fa-heart"></i>
-                                        <span id="subscribe_store">已訂閱</span>
-                                    </button>
-                                    <input type="hidden" name="action" value="deleteSubsbyPage">
-                                </form>
+
+                                <input type="hidden" name="subStoreId" value="${store.storeId}"
+                                       id="storeId">
+                                <input type="hidden" name="subMemId" value="${member.memId}"
+                                       id="memId">
+                                <button class="button button-like liked deleteSubs"
+                                        type="button" name="deleteSubs" id="subsbutton">
+                                    <i class="fa fa-heart"></i> <span id="subscribe_store">已訂閱</span>
+                                </button>
+
+
                             </c:if>
-                            <!-- modal開啟後之背景 -->
-                            <div class="modal-overlay">
-                                <!-- modal開啟後之白底方格 -->
-                                <div class="modal-container">
-                                    <!-- modal內容 -->
-                                    <p class="subscription"
-                                       style="font-weight: 1000;color: aliceblue;margin-right: 10px;">從我的最愛移除</p>
-                                    <!-- 關閉按鈕 -->
-                                    <button class="close-btn">
-                                        <!-- 使用Font Awesome的Icon -->
-                                        <i class="fa-solid fa-x"></i>
-                                    </button>
+                            <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+                            <script>
+                                const subsbutton = document.querySelector('#subsbutton');
+                                subsbutton.addEventListener('click', (e) => {
+                                    if (subsbutton.classList.contains('insertSubs')) {
+                                        console.log('insertSubs');
+                                        $.ajax({
+                                            url: "/CGA105G2/MyFavoriteServlet",
+                                            type: "post",
+                                            data: {
+                                                storeId: $('#storeId').val(),
+                                                memId: $('#memId').val(),
+                                                action: 'insertSubsAjax',
+                                            },
+
+                                            success: function (data) {
+                                                console.log("test");
+                                                subsbutton.classList.toggle('insertSubs');
+                                                subsbutton.classList.toggle('deleteSubs');
+                                                return;
+                                            },
+                                            error: function (err) {
+                                                console.log(err)
+                                            },
+                                        });
+
+                                    }
+                                    if (subsbutton.classList.contains('deleteSubs')) {
+                                        console.log('deleteSubs');
+                                        $.ajax({
+                                            url: "/CGA105G2/MyFavoriteServlet",
+                                            type: "post",
+                                            data: {
+                                                storeId: $('#storeId').val(),
+                                                memId: $('#memId').val(),
+                                                action: 'deleteSubsAjax',
+                                            },
+
+                                            success: function (data) {
+                                                console.log("test");
+                                                subsbutton.classList.toggle('deleteSubs');
+                                                subsbutton.classList.toggle('insertSubs');
+                                                return;
+
+                                            },
+                                            error: function (err) {
+                                                console.log(err)
+                                            },
+                                        });
+                                    }
+                                    ;
+                                });
+                            </script>
+                            <c:if test="${subslist.size() == 0}">
+                                <!-- modal開啟後之背景 -->
+                                <div class="modal-overlay">
+                                    <!-- modal開啟後之白底方格 -->
+                                    <div class="modal-container">
+                                        <!-- modal內容 -->
+                                        <p class="subscription"
+                                           style="font-weight: 1000;color: aliceblue;margin-right: 10px;">
+                                            從我的最愛移除</p>
+                                        <!-- 關閉按鈕 -->
+                                        <button class="close-btn">
+                                            <!-- 使用Font Awesome的Icon -->
+                                            <i class="fa-solid fa-x"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            </c:if>
+                            <c:if test="${subslist.size() != 0}">
+                                <!-- modal開啟後之背景 -->
+                                <div class="modal-overlay">
+                                    <!-- modal開啟後之白底方格 -->
+                                    <div class="modal-container">
+                                        <!-- modal內容 -->
+                                        <p class="subscription"
+                                           style="font-weight: 1000;color: aliceblue;margin-right: 10px;">
+                                            已加入我的最愛</p>
+                                        <!-- 關閉按鈕 -->
+                                        <button class="close-btn">
+                                            <!-- 使用Font Awesome的Icon -->
+                                            <i class="fa-solid fa-x"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </c:if>
                         </div>
                         <!-- ================訂閱按鈕結束======================= -->
                     </div>
@@ -127,31 +201,45 @@
             <!-- ==========訂餐跟購物商城開始============= -->
             <div class="col-4 d-flex flex-column justify-content-end">
                 <div>
-                    <div>
-                        <a href="">
-                            <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/standby">
+                    <c:if test="${sts == 4}">
+                        <div>
+                            <FORM METHOD="post" ACTION="/CGA105G2/standby">
                                 <input type="hidden" name="foodorder_storeId" value="${store.storeId}">
-                                <input type="hidden" name="action" value="insertSta">
-                                <button id="store_standby" type="button" class="btn btn-success btn-block"
+                                <input type="hidden" name="action" value="instandby">
+                                <button id="store_standby" type="submit" class="btn btn-success btn-block"
                                         style="font-size:28px;border:0;">線上候位
                                 </button>
                             </FORM>
-                        </a>
-                    </div>
+                        </div>
+                    </c:if>
+                    <c:if test="${canopen > 0}">
+                        <div>
+                            <FORM METHOD="post"
+                                  ACTION="<%=request.getContextPath()%>/front-end/Member/food_order/food_order.do">
+                                <button id="store_order" type="submit" class="btn btn-success btn-block mt-5"
+                                        style="font-size:28px;border:0;background-color: #216a51;">立即訂位
+                                </button>
+                                <input type="hidden" name="action" value="Member_order_button">
+                                <input type="hidden" name="foodorder_storeId" value="${store.storeId}">
+                            </FORM>
+                        </div>
+                    </c:if>
                     <div>
-                        <FORM METHOD="post"
-                              ACTION="<%=request.getContextPath()%>/front-end/Member/food_order/food_order.do">
-                            <button id="store_order" type="submit" class="btn btn-success btn-block mt-5"
-                                    style="font-size:28px;border:0;background-color: #216a51;">立即訂位
+                        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/Member/goods/goods.do">
+                            <button id="store_shop" type="submit"
+                                    class="btn btn-success btn-block mt-5 mb-5"
+                                    style="font-size: 28px; border: 0; background-color: rgb(96, 96, 0);">查看購物商城
                             </button>
-                            <input type="hidden" name="action" value="Member_order_button">
-                            <input type="hidden" name="foodorder_storeId" value="${store.storeId}">
+                            <input type="hidden" name="action" value="getStoreId_For_Display">
+                            <input type="hidden" name="storeId" value="${store.storeId}">
                         </FORM>
                     </div>
                     <div>
-                        <a href="">
-                            <button id="store_shop" type="button" class="btn btn-success btn-block mt-5 mb-5"
-                                    style="font-size:28px;border:0;background-color: rgb(96, 96, 0);">查看購物商城
+                        <a class="todeepage"
+                           href="我發現FoodMap這間餐廳${article.store.storeName}好像不錯也 http://tibame.likktw.com:8081/CGA105G2/LonginServlet?action=StorePage&SearchstoreId=${store.storeId}">
+                            <button id="store_line" type="button" class="btn btn-success btn-block mt-5 mb-5"
+                                    style="font-size:28px;border:0;background-color: rgb(96, 96, 0);">
+                                分享到Line
                             </button>
                         </a>
                     </div>
@@ -279,17 +367,22 @@
                                                      src="https://i.pinimg.com/564x/07/c4/72/07c4720d19a9e9edad9d0e939eca304a.jpg"
                                                      alt="" style="width:60px;"/>
                                             </c:if>
-                                            <a href="/CGA105G2/LonginServlet?action=MemberPage&SearchMemberId=${articlelist.member.memId}">
-                                                <div class="col-12 d-flex flex-column"><span
-                                                        class="name font-weight-bold">${articlelist.member.memName}</span><span><fmt:formatDate
-                                                        value="${articlelist.artTime}" pattern="yyyy-MM-dd"/></span>
-                                                </div>
-                                            </a>
-                                            <c:if test="${not empty articlelist.artTag}">
-                                        <span
-                                                style="font-size: 20px;padding: 8px 12px;border-radius:15px ;margin-left: 10px;background-color: rgb(82, 206, 156);color: white;line-height:25px;height:40px;margin-top:10px">#${articlelist.artTag}
+                                            <c:if test="${member.memId == articlelist.member.memId}">
+                                            <a href="<%=request.getContextPath()%>/front-end/Member/art/listArt.jsp">
+                                                </c:if>
+                                                <c:if test="${member.memId != articlelist.member.memId}">
+                                                <a href="/CGA105G2/LonginServlet?action=MemberPage&SearchMemberId=${articlelist.member.memId}">
+                                                    </c:if>
+                                                    <div class="col-12 d-flex flex-column"><span
+                                                            class="name font-weight-bold">${articlelist.member.memName}</span><span><fmt:formatDate
+                                                            value="${articlelist.artTime}" pattern="yyyy-MM-dd"/></span>
+                                                    </div>
+                                                </a>
+                                                <c:if test="${not empty articlelist.artTag}">
+                                                <span
+                                                        style="font-size: 20px;padding: 8px 12px;border-radius:15px ;margin-left: 10px;background-color: rgb(82, 206, 156);color: white;line-height:25px;height:40px;margin-top:10px">#${articlelist.artTag}
                                         </span>
-                                            </c:if>
+                                                </c:if>
                                         </div>
                                         <!-- =================評分====================== -->
                                         <div style="padding-left:10px;font-size: 15px; ">
@@ -343,7 +436,6 @@
 </script>
 <!--     ===================google地圖結束======================== -->
 <script>
-    $("a:contains(🌟)").closest("a").addClass("active disabled topage");
     $(document).ready(function () {
         new ClipboardJS('.btn');
     });
@@ -355,6 +447,16 @@
 </script>
 <script src="/CGA105G2/assets/js/Storepage.js"></script>
 <script src="https://kit.fontawesome.com/2c6d23848b.js" crossorigin="anonymous"></script>
+<script>
+    <%--    將line分享連結轉utf-8--%>
+    $(document).ready(function () {
+        $(".todeepage").each(function () {
+            let href = $(this).attr("href");
+            const encodedHref = "https://line.me/R/share?text=" + encodeURIComponent(href) + "&from=line_scheme";
+            $(this).attr("href", encodedHref);
+        })
+    })
+</script>
 </body>
 
 </html>

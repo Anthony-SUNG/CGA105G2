@@ -20,7 +20,7 @@
         <!-- nav end -->
         <div class="container mt-17 mb-17">
             <div class="col-md-9  card shadow m-5">
-                <h1 class=" m-5 text-center">綠界支付</h1>
+                <h1 class=" m-5 text-center">付款方式</h1>
                 <form id="idFormAioCheckOut" METHOD="post"
                       action="${pageContext.request.contextPath}/front-end/Member/food_order/food_order.do"
                       style="padding: 10px 100px;">
@@ -46,7 +46,7 @@
                             class="form-control"/>
                     <input type="hidden" name="ChoosePayment" value="ALL"/>
                     <input type="hidden" name="action" value="ecpay"/>
-                    <button type="submit" class="btn btn-warning mb-1 btn-block fs-5 mb-10">綠界線上支付</button>
+                    <button type="submit" class="btn btn-warning mb-1 btn-block fs-5 mb-10">信用卡線上支付</button>
                 </form>
             </div>
         </div>

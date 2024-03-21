@@ -112,14 +112,15 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-uppercase" data-toggle="none"
-                                   href="/CGA105G2/front-end/Member/point/listPoint.jsp">
+                                   href="/CGA105G2/front-end/Member/point/listPointGood.jsp">
                                     💰point
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-uppercase" data-toggle="none"
-                                   href="/CGA105G2/BlankPage/Loader2.jsp">
-                                    🛒
+                             <a class="nav-link text-uppercase showCart" data-toggle="none" href="/CGA105G2/front-end/Member/goods/Member_cart.jsp">
+                                    🛒<span id="cartIcon" style="display: none">0</span>
+                                    <span style="display: none">${goods.goodsId}</span>
+                                    <span style="display: none">${goods.storeId}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -162,6 +163,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
+
+<!-- sweetalert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <!-- stickey bar: -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
 <script>
@@ -171,11 +175,6 @@
         containerSelector: ".container",
         innerWrapperSelector: ".sidebar__inner"
     });
-    $(document).ready(function () {
-        new ClipboardJS('.btn');
-    });
 </script>
-<!-- sweetalert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
 </html>

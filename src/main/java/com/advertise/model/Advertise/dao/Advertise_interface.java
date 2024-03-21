@@ -11,6 +11,7 @@ public interface Advertise_interface {
     public void update(Advertise advertiseVO);
     public void delete(Integer advId);
     public Advertise getByAdvId(Integer advId);
+    public Advertise getByStoreId(Integer storeId);
     public List<Advertise> getByStatus(Integer advStatus);
     public List<Advertise> getAll();
 }

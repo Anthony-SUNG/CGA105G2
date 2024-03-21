@@ -7,9 +7,7 @@ import java.util.List;
 
 public interface CodeDAO_interface extends CoreDao<Code,Integer> {
     List<Integer> getCodeId(String codeNum, Integer storeId);
-
     List<Code> getBy(Integer id, String string);
-
 
     List<Integer> getBycodeNum(String codeNum, Integer storeId);
 }

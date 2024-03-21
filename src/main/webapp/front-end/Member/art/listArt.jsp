@@ -102,24 +102,21 @@
             <div class="container my-5">
                 <div class="profile-header">
                     <div class="profile-header-cover"
-                         style="background: url(images/ex2.jpg);"></div>
+                         style="background: url(../webapp/assets/images/ex2.jpg);"></div>
                     <div class="profile-header-content">
                         <div class="profile-header-img mb-1">
                             <c:if test="${not empty member.memPic}">
-                                <img src="${pageContext.request.contextPath}/LonginServlet?action=getOtherMemberPhoto&memId=${member.memId}"/>
+                                <img src="${pageContext.request.contextPath}/LonginServlet?action=getOtherMemberPhoto&memId=${member.memId}" style="width:100%;height:100%;'"/>
                             </c:if>
                             <c:if test="${empty member.memPic}">
                                 <img src="https://i.pinimg.com/564x/07/c4/72/07c4720d19a9e9edad9d0e939eca304a.jpg"/>
                             </c:if>
                         </div>
-                        <div class="profile-header-info">
-                            <div style="display: flex;">
-                                <h3 class="m-t-sm mt-5"
+                        <div style="display: flex;">
+                                <h3 class="m-t-sm mt-5" id="row"
                                     style="font-weight: 1000;font-size: 33px;">${member.memName}</h3>
                                 <p class="m-t-sm mt-7 ml-4" style="color: rgb(215, 235, 68);">@${member.memAcc}</p>
                             </div>
-                            <button class="btn btn-sm btn-primary mb-4 " style="font-size: 17px;">聊天室</button>
-                        </div>
                     </div>
                 </div>
                 <div class="container bg-white mt-10 p-8">
@@ -275,6 +272,33 @@
     }
 </script>
 <!-- ==========================button特效結束======================= -->
+<script>
+    function addCupAlert() {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-outline-primary m-5 fs-5',
+            },
+            buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+            position: 'middle',
+            icon: 'success',
+            title: '完成評論，獲得10點',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+
+    let toResult = null;
+    toResult =
+    <%= request.getAttribute("toResult") %>
+    if (toResult == true) {
+        // alert(toResult);
+        addCupAlert();
+        toResult = null;
+    }
+    ;
+</script>
 <!-- stickey bar: -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>
 <script>

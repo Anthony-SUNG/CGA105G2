@@ -1,6 +1,11 @@
 package com.advertise.model.Advertise.pojo;
 
 import javax.persistence.*;
+
+import com.emp.model.service.EmployeeService;
+import com.store.model.Store.pojo.Store;
+import com.store.model.service.StoreService;
+
 import java.sql.Date;
 
 
@@ -168,5 +173,12 @@ public class Advertise implements java.io.Serializable{
   public void setAdvNtime(java.sql.Date advNtime) {
     this.advNtime = advNtime;
   }
+
+  public Store getStore() {
+	  StoreService storeSvc = new StoreService();
+	  return storeSvc.getById(storeId);
+
+  }
+
 
 }

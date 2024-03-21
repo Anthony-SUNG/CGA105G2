@@ -18,7 +18,7 @@
         <!-- nav start -->
         <%@ include file="/front-end/store/01h/nav/navin01.jsp" %>
         <!-- nav end -->
-        <main role="main" class="col-md-9">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 my-5">
             <div class="table-responsive" style="overflow: hidden !important;">
                 <h1 class="h2">🔆訂位預約</h1>
                 <table id="code" class="table table-striped display" style="text-align:center;">
@@ -55,10 +55,8 @@
             data: data_test,
             // 設定資料欄位區塊(columns),
             "columns": [
-                {data: null, title: ""},
+            	{data: 'OW', title: "OW"},
                 {data: 'REN_ID', title: "訂單編號"},
-                {data: 'MEM_NAME', title: "會員姓名"},
-                {data: 'MEM_PHONE', title: "會員電話"},
                 {data: 'REN_NAME', title: "姓名"},
                 {data: 'REN_PHONE', title: "電話"},
                 {data: 'REN_DATE', title: "日期"},
@@ -73,47 +71,41 @@
             ],
             "columnDefs": [
                 {
-                    targets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], // 第一欄
+                    targets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], // 第一欄
+                    className: "dt-head-center",
                     createdCell: function (cell, cellData, rowData, rowIndex, colIndex) {
                         if (colIndex === 0) {
                             i = i + 1;
-                            cell.innerHTML = `\${i}`
                             cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 1) {
-                            cell.setAttribute('style', `width:5%`);
+                            cell.setAttribute('style', `width:8%`);
                         }
                         if (colIndex === 2) {
-                            cell.setAttribute('style', `width:5%`);
+                            cell.setAttribute('style', `width:8%`);
                         }
                         if (colIndex === 3) {
                             cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 4) {
-                            cell.setAttribute('style', `width:5%`);
+                            cell.setAttribute('style', `width:10%`);
                         }
                         if (colIndex === 5) {
                             cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 6) {
-                            cell.setAttribute('style', `width:15%`);
+                            cell.setAttribute('style', `width:10%`);
                         }
                         if (colIndex === 7) {
-                            cell.setAttribute('style', `width:5%`);
+                            cell.setAttribute('style', `width:15%`);
                         }
                         if (colIndex === 8) {
                             cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 9) {
-                            cell.setAttribute('style', `width:20%`);
+                            cell.setAttribute('style', `width:5%`);
                         }
                         if (colIndex === 10) {
-                            cell.setAttribute('style', `width:5%`);
-                        }
-                        if (colIndex === 11) {
-                            cell.setAttribute('style', `width:5%`);
-                        }
-                        if (colIndex === 12) {
                             cell.innerHTML = `
                               <FORM METHOD="post" ACTION="food_order.do" >
                                 <input type="hidden" name="deleteid" value="\${data_test[i-1].REN_ID}">
@@ -121,7 +113,7 @@
                                 <input type="submit" class="btn btn-danger btn-sm" value="取消">
                               </FORM>
                            `;
-                            cell.setAttribute('style', `width:15%`);
+                            cell.setAttribute('style', `width:10%`);
                         }
                     }
                 },
@@ -146,7 +138,7 @@
             scrollCollapse: false, // 預設為false 是否開始滾軸功能控制X、Y軸
             scrollX: false,
             scrollY: false,
-            "dom": "<'row justify-content-start ml-0'f>" + "<'eight wide column'l>" + 'lrtip', // 設置搜尋div、頁碼div...等基本位置/外觀..等，詳細可看官網
+            "dom": "<'col-xs-6'f>" + "<'eight wide column'l>" + 'lrtip', // 設置搜尋div、頁碼div...等基本位置/外觀..等，詳細可看官網
             // 語言區塊(language),
             language: {
                 lengthMenu: "顯示 MENU 筆資料",
@@ -156,7 +148,7 @@
                 sInfoEmpty: "目前共有 0 筆紀錄",
                 sInfoFiltered: " ",
                 sInfoPostFix: "",
-                sSearch: "收尋",
+                sSearch: "搜尋",
                 sUrl: "",
                 sEmptyTable: "尚未有資料紀錄存在",
                 sLoadingRecords: "載入資料中...",

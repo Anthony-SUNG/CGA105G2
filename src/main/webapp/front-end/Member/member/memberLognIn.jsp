@@ -94,8 +94,8 @@
                                             <div class="form-group mb-3">
                                                 <label class="label" for="name">Username</label>
                                                 <input id="name" name="MEM_ACC" type="text" class="form-control"
-                                                       placeholder="Username"
-                                                       value="<%= (member==null)?  " " : member.getMemAcc()%>">
+                                                       placeholder="Useracc"
+                                                       value="<%=(member==null)?"":member.getMemAcc()%>">
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label class="label" for="password">Password</label>
@@ -105,8 +105,7 @@
                                             <div class="form-group">
                                                 <input type="hidden" name="action" value="Signinm">
                                                 <button type="submit"
-                                                        class="form-control btn btn-primary rounded submit px-3">Sign
-                                                    In
+                                                        class="form-control btn btn-primary rounded submit px-3">Sign In
                                                 </button>
                                             </div>
                                             <div class="form-group d-md-flex">
@@ -153,9 +152,8 @@
                                               action="${pageContext.request.contextPath}/LonginServlet" name="signins">
                                             <div class="form-group mb-3">
                                                 <label class="label" for="name">Username</label>
-                                                <input type="text" class="form-control" placeholder="Username"
-                                                       name="STORE_ACC"
-                                                       value="<%= (store==null)?  " " : store.getStoreAcc()%>">
+                                                <input type="text" class="form-control" placeholder="Useracc"
+                                                       name="STORE_ACC" value="${storeacc}">
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label class="label" for="password">Password</label>

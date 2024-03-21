@@ -176,7 +176,7 @@
                         <div class="poststore_text"
                              style="margin-left: 5px; align-items: center; display: flex;">
 								<span class="post_name"
-                                      style="font-size: 30px; font-weight: 1000;">${StoreName}</span>
+                                      style="font-size: 30px; font-weight: 1000;">${store.storeName}</span>
                         </div>
                     </div>
                     <!-- ===================店家評分星星================== -->
@@ -186,7 +186,7 @@
                         <div class="rating-wrapper pt-3">
                             <div>
                                 <input type="hidden" name="memId" value="${member.memId}">
-                                <input type="hidden" name="storeId" value="${sid}">
+                                <input type="hidden" name="storeId" value="${store.storeId}">
                                 <input type="hidden" name="pointChange" value="完成訂單評論">
                                 <input type="hidden" name="pointNumber" value="10">
                                 <span style="font-size: 22px; font-weight: 600; background-color: antiquewhite; margin-left: 20px; line-height: 60px;"></span>
@@ -242,10 +242,9 @@
                                        class="form-control" style="width: 100%; margin: 20px 0px;">
                             </div>
                             <div class="mb-5">
-                                <input type="text" placeholder="給店家的評語" name="artText" id="tb22_comment"
-                                       value="<%= (article==null)? "" : article.getArtText()%>"
-                                       style="width: 100%; height: 150px;"
-                                       class="form-control">
+                                <textarea class="form-control" name="artText"
+                                          placeholder="給店家的評語" style="width: 100%; height: 150px;"
+                                          id="tb22_comment"><%= (article==null)? "" : article.getArtText()%></textarea>
                             </div>
                         </div>
                         <!-- ==============插入圖片開始================= -->

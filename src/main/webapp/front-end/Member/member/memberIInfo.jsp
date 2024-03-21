@@ -56,10 +56,10 @@
                                             <hr class="mx-n3">
                                             <div class="row align-items-center pt-4 pb-3">
                                                 <div class="col-md-3 ps-5">
-                                                    <h4 class="mb-0">帳號名稱</h4>
+                                                    <h4 class="mb-0">帳號</h4>
                                                 </div>
                                                 <div class="col-md-9 pe-5">
-                                                    <input type="text" name="MEM_ACC"
+                                                    <input type="text" name="MEM_ACC" readonly="readonly"
                                                            class="form-control form-control-lg"
                                                            id="memberr-accountid" value=${ Member.memAcc }>
                                                 </div>
@@ -70,7 +70,7 @@
                                                     <h4 class="mb-0">真實姓名</h4>
                                                 </div>
                                                 <div class="col-md-9 pe-5">
-                                                    <input type="text" name="MEM_RECIPIENT"
+                                                    <input type="text" name="MEM_RECIPIENT" readonly="readonly"
                                                            class="form-control form-control-lg"
                                                            id="memberr-recipient" value=${ Member.memRecipient }>
                                                 </div>
@@ -92,7 +92,7 @@
                                                     <h4 class="mb-0">出生日期</h4>
                                                 </div>
                                                 <div class="col-md-9 pe-5">
-                                                    <input type="date" name="MEM_BIRTHDAY"
+                                                    <input type="date" name="MEM_BIRTHDAY" readonly="readonly"
                                                            class="form-control form-control-lg"
                                                            id="memberr-birthday" value=${ Member.memBirthday }>
                                                 </div>

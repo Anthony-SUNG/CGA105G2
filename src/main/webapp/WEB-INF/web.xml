@@ -8,64 +8,71 @@
 	additional features that make it a useful platform for developing and deploying 
 	web applications and web services. -->
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
-	id="WebApp_ID" version="4.0">
-	<!-- <display-name>Archetype Created Web Application</display-name> -->
-	<display-name>CGA105G2</display-name>
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         id="WebApp_ID" version="4.0">
+    <!-- <display-name>Archetype Created Web Application</display-name> -->
+    <display-name>CGA105G2</display-name>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 
-	<resource-ref>
-		<description>DB Connection</description>
-		<res-ref-name>jdbc/TestDB</res-ref-name>
-		<res-type>javax.sql.DataSource</res-type>
-		<res-auth>Container</res-auth>
-	</resource-ref>
+    <resource-ref>
+        <description>DB Connection</description>
+        <res-ref-name>jdbc/TestDB</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
 
-	<!-- 此處設定創建.jsp檔案時候，宣告為UTF8 -->
-	<jsp-config>
-		<jsp-property-group>
-			<url-pattern>*.jsp</url-pattern>
-			<page-encoding>UTF-8</page-encoding>
-			<default-content-type>text/html</default-content-type>
-		</jsp-property-group>
-	</jsp-config>
+    <!-- 此處設定創建.jsp檔案時候，宣告為UTF8 -->
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+            <default-content-type>text/html</default-content-type>
+        </jsp-property-group>
+    </jsp-config>
 
-	<error-page>
-		<error-code>404</error-code>
-		<location>/BlankPage/Loader2.jsp</location>
-	</error-page>
-	<error-page>
-		<error-code>500</error-code>
-		<location>/BlankPage/Loader3.jsp</location>
-	</error-page>
-
-
-	<servlet>
-		<servlet-name>PointServlet</servlet-name>
-		<servlet-class>com.point.contorller.PointServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>PointServlet</servlet-name>
-		<url-pattern>/front-end/Member/point/point.do</url-pattern>
-	</servlet-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/BlankPage/Loader2.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/BlankPage/Loader3.jsp</location>
+    </error-page>
 
 
-	<filter>
-		<filter-name>SetCharacterEncodingFilter</filter-name>
-		<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>characterEncoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>SetCharacterEncodingFilter</filter-name>
-		<url-pattern>*.jsp</url-pattern>
-	</filter-mapping>
+    <servlet>
+        <servlet-name>PointServlet</servlet-name>
+        <servlet-class>com.point.contorller.PointServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PointServlet</servlet-name>
+        <url-pattern>/front-end/Member/point/point.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PointServlet</servlet-name>
+        <url-pattern>/back-end/pointgood/point.do</url-pattern>
+    </servlet-mapping>
+
+
+
+
+
+    <filter>
+        <filter-name>SetCharacterEncodingFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>characterEncoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>SetCharacterEncodingFilter</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
 
 
 </web-app>

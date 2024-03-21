@@ -31,40 +31,40 @@
                                         <div class="container">
                                             <div class="card-deck mb-3 text-center">
                                                 <c:if test="${storeplan == 1}">
-                                                <div class="card mb-4 box-shadow">
-                                                    <div class="card-header">
-                                                        <h4 class="my-0 font-weight-normal">基礎方案</h4>
+                                                    <div class="card mb-4 box-shadow">
+                                                        <div class="card-header">
+                                                            <h4 class="my-0 font-weight-normal">基礎方案</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h1 class="card-title pricing-card-title">
+                                                                $1,000 <small class="text-muted">/ 月</small>
+                                                            </h1>
+                                                            <ul class="list-unstyled mt-3 mb-4">
+                                                                <li>開啟訂位/候位功能</li>
+                                                                <li>開啟商城功能</li>
+                                                                <li>開啟優惠券功能</li>
+                                                                <li><br></li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                    <div class="card-body">
-                                                        <h1 class="card-title pricing-card-title">
-                                                            $1,000 <small class="text-muted">/ 月</small>
-                                                        </h1>
-                                                        <ul class="list-unstyled mt-3 mb-4">
-                                                            <li>開啟訂位/候位功能</li>
-                                                            <li>開啟商城功能</li>
-                                                            <li>開啟優惠券功能</li>
-                                                            <li><br></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
                                                 </c:if>
                                                 <c:if test="${storeplan == 2}">
-                                                <div class="card mb-4 box-shadow">
-                                                    <div class="card-header">
-                                                        <h4 class="my-0 font-weight-normal">高級方案</h4>
+                                                    <div class="card mb-4 box-shadow">
+                                                        <div class="card-header">
+                                                            <h4 class="my-0 font-weight-normal">高級方案</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h1 class="card-title pricing-card-title">
+                                                                $5,000<small class="text-muted">/ 月</small>
+                                                            </h1>
+                                                            <ul class="list-unstyled mt-3 mb-4">
+                                                                <li>開啟訂位/候位功能</li>
+                                                                <li>開啟商城功能</li>
+                                                                <li>開啟優惠券功能</li>
+                                                                <li style="color: red">開啟推播功能</li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                    <div class="card-body">
-                                                        <h1 class="card-title pricing-card-title">
-                                                            $5,000<small class="text-muted">/ 月</small>
-                                                        </h1>
-                                                        <ul class="list-unstyled mt-3 mb-4">
-                                                            <li>開啟訂位/候位功能</li>
-                                                            <li>開啟商城功能</li>
-                                                            <li>開啟優惠券功能</li>
-                                                            <li style="color: red">開啟推播功能</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
                                                 </c:if>
                                                 <c:if test="${storeplan == 3}">
                                                     <div class="card mb-4 box-shadow">
@@ -81,23 +81,16 @@
                                                                 <li>開啟優惠券功能</li>
                                                                 <li style="color: red">開啟廣告功能</li>
                                                             </ul>
-                                                            <Form method="post"
-                                                                  action="${pageContext.request.contextPath}/LonginServlet">
-                                                                <input type="hidden" name="action" value="ecpay">
-                                                                <input type="hidden" name="planMoney" value=10000>
-                                                                <input type="hidden" name="plan" value=2>
-                                                                <button type="submit"
-                                                                        class="btn btn-lg btn-block btn-primary align-bottom">
-                                                                    上傳廣告
-                                                                </button>
-                                                            </Form>
+                                                            <input type="button" value="上傳廣告"
+                                                                   onclick="location.href='/CGA105G2/front-end/store/advertise/Advertise_upload.jsp'"
+                                                                   class="btn btn-lg btn-block btn-primary align-bottom">
                                                         </div>
                                                     </div>
                                                 </c:if>
-                                                <c:if test="${planday == 4}">
+                                                <c:if test="${planday >= 1}">
                                                     <input type="button" value="變更次月方案"
                                                            onclick="location.href='/CGA105G2/front-end/store/Login/forgetplan.jsp'"
-                                                            class="btn btn-lg btn-block btn-primary align-bottom">
+                                                           class="btn btn-lg btn-block btn-primary align-bottom">
                                                 </c:if>
                                             </div>
                                         </div>

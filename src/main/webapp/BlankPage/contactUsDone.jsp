@@ -21,7 +21,7 @@
                     <div class="col-12 col-lg-12 mb-14 mb-lg-0 text-center card shadow-lg">
                         <div class="p-5 m-5">
                             <h1>感謝你的意見</h1> <br>
-                            <span id="count"></span><span>秒後跳轉至上頁</span>
+                            <span  id="count"></span><span>秒後跳轉至上頁</span>
                             <a href="./contactUs.jsp" class="btn btn-block btn-primary my-5">或點此回上一頁</a>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
         </section>
     </main>
 </div>
-<canvas height="200"></canvas>
+ <canvas height = "200"></canvas>
 <!-- main -->
 <!-- footer start -->
 <%@ include file="/back-end/01h/footerin.jsp" %>
@@ -41,7 +41,6 @@
     $("a:contains(📭聯繫我們)").closest("a").addClass("active disabled topage");
     //設定倒數秒數
     let t = 5;
-
     //顯示倒數秒數
     function showTime() {
         t -= 1;

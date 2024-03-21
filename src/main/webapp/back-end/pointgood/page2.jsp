@@ -3,6 +3,7 @@
   <%if (rowsPerPage<rowNumber) {%>
   
     <%if(pageIndex>=rowsPerPage){%>
+    	<li class="page-item"><a class="page-link" href="<%=request.getRequestURI()%>?whichPage=1">至第一頁 </a></li> &nbsp;
         <li class="page-item"><a class="page-link" href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>">上一頁 </a></li> &nbsp;
     <%}%>
     

@@ -1,12 +1,12 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.*" %>
-<%@ page import="com.point.model.PointOrder.pojo.PointOrder" %>
-<%@ page import="com.point.model.service.PointOrderService" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.point.model.PointOrder.pojo.PointOrder"%>
+<%@ page import="com.point.model.service.PointOrderService"%>
 <%
-    PointOrderService pointorderSvc = new PointOrderService();
-    List<PointOrder> list = pointorderSvc.getBackOrder();
-    pageContext.setAttribute("list", list);
+	PointOrderService pointorderSvc = new PointOrderService();
+	List<PointOrder> list = pointorderSvc.getBackOrder();
+    pageContext.setAttribute("list",list);
 %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -76,10 +76,9 @@
                             <th>編號</th>
                             <th>會員編號</th>
                             <th>商品編號</th>
-                            <th>單價</th>
+                            <th>點數</th>
                             <th>備註</th>
                             <th>新增日期</th>
-                            <th>員工編號</th>
                             <th>點擊出貨</th>
                         </tr>
                         </thead>
@@ -92,9 +91,8 @@
                                 <td>${PointOrder.poPrice}</td>
                                 <td>${PointOrder.poText}</td>
                                 <td>${PointOrder.poTime}</td>
-                                <td>${PointOrder.empId}</td>
                                 <td>
-                                    <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/PointServlet">
+                                    <FORM METHOD="post" ACTION="point.do">
                                         <input type="hidden" name="poId" value=${PointOrder.poId}>
                                         <input type="hidden" name="poStatus" value=1>
                                         <input type="hidden" name="action" value="updateOrder">

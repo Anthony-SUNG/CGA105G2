@@ -1,6 +1,10 @@
 package com.order.model.Order.pojo;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Order implements java.io.Serializable{
@@ -33,6 +37,11 @@ public class Order implements java.io.Serializable{
 
   public Order() {
   }
+  public com.member.model.Member.pojo.Member getMember() {
+	     com.member.model.service.MemberService memberService = new com.member.model.service.MemberService();
+	     com.member.model.Member.pojo.Member member = memberService.getById(memId);
+		 return member;
+	  }
 
   public Integer getOrderId() {
     return orderId;

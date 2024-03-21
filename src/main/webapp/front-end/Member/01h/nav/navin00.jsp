@@ -7,7 +7,7 @@
     <div class="p-4 pt-5">
         <ul class="list-unstyled components mb-5">
             <li class="my-4">
-                <a href="/CGA105G2/front-end/Member/member/Member.jsp">
+                <a href="/CGA105G2/index.jsp">
                     <h2>Home</h2>
                 </a>
             </li>

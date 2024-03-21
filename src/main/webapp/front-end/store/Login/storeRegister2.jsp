@@ -36,9 +36,9 @@
                                                     <h3 class="mb-0">店家名稱</h3>
                                                 </div>
                                                 <div class="col-md-9 pe-5">
-                                                    <input type="text" class="form-control form-control-lg"
+                                                    <input type="text" class="form-control form-control-lg" readonly
                                                            id="memberstore-storename" name="STORE_NAME"
-                                                           value=${Store.storeName} disabled/>
+                                                           value="${Store.storeName}" >
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -49,29 +49,27 @@
                                                 <div class="col-md-9 pe-5">
                                                     <div class="js-demeter-tw-zipcode-selector" data-city="#city"
                                                          data-dist="#dist">
-                                                        <select id="city"
-                                                                placeholder=${ Store.storeCity}      name="STORE_CITY"
-                                                                disabled></select>
-                                                        <select id="dist"
-                                                                placeholder=${ Store.storeDistrict}  name="STORE_DISTRICT"
-                                                                disabled></select>
+                                                        <select id="city" disabled
+                                                                placeholder="${Store.storeCity}"      name="STORE_CITY"></select>
+                                                        <select id="dist" disabled
+                                                                placeholder="${Store.storeDistrict}"  name="STORE_DISTRICT"></select>
                                                     </div>
-                                                    <input type="text" class="form-control form-control-lg"
+                                                    <input type="text" class="form-control form-control-lg" readonly
                                                            id="memberstore-address" name="STORE_ADDRESS"
-                                                           value=${ Store.storeAddress }/>
+                                                           value="${ Store.storeAddress}">
                                                     <a style="color: red">${ errorMsgs.STORE_ADDRESS}</a>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
-                                            <div class="row align-items-center pt-4 pb-3">
+                                            <div class="row align-items-center pt-4 pb-3 ">
                                                 <div class="col-md-3 ps-5">
-                                                    <h3 class="mb-0">帳號名稱</h3>
+                                                    <h3 class="mb-0">帳號</h3>
                                                 </div>
                                                 <div class="col-md-9 pe-5">
-                                                    <input type="text" class="form-control form-control-lg"
+                                                    <input type="text" class="form-control form-control-lg" readonly
                                                            id="memberstore-accountid" name="STORE_ACC"
-                                                           value=${ Store.storeAcc }/> <a
-                                                        style="color: red">${ errorMsgs.STORE_ACC}</a>
+                                                           value="${Store.storeAcc}">
+                                                    <a style="color: red">${ errorMsgs.STORE_ACC}</a>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -94,8 +92,8 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" class="form-control form-control-lg"
                                                            id="memberstore-taxid" name="STORE_COM_ID"
-                                                           value=${ Store.storeComId }/> <a
-                                                        style="color: red">${ errorMsgs.STORE_COM_ID}</a>
+                                                           value="${ Store.storeComId }">
+                                                    <a style="color: red">${ errorMsgs.STORE_COM_ID}</a>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -106,7 +104,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" class="form-control form-control-lg"
                                                            id="memberstore-phonenumber" name="STORE_PHONE1"
-                                                           value=${ Store.storePhone1 }/>
+                                                           value="${ Store.storePhone1 }">
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -117,7 +115,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="email" class="form-control form-control-lg"
                                                            placeholder="example@example.com" id="email"
-                                                           name="STORE_MAIL" value=${ Store.storeMail }/> <a
+                                                           name="STORE_MAIL" value="${ Store.storeMail }"> <a
                                                         style="color: red">${ errorMsgs.STORE_MAIL}</a>
                                                 </div>
                                             </div>
@@ -141,7 +139,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" class="form-control form-control-lg"
                                                            id="storeurl" name="STORE_URL"
-                                                           value=${ Store.storeUrl }/>
+                                                           value="${ Store.storeUrl }">
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -152,7 +150,7 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" class="form-control form-control-lg"
                                                            id="storeweb" name="STORE_WEB"
-                                                           value=${ Store.storeWeb }/>
+                                                           value="${ Store.storeWeb }">
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -164,8 +162,8 @@
                                                     <input type="text" class="form-control form-control-lg"
                                                            placeholder="Holder's Name" id="memberstore-name"
                                                            name="STORE_COM_ADDRESS"
-                                                           value=${ Store.storeComAddress }/>
-                                                    <a style="color: red">${ errorMsgs.STORE_COM_ADDRESS}</a>
+                                                           value="${Store.storeComAddress }">
+                                                    <a style="color: red">${errorMsgs.STORE_COM_ADDRESS}</a>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -176,8 +174,8 @@
                                                 <div class="col-md-9 pe-5">
                                                     <input type="text" class="form-control form-control-lg"
                                                            placeholder="Holder's Phone" id="memberstore-phone"
-                                                           name="STORE_PHONE2" value=${ Store.storePhone2 }/>
-                                                    <a style="color: red">${ errorMsgs.STORE_PHONE2}</a>
+                                                           name="STORE_PHONE2" value=${Store.storePhone2 }>
+                                                    <a style="color: red">${errorMsgs.STORE_PHONE2}</a>
                                                 </div>
                                             </div>
                                             <hr class="mx-n3">
@@ -189,7 +187,7 @@
                                                     <input type="text" class="form-control form-control-lg"
                                                            placeholder="Holder's Identity Card"
                                                            id="memberstore-identitycard" name="STORE_TW_ID"
-                                                           value=${ Store.storeTwId }/>
+                                                           value="${ Store.storeTwId }">
                                                     <a style="color: red">${ errorMsgs.STORE_TW_ID}</a>
                                                 </div>
                                             </div>
@@ -222,6 +220,7 @@
         <%@ include file="/front-end/store/01h/footerin.jsp" %>
         <!-- footer end -->
         <!-- sidebar menu Class -->
+        <script src="https://demeter.5fpro.com/tw/zipcode-selector.js"></script>
         <script>
             $("a:contains(🗃️管理)").closest("a").addClass("active disabled topage");
             $("a:contains(🔻帳號管理)").closest("a").attr("data-toggle", "show");

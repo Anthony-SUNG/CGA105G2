@@ -1,13 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.*" %>
-<%@ page import="com.point.model.Point.pojo.Point" %>
-<%@ page import="com.point.model.service.PointService" %>
-<%
-    PointService pointSvc = new PointService();
-    List<Point> list = pointSvc.getAll();
-    pageContext.setAttribute("list", list);
-%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -59,8 +51,17 @@
         <!-- nav end -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 p-0">
             <section class="py-5">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2 mt-5">🔆點數查詢</h1>
+                <div
+                        class="d-flex justify-content-between flex-wrap flex-md-nofjoewrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2 mt-5">💰剩餘點數<span
+                            class="lrp_text_count">${Member.memPoint} <dfn>points</dfn></span></h1>
+                    </Form>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group mr-2">
+                            <!--                             <button type="button" class="btn btn-sm btn-outline-info">Share</button> -->
+                            <!--                             <button type="button" class="btn btn-sm btn-outline-info">Export</button> -->
+                        </div>
+                    </div>
                 </div>
                 <div class="table-responsive ">
                     <table class="table table-striped ">
@@ -80,7 +81,8 @@
                         </tbody>
                     </table>
                 </div>
-                <canvas class="my-4 w-100" id="myChart" width="900" height="150"></canvas>
+                <canvas class="my-4 w-100" id="myChart" width="900" height="150">
+                </canvas>
             </section>
             <br>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">

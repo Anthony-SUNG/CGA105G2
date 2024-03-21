@@ -208,7 +208,6 @@
     $(document).ready(function () {
         new ClipboardJS('.btn');
     });
-    $("a:contains(🌟)").closest("a").addClass("active disabled topage");
 </script>
 <!-- stickey bar: -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js"></script>

@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
                                         <input type="text" disabled class="form-control form-control-lg"
-                                               id="memberstore-storename" name="STORE_NAME" value=${Store.storeName}>
+                                               id="memberstore-storename" name="STORE_NAME" value="${Store.storeName}">
                                     </div>
                                 </div>
                                 <hr class="mx-n3">
@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
                                         <input type="text" class="form-control form-control-lg"
-                                               id="memberstore-accountid" name="STORE_ACC">
+                                               id="memberstore-accountid" name="STORE_ACC"   value="${storeacc}">
                                         <a style="color: red">${ errorMsgs.STORE_ACC}</a>
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
                                         <input type="text" class="form-control form-control-lg"
-                                               placeholder="Holder's Name" id="memberstore-name"
+                                               placeholder="Holder's Name" id="memberstore-name"  value="${storecomaddress}"
                                                name="STORE_COM_ADDRESS">
                                         <a style="color: red">${ errorMsgs.STORE_COM_ADDRESS}</a>
                                     </div>
@@ -102,7 +102,7 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
                                         <input type="text" class="form-control form-control-lg"
-                                               placeholder="Holder's Phone" id="memberstore-phone" name="STORE_PHONE2">
+                                               placeholder="Holder's Phone" id="memberstore-phone" name="STORE_PHONE2"  value="${storephone2}">
                                     </div>
                                 </div>
                                 <hr class="mx-n3">
@@ -113,7 +113,7 @@
                                     <div class="col-md-9 pe-5">
                                         <input type="text" class="form-control form-control-lg"
                                                placeholder="Holder's Identity Card"
-                                               id="memberstore-identitycard" name="STORE_TW_ID">
+                                               id="memberstore-identitycard" name="STORE_TW_ID"  value="${storetwid}">
                                         <a style="color: red">${ errorMsgs.STORE_TW_ID}</a>
                                     </div>
                                 </div>

@@ -86,7 +86,7 @@
             scrollCollapse: false, // 預設為false 是否開始滾軸功能控制X、Y軸
             scrollX: false,
             scrollY: false,
-            "dom": "<'row justify-content-start ml-0'f>" + "<'eight wide column'l>" + 'lrtip', // 設置搜尋div、頁碼div...等基本位置/外觀..等，詳細可看官網
+            "dom": "<'col-xs-6'f>" + "<'eight wide column'l>" + 'lrtip', // 設置搜尋div、頁碼div...等基本位置/外觀..等，詳細可看官網
             // 語言區塊(language),
             language: {
                 lengthMenu: "顯示 _MENU_ 筆資料",

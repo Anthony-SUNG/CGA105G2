@@ -1,75 +1,30 @@
 
-†	java:S112%"FDefine and throw a dedicated exception instead of using a generic one.(Œ“„¶ÿÿÿÿÿJ$2064ba26-a9a2-46f1-933f-d18059e2c4bd
-†	java:S112B"FDefine and throw a dedicated exception instead of using a generic one.(Œ“„¶ÿÿÿÿÿJ$b5b17b8e-f752-4b2b-b8b3-8fd75cde7de3
-†	java:S112_"FDefine and throw a dedicated exception instead of using a generic one.(ßüØ½ıÿÿÿÿJ$42c11d59-3bb3-4239-b4ca-16b2d1ba3073
-†	java:S112z"FDefine and throw a dedicated exception instead of using a generic one.(Œ“„¶ÿÿÿÿÿJ$dea97b7a-4e56-4179-90a1-f2f7bd1cf810
-‡	java:S112–"FDefine and throw a dedicated exception instead of using a generic one.(Œ“„¶ÿÿÿÿÿJ$49551a15-44df-4f2c-89ef-2bd7eebb7ea0
-‡	java:S112Â"FDefine and throw a dedicated exception instead of using a generic one.(Œ“„¶ÿÿÿÿÿJ$0df6436e-82f8-4770-ab37-123c1b696f93
-š
-java:S2293-"YReplace the type specification in this constructor call with the diamond operator ("<>").(äæ·øÿÿÿÿJ$165bc438-84e0-4b13-a7be-307e083fa6b2
-š
-java:S2293J"YReplace the type specification in this constructor call with the diamond operator ("<>").(äæ·øÿÿÿÿJ$320a2208-ff7b-476f-a4f8-13885548809e
-œ
-java:S1192%"[Define a constant instead of duplicating this literal "A database error occured. " 6 times.(Œ“„¶ÿÿÿÿÿJ$97a4ffaf-f773-42f8-8e1e-fccc6f740cb5
-†
-java:S1192<"JDefine a constant instead of duplicating this literal "ADV_STIME" 3 times.(Æê¹©J$6f8eefed-4c2e-4ba4-ab70-ea6ba4559954
-…
-java:S1192;"IDefine a constant instead of duplicating this literal "ADV_TIME" 3 times.(ÅüìµJ$654829ee-bb3a-4593-99bc-42cde2a0c72f
-Š
-java:S1192:"IDefine a constant instead of duplicating this literal "ADV_TEXT" 3 times.(åËÂ²üÿÿÿÿJ$86a9de52-b768-470b-8b2b-c990999e194d
-‰
-java:S11929"HDefine a constant instead of duplicating this literal "ADV_IMG" 3 times.(—¬£µıÿÿÿÿJ$513ffb7e-0294-4058-b6cb-1729cd75d812
-ˆ
-java:S11927"GDefine a constant instead of duplicating this literal "EMP_ID" 3 times.(óç’ËıÿÿÿÿJ$4794d675-3273-4210-bf01-ab077ec0740e
-ƒ
-java:S11925"GDefine a constant instead of duplicating this literal "ADV_ID" 3 times.(üã´àJ$baa780fb-9cb6-4c22-82b2-7d94fc3ec18e
+¡
+java:S2293-"YReplace the type specification in this constructor call with the diamond operator ("<>").(äæ·øÿÿÿÿ8†ôîúå1J$0e4bab31-c56b-4c3a-80a1-02241d334518
+¡
+java:S2293N"YReplace the type specification in this constructor call with the diamond operator ("<>").(äæ·øÿÿÿÿ8†ôîúå1J$c11d48d7-6042-4dee-ab2b-1550feb8ebbd
 Œ
-java:S11928"KDefine a constant instead of duplicating this literal "ADV_STATUS" 3 times.(£œàĞûÿÿÿÿJ$c97c3bfb-43f7-4862-8c80-9bd9fd570f4f
-†
-java:S1192="JDefine a constant instead of duplicating this literal "ADV_NTIME" 3 times.(Ü–›ÔJ$ce3b093f-9029-44f6-af7c-ed887c8deb26
+java:S1192:"IDefine a constant instead of duplicating this literal "ADV_TIME" 4 times.(Åüìµ8ˆôîúå1J$affde153-6438-49b2-a556-95f61fc8d63d
+
+java:S11928"HDefine a constant instead of duplicating this literal "ADV_IMG" 4 times.(—¬£µıÿÿÿÿ8ˆôîúå1J$9cdd91c7-309a-466d-8960-b5b5720180ed
 Š
-java:S11926"IDefine a constant instead of duplicating this literal "STORE_ID" 3 times.(°×û»úÿÿÿÿJ$f0b9da82-8647-4495-a0a5-fa66a258d731
-Œ	java:S117."QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÕÃ–ÕJ$0d8daa04-78ca-4fca-b577-2c0de0d43f40
-Œ	java:S117K"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÕÃ–ÕJ$a126f4a3-e25f-4f0f-b623-18849200427f
-Œ	java:S117g"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÕÃ–ÕJ$0cc64dea-c7d3-4aff-907a-22a6f469deeb
-’	java:S117€"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¾½Š‡şÿÿÿÿJ$bdb4bb63-efb9-48be-944d-9cb1857af859
-	java:S117ƒ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿®æµJ$a776757c-518e-4e59-948c-8d05772b5715
-	java:S117„"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(†şùòJ$6269e8dd-b665-4dd7-a441-c0dcad1f1073
-Œ	java:S117…"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÏÕŠ@J$72a42f26-450c-45c2-abf0-701de31d59f6
-	java:S117°"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(†şùòJ$63079434-977a-407c-93be-1449800012ff
-	java:S117Î"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µéÙÜJ$d42afa14-f9a7-44a3-9d04-f8f3c5d19992
-•	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¶ì…J$95805346-01ca-4b06-b856-d0304ff62091
-p
-java:S4925"-Remove this "Class.forName()", it is useless.(±È…‡8úüÍ‰ä1J$690a7d47-0346-4925-bc03-a71474d7b2b4
-~
-java:S6437"6Revoke and change this password, as it is compromised.(¨ öÿûÿÿÿÿ8Ë«‰ä1J$ee6025d7-fe04-431c-9dc3-28d4927d11e0
-~
-java:S64370"6Revoke and change this password, as it is compromised.(¨ öÿûÿÿÿÿ8’Ë«‰ä1J$edb35220-df4f-4a77-821c-91fd0a23f3e8
-~
-java:S6437M"6Revoke and change this password, as it is compromised.(¨ öÿûÿÿÿÿ8–Ë«‰ä1J$75f45462-ac94-4ecd-814a-255218287fef
-~
-java:S6437i"6Revoke and change this password, as it is compromised.(¨ öÿûÿÿÿÿ8šË«‰ä1J$cca78c7e-0e90-4f95-9b4d-3034123e3b34
-z
-java:S6437‡"6Revoke and change this password, as it is compromised.(•â¢€8Ë«‰ä1J$fdf0c91d-e941-4df3-92b2-cd0edb78d36f
-^
-java:S1116"Remove this empty statement.(Åñ­õşÿÿÿÿJ$b58d26d4-c003-47a1-8065-29a6a328c4c3
-f	java:S106"+Replace this use of System.err by a logger.(š×ÕJ$9569bd3f-2aa8-4440-9920-acd48c0fde4e
-g	java:S106¤"+Replace this use of System.err by a logger.(Îã­ÃJ$ee165d28-0cfd-49fe-be36-9a9dd18688b1
-
-java:S6437½"6Revoke and change this password, as it is compromised.(¨ öÿûÿÿÿÿ8§Ë«‰ä1J$9fa63269-337f-4c98-b89f-21502b0efd6f
-
-java:S1854Î"=Remove this useless assignment to local variable "Advertise".(µéÙÜ8©Ë«‰ä1J$24871de4-a01b-4427-b145-9df3f2367f12
-x	java:S125Ê"<This block of commented-out lines of code should be removed.(È®ÁîJ$af24a530-0cd5-491b-bf94-032ea0d6462e
-x	java:S125Ğ"<This block of commented-out lines of code should be removed.(ãù¢ñJ$638b5c3f-3899-49f9-bae7-8c504eb0af75
-}	java:S125Ù"<This block of commented-out lines of code should be removed.(î³‡®ıÿÿÿÿJ$2074552a-6ca3-48c3-8baa-64a6cf13cfbe
-g	java:S106İ"+Replace this use of System.out by a logger.(«¬ÖƒJ$494d821d-f700-4d21-9b7b-8204a81f95a4
-g	java:S106Ş"+Replace this use of System.out by a logger.(¨®ü–J$b51b70c6-5574-471a-8a6d-30f980286595
-l	java:S106ß"+Replace this use of System.out by a logger.(˜ùˆ—úÿÿÿÿJ$76fab591-b652-4c0f-b2a1-955f2715743e
-g	java:S106à"+Replace this use of System.out by a logger.(‚äĞÂJ$a96a5e86-1140-4c6c-9564-651e93fef166
-l	java:S106á"+Replace this use of System.out by a logger.(¼õñèıÿÿÿÿJ$b01a5922-5ab2-43ad-8a0f-16f61675d4ae
-l	java:S106â"+Replace this use of System.out by a logger.(í£¥ıÿÿÿÿJ$fb3de8d4-bd76-4cca-8014-dc6b3e19de4e
-l	java:S106ã"+Replace this use of System.out by a logger.(½¿â’ÿÿÿÿÿJ$ba1b3799-57d6-480a-a120-27c9239db9f1
-l	java:S106ä"+Replace this use of System.out by a logger.(Ğ‡ĞøÿÿÿÿJ$bfe7ecab-c819-46f5-898c-75c6c89d84d6
-l	java:S106å"+Replace this use of System.out by a logger.(½†ã úÿÿÿÿJ$80983ed3-b690-4246-802b-3f46973a7fb3
-x	java:S125è"<This block of commented-out lines of code should be removed.(–ÈÍJ$5b523fb9-053f-42d6-8ebe-7d0b87554f38
-x	java:S125ü"<This block of commented-out lines of code should be removed.(×ª²ÁJ$3ba49fba-3aed-4b76-9f47-af6a3f323a37
+java:S11924"GDefine a constant instead of duplicating this literal "ADV_ID" 4 times.(üã´à8ˆôîúå1J$b615ea81-96c3-4bc4-92e1-e45b20e29b8b
+
+java:S1192;"JDefine a constant instead of duplicating this literal "ADV_STIME" 4 times.(Æê¹©8‡ôîúå1J$48df53b3-6569-418c-8086-8338b72c1175
+‘
+java:S11929"IDefine a constant instead of duplicating this literal "ADV_TEXT" 4 times.(åËÂ²üÿÿÿÿ8ˆôîúå1J$086d5b20-5e63-443a-8036-60a2bbf35f0a
+
+java:S11926"GDefine a constant instead of duplicating this literal "EMP_ID" 4 times.(óç’Ëıÿÿÿÿ8ˆôîúå1J$3bd20f66-6544-4bd6-9260-bdc6bad3a3d1
+“
+java:S11927"KDefine a constant instead of duplicating this literal "ADV_STATUS" 4 times.(£œàĞûÿÿÿÿ8ˆôîúå1J$2bf05742-d593-4afc-83f4-71f4516f0f1d
+‘
+java:S11925"IDefine a constant instead of duplicating this literal "STORE_ID" 4 times.(°×û»úÿÿÿÿ8ˆôîúå1J$ed1afe62-08f3-4bae-96f9-d4d2fc0c6f3c
+
+java:S1192<"JDefine a constant instead of duplicating this literal "ADV_NTIME" 4 times.(Ü–›Ô8ˆôîúå1J$4d0642e8-5f34-4571-a1fb-d31bd708a2f6
+“	java:S117."QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÕÃ–Õ8ˆôîúå1J$d1830c3f-d693-45eb-ba5e-56e75c733251
+“	java:S117O"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÕÃ–Õ8ˆôîúå1J$d4bfb9f0-1b7e-429d-b153-03372a6210b7
+“	java:S117q"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÕÃ–Õ8‰ôîúå1J$947459b4-00f5-4337-9217-c7624865800e
+”	java:S117‘"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÕÃ–Õ8‰ôîúå1J$788d430a-2b59-45fe-98a3-cd1233da5f27
+™	java:S117¯"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¾½Š‡şÿÿÿÿ8‰ôîúå1J$99ace6d4-1d1d-4c96-9ffb-39225a4a0e9d
+”	java:S117²"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªõØ²8‰ôîúå1J$e7b7c643-ad56-47ad-b212-674ebb3fd5dd
+œ	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¶ì…8‹ôîúå1J$204d3918-d54c-4f15-a53b-649cd7c557a6

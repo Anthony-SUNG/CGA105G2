@@ -3,6 +3,8 @@ package com.core.filter;
 import com.pushmesg.model.service.pgService;
 import com.store.model.Store.dao.impl.StoreDAO;
 import com.store.model.service.StoreService;
+import org.apache.log4j.Logger;
+import org.apache.log4j.xml.DOMConfigurator;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -10,14 +12,18 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.sql.Date;
 
 //PageFilter這個類別被標記為 @WebFilter("/*") 代表所有請求都會通過這個。
 @WebFilter("/*")
 public class IdFilter extends HttpFilter {
+    static {
+        DOMConfigurator.configure("D:\\SYI\\CGA105G2\\log4j.xml");
+    }
+
     private static final long serialVersionUID = 1L;
+    public static final Logger logger = Logger.getLogger("IMPORT");
 
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -37,25 +43,25 @@ public class IdFilter extends HttpFilter {
         if (sId >= 1) {
             StoreService storeSvc = new StoreService();
             storeplan = storeSvc.getById(sId).getStorePlan();
-            request.setAttribute("storeplan",storeplan);
+            request.setAttribute("storeplan", storeplan);
         }
-        Integer notify=0;
+        Integer notify = 0;
         if (mId >= 1) {
-            pgService pgs=new pgService();
-            notify= pgs.see(mId);
-            request.setAttribute("notify",notify);
+            pgService pgs = new pgService();
+            notify = pgs.see(mId);
+            request.setAttribute("notify", notify);
         }
 //		存在cookie方法
 //		Cookie cookie = new Cookie("username", "John");
 //		response.addCookie(cookie);
-        System.out.println("========================================");
-        System.out.println("requestCon:" + requestCon);
-        System.out.println("requestPath:" + requestPath);
-        System.out.println("memId:" + mId);
-        System.out.println("storeId:" + sId);
-        System.out.println("empId:" + eId);
-        System.out.println("後台條件:" + ((sId >= 1) && (mId >= 1)));
-        System.out.println("========================================");
+        logger.info("========================================");
+        logger.info("requestCon:" + requestCon);
+        logger.info("requestPath:" + requestPath);
+        logger.info("memId:" + mId);
+        logger.info("storeId:" + sId);
+        logger.info("empId:" + eId);
+        logger.info("後台條件:" + ((sId >= 1) && (mId >= 1)));
+        logger.info("========================================");
         if (requestPath.matches(".*index.jsp") || requestPath.matches(".*LonginServlet") || requestPath.matches(".*LognIn.*") ||
                 requestPath.matches(".*Register.*") || requestPath.matches(".*PassWord.*") || requestPath.matches(".*search.*") ||
                 requestPath.matches(".*Page.*") || requestPath.matches(".*addStandBy.*") || requestPath.matches(".*standby.*") ||
@@ -63,53 +69,52 @@ public class IdFilter extends HttpFilter {
                 requestPath.matches(".*adServlet.*") || requestPath.matches(".*Advertise.*") || requestPath.matches(".*Waiting.*") ||
                 requestPath.matches(".*search.*") || requestPath.matches(".*contactUs.jsp.*") || requestPath.matches(".*Loader.*")
         ) {
-            System.out.println("doFilter-1區:免登入區");
+            logger.info("doFilter-1區:免登入區");
             chain.doFilter(request, response);
 
         } else if (sId >= 1 && (storeplan == 0 || storeplan.equals(null))) {
-            System.out.println("else-1區:未購買方案區");
-            Integer plan3q =new StoreDAO().getByplan();
-            request.setAttribute("plan3q",plan3q);
+            logger.info("else-1區:未購買方案區");
+            Integer plan3q = new StoreDAO().getByplan();
+            request.setAttribute("plan3q", plan3q);
             String url = "/front-end/store/Login/forgetplan.jsp";
             request.getRequestDispatcher(url).forward(request, response);
 
         } else if ((requestPath.matches(".*/back-end/.*") && eId >= 1)) {
-            System.out.println("doFilter-2區:後台登入區");
+            logger.info("doFilter-2區:後台登入區");
             chain.doFilter(request, response);
 
         } else if ((requestPath.matches(".*/front-end/Member/.*") && mId >= 1)) {
-            System.out.println("doFilter-3區:會員登入區");
+            logger.info("doFilter-3區:會員登入區");
             chain.doFilter(request, response);
 
-        }else if (((requestPath.matches(".*/front-end/store/.*") && sId >= 1 && storeplan >= 1)) ||
+        } else if (((requestPath.matches(".*/front-end/store/.*") && sId >= 1 && storeplan >= 1)) ||
                 ((requestPath.matches(".*StoreStart_blank.*") && sId >= 1 && storeplan >= 1))) {
-            System.out.println("doFilter-4區:店家登入區");
+            logger.info("doFilter-4區:店家登入區");
             long miliseconds = System.currentTimeMillis();
-            int day=(new Date(miliseconds)).getDate();
-            request.setAttribute("planday",day);
+            int day = (new Date(miliseconds)).getDate();
+            request.setAttribute("planday", day);
             chain.doFilter(request, response);
 
         } else if (requestPath.matches(".*Servlet") && (eId >= 1 || sId >= 1 || mId >= 1)) {
-            System.out.println("doFilter-5區:Servlet跳轉區");
+            logger.info("doFilter-5區:Servlet跳轉區");
             chain.doFilter(request, response);
 
         } else if (requestPath.matches(".*css") || requestPath.matches(".*js") || requestPath.matches(".*assets.*")) {
-            System.out.println("doFilter-6區:css&js區");
+            logger.info("doFilter-6區:css&js區");
             chain.doFilter(request, response);
 
         } else if (requestPath.matches(".*/back-end/.*") && eId <= 0) {
-            System.out.println("else-2區:後台else區");
+            logger.info("else-2區:後台else區");
             request.getRequestDispatcher("/back-end/emp/employeeLogin.jsp").forward(request, response);
 
         } else if ((sId >= 1) && (mId >= 1)) {
-            System.out.println("doFilter-7區:後台區");
+            logger.info("doFilter-7區:後台區");
             chain.doFilter(request, response);
         } else if (requestPath.matches(".*/CGA105G2/")) {
-            System.out.println("doFilter-8區:首頁區");
+            logger.info("doFilter-8區:首頁區");
             chain.doFilter(request, response);
-        }
-        else {
-            System.out.println("else-3區:else區");
+        } else {
+            logger.info("else-3區:else區");
             request.getRequestDispatcher("/front-end/Member/member/memberLognIn.jsp").forward(request, response);
         }
     }

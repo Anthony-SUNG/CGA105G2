@@ -24,7 +24,7 @@ public class pgService {
         SubscribeJDBCDAO Subdao = new SubscribeJDBCDAO();
         List<Subscribe> subList = Subdao.getAllBystoreId(storeId);
         Integer comm = 0;
-        if (subList.size() > 0) {
+        if (!subList.isEmpty()) {
             for (Subscribe e : subList) {
                 sg.setSubId(e.getSubId());
                 dao.insert(sg);
@@ -35,42 +35,43 @@ public class pgService {
             return -1;
         }
     }
+
     public Integer see(Integer memId) {
         SubscribeJDBCDAO sb = new SubscribeJDBCDAO();
         List<Subscribe> list = sb.getAllByMemId(memId);
-        Integer n=0;
+        int n = 0;
         for (Subscribe e : list) {
             Integer subid = e.getSubId();
             List<Smessage> slist = dao.getById(subid);
-            if (slist.size() > 0) {
-                for (Smessage i : slist) {
-                    n++;
-                }
-            }
+            if (!slist.isEmpty()) n = slist.size();
         }
         return n;
     }
+
     public JSONArray all(Integer memId) {
         JSONArray json = new JSONArray();
         JSONObject obj = null;
         SubscribeJDBCDAO sb = new SubscribeJDBCDAO();
         List<Subscribe> list = sb.getAllByMemId(memId);
-        Integer n=0;
+        int n = 0;
         for (Subscribe e : list) {
             Integer subid = e.getSubId();
             Integer sid = e.getStoreId();
             String sname = new StoreDAO().getById(sid).getStoreName();
             List<Smessage> slist = dao.getById(subid);
-            if (slist.size() > 0) {
+            if (!slist.isEmpty()) {
                 for (Smessage i : slist) {
                     obj = new JSONObject();
-                    String[] stext = i.getSmessageTxet().split(":");
-                    obj.put("store",sname);
-                    obj.put("pgid",i.getSmessageId());
-                    obj.put("lab",stext[0]);
-                    obj.put("text",stext[1]);
-                    json.add(obj);
-                    n++;
+                    String smessageTxet = i.getSmessageTxet();
+                    String[] stext = smessageTxet.split(":");
+                    if (stext.length >= 2) { // 確保至少有兩個部分
+                        obj.put("store", sname);
+                        obj.put("pgid", i.getSmessageId());
+                        obj.put("lab", stext[0]);
+                        obj.put("text", stext[1]);
+                        json.add(obj);
+                        n++;
+                    }
                 }
             }
         }

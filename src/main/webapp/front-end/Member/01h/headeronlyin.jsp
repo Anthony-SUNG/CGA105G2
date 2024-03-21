@@ -40,13 +40,15 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-uppercase" data-toggle="none" href="/CGA105G2/front-end/Member/point/listPoint.jsp">
+                                <a class="nav-link text-uppercase" data-toggle="none" href="/CGA105G2/front-end/Member/point/listPointGood.jsp">
                                     💰point
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-uppercase" data-toggle="none" href="/CGA105G2/BlankPage/Loader2.jsp">
-                                    🛒
+                                <a class="nav-link text-uppercase showCart" data-toggle="none" href="/CGA105G2/front-end/Member/goods/Member_cart.jsp">
+                                    🛒<span id="cartIcon" style="display: none">0</span>
+                                    <span style="display: none">${goods.goodsId}</span>
+                                    <span style="display: none">${goods.storeId}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -63,7 +65,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-uppercase" data-toggle="none"
                                    href="/CGA105G2/LonginServlet?action=out">
-                                    🚪Sing out
+                                    🚪Sign out
                                 </a>
                             </li>
                         </ul>

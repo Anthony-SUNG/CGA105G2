@@ -44,7 +44,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-uppercase" data-toggle="none" href="/CGA105G2/LonginServlet?action=out">
-                                    🚪Sing out
+                                    🚪Sign out
                                 </a>
                             </li>
                         </ul>

@@ -41,40 +41,40 @@
                                   name="addfrom">
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-                                        <h4 class="mb-0">用戶名稱</h4>
+                                        <h4 class="mb-0">用戶名稱<p style="color: red">*必填</p></h4>
                                     </div>
                                     <div class="col-md-9 pe-5">
-                                        <input type="text" name="MEM_NAME"
-                                               class="form-control form-control-lg" id="memberr-fullname"/>
+                                        <input type="text" name="MEM_NAME" value="${memname}"
+                                               class="form-control form-control-lg" id="memberr-fullname">
                                     </div>
                                 </div>
                                 <hr class="mx-n3">
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-                                        <h4 class="mb-0">帳號名稱</h4>
+                                        <h4 class="mb-0">帳號<p style="color: red">*必填</p></h4>
                                     </div>
                                     <div class="col-md-9 pe-5">
-                                        <input type="text" name="MEM_ACC"
-                                               class="form-control form-control-lg" id="memberr-accountid"/>
+                                        <input type="text" name="MEM_ACC" value="${memacc}"
+                                               class="form-control form-control-lg" id="memberr-accountid">
                                     </div>
                                 </div>
                                 <hr class="mx-n3">
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-                                        <h4 class="mb-0">密碼</h4>
+                                        <h4 class="mb-0">密碼<p style="color: red">*必填</p></h4>
                                     </div>
                                     <div class="col-md-9 pe-5">
-                                        <input type="text" name="MEM_PWD"
+                                        <input type="password" name="MEM_PWD" value="${memname}"
                                                class="form-control form-control-lg" id="memberr-password"/>
                                     </div>
                                 </div>
                                 <hr class="mx-n3">
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-                                        <h4 class="mb-0">確認密碼</h4>
+                                        <h4 class="mb-0">確認密碼<p style="color: red">*必填</p></h4>
                                     </div>
                                     <div class="col-md-9 pe-5">
-                                        <input type="text" name="MEM_PWD2"
+                                        <input type="password" name="MEM_PWD2"
                                                class="form-control form-control-lg"
                                                id="memberr-confirmpassword"/>
                                     </div>
@@ -82,20 +82,20 @@
                                 <hr class="mx-n3">
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-                                        <h4 class="mb-0">真實姓名</h4>
+                                        <h4 class="mb-0">真實姓名<p style="color: red">*必填</p></h4>
                                     </div>
                                     <div class="col-md-9 pe-5">
-                                        <input type="text" name="MEM_RECIPIENT"
+                                        <input type="text" name="MEM_RECIPIENT" value="${memrecipient}"
                                                class="form-control form-control-lg" id="memberr-recipient"/>
                                     </div>
                                 </div>
                                 <hr class="mx-n3">
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-                                        <h4 class="mb-0">身分證字號</h4>
+                                        <h4 class="mb-0">身分證字號<p style="color: red">*必填</p></h4>
                                     </div>
                                     <div class="col-md-9 pe-5">
-                                        <input type="text" name="MEM_TW_ID"
+                                        <input type="text" name="MEM_TW_ID" value="${memtwid}"
                                                class="form-control form-control-lg"
                                                id="memberr-identitycard"/>
                                     </div>
@@ -103,20 +103,20 @@
                                 <hr class="mx-n3">
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-                                        <h4 class="mb-0">出生日期</h4>
+                                        <h4 class="mb-0">出生日期<p style="color: red">*必填</p></h4>
                                     </div>
                                     <div class="col-md-9 pe-5">
-                                        <input type="date" name="MEM_BIRTHDAY"
+                                        <input type="date" name="MEM_BIRTHDAY" value="${membirthday}"
                                                class="form-control form-control-lg" id="memberr-birthday"/>
                                     </div>
                                 </div>
                                 <hr class="mx-n3">
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-                                        <h4 class="mb-0">電話號碼</h4>
+                                        <h4 class="mb-0">電話號碼<p style="color: red">*必填</p></h4>
                                     </div>
                                     <div class="col-md-9 pe-5">
-                                        <input type="text" name="MEM_PHONE"
+                                        <input type="tel" name="MEM_PHONE" value="${memphone}"
                                                class="form-control form-control-lg"
                                                id="memberr-phonenumber"/>
                                     </div>
@@ -124,7 +124,7 @@
                                 <hr class="mx-n3">
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
-                                        <h4 class="mb-0">地址</h4>
+                                        <h4 class="mb-0">地址<p style="color: red">*必填</p></h4>
                                     </div>
                                     <div class="col-md-9 pe-5">
                                         <input class="js-demeter-tw-zipcode-selector"
@@ -132,7 +132,7 @@
                                                placeholder="請輸入郵遞區號" value="22048"> <select
                                             id="city4" placeholder="請選擇縣市" name="MEM_CITY"></select> <select
                                             id="dist4" placeholder="請選擇鄉鎮區" name="MEM_DISTRICT"></select>
-                                        <input type="text" name="MEM_ADDRESS"
+                                        <input type="text" name="MEM_ADDRESS" value="${memaddress}"
                                                class="form-control form-control-lg"
                                                id="memberstore-address"/>
                                     </div>
@@ -140,10 +140,10 @@
                                 <hr class="mx-n3">
                                 <div class="row align-items-center py-3">
                                     <div class="col-md-3 ps-5">
-                                        <h4 class="mb-0">Email</h4>
+                                        <h4 class="mb-0">Email<p style="color: red">*必填</p></h4>
                                     </div>
                                     <div class="col-md-9 pe-5">
-                                        <input type="email" name="MEM_MAIL"
+                                        <input type="email" name="MEM_MAIL" value="${memmail}"
                                                class="form-control form-control-lg"
                                                placeholder="example@example.com" id="memberr-emailaddress"/>
                                     </div>

@@ -91,12 +91,7 @@
                     </tbody>
                 </table>
             </div>
-
-
         </main>
-        <section class="jumbotron jumbotron-fluid mb-0 bg-secondary">
-
-        </section>
     </div>
 </div>
 

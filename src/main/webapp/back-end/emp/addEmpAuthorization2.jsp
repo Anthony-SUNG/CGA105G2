@@ -31,16 +31,15 @@
                         <label>選擇員工</label><br>
                         <select size="1" name="emp" id="selectEmp">
                             <c:forEach var="empVO" items="${empSvc.all}">
-                            <option value="${empVO.empId}">${empVO.empAcc}
+                            	<c:if test="${empVO.empId!=1}">
+                            		<option value="${empVO.empId}">${empVO.empAcc}
+                                	</c:if>
                                 </c:forEach>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>選擇權限</label><br>
-                        <select size="1" name="root">
-                            <c:forEach var="empRoot" items="${empSvc.empRootAll}">
-                            <option value="${empRoot.rootId}">${empRoot.rootText}
-                                </c:forEach>
+                        <select size="1" name="root" id="chooseRoot">
                         </select>
                     </div>
                     <input type="hidden" name="action" value="addEmpRoot">
@@ -110,5 +109,45 @@
         })
     }
 </script>
+<script>
+var selectEmp = document.getElementById("selectEmp");
+selectEmp.addEventListener("change", function() {
+    var empId = document.getElementById("selectEmp").value;
+    var sJson = {id: empId};
+//         var sJson = {"detail":'[{"name":"aa","quality":"4"},{"name":"bb","quality":"5"}]'};
+    console.log(sJson);
+    $.ajax({
+        url: '<%=request.getContextPath()%>/EmployeeServlet?action=getRootByAjax',
+        type: 'POST',
+//         traditional: true,
+        data: sJson,
+        success: function(data) {
+
+            var select = document.getElementById("chooseRoot");
+            var length = select.options.length;
+            for (i = length-1; i >= 0; i--) {
+              select.options[i] = null;
+            }
+
+            for(i = 0; i<data.length; i++){
+             var option = document.createElement("option");
+             option.value = data[i].rootId;
+             option.text = data[i].rootName;
+             select.add(option);
+            }
+            // var option = document.createElement("option");
+            // option.value
+
+
+            console.log(data);
+        },
+        error: function(XMLHttpRequest, status, error) {
+            console.log("error")
+        }
+    })
+});
+</script>
+
+
 </body>
 </html>

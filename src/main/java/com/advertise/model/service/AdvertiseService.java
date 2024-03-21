@@ -1,5 +1,7 @@
 package com.advertise.model.service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.advertise.model.Advertise.dao.Advertise_interface;
@@ -20,7 +22,14 @@ public class AdvertiseService {
 		return dao.getByStatus(1);
 	}
 	public List<Advertise> getStatusPass(){
-		return dao.getByStatus(2);
+		List<Advertise>  advertise = new ArrayList();
+		Date date = new Date();
+		for(Advertise ad:dao.getByStatus(2)) {
+			if(date.before(ad.getAdvNtime())) {
+				advertise.add(ad);
+			}
+		}
+		return advertise;
 	}
 	public List<Advertise> getAll(){
 		return dao.getAll();
@@ -48,4 +57,14 @@ public class AdvertiseService {
     {
         dao.insert(advertise);
     }
+	public void update1(Advertise advertise){
+		dao.update(advertise);
+
+	}
+	public Advertise getByStoreId(Integer storeId){
+		return dao.getByStoreId(storeId);
+	}
+	public void deleteByStoreId(Integer advId){
+		 dao.delete(advId);
+	}
 }

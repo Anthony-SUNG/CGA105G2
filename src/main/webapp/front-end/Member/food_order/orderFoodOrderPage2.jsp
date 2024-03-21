@@ -68,9 +68,15 @@
                         <!-- 優惠劵輸入 -->
                         <label class="col-form-label pr-2">優惠劵:</label>
                         <div>
-                            <input type="text" class="form-control form-control-sm" name="codeinput"
+                            <input type="text" class="form-control form-control-sm" id="codevalue" name="codeinput"
                                    value="${codeinput}">
                         </div>
+                    </div>
+                    <div class="input-group input-group-lg mb-5">
+                        <span class="input-group-text">折扣金額 : </span>
+                        <input type="text" id="codemoney" readonly="readonly"
+                               value="" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-lg">
                     </div>
                     <input type="hidden" name="action" value="Member_order_meal">
                     <input id="submit_0" class="btn btn-danger btn-sm" type="submit" value="結帳">
@@ -117,6 +123,24 @@
         }
     })
     </c:forEach>
+    document.getElementById("codevalue").addEventListener("blur",function(){
+    	var codeValue = document.getElementById("codevalue").value;
+    	var sJson = {code: codeValue};
+    	console.log(sJson);
+        $.ajax({
+            url: '<%=request.getContextPath()%>/front-end/Member/food_order/food_order.do?action=getCodemoneyByAjax',
+            type: 'POST',
+            traditional: true,
+            data: sJson,
+            success: function(data) {
+                console.log(data);
+                document.getElementById("codemoney").value=data[0].codeMoney;
+            },
+            error: function(XMLHttpRequest, status, error) {
+                console.log("error")
+            }
+        })
+    })
 </script>
 </body>
 </html>
