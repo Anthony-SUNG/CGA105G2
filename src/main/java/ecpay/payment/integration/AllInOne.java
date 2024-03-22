@@ -66,7 +66,7 @@ public class AllInOne extends AllInOneBase{
 	public AllInOne(String log4jPropertiesPath){
 		super();
 		if(log4jPropertiesPath != "" && log4jPropertiesPath != null){
-			String propertiesFile = log4jPropertiesPath + "/log4j.xml";
+			String propertiesFile = log4jPropertiesPath + "/log4j2.xml";
 			
 			if(log4jPropertiesPath.substring(log4jPropertiesPath.length()-1) == "/")
 				propertiesFile = propertiesFile + "log4j.properties";

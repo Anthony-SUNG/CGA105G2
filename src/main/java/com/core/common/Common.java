@@ -1,19 +1,22 @@
 package com.core.common;
 
 import com.core.entity.ErrorTitle;
-import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.nio.file.FileSystems;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Common {
+    static String spt = FileSystems.getDefault().getSeparator();
     protected static Connection con = null;
-    public static final Logger logger = Logger.getLogger("IMPORT");
+    public static final Logger logger = LogManager.getLogger(Common.class);
 
     static {
-        DOMConfigurator.configure("D:\\SYI\\CGA105G2\\log4j.xml");
+        DOMConfigurator.configure(System.getProperty("user.dir") + spt + "log4j2.xml");
         String driverName = "com.mysql.cj.jdbc.Driver";
         try {
             Class.forName(driverName);

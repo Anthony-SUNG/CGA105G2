@@ -1,10 +1,12 @@
 package com.core.filter;
 
+import com.core.common.Common;
 import com.pushmesg.model.service.pgService;
 import com.store.model.Store.dao.impl.StoreDAO;
 import com.store.model.service.StoreService;
-import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -13,17 +15,21 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.Serial;
+import java.nio.file.FileSystems;
 import java.sql.Date;
 
 //PageFilter這個類別被標記為 @WebFilter("/*") 代表所有請求都會通過這個。
 @WebFilter("/*")
 public class IdFilter extends HttpFilter {
-    static {
-        DOMConfigurator.configure("D:\\SYI\\CGA105G2\\log4j.xml");
-    }
-
+    static String spt = FileSystems.getDefault().getSeparator();
+    @Serial
     private static final long serialVersionUID = 1L;
-    public static final Logger logger = Logger.getLogger("IMPORT");
+    public static final Logger logger = LogManager.getLogger(IdFilter.class);
+
+    static {
+        DOMConfigurator.configure(System.getProperty("user.dir") + spt + "log4j2.xml");
+    }
 
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
