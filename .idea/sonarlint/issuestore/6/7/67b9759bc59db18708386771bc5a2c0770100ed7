@@ -1,0 +1,19 @@
+
+ˆ	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ççùJ$07224b9e-5e48-454c-82f0-62f8b755bd2d
+f	java:S106"+Replace this use of System.out by a logger.(ğàæ˜J$c9f57a7d-f7b7-49ac-8fac-54d5768d121c
+l
+java:S1128"PRemove this unused import 'com.foodorder.model.Reserva.dao.impl.ReservaJDBCDAO'.(ªÒ8Á¾®úå1
+g
+java:S1128"ERemove this unused import 'com.foodorder.model.Reserva.pojo.Reserva'.(…¡”Æÿÿÿÿÿ8Á¾®úå1
+`
+java:S1128"DRemove this unused import 'com.store.model.Store.dao.impl.StoreDAO'.(–Í@8Á¾®úå1
+q
+java:S1128"ORemove this unused import 'com.subs.model.Subscribe.dao.impl.SubscribeJDBCDAO'.(ï³¸®üÿÿÿÿ8Á¾®úå1
+f
+java:S1128"DRemove this unused import 'com.subs.model.Subscribe.pojo.Subscribe'.(Œ§½„üÿÿÿÿ8Á¾®úå1
+G
+java:S1128"*Remove this unused import 'java.sql.Date'.(ÙÀ½Ê8Á¾®úå1
+M
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8Á¾®úå1
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8Á¾®úå1

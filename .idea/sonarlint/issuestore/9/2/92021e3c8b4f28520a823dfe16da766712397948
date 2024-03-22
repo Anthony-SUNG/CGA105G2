@@ -1,0 +1,40 @@
+
+g
+java:S1192J"LDefine a constant instead of duplicating this literal "STORE_PHONE" 4 times.(¿Ò¯”øÿÿÿÿ
+e
+java:S1192&"ODefine a constant instead of duplicating this literal "STORE_DISTRICT" 5 times.(ÒƒœŸ
+`
+java:S1192G"JDefine a constant instead of duplicating this literal "STORE_ACC" 4 times.(¦˜—¸
+a
+java:S1192K"KDefine a constant instead of duplicating this literal "STORE_MAIL" 4 times.(þ¯Ùë
+i
+java:S1192I"NDefine a constant instead of duplicating this literal "STORE_TO_NAME" 4 times.(Õ±±¹þÿÿÿÿ
+b
+java:S1192H"LDefine a constant instead of duplicating this literal "STORE_TW_ID" 4 times.(òë’·
+h
+java:S1192#"MDefine a constant instead of duplicating this literal "STORE_STATUS" 5 times.(š™·³ùÿÿÿÿ
+a
+java:S1192%"KDefine a constant instead of duplicating this literal "STORE_CITY" 5 times.(÷¨þæ
+f
+java:S1192$"KDefine a constant instead of duplicating this literal "STORE_NAME" 5 times.(É»Ùàùÿÿÿÿ
+_
+java:S1192""IDefine a constant instead of duplicating this literal "STORE_ID" 5 times.(ƒàÈö
+h
+java:S1192C"MDefine a constant instead of duplicating this literal "STORE_COM_ID" 4 times.(ŽéÐŒüÿÿÿÿ
+k	java:S117y"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(üÍà™úÿÿÿÿ
+l	java:S117Ô"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(üÍà™úÿÿÿÿ
+f
+java:S1301<"KReplace this "switch" statement by "if" statements to increase readability.(ÊØÞøÿÿÿÿÿ
+W
+java:S4973R"<Strings and Boxed types should be compared using "equals()".(ø’£°úÿÿÿÿ
+o	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ÏÂüŠ
+R	java:S107v"=Method has 12 parameters, which is greater than 7 authorized.(Ýã‘î
+`
+java:S1858("E"getStoreUrl" returns a string, there's no need to call "toString()".(§×çðûÿÿÿÿ
+<	java:S131<""Add a default case to this switch.(ÊØÞøÿÿÿÿÿ
+U
+java:S1128":Remove this unused import 'com.code.model.Code.pojo.Code'.(åžÑïÿÿÿÿÿ
+V
+java:S1128"@Remove this unused import 'com.member.model.Member.pojo.Member'.(×Ï¸¾
+A
+java:S1068"+Remove this unused "Integer" private field.(ÏÂüŠ

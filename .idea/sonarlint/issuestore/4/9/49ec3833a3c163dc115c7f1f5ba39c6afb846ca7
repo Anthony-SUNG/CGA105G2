@@ -1,0 +1,24 @@
+
+œ
+java:S2293|"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÀäĞ8“¿™÷å1J$6c386812-6fe4-4cd5-ba87-2814da1810b1
+
+java:S1192Q"KDefine a constant instead of duplicating this literal "goods_text" 3 times.(ÖÒîÓ8”¿™÷å1J$d89387d2-762a-4fe4-bda1-8100b4af6386
+”
+java:S1192S"LDefine a constant instead of duplicating this literal "goods_rtime" 3 times.(‹»‰úÿÿÿÿ8”¿™÷å1J$4e6a61ea-55df-48d1-975e-22fa800100d2
+
+java:S1192N"KDefine a constant instead of duplicating this literal "goods_name" 3 times.(ª¬Ó8”¿™÷å1J$ffef12c0-3f5f-4cd0-bb43-8d76a6f9cd42
+Œ
+java:S1192L"IDefine a constant instead of duplicating this literal "goods_id" 3 times.(œ¯†î8”¿™÷å1J$139776e6-6351-498a-9a32-33411afa2beb
+
+java:S1192P"LDefine a constant instead of duplicating this literal "goods_price" 3 times.(š“¦Ï8”¿™÷å1J$ae508bb7-4264-4e94-b256-c1c926273493
+Œ
+java:S1192T"IDefine a constant instead of duplicating this literal "store_id" 3 times.(ìµ¿Ñ8”¿™÷å1J$dd8d376e-868e-4056-87fe-8ae170d9b98e
+
+java:S1192O"MDefine a constant instead of duplicating this literal "goods_status" 3 times.(ÔÇÁ®8”¿™÷å1J$3e1c25b5-83e9-4f96-9563-6395d1f1e786
+
+java:S1192R"KDefine a constant instead of duplicating this literal "goods_time" 3 times.(Ñ‹Ë8”¿™÷å1J$4f76b5ab-0333-4450-892c-702dfaa2aa75
+’
+java:S1192M"JDefine a constant instead of duplicating this literal "goods_img" 3 times.(Í™Ó²úÿÿÿÿ8”¿™÷å1J$8a469e52-94de-4f66-970a-21a9100d12df
+“	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ãµÍ8•¿™÷å1J$2841569e-3818-4c1f-92c1-8baaeef78e92
+˜	java:S117$"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹­´úÿÿÿÿ8•¿™÷å1J$afb35ee5-112e-421f-98f5-2c214d6b93e7
+œ	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÒÚñÛ8–¿™÷å1J$d8c7387d-c5d0-43dd-972c-8c1788262060

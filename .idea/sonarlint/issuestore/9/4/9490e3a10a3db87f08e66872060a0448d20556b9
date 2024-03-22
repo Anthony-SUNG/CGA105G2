@@ -1,0 +1,36 @@
+
+š
+java:S2293|"YReplace the type specification in this constructor call with the diamond operator ("<>").(§©Ü¡üÿÿÿÿJ$1b4cb9f6-5db3-4bd7-b7b5-8a12376d0c29
+v
+java:S1141R"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿJ$ba52cc72-73cf-4655-9acb-0c893396f193
+v
+java:S1141X"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿJ$cb892d02-479b-4b94-9fd1-5ecbfef98a57
+v
+java:S1141j"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿJ$db243542-44d9-48e3-baa4-b9bad8a29b92
+q
+java:S1141w"5Extract this nested try block into a separate method.(³ãã¦J$e9ce6cb7-cbbd-479c-bb27-ca6770c4c0cb
+Œ	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ù’è€J$5a0fb0ba-1bcf-4a3c-b5b0-bf76acbd0186
+‘	java:S117 "QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—¹ÜïùÿÿÿÿJ$411dfada-6782-46af-aa1b-cfe420eb0b88
+Œ	java:S117!"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¦¾üÒJ$616767e3-c2c7-4849-b8f3-36bc4e843593
+Œ	java:S117#"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤ÙÏJ$597e26c0-bf7d-49ab-bd56-bcc247e331b2
+‹	java:S117)"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ¬ÄJ$e4c622e4-b95e-43e5-a5b8-25b63d0b3d4b
+‘	java:S117/"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ò»¦·ûÿÿÿÿJ$c1ac64c4-1813-4c2f-a823-03e7ceba86d7
+‘	java:S1170"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÊÁôùùÿÿÿÿJ$91c5630a-e0e8-42f7-a7f5-808640104c00
+Œ	java:S117N"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äš§«J$b63cefed-10c9-40c8-a6f0-bb3280399c93
+‹	java:S117P"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯†ËJ$313e157d-60cb-4caa-964a-b8bbb32559df
+Œ	java:S117Ÿ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ¬ÄJ$e16b6abc-07f6-4361-b846-2bfc747076c2
+	java:S117­"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰ÓÒìJ$2b164cdf-b465-40c0-9e81-106162409f2b
+’	java:S117®"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ùã¢°şÿÿÿÿJ$bb119c40-8ee3-44d3-9a94-20ddf7f1b950
+’	java:S117°"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ØŞÈûÿÿÿÿJ$eb094a01-f118-427d-94e2-a5cc9241a5d7
+Œ	java:S117¸"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Üÿµ2J$d192e3f0-09e4-4879-bf95-38d1f7403d92
+ˆ	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(–¥×÷J$9af1d52f-921a-4f12-a9ef-6b55ce757cc6
+“
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.(Úİ‹­üÿÿÿÿJ$34db0608-e475-4b17-9d92-f43e034cbe2b
+‚
+java:S2147…"ECombine this catch with the one at line 130, which has the same body.(É®£J$ec9febd0-eda9-47d1-a222-11476bc445b2
+Š	java:S100¬"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€­ÜéJ$df7fd3dd-f7e9-46dc-8f86-a9e1646d1e40
+m
+java:S1144"0Remove this unused private "parseObject" method.(Ä€¬J$e1a493a0-7f41-44f1-b6a1-b3749c8c1c5f
+m
+java:S1144¬"0Remove this unused private "Details_pri" method.(€­ÜéJ$303d7b9b-e3f9-49e1-a87d-92d29101e7d9
+£secrets:S63343"_Make sure this Google API Key is either secured or revoked, changed, and removed from the code.(²ËÃüÿÿÿÿJ$12180742-21f7-4cf7-b984-6f35b5fe0153

@@ -1,0 +1,27 @@
+
+΅
+java:S2293|"YReplace the type specification in this constructor call with the diamond operator ("<>").(§©ά΅όÿÿÿÿ8© ψε1J$0a971993-7618-4ab6-8a49-81f9346c9f0a
+}
+java:S1141R"5Extract this nested try block into a separate method.(΅»Άόωÿÿÿÿ8ª ψε1J$2b1d42cf-1896-4d39-9b20-3bf214f37bc0
+}
+java:S1141X"5Extract this nested try block into a separate method.(΅»Άόωÿÿÿÿ8ª ψε1J$011f4c6b-0735-4ba1-81b7-0a0bb376eb51
+}
+java:S1141j"5Extract this nested try block into a separate method.(΅»Άόωÿÿÿÿ8ª ψε1J$efce437b-a88a-43de-83aa-435ce746d803
+x
+java:S1141w"5Extract this nested try block into a separate method.(³γγ¦8ª ψε1J$e135830e-f3ea-459c-9835-85307989e9ea
+“	java:S117N"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(δ§«8ª ψε1J$1e26ce7e-89d0-4603-9d79-7a256222cdd9
+’	java:S117P"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(―†Λ8ª ψε1J$bcf77a54-5d22-4f59-b228-a90f1aa03c5e
+“	java:S117¶"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(άÿµ28ª ψε1J$13111152-1646-4f8b-adb2-a8e79a68d9e3
+	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(κξΓΚ8¬ ψε1J$1212ed1d-0c75-4a1b-8217-ad885154ef7e
+‘
+java:S20959"IUse try-with-resources or close this "PrintWriter" in a "finally" clause.(‘’§ϋÿÿÿÿ8εφϊε1J$11b1b900-b4d6-4b48-848e-70fca3e931ae
+
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(Ϊέ‹­όÿÿÿÿ8³ ψε1J$a072751e-21c5-4c88-b8a9-c7626ea5370f
+Ύ
+java:S1130"vRemove the declaration of thrown exception 'java.sql.BatchUpdateException', as it cannot be thrown from method's body.(Ϊέ‹­όÿÿÿÿ8“εφϊε1J$53e0c0c9-c387-470f-8bc3-2fd57247bfc2
+‘	java:S100ª"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€­άι8Ώ ψε1J$dfe04913-26bc-4525-a325-ce4dde21b503
+t
+java:S1144›"0Remove this unused private "parseObject" method.(Δ€¬8Β ψε1J$5dba66d5-9792-45d5-8933-d19bbaa14232
+t
+java:S1144ª"0Remove this unused private "Details_pri" method.(€­άι8Β ψε1J$b5c85317-4c66-423d-ae1d-7964a05909e5
+£secrets:S63343"_Make sure this Google API Key is either secured or revoked, changed, and removed from the code.(²ΛΓόÿÿÿÿJ$b390ffa3-c7a0-4730-a985-225c2bca1f66

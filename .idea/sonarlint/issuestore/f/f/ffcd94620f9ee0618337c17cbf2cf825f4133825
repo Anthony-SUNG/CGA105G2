@@ -1,0 +1,26 @@
+
+›
+java:S2293w"YReplace the type specification in this constructor call with the diamond operator ("<>").(·Á·V8ìšú÷å1J$c6d6461b-3ed9-4693-94da-b4e2249b2ee0
+œ
+java:S2293—"YReplace the type specification in this constructor call with the diamond operator ("<>").(·Á·V8ìšú÷å1J$d56840c9-d53c-494c-ad16-b6492983225a
+
+java:S1192c"JDefine a constant instead of duplicating this literal "PO_STATUS" 3 times.(– á8íšú÷å1J$6e8ab636-b47e-4d3c-bebf-0f2ba385917b
+
+java:S1192d"HDefine a constant instead of duplicating this literal "PO_TIME" 3 times.(§Õøÿÿÿÿ8íšú÷å1J$8ec9b80f-62b2-4361-85ab-e33e7edfc3d9
+‰
+java:S1192_"GDefine a constant instead of duplicating this literal "MEM_ID" 3 times.(œÚœh8íšú÷å1J$088e333c-ee18-4ef0-bc91-2cc78408dd88
+
+java:S1192f"GDefine a constant instead of duplicating this literal "EMP_ID" 3 times.(ŠÔ›˜ûÿÿÿÿ8íšú÷å1J$46be9b48-97e6-4c75-8df6-0ea11db6a5d7
+‘
+java:S1192e"IDefine a constant instead of duplicating this literal "PO_UTIME" 3 times.(¥£¶ºùÿÿÿÿ8íšú÷å1J$fb6b6630-5324-494d-8e73-6a28b34e62ef
+‰
+java:S1192`"FDefine a constant instead of duplicating this literal "PD_ID" 3 times.(Ï›“Í8íšú÷å1J$ae7e33e3-4d28-4dfd-8ed7-f810cb7a5227
+
+java:S1192b"HDefine a constant instead of duplicating this literal "PO_TEXT" 3 times.(¤Ÿ–ÿÿÿÿÿ8íšú÷å1J$ae4f4b23-7f47-4dc2-b286-fa4862a2213f
+‰
+java:S1192^"FDefine a constant instead of duplicating this literal "PO_ID" 3 times.(öî¬ï8íšú÷å1J$5081e5bf-c1a0-46ad-830a-6dd4ea73a31c
+Œ
+java:S1192a"IDefine a constant instead of duplicating this literal "PO_PRICE" 3 times.(ÕÕÃù8íšú÷å1J$dcc72c9e-6205-4752-b4dd-38e86decebed
+˜	java:S117D"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÅÀîÿşÿÿÿÿ8îšú÷å1J$3fb8a947-4861-4589-9288-dbd42f205a35
+“	java:S117V"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ª¢±’8îšú÷å1J$31def92d-46f1-49e4-bca8-c56259f46aad
+¡	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ñš€÷ûÿÿÿÿ8ïšú÷å1J$2f4e72b6-5fbc-4ba6-8a81-6364a7beb420

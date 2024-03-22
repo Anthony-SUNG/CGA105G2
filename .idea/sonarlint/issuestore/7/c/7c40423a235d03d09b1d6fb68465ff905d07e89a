@@ -1,0 +1,7 @@
+
+†
+java:S1192"JDefine a constant instead of duplicating this literal "ROOT_TEXT" 3 times.(ç”åŠJ$7a7b5b9e-4cf6-403a-a96a-1f86df1960b9
+‰
+java:S1192"HDefine a constant instead of duplicating this literal "ROOT_ID" 3 times.(Ä­´èþÿÿÿÿJ$7b2eb7d1-2edb-4d1a-a528-7cf49e5b8743
+Œ	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹Ú¼àJ$85980e0f-86c4-45fb-8b24-5e56df4c9bd1
+š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¶‚ë»þÿÿÿÿJ$e9718235-7222-4dc3-897b-db35d746c936

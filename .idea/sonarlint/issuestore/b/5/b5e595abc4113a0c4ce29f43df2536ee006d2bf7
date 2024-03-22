@@ -1,0 +1,20 @@
+
+•
+java:S2293x"YReplace the type specification in this constructor call with the diamond operator ("<>").(½ÜòÿJ$931c6400-2e53-4629-918a-e129dc3f07af
+†
+java:S1192g"JDefine a constant instead of duplicating this literal "PD_STATUS" 3 times.(ƒåíÝJ$2800ea1c-aa42-42b9-a303-d2215997cc96
+ƒ
+java:S1192b"HDefine a constant instead of duplicating this literal "PD_NAME" 3 times.(®ØÇ*J$80ab9819-1458-4142-8a3f-54a30c61199e
+…
+java:S1192c"IDefine a constant instead of duplicating this literal "PD_PRICE" 3 times.(Å™ô·J$9bc5ddb5-b256-4eef-ae4b-b72938daab5a
+ˆ
+java:S1192a"GDefine a constant instead of duplicating this literal "PD_IMG" 3 times.(®¤²¡úÿÿÿÿJ$67570fe7-ca5e-4497-b76b-3b6c00ae3207
+‡
+java:S1192`"FDefine a constant instead of duplicating this literal "PD_ID" 3 times.(±¢Î›ýÿÿÿÿJ$2afb68c0-6a65-46d1-948f-326b7bbe4d10
+‰
+java:S1192d"HDefine a constant instead of duplicating this literal "PD_TEXT" 3 times.(ÇÁŸöúÿÿÿÿJ$549f256c-c957-4027-9698-2bc4c49abe55
+…
+java:S1192f"IDefine a constant instead of duplicating this literal "PD_RTIME" 3 times.(à°ÂÑJ$5ffbbf46-cbe9-417f-9feb-60f511059f47
+„
+java:S1192e"HDefine a constant instead of duplicating this literal "PD_TIME" 3 times.(îËÕ¿J$b7ed431e-d541-46c5-9842-1ec147d48470
+•	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(àÆòâJ$cee4a1c1-ba53-4666-abeb-df6e3b68b23b

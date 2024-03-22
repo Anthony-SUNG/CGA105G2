@@ -1,0 +1,111 @@
+
+o
+java:S22935"YReplace the type specification in this constructor call with the diamond operator ("<>").(¼®±Ş
+p
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(¼®±Ş
+p
+java:S2293·"YReplace the type specification in this constructor call with the diamond operator ("<>").(ìÂáê
+p
+java:S2293÷"YReplace the type specification in this constructor call with the diamond operator ("<>").(¼®±Ş
+p
+java:S2293¥"YReplace the type specification in this constructor call with the diamond operator ("<>").(ìÂáê
+b
+java:S1192‰"KDefine a constant instead of duplicating this literal "/index.jsp" 3 times.(‡¢Ş²
+n
+java:S1192A"SDefine a constant instead of duplicating this literal "å¸³è™Ÿè«‹å‹¿ç©ºç™½" 4 times.(¹§üÌüÿÿÿÿ
+e
+java:S11926"JDefine a constant instead of duplicating this literal "errorMsgs" 5 times.(Œ€¶Öüÿÿÿÿ
+c
+java:S1192Â"LDefine a constant instead of duplicating this literal "STORE_TW_ID" 3 times.(¶Ä«İ
+‚
+java:S1192"fDefine a constant instead of duplicating this literal "/front-end/store/Login/changepwd2.jsp" 3 times.(ôÌµûÿÿÿÿ
+c
+java:S11920"HDefine a constant instead of duplicating this literal "storeId" 4 times.(Á¯°ÿÿÿÿÿ
+k	java:S117o"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ã×Ôßûÿÿÿÿ
+g	java:S117Ÿ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§ß÷°
+l	java:S117¯"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İ»¸şùÿÿÿÿ
+l	java:S117‰"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(üÍà™úÿÿÿÿ
+c
+java:S2259†"GA "NullPointerException" could be thrown; "storepwd2" is nullable here.(²Øëƒúÿÿÿÿ
+{
+java:S1989("`Handle the following exceptions that could be thrown by "doPost": ServletException, IOException.(³æ£õùÿÿÿÿ
+n
+java:S3776,"SRefactor this method to reduce its Cognitive Complexity from 101 to the 15 allowed.(ş³‚”ûÿÿÿÿ
+Q
+java:S1854†":Remove this useless assignment to local variable "Member".(Êë¾É
+P
+java:S1854œ"9Remove this useless assignment to local variable "Store".(¿ÒÓ²
+‡
+java:S1989."lHandle the following exception that could be thrown by "setCharacterEncoding": UnsupportedEncodingException.(áò‰øÿÿÿÿ
+E
+java:S58699"*Remove duplicates in this character class.(óš‡Şşÿÿÿÿ
+@
+java:S5869H"*Remove duplicates in this character class.(Šöş‹
+n
+java:S1989Y"XHandle the following exception that could be thrown by "valueOf": NumberFormatException.(–õß¨
+i
+java:S1989n"SHandle the following exception that could be thrown by "readAllBytes": IOException.(ØÆîô
+k
+java:S1989n"UHandle the following exception that could be thrown by "getInputStream": IOException.(ØÆîô
+w
+java:S1989n"aHandle the following exceptions that could be thrown by "getPart": IOException, ServletException.(ØÆîô
+}
+java:S1989"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(¦ô‡×ıÿÿÿÿ
+}
+java:S1989‹"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(í«½Éûÿÿÿÿ
+}
+java:S1989™"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(¦ô‡×ıÿÿÿÿ
+}
+java:S1989£"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(¦ô‡×ıÿÿÿÿ
+}
+java:S1989ª"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(í«½Éûÿÿÿÿ
+}
+java:S1989³"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(í«½Éûÿÿÿÿ
+U
+java:S1155Á">Use isEmpty() to check whether the collection is empty or not.(€Îõ©
+}
+java:S1989Í"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(í«½Éûÿÿÿÿ
+t
+java:S1989Ñ"XHandle the following exception that could be thrown by "valueOf": NumberFormatException.(‚ğş½üÿÿÿÿ
+t
+java:S1989Ò"XHandle the following exception that could be thrown by "valueOf": NumberFormatException.(›î¤Çıÿÿÿÿ
+}
+java:S1989Ø"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(í«½Éûÿÿÿÿ
+t
+java:S1989Ü"XHandle the following exception that could be thrown by "valueOf": NumberFormatException.(‚ğş½üÿÿÿÿ
+o
+java:S1989İ"XHandle the following exception that could be thrown by "valueOf": NumberFormatException.(û€õ©
+}
+java:S1989ê"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(í«½Éûÿÿÿÿ
+}
+java:S1989ó"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(í«½Éûÿÿÿÿ
+}
+java:S1989"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(¦ô‡×ıÿÿÿÿ
+}
+java:S1989™"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(¦ô‡×ıÿÿÿÿ
+}
+java:S1989¡"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(í«½Éûÿÿÿÿ
+S
+java:S6353´"<Use concise character class syntax '\\d' instead of '[0-9]'.(«âÁ
+c
+java:S5998¹"LRefactor this repetition that can lead to a stack overflow for large inputs.(®·Õè
+G
+java:S6035¹"0Replace this alternation with a character class.(®·Õè
+}
+java:S1989Ì"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(¦ô‡×ıÿÿÿÿ
+}
+java:S1989Õ"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(í«½Éûÿÿÿÿ
+E
+java:S1128"*Remove this unused import 'javax.servlet'.(ßëÑºıÿÿÿÿ
+J
+java:S1128"/Remove this unused import 'javax.servlet.http'.(·¹¼®şÿÿÿÿ
+Q
+java:S1128"<Remove this unused import 'com.code.contorller.CodeServlet'.(šî^
+U
+java:S1128"?Remove this unused import 'ecpay.payment.integration.AllInOne'.(¾ã‘¨
+k
+java:S1128"PRemove this unused import 'ecpay.payment.integration.domain.AioCheckOutOneTime'.(’¯×©ùÿÿÿÿ
+M
+java:S1128"7Remove this unused import 'java.text.SimpleDateFormat'.(ú¡ÙÛ
+â
+java:S6541,"ÆA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 281 to 64, Complexity from 64 to 14, Nesting Level from 3 to 2, Number of Variables from 95 to 6.(ş³‚”ûÿÿÿÿ

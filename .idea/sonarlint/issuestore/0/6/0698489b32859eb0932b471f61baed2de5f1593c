@@ -1,0 +1,19 @@
+
+•
+java:S2293!"YReplace the type specification in this constructor call with the diamond operator ("<>").(¼®±ÞJ$054b20ff-0121-420b-aa8c-a19e01a91b7f
+{
+java:S1161":Add the "@Override" annotation above this method signature(š†ÈàýÿÿÿÿJ$bb3f0797-63f3-4557-b0d5-c553068573d7
+¡
+java:S1989"`Handle the following exceptions that could be thrown by "doPost": ServletException, IOException.(ÑÒª³üÿÿÿÿJ$81998550-3f6f-4555-8b8f-d18e70082e4c
+v
+java:S1161":Add the "@Override" annotation above this method signature(û£ÇŸJ$e789ee29-aaaf-4d05-88a3-df1bdfb7bec4
+¨
+java:S1989"lHandle the following exception that could be thrown by "setCharacterEncoding": UnsupportedEncodingException.(±Œ©ÀJ$7068f9ee-3ccb-403d-ab45-f726cd3fa8b0
+¢
+java:S1989-"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(‹€·§ÿÿÿÿÿJ$ed0d77df-3c13-45bf-a743-0e12be2f1007
+¢
+java:S1989:"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(‹€·§ÿÿÿÿÿJ$037be316-9530-4011-8e51-7e18177ad6bc
+¢
+java:S1989H"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(‹€·§ÿÿÿÿÿJ$cc0ace4a-bc1c-4dc7-b59e-a3a0d2d96630
+¢
+java:S1989O"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(ô¯ùÁþÿÿÿÿJ$c4373bd3-e1fb-47cb-a3c7-083154ca100a

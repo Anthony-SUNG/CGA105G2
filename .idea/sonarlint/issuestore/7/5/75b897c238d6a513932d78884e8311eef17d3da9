@@ -1,0 +1,11 @@
+
+„
+java:S1192."HDefine a constant instead of duplicating this literal "MEM_ID2" 4 times.(‘ÔÏÀJ$93685729-98e3-46b9-b534-d9770c0e1520
+„
+java:S1192-"HDefine a constant instead of duplicating this literal "MEM_ID1" 4 times.(ÕÈ®ƒJ$abd3bb69-6033-4adc-ad8f-a02843197db4
+Œ	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘ü¤öJ$7102cb3d-cf82-4a77-ab32-7256ccf1c49d
+‘	java:S117+"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™†ë¡úÿÿÿÿJ$1833cdd8-2099-4e13-8250-4cb7604928f1
+‹	java:S117A"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(è¡ŒcJ$34d88b96-9151-4218-bf0c-070201af8663
+‘	java:S117`"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™†ë¡úÿÿÿÿJ$947dc21b-b70c-40fe-9278-99d231c380e9
+‘	java:S117{"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™†ë¡úÿÿÿÿJ$b7e75fb0-3c6e-436f-bd5d-89f9004b82ce
+•	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ý¿îˆJ$6cf06d73-34e9-426c-8e20-feca79fc3afb
