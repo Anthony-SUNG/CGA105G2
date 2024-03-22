@@ -1,27 +1,27 @@
 
 
-java:S2293¹"YReplace the type specification in this constructor call with the diamond operator ("<>").(ëÇÒ‘8ƒîØøå1J$6be05bd6-aa93-4e22-851e-397adf14520c
+java:S2293¹"YReplace the type specification in this constructor call with the diamond operator ("<>").(ëÇÒ‘8ƒîØøå1J$2fc3b5f5-1e29-4b2d-8f77-4a041feb395a
 ‘
-java:S1192p"IDefine a constant instead of duplicating this literal "CODE_OFF" 4 times.(—€ª®ÿÿÿÿÿ8ûÛœöå1J$ffb41cf8-bbbe-4c44-b7ab-096118a8e39a
-”
-java:S1192¨"KDefine a constant instead of duplicating this literal "CODE_NTIME" 3 times.(ò´”Ôşÿÿÿÿ8„îØøå1J$72ea6a6e-83d0-422d-b7ea-5fe324bfa2b8
-
-java:S1192¥"JDefine a constant instead of duplicating this literal "CODE_TEXT" 3 times.(¼õî¢8„îØøå1J$c2942210-39c5-4511-baf4-ac49b8a2e5b0
-•
-java:S1192¤"LDefine a constant instead of duplicating this literal "CODE_STATUS" 3 times.(Ö­•Ùüÿÿÿÿ8„îØøå1J$6b257616-c323-448e-9c28-dced665e76c5
-
-java:S1192¡"GDefine a constant instead of duplicating this literal "EMP_ID" 3 times.(¬¢÷šøÿÿÿÿ8üÛœöå1J$235f7049-f0d6-48af-9663-03a4ecfce797
-
-java:S1192§"KDefine a constant instead of duplicating this literal "CODE_RTIME" 3 times.(±€É8„îØøå1J$ac7cac52-8f86-489c-903d-9ae66ac44090
+java:S1192p"IDefine a constant instead of duplicating this literal "CODE_OFF" 4 times.(—€ª®ÿÿÿÿÿ8ûÛœöå1J$37378655-6f21-466f-ae0a-684ec3955785
 Œ
-java:S1192‡"HDefine a constant instead of duplicating this literal "CODE_ID" 4 times.(Ë®Ì˜8ûÛœöå1J$f10662c3-2106-427e-a787-1489e3ad098f
-’
-java:S1192 "IDefine a constant instead of duplicating this literal "STORE_ID" 3 times.(è—Öşıÿÿÿÿ8ûÛœöå1J$ba3b54cd-5fb0-4915-bcdf-c8d7a85a23cb
+java:S1192‡"HDefine a constant instead of duplicating this literal "CODE_ID" 4 times.(Ë®Ì˜8ûÛœöå1J$b9d503fc-11b6-4ec3-8ccf-4d77a04010e8
 ‘
-java:S1192p"IDefine a constant instead of duplicating this literal "CODE_NUM" 5 times.(—€ª®ÿÿÿÿÿ8üÛœöå1J$d541fe50-7a3f-4dc7-ab90-605c00224418
+java:S1192p"IDefine a constant instead of duplicating this literal "CODE_NUM" 5 times.(—€ª®ÿÿÿÿÿ8üÛœöå1J$287a33f8-e445-4638-921b-62a67eb2f7cc
+”
+java:S1192¨"KDefine a constant instead of duplicating this literal "CODE_NTIME" 3 times.(ò´”Ôşÿÿÿÿ8„îØøå1J$b46962eb-96c2-4916-bbf3-d86974f0ffe4
+•
+java:S1192¤"LDefine a constant instead of duplicating this literal "CODE_STATUS" 3 times.(Ö­•Ùüÿÿÿÿ8„îØøå1J$701bc63d-f38f-43bc-b1a1-e8c9ba58bbe4
 
-java:S1192¦"JDefine a constant instead of duplicating this literal "CODE_TIME" 3 times.(¢ÛÓ×8„îØøå1J$12fdaf7f-186b-4e39-964e-9053869656a5
-“	java:S117<"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(íĞôù8üÛœöå1J$7957ba6e-4cf8-4530-8946-814010c77365
-“	java:S117>"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚•œĞ8üÛœöå1J$2498b7ae-cfe1-46f4-b477-83dea504f798
-“	java:S117`"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚§ó¨8ıÛœöå1J$11312b82-36d1-40c2-b303-9e67d77c410c
-œ	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¬¿è…8şÛœöå1J$c294121f-98be-4cd5-ae1b-2eb32aa8c781
+java:S1192¦"JDefine a constant instead of duplicating this literal "CODE_TIME" 3 times.(¢ÛÓ×8„îØøå1J$6ca4ac6d-5c86-4868-af36-f94ad4d8ff7e
+
+java:S1192¥"JDefine a constant instead of duplicating this literal "CODE_TEXT" 3 times.(¼õî¢8„îØøå1J$bb237fe8-f1cb-4f90-b735-49c3e1adbb60
+
+java:S1192¡"GDefine a constant instead of duplicating this literal "EMP_ID" 3 times.(¬¢÷šøÿÿÿÿ8üÛœöå1J$ab45c006-ea7b-46e6-b136-ede00d033d3b
+
+java:S1192§"KDefine a constant instead of duplicating this literal "CODE_RTIME" 3 times.(±€É8„îØøå1J$26af44f0-acdb-4ed8-8db2-17a45a0298f5
+’
+java:S1192 "IDefine a constant instead of duplicating this literal "STORE_ID" 3 times.(è—Öşıÿÿÿÿ8ûÛœöå1J$a08317ce-7da9-4f28-b1e3-046ad3d2bbf2
+“	java:S117<"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(íĞôù8üÛœöå1J$289a5c6f-4b42-4a0c-b5b6-20d51ea09062
+“	java:S117>"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚•œĞ8üÛœöå1J$3589aaee-f6f0-45e2-9029-736055fff6c2
+“	java:S117`"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚§ó¨8ıÛœöå1J$8f386d87-4780-4683-8d62-dc05c2aa5c1c
+œ	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¬¿è…8şÛœöå1J$269f7955-2936-47a8-85fa-f9a55f1fff69

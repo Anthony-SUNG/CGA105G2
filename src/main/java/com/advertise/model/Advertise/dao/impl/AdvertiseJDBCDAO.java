@@ -14,8 +14,6 @@ import java.util.List;
 
 
 public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
-
-
     @Override
     public void insert(Advertise pojo) {
         String sql = "INSERT INTO cga105g2.ADVERTISE (STORE_ID, ADV_STATUS, ADV_IMG, ADV_TEXT, ADV_STIME, ADV_NTIME) VALUES ( ?, ?, ?, ?, ?, ?)";
@@ -42,13 +40,13 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
     @Override
     public List<Advertise> getAll() {
         String sql = "SELECT * FROM cga105g2.ADVERTISE";
-        List<Advertise> list = new ArrayList<Advertise>();
-        Advertise Advertise = null;
-        ResultSet rs = null;
+        List<Advertise> list = new ArrayList<>();
+
+
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
-            rs = pstmt.executeQuery();
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                Advertise = new Advertise();
+                Advertise Advertise = new Advertise();
                 Advertise.setAdvId(rs.getInt("ADV_ID"));
                 Advertise.setStoreId(rs.getInt("STORE_ID"));
                 Advertise.setEmpId(rs.getInt("EMP_ID"));
@@ -75,14 +73,12 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
 
     public List<Advertise> getByStatus(Integer advStatus) {
         String sql = "SELECT * FROM cga105g2.ADVERTISE where ADV_STATUS = ?";
-        List<Advertise> list = new ArrayList<Advertise>();
-        Advertise Advertise = null;
-        ResultSet rs = null;
+        List<Advertise> list = new ArrayList<>();
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, advStatus);
-            rs = pstmt.executeQuery();
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                Advertise = new Advertise();
+                Advertise Advertise = new Advertise();
                 Advertise.setAdvId(rs.getInt("ADV_ID"));
                 Advertise.setStoreId(rs.getInt("STORE_ID"));
                 Advertise.setEmpId(rs.getInt("EMP_ID"));
@@ -111,10 +107,9 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
     public Advertise getByAdvId(Integer advId) {
         String sql = "SELECT * FROM cga105g2.ADVERTISE where ADV_ID = ?";
         Advertise Advertise = null;
-        ResultSet rs = null;
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, advId);
-            rs = pstmt.executeQuery();
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Advertise = new Advertise();
                 Advertise.setAdvId(rs.getInt("ADV_ID"));
@@ -143,10 +138,10 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
     public Advertise getByStoreId(Integer storeId) {
         String sql = "SELECT * FROM cga105g2.ADVERTISE where STORE_ID = ?";
         Advertise Advertise = null;
-        ResultSet rs = null;
+
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, storeId);
-            rs = pstmt.executeQuery();
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Advertise = new Advertise();
                 Advertise.setAdvId(rs.getInt("ADV_ID"));
