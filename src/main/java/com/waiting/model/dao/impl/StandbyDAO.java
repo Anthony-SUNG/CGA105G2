@@ -26,7 +26,7 @@ public class StandbyDAO extends Common implements StandbyDAO_interface {
             con.commit();
             con.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
                 con.rollback();
             } catch (SQLException r) {
@@ -63,7 +63,7 @@ public class StandbyDAO extends Common implements StandbyDAO_interface {
             con.commit();
             con.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
                 con.rollback();
             } catch (SQLException r) {

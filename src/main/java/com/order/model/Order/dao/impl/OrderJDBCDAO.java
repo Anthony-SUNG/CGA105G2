@@ -39,7 +39,7 @@ public class OrderJDBCDAO extends Common implements OrderDAO_interface {
             con.commit();
             con.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
                 con.rollback();
             } catch (SQLException r) {
@@ -66,7 +66,7 @@ public class OrderJDBCDAO extends Common implements OrderDAO_interface {
             con.commit();
             con.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
                 con.rollback();
             } catch (SQLException r) {
@@ -223,7 +223,7 @@ public class OrderJDBCDAO extends Common implements OrderDAO_interface {
             con.commit();
             con.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(INSERT_STMT), se);
+            logger.error(ErrorTitle.INSERT_TITLE.getTitle(INSERT_STMT), se);
             try {
                 con.rollback();
             } catch (SQLException r) {

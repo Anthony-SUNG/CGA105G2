@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class CodeJDBCDAO extends Common implements CodeDAO_interface {
     @Override
     public void insert(Code pojo) {
@@ -26,7 +27,7 @@ public class CodeJDBCDAO extends Common implements CodeDAO_interface {
             con.commit();
             con.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
                 con.rollback();
             } catch (SQLException r) {
@@ -44,7 +45,7 @@ public class CodeJDBCDAO extends Common implements CodeDAO_interface {
             con.commit();
             con.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
                 con.rollback();
             } catch (SQLException r) {
@@ -74,7 +75,7 @@ public class CodeJDBCDAO extends Common implements CodeDAO_interface {
             con.commit();
             con.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
                 con.rollback();
             } catch (SQLException r) {
@@ -182,7 +183,7 @@ public class CodeJDBCDAO extends Common implements CodeDAO_interface {
 
     @Override
     public List<Code> getBy(Integer id, String string) {
-        List<Code> list = new ArrayList<Code>();
+        List<Code> list = new ArrayList<>();
         String sql = "select CODE_ID,STORE_ID,EMP_ID,CODE_NUM,CODE_OFF,CODE_STATUS,CODE_TEXT,CODE_TIME,CODE_RTIME,CODE_NTIME from cga105g2.code";
         if (string.equals("店家")) sql += " where STORE_ID=?;";
         if (string.equals("狀態")) sql += " where CODE_STATUS=?;";

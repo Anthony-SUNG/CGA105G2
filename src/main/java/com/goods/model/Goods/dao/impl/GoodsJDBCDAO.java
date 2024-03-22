@@ -29,6 +29,11 @@ public class GoodsJDBCDAO extends Common implements GoodsDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
     }
 
@@ -48,6 +53,11 @@ public class GoodsJDBCDAO extends Common implements GoodsDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
     }
 
@@ -61,6 +71,11 @@ public class GoodsJDBCDAO extends Common implements GoodsDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
     }
 

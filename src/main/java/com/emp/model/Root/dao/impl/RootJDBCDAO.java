@@ -29,6 +29,11 @@ public class RootJDBCDAO extends Common implements RootDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
 
@@ -50,6 +55,11 @@ public class RootJDBCDAO extends Common implements RootDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
     }
@@ -70,6 +80,11 @@ public class RootJDBCDAO extends Common implements RootDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return rootvo;
     }

@@ -24,6 +24,11 @@ public class MemCodeJDBCDAO extends Common implements MemCodeDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
     }
 
@@ -43,6 +48,11 @@ public class MemCodeJDBCDAO extends Common implements MemCodeDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
     }
 
@@ -64,6 +74,11 @@ public class MemCodeJDBCDAO extends Common implements MemCodeDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
     }
 
@@ -95,6 +110,11 @@ public class MemCodeJDBCDAO extends Common implements MemCodeDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
     }
@@ -115,6 +135,11 @@ public class MemCodeJDBCDAO extends Common implements MemCodeDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
     }
@@ -140,7 +165,7 @@ public class MemCodeJDBCDAO extends Common implements MemCodeDAO_interface {
         List<MemCode> list1 = dao.getByPK(1, "codeId");
         logger.info("有此優惠券的會員如下:");
         for (MemCode e : list1) {
-            logger.info(+e.getMemId() + "號、");
+            logger.info(e.getMemId() + "號、");
         }
         logger.info("*******************************************");
         //(2)memId:查詢會員id=5的會員有哪些優惠券id

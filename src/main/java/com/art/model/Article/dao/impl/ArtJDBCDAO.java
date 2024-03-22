@@ -27,7 +27,12 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
             con.commit();
             con.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
     }
 
@@ -59,6 +64,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
     }
@@ -90,6 +100,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return Article;
     }
@@ -120,6 +135,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return Article;
     }
@@ -151,6 +171,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
     }
@@ -181,6 +206,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
     }
@@ -213,6 +243,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
     }
@@ -232,6 +267,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
     }
 
@@ -245,6 +285,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
     }
 
@@ -275,6 +320,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
     }

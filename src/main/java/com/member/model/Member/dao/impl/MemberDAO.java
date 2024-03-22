@@ -31,6 +31,11 @@ public class MemberDAO extends Common implements MemberDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
     }
 
@@ -58,6 +63,11 @@ public class MemberDAO extends Common implements MemberDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
     }
 
@@ -71,6 +81,11 @@ public class MemberDAO extends Common implements MemberDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
     }
 
@@ -230,7 +245,12 @@ public class MemberDAO extends Common implements MemberDAO_interface {
             con.commit();
             con.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.UNDEF_TITLE.getTitle(sql), se);
+            logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
     }
 
@@ -268,8 +288,12 @@ public class MemberDAO extends Common implements MemberDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
-
     }
 
     @Override
@@ -283,6 +307,11 @@ public class MemberDAO extends Common implements MemberDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
     }
 }

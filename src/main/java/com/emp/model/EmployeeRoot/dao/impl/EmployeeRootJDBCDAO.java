@@ -25,13 +25,18 @@ public class EmployeeRootJDBCDAO extends Common implements EmployeeRootDAO_inter
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
     }
 
     @Override
     public List<EmployeeRoot> getAll() {
         String sql = "SELECT * FROM cga105g2.employee_root order by EMP_ID";
-        List<EmployeeRoot> list = new ArrayList<EmployeeRoot>();
+        List<EmployeeRoot> list = new ArrayList<>();
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -43,9 +48,13 @@ public class EmployeeRootJDBCDAO extends Common implements EmployeeRootDAO_inter
             con.commit();
             con.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
+            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
-
         return list;
     }
 
@@ -66,6 +75,11 @@ public class EmployeeRootJDBCDAO extends Common implements EmployeeRootDAO_inter
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
     }
@@ -81,8 +95,12 @@ public class EmployeeRootJDBCDAO extends Common implements EmployeeRootDAO_inter
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
-
     }
 
     @Override
@@ -102,6 +120,11 @@ public class EmployeeRootJDBCDAO extends Common implements EmployeeRootDAO_inter
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
     }

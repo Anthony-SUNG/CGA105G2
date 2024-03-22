@@ -27,7 +27,7 @@ public class MealJDBCDAO extends Common implements MealDAO_interface {
             con.commit();
             con.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
                 con.rollback();
             } catch (SQLException r) {
@@ -46,7 +46,7 @@ public class MealJDBCDAO extends Common implements MealDAO_interface {
             con.commit();
             con.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
                 con.rollback();
             } catch (SQLException r) {

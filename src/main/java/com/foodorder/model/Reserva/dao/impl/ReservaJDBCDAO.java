@@ -31,7 +31,7 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                 con.commit();
                 con.close();
             } catch (SQLException se) {
-                logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+                logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
                 try {
                     con.rollback();
                 } catch (SQLException r) {
@@ -55,7 +55,7 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                 con.commit();
                 con.close();
             } catch (SQLException se) {
-                logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+                logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
                 try {
                     con.rollback();
                 } catch (SQLException r) {
@@ -82,7 +82,7 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
             con.commit();
             con.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
                 con.rollback();
             } catch (SQLException r) {
@@ -101,7 +101,7 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
             con.commit();
             con.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
                 con.rollback();
             } catch (SQLException r) {
@@ -396,7 +396,7 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                     con1.close();
                     con2.close();
                 } catch (SQLException se) {
-                    logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+                    logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
                     try {
                         con1.rollback();
                         con2.rollback();
@@ -444,7 +444,7 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                     con1.close();
                     con2.close();
                 } catch (SQLException se) {
-                    logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+                    logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
                     try {
                         con1.rollback();
                         con2.rollback();

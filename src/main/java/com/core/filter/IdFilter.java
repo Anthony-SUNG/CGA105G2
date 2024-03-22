@@ -1,10 +1,8 @@
 package com.core.filter;
 
-import com.core.common.Common;
 import com.pushmesg.model.service.pgService;
 import com.store.model.Store.dao.impl.StoreDAO;
 import com.store.model.service.StoreService;
-import org.apache.log4j.xml.DOMConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,14 +20,14 @@ import java.sql.Date;
 //PageFilter這個類別被標記為 @WebFilter("/*") 代表所有請求都會通過這個。
 @WebFilter("/*")
 public class IdFilter extends HttpFilter {
-    static String spt = FileSystems.getDefault().getSeparator();
     @Serial
     private static final long serialVersionUID = 1L;
     public static final Logger logger = LogManager.getLogger(IdFilter.class);
 
-    static {
-        DOMConfigurator.configure(System.getProperty("user.dir") + spt + "log4j2.xml");
-    }
+
+//    static {
+//        DOMConfigurator.configure(System.getProperty("user.dir") + spt + "log4j2.xml");
+//    }
 
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {

@@ -23,6 +23,11 @@ public class EmployeeJDBCDAO extends Common implements EmployeeDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
     }
 
@@ -42,6 +47,11 @@ public class EmployeeJDBCDAO extends Common implements EmployeeDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return EmployeeVO;
     }
@@ -67,6 +77,11 @@ public class EmployeeJDBCDAO extends Common implements EmployeeDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return employeeVO;
     }
@@ -75,7 +90,6 @@ public class EmployeeJDBCDAO extends Common implements EmployeeDAO_interface {
     public Employee findByEmpAcc(String empAcc) {
         String sql = "SELECT * FROM cga105g2.employee where EMP_ACC = ?";
         Employee employee = null;
-
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setString(1, empAcc);
             ResultSet rs = pstmt.executeQuery();
@@ -93,6 +107,11 @@ public class EmployeeJDBCDAO extends Common implements EmployeeDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return employee;
     }
@@ -119,6 +138,11 @@ public class EmployeeJDBCDAO extends Common implements EmployeeDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
     }
