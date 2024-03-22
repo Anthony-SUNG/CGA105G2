@@ -1,9 +1,0 @@
-
-r
-java:S3740"/Provide the parametrized type for this generic.(×”¢ø8©æöúå1J$378eac5f-2920-4fc4-99b3-ce5e01ae5e45
-°
-java:S1319"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(® Éê8ªæöúå1J$363f0e1c-cdc7-4f9a-a36a-f10ac16893f1
-•	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ÿ›ö¯J$2542974b-673b-4718-982d-193ed47ca385
-¡	java:S116	"ZRename this field "CartsTotalPrice" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(áóæŽûÿÿÿÿ8¬æöúå1J$537686e2-544b-4f9a-8292-1224e22dc792
-É
-java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(™èƒ³ýÿÿÿÿ8¬æöúå1J$68785928-da0d-4e70-9398-779ff8647056

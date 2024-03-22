@@ -1,12 +1,0 @@
-
-š
-java:S22932"YReplace the type specification in this constructor call with the diamond operator ("<>").(ôääùÿÿÿÿJ$bfe4c36a-6472-4548-9a6d-e664d6c587bf
-	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Î™§™ùÿÿÿÿJ$cc196243-813b-4c71-8261-e93cb6c84fa6
-›
-java:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(—ØJ$896581bd-8ed8-4636-a6a9-a088a8621cc3
-	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§›ÕøÿÿÿÿJ$8b7be217-ad39-435b-803a-4180477cb8e9
-f	java:S106'"+Replace this use of System.out by a logger.(‡¶úïJ$9154fa28-7c12-4735-890a-b1ce835d089e
-w	java:S125%"<This block of commented-out lines of code should be removed.(—¢£èJ$23466215-472a-481e-8a11-4e533a158a59
-f
-java:S1197."*Move the array designators [] to the type.(ÈšÉ÷J$6e375eb5-9d2a-44b4-b443-2ca560da7344
-k	java:S1067"+Replace this use of System.out by a logger.(èšÁóıÿÿÿÿJ$f99729c1-851e-47a3-8069-c084fcf33b81

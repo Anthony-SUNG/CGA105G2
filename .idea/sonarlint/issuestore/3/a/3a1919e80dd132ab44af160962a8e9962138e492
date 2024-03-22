@@ -1,20 +1,0 @@
-
-‡
-java:S1192"FDefine a constant instead of duplicating this literal "empId" 3 times.(Æšý¬üÿÿÿÿJ$e4061181-3f5f-4c34-94e2-d9235f5af51c
-‰
-java:S1192"HDefine a constant instead of duplicating this literal "storeId" 3 times.(Æšý¬üÿÿÿÿJ$a1fae3cb-1eb1-4699-88b6-cffd39b49593
-‡
-java:S1192"FDefine a constant instead of duplicating this literal "memId" 3 times.(Æšý¬üÿÿÿÿJ$e81516bd-9960-451d-8451-5655bf055013
-“
-java:S3776"RRefactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.(œû«…þÿÿÿÿJ$521f03ed-40ef-4bed-80ef-61fd420860d7
-|	java:S1257"<This block of commented-out lines of code should be removed.(ï‚ÓèùÿÿÿÿJ$467c9731-c5ad-4292-8b92-c28b5f5fe573
-‡
-java:S1764F"KCorrect one of the identical sub-expressions on both sides of operator "||"(°Ö•ÆJ$8c0b4a43-b9f7-4894-b37f-ae247f8c596e
-»
-java:S2159K"zRemove this call to "equals"; comparisons against null always return false; consider using '== null' to check for nullity.(õ”„ÝúÿÿÿÿJ$7630cefd-67c2-4216-b072-7382cd06571e
-b
-java:S1110Z"!Remove these useless parentheses.(‚¥ÝÝþÿÿÿÿJ$89c51bfe-c632-4c6f-9c8b-7e0dc6ad4eeb
-]
-java:S1110["!Remove these useless parentheses.(”£´êJ$b5826f5e-b5be-41f2-afda-c9549609a61a
-k
-java:S1874^"/Remove this use of "getDate"; it is deprecated.(é»äJ$93690817-6f58-4f36-acf4-35eb4dc32179
