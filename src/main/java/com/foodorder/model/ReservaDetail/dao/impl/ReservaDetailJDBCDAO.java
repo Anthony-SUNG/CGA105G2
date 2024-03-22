@@ -23,6 +23,7 @@ public class ReservaDetailJDBCDAO extends Common implements ReservaDetailDAO_int
             pstmt.setInt(2, reservaDetailVO.getMealId());
             pstmt.setInt(3, reservaDetailVO.getRdQuantity());
             pstmt.setInt(4, reservaDetailVO.getPdPrice());
+            pstmt.executeUpdate();
             con.commit();
             con.close();
         } catch (SQLException se) {
@@ -40,12 +41,10 @@ public class ReservaDetailJDBCDAO extends Common implements ReservaDetailDAO_int
         List<ReservaDetail> list = new ArrayList<>();
         String sql = "select * from cga105g2.reserva_detail where";
         String where;
-        if (pk.equals("renId")) {
-            where = " REN_ID=?;";
-        } else {
-            where = " MEAL_ID=?;";
-        }
-        try (PreparedStatement pstmt = getConnection().prepareStatement(sql + where)) {
+        if (pk.equals("renId")) where = " REN_ID=?;";
+        else where = " MEAL_ID=?;";
+        sql = sql + where;
+        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -95,4 +94,6 @@ public class ReservaDetailJDBCDAO extends Common implements ReservaDetailDAO_int
         }
         return list;
     }
+
+
 }

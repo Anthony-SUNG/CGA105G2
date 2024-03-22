@@ -2,11 +2,15 @@ package com.point.model.service;
 
 import java.util.List;
 
+import com.member.model.Member.pojo.Member;
 import com.point.model.Point.dao.impl.PointDAO;
 import com.point.model.Point.pojo.Point;
 import com.point.model.PointGoods.dao.PointGoodsDAO_interface;
 import com.point.model.PointGoods.dao.impl.PointGoodsDAO;
 import com.point.model.PointGoods.pojo.PointGoods;
+import com.point.model.PointOrder.pojo.PointOrder;
+
+import java.util.Set;
 
 public class PointGoodsService {
 	private PointGoodsDAO_interface dao;

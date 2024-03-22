@@ -1,8 +1,11 @@
 package com.emp.contorller;
 
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
+import com.emp.model.Employee.pojo.Employee;
+import com.emp.model.EmployeeRoot.pojo.EmployeeRoot;
+import com.emp.model.Root.pojo.Root;
+import com.emp.model.service.EmployeeService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,12 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.emp.model.Employee.pojo.Employee;
-import com.emp.model.EmployeeRoot.pojo.EmployeeRoot;
-import com.emp.model.service.EmployeeService;
-import com.store.model.Store.dao.impl.StoreDAO;
-import com.store.model.Store.pojo.Store;
+import java.io.IOException;
+import java.util.*;
 
 @WebServlet(urlPatterns = {"/back-end/emp/test", "/EmployeeServlet"})
 public class EmployeeServlet extends HttpServlet {
@@ -152,21 +151,14 @@ public class EmployeeServlet extends HttpServlet {
         if ("getRoot".equals(action)) {
             String str = req.getParameter("getRootID");
             Integer rootID = Integer.valueOf(str);
-            ;
-            System.out.println(rootID);
             EmployeeService empSvc = new EmployeeService();
             List<EmployeeRoot> list = empSvc.getRootEmp(rootID);
-            for (EmployeeRoot i : list) {
-                System.out.print(i.getEmpId() + ",");
-                System.out.print(i.getRootId() + " \n");
-            }
             req.setAttribute("list", list);
             String url = "/back-end/emp/show_page2.jsp";
             RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
         }
         if ("deleteRoot".equals(action)) {
-            System.out.println("det========");
             String str = req.getParameter("empId");
             String str2 = req.getParameter("rootId");
             Integer empId1 = Integer.valueOf(str);
@@ -181,6 +173,13 @@ public class EmployeeServlet extends HttpServlet {
             EmployeeRoot empRoot = new EmployeeRoot();
             String str = req.getParameter("emp");
             String str2 = req.getParameter("root");
+            if (str2 == null) {
+                String url = "/back-end/emp/updateEmpAuthorization2.jsp";
+                RequestDispatcher test = req.getRequestDispatcher(url);
+                test.forward(req, res);
+                return;
+            }
+
             Integer empId1 = Integer.valueOf(str);
             Integer rootId = Integer.valueOf(str2);
             empRoot.setEmpId(empId1);
@@ -190,12 +189,47 @@ public class EmployeeServlet extends HttpServlet {
             String url = "/back-end/emp/updateEmpAuthorization2.jsp";
             RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
+            return;
         }
         if ("getThisRoot".equals(action)) {
-            System.out.println("get");
             String url = "/back-end/emp/addEmpAuthorization2.jsp";
             RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
+        }
+        if ("getRootByAjax".equals(action)) {
+            res.setCharacterEncoding("UTF-8");
+            res.setContentType("application/json");
+            Integer idTemp = Integer.valueOf(req.getParameter("id"));
+            EmployeeService empSvc = new EmployeeService();
+            List<Root> allRoot = empSvc.getAllRoot();
+            List<EmployeeRoot> root = empSvc.getRoot(idTemp);
+            ArrayList arrayRemoveRoot = new ArrayList();
+            arrayRemoveRoot.add(1);
+            ArrayList arrayListRoot = new ArrayList();
+            ArrayList arrayListEmployeeRoot = new ArrayList();
+            for (int i = 0; i < allRoot.size(); i++) {
+                arrayListRoot.add(allRoot.get(i).getRootId());
+            }
+            for (int i = 0; i < root.size(); i++) {
+                arrayListEmployeeRoot.add(root.get(i).getRootId());
+            }
+            // 取差集
+            arrayListRoot.removeAll(arrayListEmployeeRoot);
+            arrayListRoot.removeAll(arrayRemoveRoot);
+            List<Map> rootListInfo = new ArrayList<Map>();
+            for (int i = 0; i < arrayListRoot.size(); i++) {
+                Integer idtemp = (Integer) arrayListRoot.get(i);
+                Map oneRoot = new LinkedHashMap();
+                oneRoot.put("rootId", idtemp);
+                oneRoot.put("rootName", empSvc.findByRootId(idtemp).getRootText());
+                rootListInfo.add(oneRoot);
+            }
+            GsonBuilder builder = new GsonBuilder();
+            builder.setPrettyPrinting();
+            Gson gson = builder.create();
+            String listJson = gson.toJson(rootListInfo);
+            res.getWriter().append(listJson);
+            ;
         }
     }
 }

@@ -12,9 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PointOrderDAO extends Common implements PointOrderDAO_interface {
+
     @Override
     public void insert(PointOrder pointorder) {
-        String sql = "INSERT INTO cga105g2.point_order (MEM_ID, PD_ID, PO_PRICE, PO_TEXT, PO_STATUS, PO_TIME, EMP_ID) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO cga105g2.point_order (MEM_ID, PD_ID, PO_PRICE, PO_TEXT, PO_STATUS, PO_TIME) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, pointorder.getMemId());
             pstmt.setInt(2, pointorder.getPdId());
@@ -24,7 +25,6 @@ public class PointOrderDAO extends Common implements PointOrderDAO_interface {
             java.util.Date utilDate = new java.util.Date();
             java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(utilDate.getTime());
             pstmt.setTimestamp(6, sqlTimestamp);
-            pstmt.setInt(7, pointorder.getEmpId());
             pstmt.executeUpdate();
             con.commit();
             con.close();
@@ -85,7 +85,7 @@ public class PointOrderDAO extends Common implements PointOrderDAO_interface {
     @Override
     public PointOrder getByPK(Integer po_id) {
         PointOrder pointorder = null;
-        String sql = "SELECT * FROM cga105g2.point_order WHERE PO_ID = ? ";
+        String sql = "SELECT PO_ID, MEM_ID, PD_ID, PO_PRICE, PO_TEXT, PO_STATUS, PO_TIME, PO_UTIME, EMP_ID FROM cga105g2.point_order WHERE PO_ID = ? ";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, po_id);
             ResultSet rs = pstmt.executeQuery();
@@ -117,7 +117,7 @@ public class PointOrderDAO extends Common implements PointOrderDAO_interface {
     @Override
     public List<PointOrder> getAll() {
         List<PointOrder> list = new ArrayList<PointOrder>();
-        String sql = "SELECT * FROM cga105g2.point_order order by PO_ID";
+        String sql = "SELECT PO_ID, MEM_ID, PD_ID, PO_PRICE, PO_TEXT, PO_STATUS, PO_TIME, PO_UTIME, EMP_ID FROM cga105g2.point_order order by PO_ID";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -149,7 +149,7 @@ public class PointOrderDAO extends Common implements PointOrderDAO_interface {
     @Override
     public List<PointOrder> getBackOrder() {
         List<PointOrder> list = new ArrayList<PointOrder>();
-        String sql = "SELECT * FROM cga105g2.point_order WHERE PO_STATUS = 0";
+        String sql = "SELECT PO_ID, MEM_ID, PD_ID, PO_PRICE, PO_TEXT, PO_STATUS, PO_TIME, PO_UTIME, EMP_ID FROM cga105g2.point_order WHERE PO_STATUS = 0";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -200,5 +200,36 @@ public class PointOrderDAO extends Common implements PointOrderDAO_interface {
         }
     }
 
+    public List<PointOrder> getMemOrder(Integer memId) {
+        List<PointOrder> list = new ArrayList<PointOrder>();
+        String sql = "SELECT PO_ID, MEM_ID, PD_ID, PO_PRICE, PO_TEXT, PO_STATUS, PO_TIME, PO_UTIME, EMP_ID FROM cga105g2.point_order WHERE MEM_ID= ?";
+        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
+            pstmt.setInt(1, memId);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                PointOrder pointorder = new PointOrder();
+                pointorder.setPoId(rs.getInt("PO_ID"));
+                pointorder.setMemId(rs.getInt("MEM_ID"));
+                pointorder.setPdId(rs.getInt("PD_ID"));
+                pointorder.setPoPrice(rs.getInt("PO_PRICE"));
+                pointorder.setPoText(rs.getString("PO_TEXT"));
+                pointorder.setPoStatus(rs.getInt("PO_STATUS"));
+                pointorder.setPoTime(rs.getTimestamp("PO_TIME"));
+                pointorder.setPoUtime(rs.getTimestamp("PO_UTIME"));
+                pointorder.setEmpId(rs.getInt("EMP_ID"));
+                list.add(pointorder);
+            }
+            con.commit();
+            con.close();
+        } catch (SQLException se) {
+            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
+        }
+        return list;
+    }
 
 }

@@ -6,7 +6,7 @@ import com.waiting.model.pojo.Standby;
 import java.util.List;
 
 public interface StandbyDAO_interface {
-	public void insert(Standby standbyVo);
+	public Integer insert(Standby standbyVo);
 
 	public void update(Standby standbyVo);
 
@@ -17,6 +17,6 @@ public interface StandbyDAO_interface {
 	public List<Standby> getAll();
 
 	public Integer standByCount();
-	
-//  public List<EmpVO> getAll(Map<String, String[]> map); 
+	public Integer getStandbyId();
+	public void resetStandBy();
 }

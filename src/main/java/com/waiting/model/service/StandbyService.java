@@ -1,15 +1,22 @@
 package com.waiting.model.service;
 
-
 import com.waiting.model.dao.impl.StandbyDAO;
 import com.waiting.model.dao.StandbyDAO_interface;
 import com.waiting.model.pojo.Standby;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StandbyService {
+	private int stsId;
+	private Standby standby;
 
 	private StandbyDAO_interface dao;
+
+	public StandbyService(int stsId, Standby standby) {
+		this.stsId = stsId;
+		this.standby = standby;
+	}
 
 	public StandbyService() {
 		dao = new StandbyDAO();
@@ -22,10 +29,8 @@ public class StandbyService {
 		standbyVo.setStaName(staName);
 		standbyVo.setStaPhone(staPhone);
 		standbyVo.setStaNumber(staNumber);
-//		waitingVo.setSta_time(sta_time);
-//		waitingVo.setSta_status(sta_status);
-//		Timestamp sta_time,Integer sta_status
-		dao.insert(standbyVo);
+		int stsid = dao.insert(standbyVo);
+		List<Standby> list = new ArrayList<Standby>();
 		return standbyVo;
 	}
 
@@ -33,7 +38,6 @@ public class StandbyService {
 		Standby standbyVo = new Standby();
 		standbyVo.setStaId(staId);
 		standbyVo.setStaStatus(staStatus);
-
 		dao.update(standbyVo);
 		return standbyVo;
 	}

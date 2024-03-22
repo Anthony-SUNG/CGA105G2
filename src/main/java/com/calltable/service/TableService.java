@@ -90,6 +90,27 @@ public class TableService {
     }
 
 
+    // 候位新增至訂位
+    public Reserva checkStandBy(Integer storeId, Integer memId, String renName, String renPhone, String renTime,
+                                java.sql.Date renDate, Integer renHeadcount, Integer renPrice, Integer renFprice ) {
+        ReservaJDBCDAO resDao =new ReservaJDBCDAO();
+        Reserva reserva = new Reserva();
+        reserva.setStoreId(storeId);
+        reserva.setMemId(memId);
+        reserva.setRenName(renName);
+        reserva.setRenPhone(renPhone);
+        reserva.setRenTime(renTime);
+        reserva.setRenDate(renDate);
+        reserva.setRenHeadcount(renHeadcount);
+        reserva.setRenPrice(renPrice);
+        reserva.setRenFprice(renFprice);
+        resDao.insertToSta(reserva);
+        Integer s= Integer.valueOf(reserva.getRenPhone());
+        reserva=resDao.gettable(s);
+        reserva.setRenTable(0);
+        resDao.update(reserva);
+        return reserva;
+    }
 
 
 

@@ -12,17 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StandbyDAO extends Common implements StandbyDAO_interface {
-
-
     @Override
-    public void insert(Standby standbyVo) {
+    public Integer insert(Standby standbyVo) {
         String sql = " INSERT INTO cga105g2.standby(`STORE_ID`, `STA_NAME`, `STA_PHONE`, `STA_NUMBER`) VALUES  (?, ?, ?, ?)";
-        try (PreparedStatement pstm = getConnection().prepareStatement(sql);) {
+        int id = 0;
+        try (PreparedStatement pstm = getConnection().prepareStatement(sql)) {
             pstm.setInt(1, standbyVo.getStoreId());
             pstm.setString(2, standbyVo.getStaName());
             pstm.setString(3, standbyVo.getStaPhone());
             pstm.setInt(4, standbyVo.getStaNumber());
             pstm.executeUpdate();
+            ResultSet rs = pstm.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
             con.commit();
             con.close();
         } catch (SQLException se) {
@@ -33,11 +36,13 @@ public class StandbyDAO extends Common implements StandbyDAO_interface {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
         }
+        return id;
+
     }
 
     @Override
     public void update(Standby standbyVo) {
-        String sql = "update cga105g2.`standby` set sta_status =? where sta_id =?;";
+        String sql = "update cga105g2.standby set sta_status =? where sta_id =?;";
         try (PreparedStatement pstm = getConnection().prepareStatement(sql)) {
             pstm.setInt(1, standbyVo.getStaStatus());
             pstm.setInt(2, standbyVo.getStaId());
@@ -45,7 +50,7 @@ public class StandbyDAO extends Common implements StandbyDAO_interface {
             con.commit();
             con.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
                 con.rollback();
             } catch (SQLException r) {
@@ -53,6 +58,25 @@ public class StandbyDAO extends Common implements StandbyDAO_interface {
             }
         }
     }
+
+    //打烊案off清空後位表
+    @Override
+    public void resetStandBy() {
+        String sql = "TRUNCATE TABLE cga105g2.standby;";
+        try (java.sql.Statement stm = getConnection().createStatement();) {
+            stm.executeUpdate(sql);
+            con.commit();
+            con.close();
+        } catch (SQLException se) {
+            logger.error(ErrorTitle.TRUNCATE_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
+        }
+    }
+
 
     @Override
     public void delete(Integer staId) {
@@ -100,12 +124,11 @@ public class StandbyDAO extends Common implements StandbyDAO_interface {
             }
         }
         return standbyVo;
-
     }
 
     @Override
     public List<Standby> getAll() {
-        String sql = "SELECT `STA_ID`, `STORE_ID`, `STA_NAME`, `STA_PHONE`, `STA_NUMBER`, `STA_TIME`, `STA_STATUS` FROM cga105g2.`standby` order by sta_id";
+        String sql = "SELECT `STA_ID`, `STORE_ID`, `STA_NAME`, `STA_PHONE`, `STA_NUMBER`, `STA_TIME`, `STA_STATUS` FROM cga105g2.`standby` where STA_STATUS = 0    order by sta_id";
         List<Standby> list = new ArrayList<>();
         try (PreparedStatement pstm = getConnection().prepareStatement(sql);) {
             ResultSet rs = pstm.executeQuery();
@@ -135,7 +158,7 @@ public class StandbyDAO extends Common implements StandbyDAO_interface {
 
     @Override
     public Integer standByCount() {
-        String sql = "SELECT COUNT(1) FROM cga105g2.STANDBY;";
+        String sql = "SELECT COUNT(1) FROM cga105g2.STANDBY where sta_status = 0;";
         int staCount = 0;
         try (PreparedStatement pstm = getConnection().prepareStatement(sql)) {
             ResultSet rs = pstm.executeQuery();
@@ -153,6 +176,28 @@ public class StandbyDAO extends Common implements StandbyDAO_interface {
             }
         }
         return staCount;
+    }
+
+    @Override
+    public Integer getStandbyId() {
+        String sql = "SELECT LAST_INSERT_ID();";
+        int lastInsertId = 0;
+        try (PreparedStatement pstm = getConnection().prepareStatement(sql)) {
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                lastInsertId = rs.getInt(1);
+            }
+            con.commit();
+            con.close();
+        } catch (SQLException se) {
+            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
+        }
+        return lastInsertId;
     }
 
 }

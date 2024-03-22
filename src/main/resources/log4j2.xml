@@ -9,6 +9,7 @@
                      filePattern="D:/SYI/CGA105G2/log/dailyFile-%d{yyyy-MM-dd}.log">
             <PatternLayout>
                 <Pattern>[%d{yyyy/MM/dd HH:mm:ss}][%p][%C-%L] %m%n</Pattern>
+                <Charset>UTF-8</Charset>
             </PatternLayout>
             <Policies>
                 <!-- 日誌滾動策略-->
@@ -23,6 +24,7 @@
                      filePattern="D:/SYI/CGA105G2/log/errFile-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout>
                 <Pattern>[%d{yyyy/MM/dd HH:mm:ss}][%p][%C-%L] %m%n</Pattern>
+                <Charset>UTF-8</Charset>
             </PatternLayout>
             <ThresholdFilter level="error"/>
             <Policies>

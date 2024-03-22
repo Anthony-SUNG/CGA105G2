@@ -33,6 +33,61 @@ public class MyFavoriteServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
+
+		if ("insertSubsAjax".equals(action)) {	//新增訂閱店家
+			/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
+			Integer memId = Integer.valueOf(request.getParameter("memId").trim());
+			Integer storeId = Integer.valueOf(request.getParameter("storeId").trim());
+
+			Subscribe subscribe = new Subscribe();
+			subscribe.setMemId(memId);
+			subscribe.setStoreId(storeId);
+			StoreService storeService = new StoreService();
+			Store store = storeService.getById(storeId);  //依照剛剛取得的id 去找尋該筆店家
+			MemberService memberService = new MemberService();
+			Member member = memberService.getById(memId);
+			/***************************2.開始新增資料***************************************/
+			SubsService subSvs = new SubsService();
+			subscribe = subSvs.addSubscribe(storeId, memId);
+			List<Subscribe> subslist = subSvs.getAllByMemIdStoreId(storeId, memId);
+			/***************************3.新增完成,準備轉交(Send the Success view)***********/
+			request.setAttribute("store", store);//set店家讓下個頁面能收到值
+			request.setAttribute("member", member);//set會員讓下個頁面能收到值
+			request.setAttribute("subslist", subslist);
+//			String url = "/front-end/Member/member/showStorePage.jsp";
+//			RequestDispatcher successView = request.getRequestDispatcher(url); // 新增成功後轉交
+//			successView.forward(request, response);
+			response.setContentType("text/plain");
+			response.getWriter().write("ok");
+		    return;
+
+	}
+
+		if ("deleteSubsAjax".equals(action)) { //刪除訂閱
+
+			/***************************1.接收請求參數***************************************/
+			Integer memId = Integer.valueOf(request.getParameter("memId").trim());
+			Integer storeId = Integer.valueOf(request.getParameter("storeId").trim());
+			StoreService storeService = new StoreService();
+			Store store = storeService.getById(storeId);  //依照剛剛取得的id 去找尋該筆店家
+			MemberService memberService = new MemberService();
+			Member member = memberService.getById(memId);
+
+
+			/***************************2.開始刪除資料***************************************/
+			SubsService subsService = new SubsService();
+			subsService.deleteSubscribe(storeId, memId);
+			List<Subscribe> subslist = subsService.getAllByMemIdStoreId(storeId, memId);
+
+			/***************************3.刪除完成,準備轉交(Send the Success view)***********/
+			request.setAttribute("store", store);//set店家讓下個頁面能收到值
+			request.setAttribute("member", member);//set會員讓下個頁面能收到值
+			request.setAttribute("subslist", subslist);
+			response.setContentType("text/plain");
+			response.getWriter().write("ok");
+		    return;
+	}
+
         if ("insertSubs".equals(action)) {    //新增訂閱店家
             /***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
             Integer memId = (Integer) request.getSession().getAttribute("memId");

@@ -95,9 +95,9 @@ public class CodeServlet extends HttpServlet {
             String errorString="";
             if (json.size()==0){
                 if (root==4||root==1){
-                    errorString="親愛的"+empacc+"員工您好，您目前無審核案件，可以去玩手機";
+                    errorString="親愛的"+empacc+"員工您好，您目前無審核案件";
                 }else {
-                    errorString="親愛的"+empacc+"員工您好，依據設定顯示，您並無審核權限，請洽詢您的主管";
+                    errorString="親愛的"+empacc+"員工您好，您並無審核權限，請洽詢您的主管";
                 }
                 errorMsgs.put("error",errorString);
             }
@@ -145,7 +145,7 @@ public class CodeServlet extends HttpServlet {
                 Msgs.add("新增成功");
             }else {
                 ans=false;
-                Msgs.add("目前無會員追蹤，想發啥優惠券?");
+                Msgs.add("目前無會員追蹤，無法發送優惠券");
                 req.setAttribute("comm", 0);
             }
             req.setAttribute("list_store", json);

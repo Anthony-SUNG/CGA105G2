@@ -2,6 +2,7 @@ package com.waiting.contorller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serial;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = {"/SendMailServlet"})
 public class SendMailServlet extends HttpServlet {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override

@@ -55,7 +55,6 @@ public class EmployeeService {
 	}
 
 	public List<EmployeeRoot>  getRootEmp(Integer ROOT_ID) {
-		System.out.println(ROOT_ID);
 		return daoEmpRoot.findByROOT_ID(ROOT_ID);
 	}
 	public List<EmployeeRoot> getRoot(Integer EMP_ID) {
@@ -81,20 +80,20 @@ public class EmployeeService {
     {
     	List<EmployeeRoot> empRoot = daoEmpRoot.findByEMP_ID(employeeRoot.getEmpId());
 
-    	System.out.println(employeeRoot.getEmpId()+"編號");
-    	System.out.println(employeeRoot.getRootId()+"新增");
-    	System.out.println(empRoot);
-
-    	if(empRoot.isEmpty()) {
-    		daoEmpRoot.insert(employeeRoot);
-    	}
+    	int num = 0;
     	for(EmployeeRoot er :empRoot) {
-    		System.out.println(er.getRootId()+"擁有");
     		if(er.getRootId()==employeeRoot.getRootId()) {
-    			System.out.println("重複");
-    		}else {
-    			daoEmpRoot.insert(employeeRoot);
+    			num=1;
     		}
     	}
+    	if(empRoot.isEmpty()||num == 0) {
+    		daoEmpRoot.insert(employeeRoot);
+    	}
     }
+    public List<EmployeeRoot>  getRootEmpBy() {
+		return daoEmpRoot.findByROOT_ID(4);
+	}
+    public List<Root> getAllRoot() {
+        return daoRoot.getAll();
+       }
 }

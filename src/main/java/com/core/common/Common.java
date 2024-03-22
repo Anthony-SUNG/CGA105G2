@@ -13,7 +13,6 @@ public class Common {
     public static final Logger logger = LogManager.getLogger(Common.class);
 
     static {
-//        DOMConfigurator.configure(System.getProperty("user.dir") + spt + "src/main/resources/log4j2.xml");
         String driverName = "com.mysql.cj.jdbc.Driver";
         try {
             Class.forName(driverName);

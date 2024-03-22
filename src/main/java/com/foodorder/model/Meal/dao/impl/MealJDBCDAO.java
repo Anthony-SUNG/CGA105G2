@@ -14,7 +14,6 @@ import java.util.List;
 
 public class MealJDBCDAO extends Common implements MealDAO_interface {
 
-
     @Override
     public void insert(Meal mealVO) {
         String sql = "INSERT INTO cga105g2.meal (STORE_ID, MEAL_NAME, MEAL_PRICE, MEAL_STATUS) VALUES (?,?,?,?);";
@@ -116,7 +115,6 @@ public class MealJDBCDAO extends Common implements MealDAO_interface {
             }
         }
         return list;
-
     }
 
     @Override
@@ -150,6 +148,7 @@ public class MealJDBCDAO extends Common implements MealDAO_interface {
     @Override
     public void MealUpdateCommit(Meal mealVO, Integer mealid) {
         // TODO Auto-generated method stub
-
     }
+
+
 }

@@ -13,6 +13,7 @@ import java.util.List;
 
 public class RootJDBCDAO extends Common implements RootDAO_interface {
 
+
     public List<Root> findByROOT_TEXT(String ROOT_TEXT) {
         String sql = "SELECT * FROM cga105g2.root where ROOT_TEXT LIKE  ? ";
         List<Root> list = new ArrayList<>();
@@ -88,4 +89,6 @@ public class RootJDBCDAO extends Common implements RootDAO_interface {
         }
         return rootvo;
     }
+
+
 }

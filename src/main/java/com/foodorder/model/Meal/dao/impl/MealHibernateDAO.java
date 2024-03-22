@@ -1,7 +1,5 @@
 package com.foodorder.model.Meal.dao.impl;
 
-import com.core.common.Common;
-import com.core.entity.ErrorTitle;
 import com.core.util.HibernateUtil;
 import com.foodorder.model.Meal.dao.MealDAO_interface;
 import com.foodorder.model.Meal.pojo.Meal;
@@ -15,7 +13,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 
 
-public class MealHibernateDAO extends Common implements MealDAO_interface {
+public class MealHibernateDAO implements MealDAO_interface {
 
 	@Override
 	public void insert(Meal mealVO) {
@@ -32,7 +30,7 @@ public class MealHibernateDAO extends Common implements MealDAO_interface {
             tx.commit();
         }catch (Exception e){
             session.getTransaction().rollback();
-            logger.error(ErrorTitle.INSERT_TITLE.getTitle(session.toString()), e);
+            e.printStackTrace();
         }
 
 	}
@@ -51,13 +49,14 @@ public class MealHibernateDAO extends Common implements MealDAO_interface {
             NativeQuery<?> nativeQuery = session.createNativeQuery("UPDATE cga105g2.meal set MEAL_STATUS=:MEAL_STATUS where MEAL_ID =:MEAL_ID")
             		.setParameter("MEAL_STATUS", status)
             		.setParameter("MEAL_ID", id);
-            nativeQuery.executeUpdate();
+            int result = nativeQuery.executeUpdate();
             //確認送出交易
             tx.commit();
         }catch (Exception e){
             session.getTransaction().rollback();
-            logger.error(ErrorTitle.UPDATE_TITLE.getTitle(session.toString()), e);
+            e.printStackTrace();
         }
+		
 	}
 
 	@Override
@@ -78,7 +77,7 @@ public class MealHibernateDAO extends Common implements MealDAO_interface {
             tx.commit();
         }catch (Exception e){
             session.getTransaction().rollback();
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(session.toString()), e);
+            e.printStackTrace();
         }
         return list;
 		
@@ -110,7 +109,7 @@ public class MealHibernateDAO extends Common implements MealDAO_interface {
             tx.commit();
         }catch (Exception e){
             session.getTransaction().rollback();
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(session.toString()), e);
+            e.printStackTrace();
         }
         return list;
 
@@ -132,13 +131,14 @@ public class MealHibernateDAO extends Common implements MealDAO_interface {
             tx.commit();
         }catch (Exception e){
             session.getTransaction().rollback();
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(session.toString()), e);
+            e.printStackTrace();
         }
         return meal;
 	}
 
 	@Override
 	public void MealUpdateCommit(Meal mealVO, Integer mealid) {
+		Meal meal = new Meal();
         //宣告
         SessionFactory sessionFactory= HibernateUtil.getSessionFactory();
         //開啟資料庫
@@ -150,14 +150,53 @@ public class MealHibernateDAO extends Common implements MealDAO_interface {
             NativeQuery<?> nativeQuery = session.createNativeQuery("UPDATE cga105g2.meal set MEAL_STATUS=:MEAL_STATUS where MEAL_ID =:MEAL_ID")
             		.setParameter("MEAL_STATUS", 0)
             		.setParameter("MEAL_ID", mealid);
-            nativeQuery.executeUpdate();
+            int result = nativeQuery.executeUpdate();
             session.persist(mealVO);
             //確認送出交易
             tx.commit();
         }catch (Exception e){
             session.getTransaction().rollback();
-            logger.error(ErrorTitle.UPDATE_TITLE.getTitle(session.toString()), e);
+            e.printStackTrace();
         }
+		
 	}
+
+//	public static void main(String[] args) {
+//		MealHibernateDAO dao = new MealHibernateDAO();
+//		// 新增
+//		Meal meal1 = new Meal(58, "義大利麵套餐", 250 , 1);
+//		dao.insert(meal1);
+//
+//		// 修改 某餐點編號的狀態 把編號四狀態修改成上架
+//		dao.update(7, 0);
+//		dao.update(meal3);
+//
+		// 查詢全部
+//		List<Meal> list = dao.getAll();
+//		for (Meal e : list) {
+//			System.out.println(e.getMealId());
+//			System.out.println(e.getMealName());
+//			System.out.println("======================================");
+//		}
+//
+//		// 依照storeid 搭配 狀態 查詢 目的:查出該店家所有上架商品
+//		List<Meal> list = dao.getByStoreIdStatus(6, 1);
+//		for (Meal e : list) {
+//			System.out.println(e.getMealId());
+//			System.out.println(e.getMealName());
+//			System.out.println("======================================");
+//		}
+//		
+//		// 依照mealid 查詢 目的:查出該餐點資訊  如果會員訂位查詢要帶出餐點名稱 訂位id->所有餐點id->不管上架下架都要秀
+//		Meal meal = dao.getByMealId(6);
+//		
+//		System.out.println(meal.getMealId());
+//		System.out.println(meal.getMealName());
+//		System.out.println("======================================");
+//
+//		
+//		
+//
+//	}
 
 }

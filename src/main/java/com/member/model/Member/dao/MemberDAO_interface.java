@@ -18,4 +18,7 @@ public interface MemberDAO_interface {
     List<Member> getAllByAcc(String memAcc); //CJ 0125
     public void update3(Member member);
     public void update4(Member member);
+    public void update5(Member member);
+	public Member srhacc(String memacc);
+	public Integer srhmail(String memmail);
 }

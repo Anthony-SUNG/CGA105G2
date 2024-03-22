@@ -17,7 +17,7 @@ public enum ErrorTitle {
     ANALYSIS_TITLE("分析暫存錯誤"),
 
 
-
+    TRUNCATE_TITLE("清空資料錯誤"),
     UPDATE_TITLE("更新資料錯誤"),
     INSERT_TITLE("新增資料錯誤"),
     SELECT_TITLE("查詢資料錯誤"),

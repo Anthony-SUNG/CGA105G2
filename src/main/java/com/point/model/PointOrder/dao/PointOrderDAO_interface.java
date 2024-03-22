@@ -1,7 +1,9 @@
 package com.point.model.PointOrder.dao;
 
 import java.util.List;
+import java.util.Set;
 
+import com.point.model.PointGoods.pojo.PointGoods;
 import com.point.model.PointOrder.pojo.PointOrder;
 
 public interface PointOrderDAO_interface {
@@ -20,4 +22,5 @@ public interface PointOrderDAO_interface {
 
 	void updateStatus(PointOrder pointorder);
 
+	List<PointOrder> getMemOrder(Integer memId);
 }

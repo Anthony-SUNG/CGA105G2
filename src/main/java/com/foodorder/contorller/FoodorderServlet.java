@@ -453,7 +453,6 @@ public class FoodorderServlet extends HttpServlet {
             String dateInput = req.getParameter("dateInput");
             String time1 = req.getParameter("time1");
             Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
-
             String nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
             if (nameInput == null || nameInput.trim().length() == 0) {
                 errorMsgs.put("name", "請勿空白!");
@@ -663,8 +662,8 @@ public class FoodorderServlet extends HttpServlet {
             // ReturnURL   : 必填  我用不到所以是隨便填一個英文字
             obj.setReturnURL("a");
             // OrderResultURL   : 選填 消費者完成付費後。重新導向的位置
-            String url = "http://localhost:8081/CGA105G2/front-end/Member/food_order/food_order.do?action=checkout_final";
-            obj.setOrderResultURL(url);
+            String url = "http://"+req.getServerName()+":8081/CGA105G2/front-end/Member/food_order/food_order.do?action=checkout_final";
+            obj.setClientBackURL(url);
             obj.setNeedExtraPaidInfo("N");
             // 回傳form訂單 並自動將使用者導到 綠界
             String form = domain.aioCheckOut(obj, null);
@@ -883,7 +882,6 @@ public class FoodorderServlet extends HttpServlet {
             RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
             successView.forward(req, res);
         }
-        ////store 查詢訂位訂餐 ////////////////////
         if ("storelistAllFoodOrderReserve".equals(action)) {
             HttpSession session = req.getSession();
             // 這邊之後要拿掉 登入就拿的到
@@ -913,12 +911,34 @@ public class FoodorderServlet extends HttpServlet {
                         String oneMealName = oneMeal.getMealName();
                         mealStringTemp = mealStringTemp + oneMealName + "*" + rdQuantity + ", ";
                     }
-                    mealStringTemp = mealStringTemp.substring(0, mealStringTemp.length() - 2);
+                    //更改
+                    if(mealStringTemp.length()!=0) {
+                    	mealStringTemp = mealStringTemp.substring(0, mealStringTemp.length() - 2);
+                    }
                     onedata.put("MEAL_NAME_LIST", mealStringTemp);
                     foodorderListInfo.add(onedata);
-                    Member memberInfo = foodorderSvc.getmemberById(reservaList.get(i).getMemId());
-                    onedata.put("MEM_NAME", memberInfo.getMemName());
-                    onedata.put("MEM_PHONE", memberInfo.getMemPhone());
+                    //更改
+                    if(reservaList.get(i).getMemId()==0) {
+	                    Member memberInfo = foodorderSvc.getmemberById(reservaList.get(i).getMemId());
+	                    onedata.put("MEM_NAME", "訪客");
+	                    onedata.put("MEM_PHONE", "0000000000");
+	                    onedata.put("OW", "W");
+	                    if(mealStringTemp.length()>0) {
+	                    	onedata.put("MEAL_NAME_LIST", mealStringTemp);
+	                    }else {
+	                    	onedata.put("MEAL_NAME_LIST", "點餐中");
+	                    }
+	                    if(reservaList.get(i).getRenFprice()!=0) {
+	                    	onedata.put("REN_FPRICE", reservaList.get(i).getRenFprice());
+	                    }else {
+	                    	onedata.put("REN_FPRICE", "");
+	                    }
+                    } else {
+                      Member memberInfo = foodorderSvc.getmemberById(reservaList.get(i).getMemId());
+                      onedata.put("MEM_NAME", memberInfo.getMemName());
+                      onedata.put("MEM_PHONE", memberInfo.getMemPhone());
+                      onedata.put("OW", "O");
+                    }
                 }
             }
             GsonBuilder builder = new GsonBuilder();
@@ -971,12 +991,27 @@ public class FoodorderServlet extends HttpServlet {
                         String oneMealName = oneMeal.getMealName();
                         mealStringTemp = mealStringTemp + oneMealName + "*" + rdQuantity + ", ";
                     }
-                    mealStringTemp = mealStringTemp.substring(0, mealStringTemp.length() - 2);
+                    //更改
+                    if(mealStringTemp.length()!=0) {
+                    	mealStringTemp = mealStringTemp.substring(0, mealStringTemp.length() - 2);
+                    }
                     onedata.put("MEAL_NAME_LIST", mealStringTemp);
                     foodorderListInfo.add(onedata);
-                    Member memberInfo = foodorderSvc.getmemberById(reservaList.get(i).getMemId());
-                    onedata.put("MEM_NAME", memberInfo.getMemName());
-                    onedata.put("MEM_PHONE", memberInfo.getMemPhone());
+                    //更改
+                    if(reservaList.get(i).getMemId()==0) {
+	                    Member memberInfo = foodorderSvc.getmemberById(reservaList.get(i).getMemId());
+	                    onedata.put("MEM_NAME", "訪客");
+	                    onedata.put("MEM_PHONE", "0000000000");
+	                    onedata.put("OW", "W");
+	                    onedata.put("MEAL_NAME_LIST", "點餐中");
+	                    onedata.put("REN_FPRICE", "");
+                    } else {
+                      Member memberInfo = foodorderSvc.getmemberById(reservaList.get(i).getMemId());
+                      onedata.put("MEM_NAME", memberInfo.getMemName());
+                      onedata.put("MEM_PHONE", memberInfo.getMemPhone());
+                      onedata.put("OW", "O");
+                    }
+//                  ##########################################################
                 }
             }
             GsonBuilder builder = new GsonBuilder();
@@ -1021,12 +1056,35 @@ public class FoodorderServlet extends HttpServlet {
                         String oneMealName = oneMeal.getMealName();
                         mealStringTemp = mealStringTemp + oneMealName + "*" + rdQuantity + ", ";
                     }
-                    mealStringTemp = mealStringTemp.substring(0, mealStringTemp.length() - 2);
+                    //更改
+                    if(mealStringTemp.length()!=0) {
+                        mealStringTemp = mealStringTemp.substring(0, mealStringTemp.length() - 2);
+                    }
                     onedata.put("MEAL_NAME_LIST", mealStringTemp);
                     foodorderListInfo.add(onedata);
-                    Member memberInfo = foodorderSvc.getmemberById(reservaList.get(i).getMemId());
-                    onedata.put("MEM_NAME", memberInfo.getMemName());
-                    onedata.put("MEM_PHONE", memberInfo.getMemPhone());
+                    //更改
+                    if(reservaList.get(i).getMemId()==0) {
+	                    Member memberInfo = foodorderSvc.getmemberById(reservaList.get(i).getMemId());
+	                    onedata.put("MEM_NAME", "訪客");
+	                    onedata.put("MEM_PHONE", "0000000000");
+	                    onedata.put("OW", "W");
+	                    if(mealStringTemp.length()>0) {
+	                    	onedata.put("MEAL_NAME_LIST", mealStringTemp);
+	                    }else {
+	                    	onedata.put("MEAL_NAME_LIST", "點餐中");
+	                    }
+	                    if(reservaList.get(i).getRenFprice()!=0) {
+	                    	onedata.put("REN_FPRICE", reservaList.get(i).getRenFprice());
+	                    }else {
+	                    	onedata.put("REN_FPRICE", "");
+	                    }
+                    } else {
+                      Member memberInfo = foodorderSvc.getmemberById(reservaList.get(i).getMemId());
+                      onedata.put("MEM_NAME", memberInfo.getMemName());
+                      onedata.put("MEM_PHONE", memberInfo.getMemPhone());
+                      onedata.put("OW", "O");
+                    }
+//                  ##########################################################
                 }
             }
             GsonBuilder builder = new GsonBuilder();
@@ -1038,6 +1096,32 @@ public class FoodorderServlet extends HttpServlet {
             String url = "/front-end/store/food_order/listAllFoodOrderReserve.jsp";
             RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
             successView.forward(req, res);
+        }
+        if("getCodemoneyByAjax".equals(action)) {
+        	HttpSession session = req.getSession();
+        	res.setCharacterEncoding("UTF-8");
+        	res.setContentType("application/json");
+        	//前面來的code碼
+        	String code = req.getParameter("code");
+//            //2. 優惠劵金額 and 優惠劵編號
+        	FoodorderService foodorderSvc = new FoodorderService();
+        	Integer storeid = (Integer) session.getAttribute("foodorder_storeId");
+            List<Integer> codeMoneyList = foodorderSvc.getCodeMoney(code, storeid);
+            Integer codeMoney = 0;
+            List<Map> codeInfo = new ArrayList<Map>();
+            Map oneCode = new LinkedHashMap();
+            if (codeMoneyList.size() != 0) {
+                codeMoney = codeMoneyList.get(0);
+                oneCode.put("codeMoney",codeMoney);
+            }else {
+                oneCode.put("codeMoney",0);
+            }
+            codeInfo.add(oneCode);
+            GsonBuilder builder = new GsonBuilder();
+            builder.setPrettyPrinting();
+            Gson gson = builder.create();
+            String listJson = gson.toJson(codeInfo);
+        	res.getWriter().append(listJson);
         }
     }
 }

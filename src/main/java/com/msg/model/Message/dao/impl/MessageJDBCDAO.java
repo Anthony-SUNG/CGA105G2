@@ -11,8 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class MessageJDBCDAO extends Common implements Message_interface {
+
     @Override
     public void insert(Message Message) {
         String sql = "INSERT INTO cga105g2.MESSAGE (FOLLOW_ID, MES_TEXT) VALUES (?, ?)";
@@ -128,4 +128,5 @@ public class MessageJDBCDAO extends Common implements Message_interface {
             }
         }
     }
+
 }

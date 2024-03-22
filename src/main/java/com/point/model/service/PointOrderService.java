@@ -1,7 +1,9 @@
 package com.point.model.service;
 
 import java.util.List;
+import java.util.Set;
 
+import com.point.model.PointGoods.pojo.PointGoods;
 import com.point.model.PointOrder.dao.PointOrderDAO_interface;
 import com.point.model.PointOrder.dao.impl.PointOrderDAO;
 import com.point.model.PointOrder.pojo.PointOrder;
@@ -13,7 +15,7 @@ public class PointOrderService {
 		dao = new PointOrderDAO();
 	}
 
-	public PointOrder addPointOrder(Integer memId, Integer pdId, Integer poPrice, String poText, Integer poStatus, java.sql.Timestamp poTime, Integer empId) {
+	public PointOrder addPointOrder(Integer memId, Integer pdId, Integer poPrice, String poText, Integer poStatus, java.sql.Timestamp poTime) {
 
 		PointOrder pointorder = new PointOrder();
 
@@ -23,7 +25,7 @@ public class PointOrderService {
 		pointorder.setPoText(poText);
 		pointorder.setPoStatus(poStatus);
 		pointorder.setPoTime(poTime);
-		pointorder.setEmpId(empId);
+//		pointorder.setEmpId(empId);
 		dao.insert(pointorder);
 
 		return pointorder;
@@ -71,5 +73,8 @@ public class PointOrderService {
 		return pointorder;
 	}
 	
+	public List<PointOrder> getMemOrder(Integer memId) {
+		return dao.getMemOrder(memId);
+	}
 	
 }

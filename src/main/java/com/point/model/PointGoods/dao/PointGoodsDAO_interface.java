@@ -1,6 +1,7 @@
 package com.point.model.PointGoods.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import com.point.model.PointGoods.pojo.PointGoods;
 
@@ -17,5 +18,5 @@ public interface PointGoodsDAO_interface {
 	List<PointGoods> getAll();
 
 	List<PointGoods> getAlready();
-
+	
 }

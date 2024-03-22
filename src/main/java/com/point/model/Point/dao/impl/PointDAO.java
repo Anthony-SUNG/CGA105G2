@@ -73,7 +73,7 @@ public class PointDAO extends Common implements PointDAO_interface {
     @Override
     public Point getByPK(Integer pointid) {
         Point point = null;
-        String sql = "SELECT * FROM cga105g2.point WHERE POINT_ID = ? ";
+        String sql = "SELECT POINT_ID, MEM_ID, POINT_CHANGE, POINT_NUMBER FROM cga105g2.point WHERE POINT_ID = ? ";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, pointid);
             ResultSet rs = pstmt.executeQuery();
@@ -100,8 +100,36 @@ public class PointDAO extends Common implements PointDAO_interface {
     @Override
     public List<Point> getAll() {
         List<Point> list = new ArrayList<>();
-        String sql = "SELECT * FROM cga105g2.point order by POINT_ID ";
+        String sql = "SELECT POINT_ID, MEM_ID, POINT_CHANGE, POINT_NUMBER FROM cga105g2.point order by POINT_ID ";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Point point = new Point();
+                point.setPointId(rs.getInt("POINT_ID"));
+                point.setMemId(rs.getInt("MEM_ID"));
+                point.setPointChange(rs.getString("POINT_CHANGE"));
+                point.setPointNumber(rs.getInt("POINT_NUMBER"));
+                list.add(point);
+            }
+            con.commit();
+            con.close();
+        } catch (SQLException se) {
+            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public List<Point> getAllByMemId(Integer memId) {
+        List<Point> list = new ArrayList<>();
+        String sql = "SELECT POINT_ID, MEM_ID, POINT_CHANGE, POINT_NUMBER FROM cga105g2.point WHERE MEM_ID = ? ";
+        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
+            pstmt.setInt(1, memId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Point point = new Point();

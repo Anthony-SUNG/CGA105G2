@@ -107,4 +107,10 @@ public class PointOrder {
     this.empId = empId;
   }
 
+  public com.point.model.PointGoods.pojo.PointGoods getPointGoods() {
+	    com.point.model.service.PointGoodsService pointgoodsSvc = new com.point.model.service.PointGoodsService();
+	    com.point.model.PointGoods.pojo.PointGoods pointgoods = pointgoodsSvc.getPointGood(pdId);
+	    return pointgoods;
+  }
+
 }

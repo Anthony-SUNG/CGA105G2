@@ -3,6 +3,7 @@ package com.member.contorller;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.member.model.Member.dao.impl.MemberDAO;
 import com.member.model.Member.pojo.Member;
 import com.member.model.service.MemberService;
 
@@ -174,6 +175,9 @@ public class MemberServlet extends HttpServlet {
             }
             String memtext = request.getParameter("MEM_TEXT").trim();
             byte[] mempic = request.getPart("MEM_PIC").getInputStream().readAllBytes();
+            if (mempic.length==0){
+                mempic=new MemberDAO().getById(memid).getMemPic();
+            }
             Member Member = new Member();
             Member.setMemName(memname);
             Member.setMemAcc(memacc);

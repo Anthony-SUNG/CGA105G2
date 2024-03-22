@@ -16,4 +16,6 @@ public interface PointDAO_interface {
 	
     public List<Point> getAll();
 
+	public List<Point> getAllByMemId(Integer memId);
+
 }

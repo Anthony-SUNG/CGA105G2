@@ -39,7 +39,6 @@ public class MemberService {
 			Date memBirthday, String memPhone, Integer memPostalcode, String memCity, String memDistrict,
 			String memAddress, String memMail) {
 		Member member = new Member();
-
 		member.setMemName(memName);
 		member.setMemAcc(memAcc);
 		member.setMemPwd(memPwd);
@@ -53,7 +52,6 @@ public class MemberService {
 		member.setMemAddress(memAddress);
 		member.setMemMail(memMail);
 		dao.insert(member);
-
 		return member;
 	}
 
@@ -94,7 +92,6 @@ public class MemberService {
 		Member member = new Member();
 		member = dao.signin(memAcc, memPwd);
 		return member;
-//		return dao.signin(memAcc, memPwd);
 	}
 
 	public Member meminfo(Integer memId) {
@@ -127,5 +124,22 @@ public class MemberService {
 		dao.update4(member);
 
 		return member;
+	}
+	public Member updmemPoint(Integer memId, Integer memPoint) {
+		Member member = new Member();
+
+		member.setMemId(memId);
+		member.setMemPoint(memPoint);
+		dao.update5(member);
+
+		return member;
+	}
+
+	public Member srhacc(String memacc) {
+		return dao.srhacc(memacc);
+	}
+
+	public Integer srhmail(String memmail) {
+		return dao.srhmail(memmail);
 	}
 }

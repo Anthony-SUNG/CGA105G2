@@ -50,5 +50,4 @@ public class Point {
   public void setPointNumber(Integer pointNumber) {
     this.pointNumber = pointNumber;
   }
-
 }

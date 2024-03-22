@@ -292,40 +292,40 @@ public class StoreServlet extends HttpServlet {
         if ("update2".equals(action)) {
             Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
             request.setAttribute("errorMsgs", errorMsgs);
-            String storeaddress = request.getParameter("STORE_ADDRESS").trim();
+            String storeaddress = request.getParameter("STORE_ADDRESS");
             if (storeaddress == null || storeaddress.trim().length() == 0) {
                 errorMsgs.put("STORE_ADDRESS", "*店家地址請勿空白");
             }
-            String storeacc = request.getParameter("STORE_ACC").trim();
+            String storeacc = request.getParameter("STORE_ACC");
             if (storeacc == null || storeacc.trim().length() == 0) {
                 errorMsgs.put("STORE_ACC", "帳號請勿空白");
             }
-            String storehours = request.getParameter("STORE_HOURS").trim();
+            String storehours = request.getParameter("STORE_HOURS");
             if (storehours == null || storehours.trim().length() == 0) {
                 errorMsgs.put("STORE_HOURS", "帳號請勿空白");
             }
-            String storecomid = request.getParameter("STORE_COM_ID").trim();
+            String storecomid = request.getParameter("STORE_COM_ID");
             if (!storecomid.trim().matches("^[0-9]{8}$")) {
                 errorMsgs.put("STORE_COM_ID", "統編格式不正確");
             }
-            String storephone1 = request.getParameter("STORE_PHONE1").trim();
-            String storemail = request.getParameter("STORE_MAIL").trim();
+            String storephone1 = request.getParameter("STORE_PHONE1");
+            String storemail = request.getParameter("STORE_MAIL");
             if (!storemail.trim().matches("^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z]+$")) {
                 errorMsgs.put("STORE_MAIL", "email格式不正確");
             }
-            String storetext = request.getParameter("STORE_TEXT").trim();
-            String storeweb = request.getParameter("STORE_WEB").trim();
-            String storecomaddress = request.getParameter("STORE_COM_ADDRESS").trim();
+            String storetext = request.getParameter("STORE_TEXT");
+            String storeweb = request.getParameter("STORE_WEB");
+            String storecomaddress = request.getParameter("STORE_COM_ADDRESS");
             if (storecomaddress == null || storecomaddress.trim().length() == 0) {
                 errorMsgs.put("STORE_COM_ADDRESS", "帳號請勿空白");
             }
-            String storetwid = request.getParameter("STORE_TW_ID").trim();
+            String storetwid = request.getParameter("STORE_TW_ID");
             if (storetwid == null || storetwid.trim().length() == 0) {
                 errorMsgs.put("STORE_TW_ID", "身分證請勿空白");
             } else if (!storetwid.trim().matches("^[a-zA-Z]\\d{9}$")) {
                 errorMsgs.put("STORE_TW_ID", "身分證格式不正確");
             }
-            String storephone2 = request.getParameter("STORE_PHONE2").trim();
+            String storephone2 = request.getParameter("STORE_PHONE2");
             if (!errorMsgs.isEmpty()) {
                 RequestDispatcher failureView = request
                         .getRequestDispatcher("/front-end/store/Login/storeRegister2.jsp");
@@ -336,9 +336,19 @@ public class StoreServlet extends HttpServlet {
             StoreService strsrv = new StoreService();
             strsrv.update(storeid, storeaddress, storeacc, storehours, storecomid, storephone1, storemail, storetext,
                     storeweb, storecomaddress, storephone2, storetwid);
-            String url = "/front-end/store/Login/success.jsp";
+            String url = "/Member/StoreServlet?action=searchinfo";
             RequestDispatcher successView = request.getRequestDispatcher(url);
             successView.forward(request, response);
+        }
+        //   searchinfo(store info) ------------------------------------------------------------------------------------------------------------
+        if ("searchinfo".equals(action)) {
+            StoreService strsvc = new StoreService();
+            Store Store=strsvc.getById(storeId);
+            request.setAttribute("Store", Store);
+            String url = "/front-end/store/Login/storeRegister2.jsp";
+            RequestDispatcher successView = request.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+            successView.forward(request, response);
+
         }
     }
 }

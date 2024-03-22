@@ -5,14 +5,17 @@ import com.core.entity.ErrorTitle;
 import com.member.model.Member.dao.MemberDAO_interface;
 import com.member.model.Member.pojo.Member;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MemberDAO extends Common implements MemberDAO_interface {
     @Override
     public void insert(Member member) {
-        String sql = "INSERT INTO cga105g2.member (MEM_ACC,MEM_PWD,MEM_MAIL,MEM_NAME,MEM_RECIPIENT,MEM_TW_ID,MEM_BIRTHDAY,MEM_PHONE,MEM_POSTAL_CODE,MEM_CITY,MEM_DISTRICT,MEM_ADDRESS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        String sql = "INSERT INTO cga105g2.member (MEM_ACC,MEM_PWD,MEM_MAIL,MEM_NAME,MEM_RECIPIENT,MEM_TW_ID,MEM_BIRTHDAY,MEM_PHONE,MEM_POSTAL_CODE,MEM_CITY,MEM_DISTRICT,MEM_ADDRESS,MEM_STATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setString(1, member.getMemAcc());
             pstmt.setString(2, member.getMemPwd());
@@ -26,6 +29,7 @@ public class MemberDAO extends Common implements MemberDAO_interface {
             pstmt.setString(10, member.getMemCity());
             pstmt.setString(11, member.getMemDistrict());
             pstmt.setString(12, member.getMemAddress());
+            pstmt.setInt(13, 1);
             pstmt.executeUpdate();
             con.commit();
             con.close();
@@ -121,6 +125,11 @@ public class MemberDAO extends Common implements MemberDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return member;
     }
@@ -129,7 +138,7 @@ public class MemberDAO extends Common implements MemberDAO_interface {
     public List<Member> getAll() {
         List<Member> list = new ArrayList<>();
         String sql = "SELECT * FROM cga105g2.member order by MEM_ID";
-        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)){
+        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Member member = new Member();
@@ -157,8 +166,22 @@ public class MemberDAO extends Common implements MemberDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
+    }
+
+    public boolean open(Integer id) {
+        Member mb = getById(id);
+        if (mb.getMemStatus() == 1) {
+            update(id, 0);
+            return true;
+        }
+        return false;
     }
 
 
@@ -194,6 +217,11 @@ public class MemberDAO extends Common implements MemberDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
     }
@@ -231,6 +259,11 @@ public class MemberDAO extends Common implements MemberDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
     }
@@ -273,6 +306,11 @@ public class MemberDAO extends Common implements MemberDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return member;
     }
@@ -314,4 +352,72 @@ public class MemberDAO extends Common implements MemberDAO_interface {
             }
         }
     }
+
+    @Override
+    public void update5(Member member) {
+        String sql = "UPDATE cga105g2.member set MEM_POINT=? where MEM_ID=?";
+        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
+            pstmt.setInt(1, member.getMemPoint());
+            pstmt.setInt(2, member.getMemId());
+            pstmt.executeUpdate();
+            con.commit();
+            con.close();
+        } catch (SQLException se) {
+            logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
+        }
+
+    }
+
+    @Override
+    public Member srhacc(String memacc) {
+        Member member = null;
+        String sql = "SELECT * FROM cga105g2.member where MEM_ACC = ?";
+        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
+            pstmt.setString(1, memacc);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                member = new Member();
+                member.setMemId(rs.getInt("MEM_ID"));
+            }
+            con.commit();
+            con.close();
+        } catch (SQLException se) {
+            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
+        }
+        return member;
+    }
+
+    @Override
+    public Integer srhmail(String memmail) {
+        Member member = new Member();
+        String sql = "SELECT * FROM cga105g2.member where MEM_MAIL = ?";
+        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
+            pstmt.setString(1, memmail);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                member.setMemId(rs.getInt("MEM_ID"));
+            }
+            con.commit();
+            con.close();
+        } catch (SQLException se) {
+            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
+        }
+        return member.getMemId();
+    }
+
 }

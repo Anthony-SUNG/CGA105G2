@@ -13,7 +13,6 @@ import java.util.List;
 
 public class PointGoodsDAO extends Common implements PointGoodsDAO_interface {
 
-
     @Override
     public void insert(PointGoods pointgoods) {
         String sql = "INSERT INTO cga105g2.point_goods (PD_IMG, PD_NAME, PD_PRICE, PD_TEXT, PD_TIME, PD_RTIME, PD_STATUS) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -87,7 +86,7 @@ public class PointGoodsDAO extends Common implements PointGoodsDAO_interface {
     @Override
     public PointGoods getByPK(Integer pdId) {
         PointGoods pointgoods = null;
-        String sql = "SELECT * FROM cga105g2.point_goods WHERE PD_ID = ? ";
+        String sql = "SELECT PD_ID, PD_IMG, PD_NAME, PD_PRICE, PD_TEXT, PD_TIME, PD_RTIME, PD_STATUS FROM cga105g2.point_goods WHERE PD_ID = ? ";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, pdId);
             ResultSet rs = pstmt.executeQuery();
@@ -118,7 +117,7 @@ public class PointGoodsDAO extends Common implements PointGoodsDAO_interface {
     @Override
     public List<PointGoods> getAll() {
         List<PointGoods> list = new ArrayList<PointGoods>();
-        String sql = "SELECT * FROM cga105g2.point_goods order by PD_ID";
+        String sql = "SELECT PD_ID, PD_IMG, PD_NAME, PD_PRICE, PD_TEXT, PD_TIME, PD_RTIME, PD_STATUS FROM cga105g2.point_goods order by PD_ID";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -148,8 +147,8 @@ public class PointGoodsDAO extends Common implements PointGoodsDAO_interface {
 
     @Override
     public List<PointGoods> getAlready() {
-        List<PointGoods> list = new ArrayList<>();
-        String sql = "SELECT * FROM cga105g2.point_goods WHERE PD_STATUS=1 order by PD_ID";
+        List<PointGoods> list = new ArrayList<PointGoods>();
+        String sql = "SELECT PD_ID, PD_IMG, PD_NAME, PD_PRICE, PD_TEXT, PD_TIME, PD_RTIME, PD_STATUS FROM cga105g2.point_goods WHERE PD_STATUS=1 order by PD_ID";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -176,4 +175,5 @@ public class PointGoodsDAO extends Common implements PointGoodsDAO_interface {
         }
         return list;
     }
+
 }

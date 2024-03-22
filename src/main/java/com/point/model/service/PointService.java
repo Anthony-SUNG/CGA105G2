@@ -2,6 +2,7 @@ package com.point.model.service;
 
 import java.util.List;
 
+import com.art.model.Article.pojo.Article;
 import com.point.model.Point.dao.PointDAO_interface;
 import com.point.model.Point.dao.impl.PointDAO;
 import com.point.model.Point.pojo.Point;
@@ -47,5 +48,9 @@ public class PointService {
 
 	public List<Point> getAll() {
 		return dao.getAll();
+	}
+	
+	public List<Point> getAllMem(Integer memId) {
+		return dao.getAllByMemId(memId);
 	}
 }

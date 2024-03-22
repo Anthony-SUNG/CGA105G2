@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReservaReservaDetailMealJDBCDAO extends Common implements ReservaReservaDetailMealDAO_interface {
-
-
 	@Override
 	public List<ReservaReservaDetailMeal> getById(Integer id, String chooseId) {
 		String where = " r." + chooseId + " = ?";
@@ -50,7 +48,9 @@ public class ReservaReservaDetailMealJDBCDAO extends Common implements ReservaRe
 			}
 		}
 		return list;
+
 	}
+
 
 
 }
