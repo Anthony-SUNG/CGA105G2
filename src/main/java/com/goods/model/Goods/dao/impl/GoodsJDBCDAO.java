@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 public class GoodsJDBCDAO extends Common implements GoodsDAO_interface {
+
+
     @Override
     public void insert(Goods Goods) {
         final String sql = "INSERT INTO cga105g2.goods (store_id,goods_img,goods_name,goods_status,goods_price,goods_text) VALUES (?, ?, ?, ?, ?, ?)";
@@ -102,6 +104,11 @@ public class GoodsJDBCDAO extends Common implements GoodsDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return goods;
     }
@@ -130,13 +137,18 @@ public class GoodsJDBCDAO extends Common implements GoodsDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
     }
 
     @Override
     public List<Goods> getAllGoods(Map<String, String[]> map) {
-        List<Goods> list = new ArrayList<Goods>();
+        List<Goods> list = new ArrayList<>();
         String sql = "select * from goods " + goodsUtil.getWhereCondition(map) + "order by goods_id";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
@@ -157,7 +169,14 @@ public class GoodsJDBCDAO extends Common implements GoodsDAO_interface {
             con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
+            try {
+                con.rollback();
+            } catch (SQLException r) {
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
         }
         return list;
     }
+
+
 }

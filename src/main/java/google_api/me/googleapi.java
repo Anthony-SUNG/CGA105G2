@@ -28,6 +28,8 @@ public class googleapi extends Common {
         int ins = 0;
         int tonext = 0;
         try {
+            Common comm = new Common();
+
             File placeJson = new File("src\\main\\java\\google_api\\store.json");
             FileReader fileReaderPlace = new FileReader(placeJson);
             JSONArray placeArray = (JSONArray) parser.parse(fileReaderPlace);
@@ -116,7 +118,7 @@ public class googleapi extends Common {
                     logger.info("===============================");
                     storen++;
                     String sql = "select STORE_MAP from cga105g2.store" + " where STORE_MAP like ?";
-                    try (PreparedStatement ps3 = getConnection().prepareStatement(sql)) {
+                    try (PreparedStatement ps3 = comm.getConnection().prepareStatement(sql)) {
                         ps3.setString(1, "%" + loc + "%");
                         ResultSet rs3 = ps3.executeQuery();
                         if (!rs3.next()) {
@@ -128,7 +130,7 @@ public class googleapi extends Common {
                             tonext++;
                         }
                     } catch (SQLException se) {
-                        logger.error(ErrorTitle.UNKNOWN_TITLE.getTitle(),se);
+                        logger.error(ErrorTitle.UNKNOWN_TITLE.getTitle(), se);
                         tonext++;
                         ins--;
                     }
@@ -180,10 +182,11 @@ public class googleapi extends Common {
     }
 
     private static void insertsoq(List<Store> store_1_google) {
+        Common comm = new Common();
         String sql = "insert into cga105g2.store("
                 + "STORE_NAME, STORE_PHONE1, STORE_HOURS,STORE_MAP,STORE_CITY, STORE_DISTRICT, STORE_ADDRESS,STORE_URL,STORE_WEB) "
                 + "values(?,?,?,?,?,?,?,?,?);";
-        try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
+        try (PreparedStatement ps = comm.getConnection().prepareStatement(sql)) {
             // 批次新增
             for (Store store : store_1_google) {
                 ps.setString(1, store.getStoreName());
@@ -198,15 +201,14 @@ public class googleapi extends Common {
                 ps.addBatch();
             }
             ps.executeBatch();
-            con.commit();
-            con.close();
+            comm.close();
         } catch (BatchUpdateException e) {
             a--;
             logger.error(ErrorTitle.UNDEF_TITLE.getTitle(), e);
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                comm.getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

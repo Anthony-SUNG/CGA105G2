@@ -53,12 +53,6 @@ public class OrderServlet extends HttpServlet {
 
 
 		if ("checkout".equals(action)) { // 來自Member_cart.jsp的請求將redis取的值轉交checkout
-			if (req.getParameter("goodsId")==null){
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-end/Member/goods/Member_cart.jsp");
-				failureView.forward(req, res);
-				return; // 程式中斷
-			}
 			HttpSession session = req.getSession();
 		    Integer memId = (Integer) session.getAttribute("memId");  
 			req.setAttribute("memId", memId);
@@ -115,13 +109,15 @@ public class OrderServlet extends HttpServlet {
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			Integer memId = (Integer) req.getSession().getAttribute("memId");
-			if (req.getParameter("goodsId")==null){
+			List<String> listG= List.of(req.getParameterValues("goodsId"));
+
+
+			if (listG.isEmpty()){
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/front-end/Member/goods/Member_cart.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
-			List<String> listG= List.of(req.getParameterValues("goodsId"));
 			/*************************** 2.開始新增資料 ***************************************/
 			List<String> listQ= List.of(req.getParameterValues("detailQuantity"));
 

@@ -58,12 +58,13 @@ public class CartIteamService implements CartItemDAO_interface {
 	    public void reduceQty(String userId, Integer storeId, Integer goodsId) {
 	        Cart cart = get(userId);
 	        CartItem cartItem = cart.getStoreMap().get(storeId).get(goodsId);
-	        int cartItemQty = cartItem.getDetailQuantity()-1;
+	        Integer cartItemQty = cartItem.getDetailQuantity()-1;
 	        if(cartItemQty == 0){
 	            cart.getStoreMap().get(storeId).remove(cartItem.getGoodsId());
 	        }else {
 	            cartItem.setDetailQuantity(cartItemQty);
 	        }
+
 	        put(storeId, cart);
 	    }
 

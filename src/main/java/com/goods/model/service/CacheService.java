@@ -1,6 +1,5 @@
 package com.goods.model.service;
 
-
 import com.goods.model.Cart.dao.CacheDAO_interface;
 import com.goods.model.Cart.pojo.Cart;
 import com.google.gson.Gson;
@@ -36,9 +35,5 @@ public class CacheService implements CacheDAO_interface {
     public void clear(String userId) {
         jedis.del(userId);
     }
-
-//    public static void main(String[] args) {
-//        CacheService dao = new CacheService();
-//    }
 
 }

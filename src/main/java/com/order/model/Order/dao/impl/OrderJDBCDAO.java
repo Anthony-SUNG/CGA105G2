@@ -19,7 +19,6 @@ import java.util.Set;
 
 public class OrderJDBCDAO extends Common implements OrderDAO_interface {
 
-    private static DataSource ds = null;
 
     @Override
     public void insert(Order order) {
@@ -205,7 +204,8 @@ public class OrderJDBCDAO extends Common implements OrderDAO_interface {
         PreparedStatement pstmt;
         String next_orderId = null;
         try {
-            pstmt = getConnection().prepareStatement(INSERT_STMT);
+            String cols[] = { "ORDER_ID" };
+            pstmt = getConnection().prepareStatement(INSERT_STMT,cols);
             pstmt.setInt(1, order.getMemId());
             pstmt.setInt(2, order.getStoreId());
             pstmt.setInt(3, order.getOrderPrice());

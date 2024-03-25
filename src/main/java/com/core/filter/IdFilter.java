@@ -43,6 +43,7 @@ public class IdFilter extends HttpFilter {
         Integer sId = (Integer) request.getSession().getAttribute("storeId");
         Integer mId = (Integer) request.getSession().getAttribute("memId");
         Integer eId = (Integer) request.getSession().getAttribute("empId");
+
         Integer storeplan = 0;
         if (sId >= 1) {
             StoreService storeSvc = new StoreService();
@@ -58,6 +59,7 @@ public class IdFilter extends HttpFilter {
 //		存在cookie方法
 //		Cookie cookie = new Cookie("username", "John");
 //		response.addCookie(cookie);
+        logger.info(String.format("ID INFO[sId:%s,mId:%s,eId:%s,storeplan:%s", sId, mId, eId, storeplan));
         if (requestPath.matches(".*css") || requestPath.matches(".*js") || requestPath.matches(".*assets.*")) {
             logger.info("doFilter-1區:css&js區");
             chain.doFilter(request, response);

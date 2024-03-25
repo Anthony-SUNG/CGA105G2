@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Common {
-    protected static Connection con = null;
+    protected Connection con = null;
     public static final Logger logger = LogManager.getLogger(Common.class);
 
     static {
@@ -21,17 +21,28 @@ public class Common {
         }
     }
 
-
-    public static Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/cga105g2";
         String user = "2023032003";
         String password = "2023032003";
         try {
-            con = DriverManager.getConnection(url, user, password);
+            this.con = DriverManager.getConnection(url, user, password);
             con.setAutoCommit(false);
         } catch (SQLException e) {
             logger.error(ErrorTitle.CONNECTION_TITLE.getTitle(con.toString()), e);
         }
         return con;
     }
+
+    public void close() throws SQLException {
+        if (this.con != null) {
+            this.con.commit();
+            this.con.close();
+        }
+    }
+
+    public Connection getCon() {
+        return this.con;
+    }
+
 }

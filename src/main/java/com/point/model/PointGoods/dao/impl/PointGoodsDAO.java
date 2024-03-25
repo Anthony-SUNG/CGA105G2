@@ -85,13 +85,13 @@ public class PointGoodsDAO extends Common implements PointGoodsDAO_interface {
 
     @Override
     public PointGoods getByPK(Integer pdId) {
-        PointGoods pointgoods = null;
-        String sql = "SELECT PD_ID, PD_IMG, PD_NAME, PD_PRICE, PD_TEXT, PD_TIME, PD_RTIME, PD_STATUS FROM cga105g2.point_goods WHERE PD_ID = ? ";
+        PointGoods pointgood = null;
+        String sql = "SELECT * FROM cga105g2.point_goods WHERE PD_ID = ? ";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, pdId);
             ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                pointgoods = new PointGoods();
+            if (rs.next()) {
+                PointGoods pointgoods = new PointGoods();
                 pointgoods.setPdId(rs.getInt("PD_ID"));
                 pointgoods.setPdImg(rs.getBytes("PD_IMG"));
                 pointgoods.setPdName(rs.getString("PD_NAME"));
@@ -100,6 +100,7 @@ public class PointGoodsDAO extends Common implements PointGoodsDAO_interface {
                 pointgoods.setPdTime(rs.getTimestamp("PD_TIME"));
                 pointgoods.setPdRtime(rs.getTimestamp("PD_RTIME"));
                 pointgoods.setPdStatus(rs.getInt("PD_STATUS"));
+                pointgood = pointgoods;
             }
             con.commit();
             con.close();
@@ -111,7 +112,7 @@ public class PointGoodsDAO extends Common implements PointGoodsDAO_interface {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
         }
-        return pointgoods;
+        return pointgood;
     }
 
     @Override
