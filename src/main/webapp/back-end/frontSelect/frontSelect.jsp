@@ -159,7 +159,8 @@
                     <div class="container col-lg-10">
                         <div class=" col-12 justify-content-center">
                             <% OrderService orderSvc = new OrderService();
-                                List<Order> orderList = orderSvc.getAll();pageContext.setAttribute("orderList", orderList);
+                                List<Order> orderList = orderSvc.getAll();
+                                pageContext.setAttribute("orderList", orderList);
                             %>
                             <table class="table table-hover" id="orderSelect">
                                 <thead>
