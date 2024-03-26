@@ -3,6 +3,7 @@ package com.core.servlet;
 import com.art.model.Article.pojo.Article;
 import com.art.model.service.ArtService;
 import com.code.model.Code.dao.impl.CodeJDBCDAO;
+import com.core.entity.ErrorTitle;
 import com.emp.model.Employee.pojo.Employee;
 import com.emp.model.EmployeeRoot.pojo.EmployeeRoot;
 import com.emp.model.service.EmployeeService;
@@ -16,7 +17,6 @@ import com.foodorder.model.ReservaDetail.pojo.ReservaDetail;
 import com.member.model.Member.dao.impl.MemberDAO;
 import com.member.model.Member.pojo.Member;
 import com.member.model.service.MemberService;
-import com.point.model.Point.pojo.Point;
 import com.point.model.service.PointService;
 import com.pushmesg.model.service.pgService;
 import com.store.model.Store.dao.impl.StoreDAO;
@@ -27,6 +27,8 @@ import com.subs.model.service.SubsService;
 import com.waiting.contorller.Mailer;
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutOneTime;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONArray;
 
 import javax.servlet.RequestDispatcher;
@@ -39,6 +41,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Serial;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
@@ -50,6 +53,8 @@ import java.util.Map;
 @MultipartConfig
 @WebServlet("/LonginServlet")
 public class LonginServlet extends HttpServlet {
+    public static final Logger logger = LogManager.getLogger(LonginServlet.class);
+    @Serial
     private static final long serialVersionUID = 1L;
     public static AllInOne domain;
 
@@ -62,16 +67,16 @@ public class LonginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
+        request.setCharacterEncoding("UTF-8");
         if ("insert".equals(action)) {
-            List<String> errorMsgs = new LinkedList<String>();
+            List<String> errorMsgs = new LinkedList<>();
             request.setAttribute("errorMsgs", errorMsgs);
-            /*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+            //*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************
             String memname = request.getParameter("MEM_NAME");
             request.setAttribute("memname", memname);
-            String memnameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
-            if (memname == null || memname.trim().length() == 0) {
+            String memnameReg = "^[(\u4e00-\u9fa5)a-zA-Z0-9_]{2,10}$";
+            if (memname == null || memname.trim().isEmpty()) {
                 errorMsgs.add("姓名: 請勿空白");
             } else if (!memname.trim().matches(memnameReg)) { // 以下練習正則(規)表示式(regular-expression)
                 errorMsgs.add("姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
@@ -79,33 +84,33 @@ public class LonginServlet extends HttpServlet {
 
             String memacc = request.getParameter("MEM_ACC").trim();
             request.setAttribute("memacc", memacc);
-            if (memacc == null || memacc.trim().length() == 0) {
+            if (memacc.trim().isEmpty()) {
                 errorMsgs.add("帳號請勿空白");
             } else if (!memacc.matches("^[a-zA-Z0-9]+$")) { // 以下練習正則(規)表示式(regular-expression)
                 errorMsgs.add("帳號: 只能是英文字母和數字組成，不能有特殊符號、_等");
             }
             String mempwd = request.getParameter("MEM_PWD").trim();
-            if (mempwd == null || mempwd.trim().length() == 0) {
+            if (mempwd.trim().isEmpty()) {
                 errorMsgs.add("密碼請勿空白");
             }
             String mempwd2 = request.getParameter("MEM_PWD2").trim();
-            if (mempwd2 == null || mempwd2.trim().length() == 0) {
+            if (mempwd2.trim().isEmpty()) {
                 errorMsgs.add("確認密碼請勿空白");
             }
             String memrecipient = request.getParameter("MEM_RECIPIENT").trim();
             request.setAttribute("memrecipient", memrecipient);
-            if (memrecipient == null || memrecipient.trim().length() == 0) {
+            if (memrecipient.trim().isEmpty()) {
                 errorMsgs.add("姓名欄位請勿空白");
             }
             String memtwid = request.getParameter("MEM_TW_ID").trim();
-            String memtwidReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+            String memtwidReg = "^[(\u4e00-\u9fa5)a-zA-Z0-9_]{2,10}$";
             request.setAttribute("memtwid", memtwid);
-            if (memtwid == null || memtwid.trim().length() == 0) {
+            if (memtwid.trim().isEmpty()) {
                 errorMsgs.add("身分證字號請勿空白");
             } else if (!memtwid.trim().matches(memtwidReg)) { // 以下練習正則(規)表示式(regular-expression)
                 errorMsgs.add("身分證字號格式錯誤");
             }
-            java.sql.Date membirthday = null;
+            java.sql.Date membirthday;
             try {
                 membirthday = java.sql.Date.valueOf(request.getParameter("MEM_BIRTHDAY").trim());
                 request.setAttribute("membirthday", membirthday);
@@ -115,76 +120,65 @@ public class LonginServlet extends HttpServlet {
             }
             String memphone = request.getParameter("MEM_PHONE").trim();
             request.setAttribute("memphone", memphone);
-            if (memphone == null || memphone.trim().length() == 0) {
+            if (memphone.trim().isEmpty()) {
                 errorMsgs.add("電話號碼請勿空白");
             }
-            Integer mempostalcode = Integer.valueOf(request.getParameter("MEM_POSTAL_CODE").trim());
-            if (mempostalcode == null) {
+            int mempostalcode = Integer.parseInt(request.getParameter("MEM_POSTAL_CODE").trim());
+            if (mempostalcode < 0) {
                 errorMsgs.add("郵遞區號請勿空白");
             }
             String memcity = request.getParameter("MEM_CITY").trim();
-            if (memcity == null || memcity.trim().length() == 0) {
+            if (memcity.trim().isEmpty()) {
                 errorMsgs.add("城市請勿空白");
             }
             String memdistrict = request.getParameter("MEM_DISTRICT").trim();
-            if (memdistrict == null || memdistrict.trim().length() == 0) {
+            if (memdistrict.trim().isEmpty()) {
                 errorMsgs.add("地區請勿空白");
             }
             String memaddress = request.getParameter("MEM_ADDRESS").trim();
             request.setAttribute("memaddress", memaddress);
-            if (memaddress == null || memaddress.trim().length() == 0) {
+            if (memaddress.trim().isEmpty()) {
                 errorMsgs.add("地址請勿空白");
             }
             String memmail = request.getParameter("MEM_MAIL").trim();
             request.setAttribute("memmail", memmail);
-            if (memmail == null || memmail.trim().length() == 0) {
+            if (memmail.trim().isEmpty()) {
                 errorMsgs.add("電子信箱請勿空白");
             }
-            Member Member = new Member();
+            Member member;
             MemberService memSvc = new MemberService();
-
-
             memSvc.srhmail(memmail);
-            if (!(memSvc.srhacc(memacc) == null)) {
-                errorMsgs.add("帳號已被註冊");
-            }
-            if (!(memSvc.srhacc(memacc) == null)) {
-                errorMsgs.add("Email已被註冊");
-            }
-
-            Member = memSvc.topojo(memname, memacc, mempwd, memrecipient, memtwid, membirthday, memphone, mempostalcode,
+            if (memSvc.srhacc(memacc) != null) errorMsgs.add("帳號已被註冊");
+            member = memSvc.topojo(memname, memacc, mempwd, memrecipient, memtwid, membirthday, memphone, mempostalcode,
                     memcity, memdistrict, memaddress, memmail);
             if (!errorMsgs.isEmpty()) {
-                request.setAttribute("Member", Member);
+                request.setAttribute("Member", member);
                 RequestDispatcher failureView = request
                         .getRequestDispatcher("/front-end/Member/member/memberRegister.jsp");
 
                 failureView.forward(request, response);
                 return;
             }
-            /*************************** 2.開始新增資料 ***************************************/
-            Member = memSvc.addMem(memname, memacc, mempwd, memrecipient, memtwid, membirthday, memphone, mempostalcode,
-                    memcity, memdistrict, memaddress, memmail);
-            /*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+            //*************************** 2.新增完成,準備轉交(Send the Success view) ***********
             //註冊成功寄email
             String ServerName = request.getServerName();
             Mailer mailer = new Mailer();
             mailer.sendAccount(memname, memmail, ServerName);
-            /*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+            //*************************** 3.新增完成,準備轉交(Send the Success view) ***********
             String url = "/front-end/Member/member/regisetDone.jsp";
             RequestDispatcher successView = request.getRequestDispatcher(url);
             successView.forward(request, response);
         }
         if ("Signinm".equals(action)) {
-            List<String> errorMsgm = new LinkedList<String>();
+            List<String> errorMsgm = new LinkedList<>();
             request.setAttribute("errorMsgm", errorMsgm);
-            /*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+            //*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************
             String memacc = request.getParameter("MEM_ACC");
             String mempwd = request.getParameter("MEM_PWD");
             Member member = new Member();
             member.setMemAcc(memacc);
             request.setAttribute("member", member);
-            if (memacc == null || (memacc.trim()).length() == 0 || mempwd == null || (mempwd.trim()).length() == 0) {
+            if (memacc == null || (memacc.trim()).isEmpty() || mempwd == null || (mempwd.trim()).isEmpty()) {
                 errorMsgm.add("帳密不可為空白");
                 RequestDispatcher failureView = request.getRequestDispatcher("/front-end/Member/member/memberLognIn.jsp");
                 failureView.forward(request, response);
@@ -206,7 +200,7 @@ public class LonginServlet extends HttpServlet {
                 failureView.forward(request, response);
                 return;// 程式中斷
             }
-            /*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+            //*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
             request.getSession().setAttribute("memberName", memSvc.getById(memid).getMemName());
             request.getSession().setAttribute("memId", memid);
             String wanttogo = (String) request.getSession().getAttribute("togourl");
@@ -230,9 +224,9 @@ public class LonginServlet extends HttpServlet {
         }
         // signin store
         if ("Signins".equals(action)) {
-            List<String> errorMsgS = new LinkedList<String>();
+            List<String> errorMsgS = new LinkedList<>();
             request.setAttribute("errorMsgS", errorMsgS);
-            /*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+            //*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
             String storeacc = request.getParameter("STORE_ACC");
             String storepwd = request.getParameter("STORE_PWD");
             Store store = new Store();
@@ -240,7 +234,7 @@ public class LonginServlet extends HttpServlet {
             request.setAttribute("store", store);
             request.setAttribute("storeacc", storeacc);
             request.setAttribute("errorMsgS", errorMsgS);
-            if (storeacc == null || (storeacc.trim()).length() == 0 || storepwd == null || (storepwd.trim()).length() == 0) {
+            if (storeacc == null || (storeacc.trim()).isEmpty() || storepwd == null || (storepwd.trim()).isEmpty()) {
                 errorMsgS.add("帳密不可為空白");
                 RequestDispatcher failureView = request.getRequestDispatcher("/front-end/Member/member/memberLognIn.jsp");
                 failureView.forward(request, response);
@@ -255,9 +249,8 @@ public class LonginServlet extends HttpServlet {
                 failureView.forward(request, response);
                 return;// 程式中斷
             }
-            /*************************** 判斷狀態 *************/
+            //*************************** 判斷狀態 *************/
             Integer storestatus = storeSvc.getById(storeid).getStoreStatus();
-            Integer storeplan = storeSvc.getById(storeid).getStorePlan();
             if (storestatus == 1) {
                 errorMsgS.add("帳號審核中");
                 RequestDispatcher failureView = request.getRequestDispatcher("/front-end/Member/member/memberLognIn.jsp");
@@ -279,7 +272,7 @@ public class LonginServlet extends HttpServlet {
         }
         // signin emp
         if ("login".equals(action)) {
-            List<String> errorMsgs = new LinkedList<String>();
+            List<String> errorMsgs = new LinkedList<>();
             request.setAttribute("errorMsgs", errorMsgs);
             String acc = request.getParameter("empAcc");
             String pwd = request.getParameter("empPwd");
@@ -331,20 +324,18 @@ public class LonginServlet extends HttpServlet {
             successView.forward(request, response);
         }
         if ("byStoreName".equals(action)) { // 來自index.jsp的請求
-            Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+            Map<String, String> errorMsgs = new LinkedHashMap<>();
             request.setAttribute("errorMsgs", errorMsgs);
-            /***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+            //***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
             String storeName = request.getParameter("storeName");
-            if (storeName == null || (storeName.trim()).length() == 0) {
-                errorMsgs.put("error1", "錯誤:請輸入要查詢的文字");
-            }
+            if (storeName == null || (storeName.trim()).isEmpty()) errorMsgs.put("error1", "錯誤:請輸入要查詢的文字");
             if (!errorMsgs.isEmpty()) {
                 RequestDispatcher failureView = request
                         .getRequestDispatcher("/index.jsp");
                 failureView.forward(request, response);
                 return;//程式中斷
             }
-            if (storeName.substring(0, 1).equals("@")) {
+            if (storeName != null && storeName.charAt(0) == '@') {
                 String text = storeName.replace("@", "");
                 String url = "/LonginServlet?action=byMemName&storeName=" + text;
                 request.setAttribute("storeName", text);
@@ -352,27 +343,27 @@ public class LonginServlet extends HttpServlet {
                 successView.forward(request, response);
                 return;
             }
-            /***************************2.開始查詢資料*****************************************/
+            //***************************2.開始查詢資料*****************************************/
             StoreService storeService = new StoreService();
             List<Store> list = storeService.getStoreName(storeName);
-            if (list.size() == 0) {
+            if (list.isEmpty()) {
                 errorMsgs.put("error2", "查無資料，請換一個搜索字");
                 RequestDispatcher failureView = request
                         .getRequestDispatcher("/index.jsp");
                 failureView.forward(request, response);
                 return;//程式中斷
             }
-            /***************************3.查詢完成,準備轉交(Send the Success view)*************/
+            //***************************3.查詢完成,準備轉交(Send the Success view)*************/
             request.setAttribute("list", list); // 資料庫取出的list物件,存入req
             String url = "/front-end/Member/member/searchStore.jsp";
             RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 searchStore.jsp
             successView.forward(request, response);
         }
         if ("StorePage".equals(action)) { //來自searchStore的請求 要轉交到店家頁面
-            /***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+            //***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
             Integer memId = (Integer) request.getSession().getAttribute("memId");
             Integer storeId = Integer.valueOf(request.getParameter("SearchstoreId").trim());    //拿到我設定的input hidden
-            /***************************2.開始查詢資料*****************************************/
+            //***************************2.開始查詢資料*****************************************/
             StoreService storeService = new StoreService();
             Store store = storeService.getById(storeId);  //依照剛剛取得的id 去找尋該筆店家
             Integer sts = store.getStoreStatus();
@@ -391,21 +382,20 @@ public class LonginServlet extends HttpServlet {
             float sum = 0;
             int commemt = articlelist.size();
             request.setAttribute("commemt", commemt);//算共有幾則評論
-            for (int i = 0; i < articlelist.size(); i++) {
-                Article article = articlelist.get(i);
+            for (Article article : articlelist) {
                 float a = article.getArtScore();
                 sum = sum + a;
             }
             try {
                 DecimalFormat df = new DecimalFormat("#.0");
-                float StoreScore = Float.valueOf(df.format(sum / articlelist.size()));
+                float StoreScore = Float.parseFloat(df.format(sum / articlelist.size()));
                 request.setAttribute("StoreScore", StoreScore);   //這邊在算店家的評分 加上四捨五入的方法
             } catch (NumberFormatException e) {
-
+                logger.error(ErrorTitle.UNKNOWN_TITLE.getTitle("NumberFormatException"), e);
             }
             SubsService subSvs = new SubsService();
             List<Subscribe> subslist = subSvs.getAllByMemIdStoreId(storeId, memId);
-            /***************************3.查詢完成,準備轉交(Send the Success view)*************/
+            //***************************3.查詢完成,準備轉交(Send the Success view)*************/
             request.setAttribute("store", store);//set店家讓下個頁面能收到值
             request.setAttribute("member", member);//set會員讓下個頁面能收到值
             request.setAttribute("articlelist", articlelist);
@@ -415,11 +405,11 @@ public class LonginServlet extends HttpServlet {
             successView.forward(request, response);
         }
         if ("byMemName".equals(action)) { // 來自index.jsp的請求，這是搜尋會員
-            Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+            Map<String, String> errorMsgs = new LinkedHashMap<>();
             request.setAttribute("errorMsgs", errorMsgs);
-            /***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+            //***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
             String memAcc = request.getParameter("storeName");
-            if (memAcc == null || (memAcc.trim()).length() == 0) {
+            if (memAcc == null || (memAcc.trim()).isEmpty()) {
                 errorMsgs.put("error1", "請輸入要查詢的文字");
             }
             if (!errorMsgs.isEmpty()) {
@@ -428,17 +418,17 @@ public class LonginServlet extends HttpServlet {
                 failureView.forward(request, response);
                 return;//程式中斷
             }
-            /***************************2.開始查詢資料*****************************************/
+            //***************************2.開始查詢資料*****************************************/
             MemberService memService = new MemberService();
             List<Member> list = memService.getAllByAcc(memAcc); //依照會員的帳號去搜
-            if (list.size() == 0) {
+            if (list.isEmpty()) {
                 errorMsgs.put("error2", "查無資料");
                 RequestDispatcher failureView = request
                         .getRequestDispatcher("/index.jsp");
                 failureView.forward(request, response);
                 return;//程式中斷
             }
-            /***************************3.查詢完成,準備轉交(Send the Success view)*************/
+            //***************************3.查詢完成,準備轉交(Send the Success view)*************/
             request.setAttribute("list", list); // 資料庫取出的list物件,存入req
             String url = "/front-end/Member/member/searchMember.jsp";
             RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 searchMember.jsp
@@ -446,7 +436,6 @@ public class LonginServlet extends HttpServlet {
         }
         //==========================查看會員頁面=================================
         if ("MemberPage".equals(action)) { //來自searchMember的請求 要轉交到會員頁面
-            request.setCharacterEncoding("UTF-8");
             Integer nameid = (Integer) request.getSession().getAttribute("memId");
             if (nameid == 0) {
                 String url = "/front-end/Member/member/memberLognIn.jsp";
@@ -457,10 +446,10 @@ public class LonginServlet extends HttpServlet {
 
             String name = new MemberDAO().getById(nameid).getMemName();
             request.setAttribute("userName", name);
-            /***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+            //***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
             Integer memId1 = (Integer) request.getSession().getAttribute("memId");
             Integer memId2 = Integer.valueOf(request.getParameter("SearchMemberId").trim());    //拿到我設定的input hidden
-            /***************************2.開始查詢資料*****************************************/
+            //***************************2.開始查詢資料*****************************************/
             MemberService memService = new MemberService();
             Member member2 = memService.getById(memId2); //別的會員
             Member member1 = memService.getById(memId1); //登入的本人
@@ -469,7 +458,7 @@ public class LonginServlet extends HttpServlet {
             request.setAttribute("userName", new MemberDAO().getById(memId2).getMemName());
             FollowMemService followMemService = new FollowMemService();
             List<FollowMem> followlist = followMemService.getAllByMemId1MeMId2(memId1, memId2);
-            /***************************3.查詢完成,準備轉交(Send the Success view)*************/
+            //***************************3.查詢完成,準備轉交(Send the Success view)*************/
             request.setAttribute("member1", member1);
             request.setAttribute("member2", member2); //set店家讓下個頁面能收到值
             request.setAttribute("list", list); //這是文章的list
@@ -479,10 +468,10 @@ public class LonginServlet extends HttpServlet {
             successView.forward(request, response);
         }
         if ("quithitgame".equals(action)) { //來自searchMember的請求 要轉交到會員頁面
-            /***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+            //***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
             Integer memId1 = (Integer) request.getSession().getAttribute("memId");
             Integer memId2 = Integer.valueOf(request.getParameter("SearchMemberId").trim());    //拿到我設定的input hidden
-            /***************************2.開始查詢資料*****************************************/
+            //***************************2.開始查詢資料*****************************************/
             MemberService memService = new MemberService();
             Member member2 = memService.getById(memId2); //別的會員
             Member member1 = memService.getById(memId1); //登入的本人
@@ -490,13 +479,9 @@ public class LonginServlet extends HttpServlet {
             List<Article> list = artService.getAllMem(memId2);
             FollowMemService followMemService = new FollowMemService();
             List<FollowMem> followlist = followMemService.getAllByMemId1MeMId2(memId1, memId2);
-            Point point = new Point();
-            /***************************3.查詢完成,準備轉交(Send the Success view)*************/
+            //***************************3.查詢完成,準備轉交(Send the Success view)*************/
             PointService pointservice = new PointService();
-            point = pointservice.addPoint(memId1, "玩遊戲", 1);
-            MemberService memSvc = new MemberService();
-            Member member = memSvc.meminfo(memId1);
-            member = memSvc.updmemPoint(memId1, Integer.valueOf(member.getMemPoint() + 1));
+            pointservice.addPoint(memId1, "玩遊戲", 1);
             request.setAttribute("member1", member1);
             request.setAttribute("member2", member2); //set店家讓下個頁面能收到值
             request.setAttribute("list", list); //這是文章的list
@@ -506,7 +491,6 @@ public class LonginServlet extends HttpServlet {
             RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交原本的會員頁面
             successView.forward(request, response);
         }
-
 
         if ("getOtherMemberArticlePhoto".equals(action)) { //秀文章圖片
             OutputStream out = response.getOutputStream();
@@ -526,19 +510,19 @@ public class LonginServlet extends HttpServlet {
         }
         //  forget1(update)
         if ("forget1".equals(action)) {
-            List<String> errorMsgs = new LinkedList<String>();
+            List<String> errorMsgs = new LinkedList<>();
             request.setAttribute("errorMsgs", errorMsgs);
-            /*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+            //*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************
             String memacc = request.getParameter("MEM_ACC").trim();
             String mempwd = request.getParameter("MEM_PWD").trim();
             String mempwd2 = request.getParameter("MEM_PWD2").trim();
-            if (memacc == null || memacc.trim().length() == 0) {
+            if (memacc.trim().isEmpty()) {
                 errorMsgs.add("帳號請勿空白");
             }
-            if (mempwd == null || mempwd.trim().length() == 0) {
+            if (mempwd.trim().isEmpty()) {
                 errorMsgs.add("密碼請勿空白");
             }
-            if (mempwd2 == null || mempwd2.trim().length() == 0) {
+            if (mempwd2.trim().isEmpty()) {
                 errorMsgs.add("確認密碼請勿空白");
             }
             if (!mempwd2.equals(mempwd)) {
@@ -554,18 +538,17 @@ public class LonginServlet extends HttpServlet {
                 failureView.forward(request, response);
                 return;
             }
-            /*************************** 2.開始新增資料 ***************************************/
+            //*************************** 2.開始新增資料 ***************************************
             MemberService memSvc = new MemberService();
-            Member = memSvc.forget1(memacc, mempwd);
-            Member member1 = memSvc.signin(memacc, mempwd);
-            Integer memid = member1.getMemId();
+            Member member = memSvc.signin(memacc, mempwd);
+            Integer memid = member.getMemId();
             if (memid == 0) {
                 errorMsgs.add("查無帳號");
                 RequestDispatcher failureView = request.getRequestDispatcher("/front-end/Member/member/forget1.jsp");
                 failureView.forward(request, response);
                 return;// 程式中斷
             }
-            /*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+            //*************************** 3.新增完成,準備轉交(Send the Success view) ***********
             String url = "/front-end/Member/member/memberLognIn.jsp";
             RequestDispatcher successView = request.getRequestDispatcher(url);
             successView.forward(request, response);
@@ -573,19 +556,19 @@ public class LonginServlet extends HttpServlet {
         }
         //  forget2(update)
         if ("forget2".equals(action)) {
-            List<String> errorMsgs = new LinkedList<String>();
+            List<String> errorMsgs = new LinkedList<>();
             request.setAttribute("errorMsgs", errorMsgs);
-            /*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+            //*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************
             String storeacc = request.getParameter("STORE_ACC").trim();
             String storepwd = request.getParameter("STORE_PWD").trim();
             String storepwd2 = request.getParameter("STORE_PWD2").trim();
-            if (storeacc == null || storeacc.trim().length() == 0) {
+            if (storeacc.trim().isEmpty()) {
                 errorMsgs.add("帳號請勿空白");
             }
-            if (storepwd == null || storepwd.trim().length() == 0) {
+            if (storepwd.trim().isEmpty()) {
                 errorMsgs.add("密碼請勿空白");
             }
-            if (storepwd2 == null || storepwd2.trim().length() == 0) {
+            if (storepwd2.trim().isEmpty()) {
                 errorMsgs.add("確認密碼請勿空白");
             }
             if (!storepwd2.equals(storepwd)) {
@@ -601,33 +584,32 @@ public class LonginServlet extends HttpServlet {
                 failureView.forward(request, response);
                 return;
             }
-            /*************************** 2.開始新增資料 ***************************************/
+            //*************************** 2.開始新增資料 ***************************************
             StoreService strSvc = new StoreService();
-            Store = strSvc.forget1(storeacc, storepwd);
-            Store store1 = strSvc.signin(storeacc, storepwd);
-            Integer storeid = store1.getStoreId();
+            Store store = strSvc.signin(storeacc, storepwd);
+            Integer storeid = store.getStoreId();
             if (storeid == 0) {
                 errorMsgs.add("查無帳號");
                 RequestDispatcher failureView = request.getRequestDispatcher("/front-end/Member/member/forget2.jsp");
                 failureView.forward(request, response);
                 return;// 程式中斷
             }
-            /*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+            //*************************** 3.新增完成,準備轉交(Send the Success view) ***********
             String url = "/front-end/Member/member/memberLognIn.jsp";
             RequestDispatcher successView = request.getRequestDispatcher(url);
             successView.forward(request, response);
         }
         //searchstore1
         if ("searchstore1".equals(action)) {
-            Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+            Map<String, String> errorMsgs = new LinkedHashMap<>();
             request.setAttribute("errorMsgs", errorMsgs);
             String storecity = request.getParameter("STORE_CITY").trim();
             String storedistrict = request.getParameter("STORE_DISTRICT").trim();
             StoreService strsrv = new StoreService();
             JSONArray json = strsrv.getAllByAddress(storecity, storedistrict);
-            String errorString = "";
-            if (json.size() == 0) {
-                errorString = "目前" + storecity + storedistrict + "沒有店家可以申請，若有疑問請聯絡客服";
+            if (json.isEmpty()) {
+                String errorString = "目前" + storecity + storedistrict + "沒有店家可以申請，若有疑問請聯絡客服";
+                errorMsgs.put("error2", errorString);
             }
             request.setAttribute("list_out", json);
             String url = "/front-end/store/Login/storeRegister0.2.jsp";
@@ -636,12 +618,11 @@ public class LonginServlet extends HttpServlet {
         }
         //update1
         if ("updatest1".equals(action)) {
-            Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+            Map<String, String> errorMsgs = new LinkedHashMap<>();
             request.setAttribute("errorMsgs", errorMsgs);
             Integer storeid = Integer.valueOf(request.getParameter("STORE_ID").trim());
             StoreService strsrv = new StoreService();
             Store store = strsrv.getById(storeid);
-            String errorString = "";
             request.setAttribute("Store", store);
             request.setAttribute("storeId", storeid);
             String url = "/front-end/store/Login/storeRegister.jsp";
@@ -654,19 +635,19 @@ public class LonginServlet extends HttpServlet {
             Integer storeid = Integer.valueOf(request.getParameter("storeId"));
             Store store = strsrv.getById(storeid);
             request.setAttribute("Store", store);
-            Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+            Map<String, String> errorMsgs = new LinkedHashMap<>();
             request.setAttribute("errorMsgs", errorMsgs);
             String storeacc = request.getParameter("STORE_ACC").trim();
             request.setAttribute("storeacc", storeacc);
-            if (storeacc == null || storeacc.trim().length() == 0) {
+            if (storeacc.trim().isEmpty()) {
                 errorMsgs.put("STORE_ACC", "帳號請勿空白");
             }
             String storepwd = request.getParameter("STORE_PWD").trim();
-            if (storepwd == null || storepwd.trim().length() == 0) {
+            if (storepwd.trim().isEmpty()) {
                 errorMsgs.put("STORE_PWD", "密碼請勿空白");
             }
             String storepwd2 = request.getParameter("STORE_PWD2").trim();
-            if (storepwd2 == null || storepwd2.trim().length() == 0) {
+            if (storepwd2.trim().isEmpty()) {
                 errorMsgs.put("STORE_PWD2", "確認密碼請勿空白");
             }
             if (!storepwd2.equals(storepwd)) {
@@ -675,19 +656,19 @@ public class LonginServlet extends HttpServlet {
             String storephone1 = request.getParameter("STORE_PHONE1").trim();
             String storecomaddress = request.getParameter("STORE_COM_ADDRESS").trim();
             request.setAttribute("storecomaddress", storecomaddress);
-            if (storecomaddress == null || storecomaddress.trim().length() == 0) {
+            if (storecomaddress.trim().isEmpty()) {
                 errorMsgs.put("STORE_COM_ADDRESS", "申請人姓名請勿空白");
             }
             String storetwid = request.getParameter("STORE_TW_ID").trim();
             request.setAttribute("storetwid", storetwid);
-            if (storetwid == null || storetwid.trim().length() == 0) {
+            if (storetwid.trim().isEmpty()) {
                 errorMsgs.put("STORE_TW_ID", "身分證請勿空白");
             } else if (!storetwid.trim().matches("^[a-zA-Z]\\d{9}$")) {
                 errorMsgs.put("STORE_TW_ID", "身分證格式不正確");
             }
             String storephone2 = request.getParameter("STORE_PHONE2").trim();
             request.setAttribute("storephone2", storephone2);
-            if (storephone2 == null || storephone2.trim().length() == 0) {
+            if (storephone2.trim().isEmpty()) {
                 errorMsgs.put("STORE_PHONE2", "申請人電話請勿空白");
             }
             if (strsrv.getByAcc(storeacc)) {
@@ -726,7 +707,7 @@ public class LonginServlet extends HttpServlet {
                 rdvo.setRdQuantity(mq);
 //                PD_PRICE
                 Integer price = new MealJDBCDAO().getByMealId(mid).getMealPrice();
-                Integer tp = price * mq;
+                int tp = price * mq;
                 allp += tp;
                 rdvo.setPdPrice(tp);
                 rdjdbc.insert(rdvo);
@@ -739,7 +720,7 @@ public class LonginServlet extends HttpServlet {
             Integer pass = 0;
             request.setAttribute("Result", 0);
             Integer codeid = 0;
-            if (off.size() > 0) {
+            if (!off.isEmpty()) {
                 pass = off.get(0);
                 codeid = jdbcdao.getCodeId(codet, sid).get(0);
                 request.setAttribute("codeid", codeid);
@@ -767,7 +748,7 @@ public class LonginServlet extends HttpServlet {
             AioCheckOutOneTime obj = new AioCheckOutOneTime();
             // 從 view 獲得資料，依照 https://developers.ecpay.com.tw/?p=2866 獲得必要的參數
             // MerchantTradeNo  : 必填 特店訂單編號 (不可重複，因此需要動態產生)
-            obj.setMerchantTradeNo(new String("salon" + System.currentTimeMillis()));
+            obj.setMerchantTradeNo("salon" + System.currentTimeMillis());
             // MerchantTradeDate  : 必填 特店交易時間 yyyy/MM/dd HH:mm:ss
             obj.setMerchantTradeDate(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date()));
             // TotalAmount  : 必填 交易金額
@@ -779,7 +760,7 @@ public class LonginServlet extends HttpServlet {
             // ReturnURL   : 必填  我用不到所以是隨便填一個英文字
             obj.setReturnURL("a");
             // OrderResultURL   : 選填 消費者完成付費後。重新導向的位置
-            String url = "http://" + request.getServerName() + ":8081/CGA105G2/LonginServlet?action=ecpayblack&sid=" + sid + "&rid=" + rid + "&allp=" + (allp + pass) + "&codeid=" + codeid;
+            String url = String.format("http://%s:8081/CGA105G2/LonginServlet?action=ecpayblack&sid=%s&rid=%s&allp=%s&codeid=%s",request.getServerName(),sid,rid,(allp + pass),codeid);
             obj.setClientBackURL(url);
             obj.setNeedExtraPaidInfo("N");
             // 回傳form訂單 並自動將使用者導到 綠界
@@ -804,10 +785,7 @@ public class LonginServlet extends HttpServlet {
                 Integer off = new CodeJDBCDAO().getById(cid).getCodeOff();
                 tp -= off;
             }
-            ;
-            if (tp <= 0) {
-                request.setAttribute("Result", 1);
-            }
+            if (tp <= 0) request.setAttribute("Result", 1);
             request.setAttribute("Result", 2);
             //支付金額
             vo.setRenFprice(tp);
@@ -822,7 +800,7 @@ public class LonginServlet extends HttpServlet {
         }
         if ("ecpay".equals(action)) {
             Integer sID = (Integer) request.getSession().getAttribute("storeId");
-            Integer plan = Integer.valueOf(request.getParameter("plan").trim());
+            int plan = Integer.parseInt(request.getParameter("plan").trim());
             // 根據表單建立收款連結 (中文編碼有問題)
             // 使用者跳轉至綠界的交易流程網站
             // 按照流程輸入卡號..... (中文編碼!)
@@ -835,7 +813,7 @@ public class LonginServlet extends HttpServlet {
             AioCheckOutOneTime obj = new AioCheckOutOneTime();
             // 從 view 獲得資料，依照 https://developers.ecpay.com.tw/?p=2866 獲得必要的參數
             // MerchantTradeNo  : 必填 特店訂單編號 (不可重複，因此需要動態產生)
-            obj.setMerchantTradeNo(new String("salon" + System.currentTimeMillis()));
+            obj.setMerchantTradeNo("salon" + System.currentTimeMillis());
             // MerchantTradeDate  : 必填 特店交易時間 yyyy/MM/dd HH:mm:ss
             obj.setMerchantTradeDate(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date()));
             // TotalAmount  : 必填 交易金額
@@ -870,8 +848,6 @@ public class LonginServlet extends HttpServlet {
             Integer storeId = Integer.valueOf(request.getParameter("storeId"));
             request.getSession().setAttribute("storeId", storeId);
             request.setAttribute("toResult", true);
-            StoreService strSvc = new StoreService();
-            Store Store = strSvc.updateplan(storeId, 1);
             String url = "/front-end/store/food_order/food_order.do?action=food_order_button";
             RequestDispatcher successView = request.getRequestDispatcher(url);
             successView.forward(request, response);
@@ -881,8 +857,6 @@ public class LonginServlet extends HttpServlet {
             Integer storeId = Integer.valueOf(request.getParameter("storeId"));
             request.getSession().setAttribute("storeId", storeId);
             request.setAttribute("toResult", true);
-            StoreService strSvc = new StoreService();
-            Store Store = strSvc.updateplan(storeId, 2);
             String url = "/front-end/store/food_order/food_order.do?action=food_order_button";
             RequestDispatcher successView = request.getRequestDispatcher(url);
             successView.forward(request, response);
@@ -892,8 +866,6 @@ public class LonginServlet extends HttpServlet {
             Integer storeId = Integer.valueOf(request.getParameter("storeId"));
             request.getSession().setAttribute("storeId", storeId);
             request.setAttribute("toResult", true);
-            StoreService strSvc = new StoreService();
-            Store Store = strSvc.updateplan(storeId, 3);
             String url = "/front-end/store/food_order/food_order.do?action=food_order_button";
             RequestDispatcher successView = request.getRequestDispatcher(url);
             successView.forward(request, response);
