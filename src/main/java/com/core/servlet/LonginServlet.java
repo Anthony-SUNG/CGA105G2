@@ -67,8 +67,8 @@ public class LonginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
         request.setCharacterEncoding("UTF-8");
+        String action = request.getParameter("action");
         if ("insert".equals(action)) {
             List<String> errorMsgs = new LinkedList<>();
             request.setAttribute("errorMsgs", errorMsgs);
@@ -159,7 +159,10 @@ public class LonginServlet extends HttpServlet {
                 failureView.forward(request, response);
                 return;
             }
-            //*************************** 2.新增完成,準備轉交(Send the Success view) ***********
+            /*************************** 2.開始新增資料 ***************************************/
+            member = memSvc.addMem(memname, memacc, mempwd, memrecipient, memtwid, membirthday, memphone, mempostalcode,
+                    memcity, memdistrict, memaddress, memmail);
+            /*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
             //註冊成功寄email
             String ServerName = request.getServerName();
             Mailer mailer = new Mailer();
@@ -436,8 +439,9 @@ public class LonginServlet extends HttpServlet {
         }
         //==========================查看會員頁面=================================
         if ("MemberPage".equals(action)) { //來自searchMember的請求 要轉交到會員頁面
-            Integer nameid = (Integer) request.getSession().getAttribute("memId");
-            if (nameid == 0) {
+            request.setCharacterEncoding("UTF-8");
+            Integer nameid= (Integer) request.getSession().getAttribute("memId");
+            if (nameid==0){
                 String url = "/front-end/Member/member/memberLognIn.jsp";
                 RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交 showMemberPage.jsp會員頁面
                 successView.forward(request, response);

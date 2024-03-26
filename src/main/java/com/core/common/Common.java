@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Common {
     protected Connection con = null;
@@ -27,6 +28,9 @@ public class Common {
         String password = "2023032003";
         try {
             this.con = DriverManager.getConnection(url, user, password);
+            Statement statement = this.con.createStatement();
+            String sql = "SET NAMES 'UTF8'";
+            statement.executeUpdate(sql);
             con.setAutoCommit(false);
         } catch (SQLException e) {
             logger.error(ErrorTitle.CONNECTION_TITLE.getTitle(con.toString()), e);

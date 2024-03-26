@@ -8,11 +8,9 @@ import org.apache.commons.mail.HtmlEmail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.mail.MessagingException;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.FileSystems;
 
 public class Mailer {
     public static final Logger logger = LogManager.getLogger(Mailer.class);
@@ -24,6 +22,7 @@ public class Mailer {
     private static final String FROM_USER;
     private static final String ENCODING;
     private static HtmlEmail htmlEmail;
+    private static final String NEW_LINE = System.lineSeparator();
 
     static {
         setPropertiesPath();
@@ -64,7 +63,8 @@ public class Mailer {
                 htmlEmail.setHostName(SMTP_HOST_NAME);
                 htmlEmail.setSmtpPort(Integer.parseInt(SMTP_PORT));
                 htmlEmail.setAuthenticator(new DefaultAuthenticator(USER_NAME, PASSWORD));
-                htmlEmail.setFrom(FROM_USER, "foodMap", ENCODING);
+                htmlEmail.setStartTLSEnabled(true); // 啟用 TLS 加密
+                htmlEmail.setFrom(FROM_USER, "foodMap");
                 htmlEmail.setCharset(ENCODING);
             } catch (EmailException var1) {
                 logger.error(ErrorTitle.UNKNOWN_TITLE.getTitle("EmailException"), var1);
@@ -73,17 +73,20 @@ public class Mailer {
     }
 
     public void send(String name, String phone, String mail, String message) {
+        initialHtmlMail();
         try {
             StringBuilder html = new StringBuilder();
-            html.append(String.format("<h1>name :%s</h1>"
-                    + "<h1>phone :%s</h1>"
-                    + "<h1>Email :%s</h1>"
-                    + "<h2>message :%s</h2>", name, phone, mail, message));
+            html.append("<html>").append(NEW_LINE);
+            html.append(String.format("<h1>name :%s</h1>", name)).append(NEW_LINE);
+            html.append(String.format("<h1>phone :%s</h1>", phone)).append(NEW_LINE);
+            html.append(String.format("<h1>Email :%s</h1>", mail)).append(NEW_LINE);
+            html.append(String.format("<h2>message :%s</h2>", message)).append(NEW_LINE);
+            html.append("</html>").append(NEW_LINE);
             String htmlTxt = html.toString();
+            logger.info(htmlTxt);
             htmlEmail.addTo(mail, name, ENCODING);
             htmlEmail.setSubject(name + "的意見回饋");
             htmlEmail.addPart(htmlTxt, "text/html;charset=" + ENCODING);
-
 //            //附件
 //            EmailAttachment attachment = new EmailAttachment();
 //            File file = new File(System.getProperty("user.dir") + SPT + "log" + SPT + "TEJ_PROJECT.log");
@@ -97,35 +100,68 @@ public class Mailer {
 //            }
             htmlEmail.setCharset(ENCODING);
             htmlEmail.send();
-        } catch (EmailException e) {
-            logger.error(ErrorTitle.UNKNOWN_TITLE.getTitle("EmailException"), e);
+            logger.info("意見回饋-寄送成功");
+        } catch (Exception var14) {
+            logger.error(ErrorTitle.UNKNOWN_TITLE.getTitle("Mail錯誤"), var14);
+        } finally {
+            close();
         }
 
     }
 
     public void sendAccount(String name, String mail, String serverName) {
+        initialHtmlMail();
         try {
             Integer id = new MemberDAO().srhmail(mail);
             StringBuilder html = new StringBuilder();
-            html.append("<div style='width:600px;height:350px;border:1px solid rgba(128,128,128,0.4);text-align:center;margin:20px auto;'>")
-                    .append("<h1 style='background-color:rgba(255,183,0,0.956);margin:0;padding-top:15px;height:60px;vertical-align:middle;'>註冊成功</h1>")
-                    .append(name).append(String.format("<h1>新會員 %s 您好:</h1>", name))
-                    .append("<h1>您已成功註冊FoodMap帳號<br>請點擊按鈕開通帳號</h1>")
-                    .append(String.format("<a href='http://%s:8081/CGA105G2/LonginServlet?action=open&id=%s'", serverName, id))
-                    .append("style='display:block;text-decoration:none;background-color:rgba(6,4,106,0.956);"+
-                            "padding:15px 32px;margin:4px 2px;border:none;border-radius:10px;color:white;text-align:center;cursor:pointer;"+
-                            "display:inline-block;font-size:16px;font-family:Lucida Console;'>進入FoodMap</a></div>");
+            html.append("<table class=\"outlook-table\" style=\"width: 600px; border: 1px solid rgb(206,156,31); text-align: center; margin: 20px auto;\">").append(NEW_LINE);
+            html.append("<tr><td>").append(NEW_LINE);
+            html.append("<h1 class=\"outlook-h1\">註冊成功</h1>").append(NEW_LINE);
+            html.append(String.format("<h1>新會員 %s 您好:</h1>", name)).append(NEW_LINE);
+            html.append("<h1>您已成功註冊FoodMap帳號<br>請點擊按鈕開通帳號</h1>").append(NEW_LINE);
+            html.append(String.format("<a href=\"http://%s:8081/CGA105G2/LonginServlet?action=open&id=%s\"", serverName, id)).append(NEW_LINE)
+                    .append(" class=\"outlook-a\">進入FoodMap</a>").append(NEW_LINE);
+            html.append("</td></tr></table>").append(NEW_LINE);
             // send message
-            String htmlTxt = html.toString();
+            String htmlTxt = toHtml(html.toString());
+            logger.info(htmlTxt);
             htmlEmail.addTo(mail, name, ENCODING);
             htmlEmail.setSubject("FoodMap註冊成功通知");
             htmlEmail.addPart(htmlTxt, "text/html;charset=" + ENCODING);
             htmlEmail.setCharset(ENCODING);
             htmlEmail.send();
-        } catch (EmailException e) {
-            logger.error(ErrorTitle.UNKNOWN_TITLE.getTitle("EmailException"), e);
+            logger.info("註冊信-寄送成功");
+        } catch (Exception var14) {
+            logger.error(ErrorTitle.UNKNOWN_TITLE.getTitle("Mail錯誤"), var14);
+        } finally {
+            close();
         }
+    }
 
+    private String toHtml(String htmlTxt) {
+        StringBuilder html = new StringBuilder();
+        html.append("<!doctype html>" +
+                "<html lang=\"en\">" +
+                "<head>" +
+                "    <meta charset=\"UTF-8\">" +
+                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
+                "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">" +
+                "    <title>massage</title>" +
+                "    <style>" +
+                "        /* Outlook-specific CSS styles */" +
+                "        .outlook-table {width: 600px !important;}" +
+                "        .outlook-h1 {background-color: #ffb700 !important; margin: 0 !important; padding-top: 15px !important; height: 60px !important; vertical-align: middle !important;}" +
+                "        .outlook-a {background-color: #06046a !important; padding: 15px 32px !important; margin: 4px 2px !important; border: none !important; border-radius: 10px !important; color: white !important; text-align: center !important; cursor: pointer !important; display: inline-block !important; font-size: 16px !important; font-family: Lucida Console,serif !important; text-decoration: none !important;}" +
+                "    </style>" +
+                "</head><body>").append(NEW_LINE);
+        html.append(htmlTxt).append(NEW_LINE);
+        html.append("</body>" +
+                "</html>");
+        return html.toString();
+    }
+
+    public static void close() {
+        htmlEmail = null;
     }
 
 }

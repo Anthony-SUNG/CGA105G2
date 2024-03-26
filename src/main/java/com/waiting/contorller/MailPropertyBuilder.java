@@ -25,9 +25,9 @@ public class MailPropertyBuilder extends Common {
             setFromUser(prop.getProperty("fromUser"));
             setEmailEncoding(prop.getProperty("emailEncoding"));
             setUserName(prop.getProperty("userName"));
-            setUserPassword(prop.getProperty("userPass"));
+            setUserPassword(prop.getProperty("userPass").replaceAll("\\s", ""));
         } catch (Exception var3) {
-            logger.error(ErrorTitle.UNKNOWN_TITLE.getTitle("MailPropertyBuilder"),var3);
+            logger.error(ErrorTitle.UNKNOWN_TITLE.getTitle("MailPropertyBuilder"), var3);
         }
     }
 
