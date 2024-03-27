@@ -1,18 +1,20 @@
 package com.emp.model.EmployeeRoot.dao;
 
+import com.core.dao.CoreDao;
 import com.emp.model.EmployeeRoot.pojo.EmployeeRoot;
 
 import java.util.List;
 
 
 
-public interface EmployeeRootDAO_interface {
-	public void insert(EmployeeRoot EmployeeRootVO);
-	public void delete(Integer EMP_ID,Integer ROOT_ID);
-	public List<EmployeeRoot> findByEMP_ID(Integer EMP_ID);
-	public List<EmployeeRoot> findByROOT_ID(Integer EMP_ID);
+public interface EmployeeRootDAO_interface extends CoreDao<EmployeeRoot,Integer> {
+	public void insert(EmployeeRoot pojo);
+	public void update(EmployeeRoot pojo);
+	public void deleteById(Integer empId);
+	public void delete(Integer empId,Integer rootId);
+	public EmployeeRoot getById(Integer id);
+	public List<EmployeeRoot> getByEmpId(Integer empId);
+	public List<EmployeeRoot> getByRootId(Integer empId);
 	public List<EmployeeRoot> getAll();
-
-
 
 }

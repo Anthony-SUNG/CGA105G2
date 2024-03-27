@@ -6,35 +6,33 @@ import com.core.common.Common;
 import com.core.entity.ErrorTitle;
 import com.order.model.Order.dao.OrderDAO_interface;
 import com.order.model.Order.pojo.Order;
-import com.order.model.OrderDetail.dao.impl.OrderDetailJDBCDAO;
-import com.order.model.OrderDetail.pojo.OrderDetail;
 
-import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class OrderJDBCDAO extends Common implements OrderDAO_interface {
-
+    private int insertId = 0;
+    public int getInsertId() {
+        return insertId;
+    }
 
     @Override
     public void insert(Order order) {
-        final String sql = "INSERT INTO cga105g2.order (mem_id,store_id,order_price,code_id,order_fre,order_fprice,order_text) VALUES (?, ? ,?, ?, ?, ?, ? )";
-        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
+        String sql = "INSERT INTO cga105g2.order (mem_id,store_id,order_price,order_fre,order_fprice) VALUES ( ? ,?, ?, ?, ? )";
+        int orderId = 0;
+        String[] cols = {"ORDER_ID"};
+        try (PreparedStatement pstmt = getConnection().prepareStatement(sql, cols)) {
             pstmt.setInt(1, order.getMemId());
             pstmt.setInt(2, order.getStoreId());
             pstmt.setInt(3, order.getOrderPrice());
-            pstmt.setInt(4, order.getCodeId());
-            pstmt.setInt(5, order.getOrderFre());
-            pstmt.setInt(6, order.getOrderFprice());
-            pstmt.setString(7, order.getOrderText());
+            pstmt.setInt(4, order.getOrderFre());
+            pstmt.setInt(5, order.getOrderFprice());
             pstmt.executeUpdate();
-            // 新增訂單明細
-            OrderDetailJDBCDAO orderDetailJDBCDAO = new OrderDetailJDBCDAO();
-            orderDetailJDBCDAO.insert(null);
+            ResultSet rs = pstmt.getGeneratedKeys();
+            while (rs.next()) orderId = rs.getInt(1);
             close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
@@ -44,7 +42,10 @@ public class OrderJDBCDAO extends Common implements OrderDAO_interface {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
         }
+        logger.info(String.format("新增訂單成功,訂單編號=%s", orderId));
+        this.insertId = orderId;
     }
+
 
     @Override
     public void update(Order order) {
@@ -72,37 +73,22 @@ public class OrderJDBCDAO extends Common implements OrderDAO_interface {
         }
     }
 
-    private static final String DELETE_OEDER = "DELETE FROM cga105g2.order where order_id = ?";
-    private static final String DELETE_DETAILs = "DELETE FROM cga105g2.order_detail where order_id = ?";
-
     @Override
-    public void delete(Integer orderno) {
-        int updateCount_ORDERs;
-        PreparedStatement pstmt1 = null;
-        PreparedStatement pstmt2 = null;
-        try {
-            pstmt1 = getConnection().prepareStatement(DELETE_DETAILs);
-            pstmt2 = getConnection().prepareStatement(DELETE_OEDER);
-            pstmt1.setInt(1, orderno);
-            updateCount_ORDERs = pstmt1.executeUpdate();
-            pstmt2.setInt(1, orderno);
-            pstmt2.executeUpdate();
-            logger.info("刪除部門編號" + orderno + "時,共有員工" + updateCount_ORDERs + "人同時被刪除");
-            pstmt1.getConnection().commit();
-            pstmt2.getConnection().commit();
-            pstmt1.getConnection().close();
-            pstmt2.getConnection().close();
+    public void deleteById(Integer id) {
+        Common common = new Common();
+        String sql = "DELETE FROM cga105g2.order_detail where order_id = ?; "
+                + "DELETE FROM cga105g2.order where order_id = ?;";
+        try (PreparedStatement pstmt = common.getConnection().prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+            common.close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.SELECT_TITLE.getTitle(DELETE_OEDER + "," + DELETE_DETAILs), se);
+            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                if (pstmt1 != null) {
-                    pstmt1.getConnection().rollback();
-                }
-                if (pstmt2 != null) {
-                    pstmt2.getConnection().rollback();
-                }
+                common.getConnection().rollback();
             } catch (SQLException r) {
-                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(DELETE_OEDER + "," + DELETE_DETAILs), r);
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
         }
 
@@ -110,11 +96,11 @@ public class OrderJDBCDAO extends Common implements OrderDAO_interface {
 
 
     @Override
-    public Order getById(Integer orderno) {
+    public Order getById(Integer id) {
         final String sql = "SELECT order_id,mem_id,store_id,order_price,code_id,order_fre,order_fprice,order_text,order_status,order_time,order_otime,order_rtime FROM cga105g2.order where order_id = ?";
         Order order = null;
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
-            pstmt.setInt(1, orderno);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 order = new Order();
@@ -145,7 +131,7 @@ public class OrderJDBCDAO extends Common implements OrderDAO_interface {
 
     @Override
     public List<Order> getByMemId(Integer memId) {
-        final String sql = "SELECT order_id,mem_id,store_id,order_price,code_id,order_fre,order_fprice,order_text,order_status,order_time,order_otime,order_rtime FROM cga105g2.order WHERE mem_id = ?";
+        String sql = "SELECT * FROM cga105g2.order WHERE mem_id = ?";
         List<Order> list = new ArrayList<>();
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, memId);
@@ -179,65 +165,34 @@ public class OrderJDBCDAO extends Common implements OrderDAO_interface {
     }
 
     @Override
-    public Set<Order> getOrderByStoreId(Integer storeId) {
-        return null;
-    }
-
-    @Override
-    public void updateOrdStat(Order order) {
-
-    }
-
-    @Override
-    public Integer genOrderId() {
-        return null;
-    }
-
-    private static final String INSERT_STMT = "INSERT INTO cga105g2.order (mem_id,store_id,order_price,order_fre,order_fprice) VALUES ( ? ,?, ?, ?, ? )";
-
-    @Override
-    public void insertWithDetail(Order order, List<OrderDetail> list) {
-        PreparedStatement pstmt;
-        String next_orderId = null;
-        try {
-            String cols[] = { "ORDER_ID" };
-            pstmt = getConnection().prepareStatement(INSERT_STMT,cols);
-            pstmt.setInt(1, order.getMemId());
-            pstmt.setInt(2, order.getStoreId());
-            pstmt.setInt(3, order.getOrderPrice());
-            pstmt.setInt(4, order.getOrderFre());
-            pstmt.setInt(5, order.getOrderFprice());
-            pstmt.executeUpdate();
-            ResultSet rs = pstmt.getGeneratedKeys();
-            if (rs.next()) {
-                next_orderId = rs.getString(1);
-                logger.info("自增主鍵值= " + next_orderId + "(剛新增成功的訂單編號)");
-            } else {
-                logger.error("未取得自增主鍵值");
+    public List<Order> getAll() {
+        String sql = "SELECT * FROM cga105g2.order ";
+        List<Order> list = new ArrayList<>();
+        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Order order = new Order();
+                order.setOrderId(rs.getInt("order_id"));
+                order.setMemId(rs.getInt("mem_id"));
+                order.setStoreId(rs.getInt("store_id"));
+                order.setOrderPrice(rs.getInt("order_price"));
+                order.setOrderStatus(rs.getInt("order_status"));
+                list.add(order);
             }
-            rs.close();
             close();
         } catch (SQLException se) {
-            logger.error(ErrorTitle.INSERT_TITLE.getTitle(INSERT_STMT), se);
+            logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
                 getCon().rollback();
             } catch (SQLException r) {
-                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(INSERT_STMT), r);
+                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
         }
-        // 再同時新增員工
-        OrderDetailJDBCDAO dao = new OrderDetailJDBCDAO();
-        logger.info("list.size()-A=" + list.size());
-        for (OrderDetail aOrderDetail : list) {
-            if (next_orderId != null) aOrderDetail.setOrderId(Integer.valueOf(next_orderId));
-            dao.insert2(aOrderDetail);
-        }
-        logger.info("list.size()-B=" + list.size());
-        logger.info("新增" + next_orderId + "時,共有明細" + list.size() + "條同時被新增");
+        return list;
     }
 
     @Override
-    public Code checkCodeDiscount(String codeNum) {
+    public Code getCodeDiscount(String codeNum) {
         final String sql = "SELECT * FROM cga105g2.code  WHERE  code_num  = ? ";
         Code code = null;
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {

@@ -59,7 +59,17 @@ public class MealHibernateDAO implements MealDAO_interface {
 		
 	}
 
-	@Override
+    @Override
+    public void update(Meal pojo) {
+
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+
+    }
+
+    @Override
 	public List<Meal> getAll() {
         List<Meal> list=new ArrayList<Meal>();
         //Code是VO名稱
@@ -116,7 +126,7 @@ public class MealHibernateDAO implements MealDAO_interface {
 	}
 
 	@Override
-	public Meal getByMealId(Integer id) {
+	public Meal getById(Integer id) {
 		Meal meal = new Meal();
         //宣告
         SessionFactory sessionFactory= HibernateUtil.getSessionFactory();

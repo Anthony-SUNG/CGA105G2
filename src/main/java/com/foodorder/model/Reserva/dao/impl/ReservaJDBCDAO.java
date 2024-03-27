@@ -152,6 +152,11 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
     }
 
     @Override
+    public void deleteById(Integer id) {
+
+    }
+
+    @Override
     public Reserva getById(Integer id) {
         String sql = "SELECT * FROM cga105g2.reserva where REN_ID = ?";
         Reserva reserva = null;
@@ -584,7 +589,7 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
     }
 
     @Override
-    public Reserva gettable(Integer id) {
+    public Reserva getTable(Integer id) {
         String sql = "SELECT * FROM cga105g2.reserva where REN_TABLE = ?";
         Reserva reserva = null;
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {

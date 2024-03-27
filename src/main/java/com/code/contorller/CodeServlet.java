@@ -5,7 +5,6 @@ import com.code.model.Code.pojo.Code;
 import com.code.model.service.CodeService;
 import com.emp.model.Employee.dao.impl.EmployeeJDBCDAO;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -85,12 +84,12 @@ public class CodeServlet extends HttpServlet {
             successView.forward(req, res);
         }
         if("reviewCoupon".equals(action)){
-            Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
+            Map<String,String> errorMsgs = new LinkedHashMap<>();
             req.setAttribute("errorMsgs", errorMsgs);
             Integer root=codeSvc.Coupon_root(empId);
             JSONArray json=codeSvc.empCode(empId);
             JSONArray empaccs=codeSvc.empacc();
-            String empacc=new EmployeeJDBCDAO().findByEMP_ID(empId).getEmpAcc();
+            String empacc=new EmployeeJDBCDAO().getById(empId).getEmpAcc();
             String url = "/back-end/code/reviewCoupon.jsp";
             String errorString="";
             if (json.size()==0){

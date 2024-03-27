@@ -99,7 +99,7 @@ public class EmployeeServlet extends HttpServlet {
             successView.forward(req, res);
         }
         if ("update".equals(action)) {
-            List<String> errorMsgs = new LinkedList<String>();
+            List<String> errorMsgs = new LinkedList<>();
             req.setAttribute("errorMsgs", errorMsgs);
             Integer empid = Integer.valueOf(req.getParameter("empid").trim());
             Integer empstatus = Integer.valueOf(req.getParameter("empstatus").trim());

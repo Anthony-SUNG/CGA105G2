@@ -72,10 +72,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
-                                <% Member memberVo = new Member(); %>
-                                <% for (int i = 0; i < list.size(); i++) {
-                                    memberVo = list.get(i);
+                                <%
+                                    Member memberVo;
+                                    for (Member vo:list) {
+                                    memberVo = vo;
                                 %>
                                 <tr>
                                     <th scope="row"><%=memberVo.getMemId()%></th>
@@ -117,10 +117,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <% Store storeVo = new Store(); %>
                                 <%
-                                    for (int i = 0; i < storeList.size(); i++) {
-                                    storeVo = storeList.get(i);
+                                    Store storeVo;
+                                    for (Store vo:storeList) {
+                                    storeVo = vo;
                                 %>
                                 <tr>
                                     <td><%=storeVo.getStoreId()%></td>
@@ -172,10 +172,10 @@
                                     <th scope="col text-center">查看明細</th>
                                 </tr>
                                 </thead>
-                                <% Order orderVo = new Order(); %>
                                 <%
-                                    for (int i = 0; i < orderList.size(); i++) {
-                                    orderVo = orderList.get(i);
+                                    Order orderVo;
+                                    for (Order vo:orderList) {
+                                    orderVo = vo;
                                 %>
                                 <tbody>
                                 <tr class="text-center">

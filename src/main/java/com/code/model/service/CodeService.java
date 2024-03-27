@@ -2,7 +2,6 @@ package com.code.model.service;
 
 
 import com.code.model.Code.dao.CodeDAO_interface;
-import com.code.model.Code.dao.impl.CodeHibernateDAO;
 import com.code.model.Code.dao.impl.CodeJDBCDAO;
 import com.code.model.Code.pojo.Code;
 import com.code.model.MemCode.dao.impl.MemCodeJDBCDAO;
@@ -10,7 +9,6 @@ import com.code.model.MemCode.pojo.MemCode;
 import com.emp.model.Employee.dao.impl.EmployeeJDBCDAO;
 import com.emp.model.EmployeeRoot.dao.impl.EmployeeRootJDBCDAO;
 import com.emp.model.EmployeeRoot.pojo.EmployeeRoot;
-import com.member.model.Member.dao.impl.MemberDAO;
 import com.store.model.Store.dao.impl.StoreDAO;
 import com.subs.model.Subscribe.dao.impl.SubscribeJDBCDAO;
 import com.subs.model.Subscribe.pojo.Subscribe;
@@ -116,7 +114,7 @@ public class CodeService {
     }
 
     public JSONArray empacc(){
-        List<EmployeeRoot> emp=new EmployeeRootJDBCDAO().findByROOT_ID(4);
+        List<EmployeeRoot> emp=new EmployeeRootJDBCDAO().getByRootId(4);
         List<Integer> empid=new ArrayList();
         JSONArray empacc = new JSONArray( );
         JSONObject map=null;
@@ -126,7 +124,7 @@ public class CodeService {
         for (Integer e:empid){
             map=new JSONObject();
             map.put("EMP_ID",e);
-            map.put("EMP_ACC",new EmployeeJDBCDAO().findByEMP_ID(e).getEmpAcc());
+            map.put("EMP_ACC",new EmployeeJDBCDAO().getById(e).getEmpAcc());
             empacc.add(map);
         }
         return empacc;
@@ -172,7 +170,7 @@ public class CodeService {
     }
     public Integer Coupon_root(Integer empId){
         EmployeeRootJDBCDAO erJDBC=new EmployeeRootJDBCDAO();
-        List<EmployeeRoot>  list=erJDBC.findByEMP_ID(empId);
+        List<EmployeeRoot>  list=erJDBC.getByEmpId(empId);
         Integer rootId=0;
         for (EmployeeRoot e :list){
             rootId=e.getRootId();

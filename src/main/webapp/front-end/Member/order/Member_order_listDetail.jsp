@@ -57,7 +57,7 @@
                                     <tr>
                                         <td>#${orderDetail.orderId}</td>
                                         <td><img
-                                                src="${pageContext.request.contextPath}/front-end/Member/goods/goods.do?action=getGoodsImg&goodsId=${orderDetail.goodsId}"
+                                                src="${pageContext.request.contextPath}/CGA105G2/goodsServlet?action=getGoodsImg&goodsId=${orderDetail.goodsId}"
                                                 width="80px"></td>
                                         <td>${orderDetail.goods.goodsName}</td>
                                         <td>${orderDetail.detailPrice}</td>

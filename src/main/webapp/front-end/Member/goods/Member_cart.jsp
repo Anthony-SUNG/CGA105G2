@@ -5,7 +5,7 @@
 <%@ page import="com.goods.model.service.*" %>
 <%@ page import="com.goods.model.Cart.pojo.Cart" %>
 <%@ page import="com.store.model.service.StoreService" %>
-<%@ page import="com.goods.model.Cart.pojo.CartItem" %>
+<%@ page import="com.goods.model.Cart.pojo.CartDetail" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%--購物車--%>

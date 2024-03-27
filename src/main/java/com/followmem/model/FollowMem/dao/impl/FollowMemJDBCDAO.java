@@ -14,11 +14,11 @@ import java.util.List;
 
 public class FollowMemJDBCDAO extends Common implements FollowMem_interface {
     @Override
-    public void insert(FollowMem FollowMem) {
+    public void insert(FollowMem pojo) {
         String sql = "INSERT INTO cga105g2.FOLLOW_MEM (MEM_ID1, MEM_ID2) VALUES (?, ?)";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
-            pstmt.setInt(1, FollowMem.getMemId1());
-            pstmt.setInt(2, FollowMem.getMemId2());
+            pstmt.setInt(1, pojo.getMemId1());
+            pstmt.setInt(2, pojo.getMemId2());
             pstmt.executeUpdate();
             close();
         } catch (SQLException se) {
@@ -29,6 +29,11 @@ public class FollowMemJDBCDAO extends Common implements FollowMem_interface {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
         }
+    }
+
+    @Override
+    public void update(FollowMem pojo) {
+
     }
 
     @Override
@@ -59,7 +64,7 @@ public class FollowMemJDBCDAO extends Common implements FollowMem_interface {
     }
 
     @Override
-    public FollowMem getByMemId1(Integer memId1) {
+    public FollowMem getById(Integer memId1) {
         String sql = "SELECT * FROM cga105g2.FOLLOW_MEM where MEM_ID1 = ?";
         FollowMem FollowMem = null;
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
@@ -154,6 +159,11 @@ public class FollowMemJDBCDAO extends Common implements FollowMem_interface {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
         }
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+
     }
 }
 

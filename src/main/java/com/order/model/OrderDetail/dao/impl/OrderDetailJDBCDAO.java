@@ -16,21 +16,33 @@ public class OrderDetailJDBCDAO extends Common implements OrderDetailDAO_interfa
 
     @Override
     public void insert(OrderDetail orderDetail) {
-        final String sql = "INSERT INTO cga105g2.order_detail (order_id,goods_id,detail_quantity) VALUES (?, ?, ?)";
-        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
+        Common common = new Common();
+        String sql = "INSERT INTO cga105g2.order_detail (order_id,goods_id,detail_quantity,detailPrice) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement pstmt = common.getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, orderDetail.getOrderId());
             pstmt.setInt(2, orderDetail.getGoodsId());
             pstmt.setInt(3, orderDetail.getDetailQuantity());
+            pstmt.setInt(4, orderDetail.getDetailPrice());
             pstmt.executeUpdate();
-            close();
+            common.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                getCon().rollback();
+                common.getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
         }
+    }
+
+    public void insertAll(int orderId, List<OrderDetail> list) {
+        int i = 0;
+        for (OrderDetail detail : list) {
+            detail.setOrderId(orderId);
+            insert(detail);
+            i++;
+        }
+        logger.info(String.format("訂單編號[%s],共新增 %s 商品細項", orderId, i));
     }
 
     @Override
@@ -129,32 +141,6 @@ public class OrderDetailJDBCDAO extends Common implements OrderDetailDAO_interfa
     public List<OrderDetail> getAll(Map<String, String[]> map) {
         // TODO Auto-generated method stub
         return null;
-    }
-
-    private static final String INSERT_STMT = "INSERT INTO cga105g2.order_detail (order_id,goods_id,detail_quantity,detailPrice) VALUES (?, ?, ?, ?)";
-
-    @Override
-    public void insert2(OrderDetail orderDetail) {
-        PreparedStatement pstmt;
-        try {
-            pstmt = getConnection().prepareStatement(INSERT_STMT);
-            logger.info("orderId:" + orderDetail.getOrderId());
-            logger.info("orderDetail:" + orderDetail.getGoodsId());
-            logger.info("--------");
-            pstmt.setInt(1, orderDetail.getOrderId());
-            pstmt.setInt(2, orderDetail.getGoodsId());
-            pstmt.setInt(3, orderDetail.getDetailQuantity());
-            pstmt.setInt(4, orderDetail.getDetailPrice());
-            pstmt.executeUpdate();
-            close();
-        } catch (SQLException se) {
-            logger.error(ErrorTitle.INSERT_TITLE.getTitle(INSERT_STMT), se);
-            try {
-                getCon().rollback();
-            } catch (SQLException r) {
-                logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(INSERT_STMT), r);
-            }
-        }
     }
 
 }

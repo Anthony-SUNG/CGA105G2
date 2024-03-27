@@ -81,11 +81,6 @@ public class CodeJDBCDAO extends Common implements CodeDAO_interface {
         }
     }
 
-    @Override
-    public Code getById(Integer id) {
-        return getByCodeId(id);
-    }
-
     public void failUpdate(Integer codeStatus) {
         long miliseconds = System.currentTimeMillis();
         Date today = new Date(miliseconds);
@@ -144,7 +139,7 @@ public class CodeJDBCDAO extends Common implements CodeDAO_interface {
     }
 
 
-    public Code getByCodeId(Integer id) {
+    public Code getById(Integer id) {
         String sql = "select CODE_ID,STORE_ID,EMP_ID,CODE_NUM,CODE_OFF,CODE_STATUS,CODE_TEXT,CODE_TIME,CODE_RTIME,CODE_NTIME from cga105g2.code where CODE_ID=?";
         Code code = null;
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {

@@ -31,7 +31,7 @@ public class EmployeeJDBCDAO extends Common implements EmployeeDAO_interface {
     }
 
     @Override
-    public Employee update(Employee EmployeeVO) {
+    public void update(Employee EmployeeVO) {
         String sql = "UPDATE cga105g2.employee set EMP__STATUS=?,  EMP_ACC=?, EMP_PWD=?, EMP_PER=?, EMP_TIME=?, EMP_RTIME=? where EMP_ID = ?";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, EmployeeVO.getEmpStatus());
@@ -51,11 +51,15 @@ public class EmployeeJDBCDAO extends Common implements EmployeeDAO_interface {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
         }
-        return EmployeeVO;
     }
 
     @Override
-    public Employee findByEMP_ID(Integer EMP_ID) {
+    public void deleteById(Integer id) {
+
+    }
+
+    @Override
+    public Employee getById(Integer EMP_ID) {
         String sql = "SELECT EMP__STATUS,EMP_ID,EMP_ACC,EMP_PWD,EMP_PER,EMP_TIME,EMP_RTIME FROM cga105g2.employee where EMP_ID = ?";
         Employee employeeVO = null;
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
@@ -84,7 +88,7 @@ public class EmployeeJDBCDAO extends Common implements EmployeeDAO_interface {
     }
 
     @Override
-    public Employee findByEmpAcc(String empAcc) {
+    public Employee getByEmpAcc(String empAcc) {
         String sql = "SELECT * FROM cga105g2.employee where EMP_ACC = ?";
         Employee employee = null;
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {

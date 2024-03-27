@@ -37,6 +37,21 @@ public class ReservaDetailJDBCDAO extends Common implements ReservaDetailDAO_int
     }
 
     @Override
+    public void update(ReservaDetail pojo) {
+
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+
+    }
+
+    @Override
+    public ReservaDetail getById(Integer id) {
+        return null;
+    }
+
+    @Override
     public List<ReservaDetail> getByPK(Integer id, String pk) {
         List<ReservaDetail> list = new ArrayList<>();
         String sql = "select * from cga105g2.reserva_detail where";

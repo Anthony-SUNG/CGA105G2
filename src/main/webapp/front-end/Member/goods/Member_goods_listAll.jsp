@@ -36,7 +36,7 @@
                 </div>
                 <div>
                     <FORM METHOD="post"
-                          ACTION="<%=request.getContextPath()%>/front-end/Member/goods/goods.do"
+                          ACTION="<%=request.getContextPath()%>/CGA105G2/goodsServlet"
                           name="form1">
                         <b>搜尋商品:</b> <input type="text" name="goods_name">
                         <input type="submit" value="送出">
@@ -51,7 +51,7 @@
                         <div class="col-12 col-md-4 pb-4">
                             <div class="card">
                                 <img
-                                        src="${pageContext.request.contextPath}/front-end/Member/goods/goods.do?action=getGoodsImg&goodsId=${goods.goodsId}"
+                                        src="${pageContext.request.contextPath}/CGA105G2/goodsServlet?action=getGoodsImg&goodsId=${goods.goodsId}"
                                         width="ˇ350px">
                                 <div class="card-body p-2">
                                     <div class="text-center">
@@ -64,7 +64,7 @@
                                 <div class="card-footer p-0 pt-0 border-top-0 bg-transparent">
                                     <div class="text-center p-1">
                                         <a class="btn btn-outline-dark mt-auto fs-4"
-                                           href="<%=request.getContextPath()%>/front-end/Member/goods/goods.do?goodsId=${goods.goodsId}&storeId=${storeId}&action=getOne_For_Display">瀏覽商品</a>
+                                           href="<%=request.getContextPath()%>/CGA105G2/goodsServlet?goodsId=${goods.goodsId}&storeId=${storeId}&action=getOne_For_Display">瀏覽商品</a>
                                     </div>
                                     <div class="text-center p-2">
                                         <a class="btn btn-outline-danger mt-auto addToCart" href="#">加入購物車

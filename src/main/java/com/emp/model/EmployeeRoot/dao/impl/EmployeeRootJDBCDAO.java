@@ -33,6 +33,16 @@ public class EmployeeRootJDBCDAO extends Common implements EmployeeRootDAO_inter
     }
 
     @Override
+    public void update(EmployeeRoot pojo) {
+
+    }
+
+    @Override
+    public void deleteById(Integer empId) {
+
+    }
+
+    @Override
     public List<EmployeeRoot> getAll() {
         String sql = "SELECT * FROM cga105g2.employee_root order by EMP_ID";
         List<EmployeeRoot> list = new ArrayList<>();
@@ -57,7 +67,7 @@ public class EmployeeRootJDBCDAO extends Common implements EmployeeRootDAO_inter
     }
 
     @Override
-    public List<EmployeeRoot> findByEMP_ID(Integer EMP_ID) {
+    public List<EmployeeRoot> getByEmpId(Integer EMP_ID) {
         String sql = "SELECT * FROM cga105g2.employee_root where EMP_ID =  ? ";
         List<EmployeeRoot> list = new ArrayList<>();
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
@@ -82,11 +92,11 @@ public class EmployeeRootJDBCDAO extends Common implements EmployeeRootDAO_inter
     }
 
     @Override
-    public void delete(Integer EMP_ID, Integer ROOT_ID) {
+    public void delete(Integer empId, Integer rootId) {
         String sql = "DELETE FROM  cga105g2.employee_root where EMP_ID = ? and ROOT_ID = ?";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
-            pstmt.setInt(1, EMP_ID);
-            pstmt.setInt(2, ROOT_ID);
+            pstmt.setInt(1, empId);
+            pstmt.setInt(2, rootId);
             pstmt.executeUpdate();
             close();
         } catch (SQLException se) {
@@ -100,11 +110,16 @@ public class EmployeeRootJDBCDAO extends Common implements EmployeeRootDAO_inter
     }
 
     @Override
-    public List<EmployeeRoot> findByROOT_ID(Integer ROOT_ID) {
+    public EmployeeRoot getById(Integer id) {
+        return null;
+    }
+
+    @Override
+    public List<EmployeeRoot> getByRootId(Integer rootId) {
         String sql = "SELECT * FROM cga105g2.employee_root where ROOT_ID =  ? ";
         List<EmployeeRoot> list = new ArrayList<>();
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
-            pstmt.setInt(1, ROOT_ID);
+            pstmt.setInt(1, rootId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 EmployeeRoot employeeRoot = new EmployeeRoot();

@@ -10,7 +10,6 @@ import com.store.model.Store.pojo.Store;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +63,7 @@ public class TableService {
                 obj2=new JSONObject();
                 Integer eatnameid=i.getMealId();
                 MealJDBCDAO meadao=new MealJDBCDAO();
-                String eatname=meadao.getByMealId(eatnameid).getMealName();
+                String eatname=meadao.getById(eatnameid).getMealName();
                 obj2.put("EAT_NAME",eatname);
                 Integer q=i.getRdQuantity();
                 obj2.put("EAT_Q",q);
@@ -106,7 +105,7 @@ public class TableService {
         reserva.setRenFprice(renFprice);
         resDao.insertToSta(reserva);
         Integer s= Integer.valueOf(reserva.getRenPhone());
-        reserva=resDao.gettable(s);
+        reserva=resDao.getTable(s);
         reserva.setRenTable(0);
         resDao.update(reserva);
         return reserva;

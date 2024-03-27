@@ -1,22 +1,15 @@
 package com.store.contorller;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-
-import com.code.contorller.CodeServlet;
 import com.code.model.service.CodeService;
 import com.emp.model.Employee.dao.impl.EmployeeJDBCDAO;
 import com.member.model.Member.pojo.Member;
 import com.member.model.service.MemberService;
 import com.store.model.Store.pojo.Store;
 import com.store.model.service.StoreService;
-import ecpay.payment.integration.AllInOne;
-import ecpay.payment.integration.domain.AioCheckOutOneTime;
 import org.json.simple.JSONArray;
 
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -187,7 +180,7 @@ public class StoreServlet extends HttpServlet {
             JSONArray empaccs = codeService.empacc();
             StoreService storeService = new StoreService();
             JSONArray json = storeService.empstore(empId);
-            String empacc = new EmployeeJDBCDAO().findByEMP_ID(empId).getEmpAcc();
+            String empacc = new EmployeeJDBCDAO().getById(empId).getEmpAcc();
             String url = "/back-end/store/reviewStore.jsp";
             String errorString = "";
             if (json.size() == 0) {

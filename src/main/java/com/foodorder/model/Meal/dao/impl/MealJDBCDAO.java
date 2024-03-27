@@ -55,6 +55,16 @@ public class MealJDBCDAO extends Common implements MealDAO_interface {
     }
 
     @Override
+    public void update(Meal pojo) {
+
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+
+    }
+
+    @Override
     public List<Meal> getAll() {
         List<Meal> list = new ArrayList<>();
         String sql = "select * from cga105g2.meal;";
@@ -118,7 +128,7 @@ public class MealJDBCDAO extends Common implements MealDAO_interface {
     }
 
     @Override
-    public Meal getByMealId(Integer id) {
+    public Meal getById(Integer id) {
         String sql = "select * from cga105g2.meal where MEAL_ID=?;";
         Meal meal = null;
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {

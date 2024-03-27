@@ -14,11 +14,11 @@ import java.util.List;
 public class RootJDBCDAO extends Common implements RootDAO_interface {
 
 
-    public List<Root> findByROOT_TEXT(String ROOT_TEXT) {
+    public List<Root> getByRoot(String rootText) {
         String sql = "SELECT * FROM cga105g2.root where ROOT_TEXT LIKE  ? ";
         List<Root> list = new ArrayList<>();
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
-            pstmt.setString(1, ROOT_TEXT);
+            pstmt.setString(1, rootText);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Root rootvo = new Root();
@@ -66,7 +66,22 @@ public class RootJDBCDAO extends Common implements RootDAO_interface {
     }
 
 
-    public Root findByRootId(Integer integer) {
+    @Override
+    public void insert(Root pojo) {
+
+    }
+
+    @Override
+    public void update(Root pojo) {
+
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+
+    }
+
+    public Root getById(Integer integer) {
         String sql = "SELECT * FROM cga105g2.root where ROOT_ID LIKE  ? ";
         Root rootvo = null;
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {

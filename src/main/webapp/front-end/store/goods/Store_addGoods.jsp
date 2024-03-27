@@ -47,7 +47,7 @@
             </ul>
             </c:if>
 
-            <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/Member/goods/goods.do" name="form1"
+            <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/CGA105G2/goodsServlet" name="form1"
                   enctype="multipart/form-data">
                 <jsp:useBean id="goodsSvc" scope="page"
                              class="com.goods.model.service.GoodsService"/>
@@ -119,7 +119,7 @@
             </form>
 
             <a
-                    href="<%=request.getContextPath()%>/front-end/Member/goods/goods.do?action=getStoreId_For_Display_store"
+                    href="<%=request.getContextPath()%>/CGA105G2/goodsServlet?action=getStoreId_For_Display_store"
                     class="btn btn-secondary btn-lg">回商品列</a>
     </div>
 

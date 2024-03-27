@@ -36,7 +36,6 @@ public class OrderDetail implements Serializable{
 	}
 
 	public OrderDetail( Integer goodsId,Integer detailQuantity,Integer detailPrice) {
-		
 		this.goodsId = goodsId;
 	    this.detailQuantity = detailQuantity;
 		this.detailPrice = detailPrice;

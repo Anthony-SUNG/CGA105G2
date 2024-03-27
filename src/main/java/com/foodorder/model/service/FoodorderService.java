@@ -50,7 +50,7 @@ public class FoodorderService {
 	
 	// 按下修改 先取出 該筆資料
 	public Meal getOneMeal(Integer mealid) {
-		return dao.getByMealId(mealid);
+		return dao.getById(mealid);
 	}
 	
 	// 修改送出按鈕  就是 下架該套餐 且 上架修改套餐的那一筆
@@ -120,7 +120,7 @@ public class FoodorderService {
 	}
 	// 利用餐點編號取出餐點名稱
 	public Meal getByMealId(Integer id) {
-		return dao.getByMealId(id);
+		return dao.getById(id);
 	}
 	// 會員查詢已預約 刪除更改狀態
 	public void updaterenStatusByrenId(Integer renid, Integer renstatus) {

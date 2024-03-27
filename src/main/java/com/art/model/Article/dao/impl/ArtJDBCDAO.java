@@ -107,7 +107,7 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
     }
 
     @Override
-    public Article getByArtId(Integer artId) {
+    public Article getById(Integer artId) {
         String sql = "SELECT * FROM cga105g2.article where ART_ID = ?";
         Article Article = null;
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
@@ -268,7 +268,7 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
     }
 
     @Override
-    public void delete(Integer artId) {
+    public void deleteById(Integer artId) {
         String sql = "DELETE FROM cga105g2.ARTICLE where ART_ID = ?";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, artId);

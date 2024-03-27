@@ -44,7 +44,7 @@
                     <div class="row gx-4 gx-lg-5 align-items-center">
                         <div class="col-md-6">
                             <img class="card-img-top mb-5 mb-md-0"
-                                 src="${pageContext.request.contextPath}/front-end/Member/goods/goods.do?action=getGoodsImg&goodsId=${goods.goodsId}"
+                                 src="${pageContext.request.contextPath}/CGA105G2/goodsServlet?action=getGoodsImg&goodsId=${goods.goodsId}"
                                  style="border: 2px gray solid" height="500px">
                         </div>
 
@@ -72,7 +72,7 @@
                             <span style="display: none">${goods.storeId}</span>
                             <span style="display: none">${memId}</span></a>
                             <a
-                                    href="<%=request.getContextPath()%>/front-end/Member/goods/goods.do?action=getStoreId_For_Display&storeId=${storeId}"
+                                    href="<%=request.getContextPath()%>/CGA105G2/goodsServlet?action=getStoreId_For_Display&storeId=${storeId}"
                                     class="btn btn-secondary btn-lg  mt-auto fs-4" role="button"
                                     aria-pressed="true">回商品列表</a>
                         </div>

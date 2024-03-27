@@ -710,7 +710,7 @@ public class LonginServlet extends HttpServlet {
                 Integer mq = Integer.valueOf(mealq[i].trim());
                 rdvo.setRdQuantity(mq);
 //                PD_PRICE
-                Integer price = new MealJDBCDAO().getByMealId(mid).getMealPrice();
+                Integer price = new MealJDBCDAO().getById(mid).getMealPrice();
                 int tp = price * mq;
                 allp += tp;
                 rdvo.setPdPrice(tp);

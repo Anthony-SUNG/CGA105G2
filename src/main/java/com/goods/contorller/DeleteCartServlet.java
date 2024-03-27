@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.goods.model.Cart.pojo.Cart;
-import com.goods.model.service.CartIteamService;
+import com.goods.model.Cart.dao.impl.CartDetailRedis;
 
 @WebServlet("/cart/delete")
 public class DeleteCartServlet  extends HttpServlet{
@@ -23,7 +23,7 @@ public class DeleteCartServlet  extends HttpServlet{
 	        final Integer storeId = Integer.valueOf(request.getParameter("storeId"));
 	        final Integer goodsId = Integer.valueOf(request.getParameter("goodsId"));
 	        String userId = String.valueOf(request.getSession().getAttribute("memId"));
-	        CartIteamService cartSvc = new  CartIteamService();
+	        CartDetailRedis cartSvc = new CartDetailRedis();
 	        Cart cart = cartSvc.get(userId);
 	        cart.getStoreMap().get(storeId).remove(goodsId);
 	        cartSvc.put(storeId, cart);

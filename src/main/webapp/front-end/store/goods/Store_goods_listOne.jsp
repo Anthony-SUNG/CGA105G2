@@ -60,7 +60,7 @@ pageContext.setAttribute("list", list);
 						<div class="row gx-4 gx-lg-5 align-items-center">
 							<div class="col-md-6">
 								<img class="card-img-top mb-5 mb-md-0"
-									src="${pageContext.request.contextPath}/front-end/Member/goods/goods.do?action=getGoodsImg&goodsId=${goods.goodsId}"
+									src="${pageContext.request.contextPath}/CGA105G2/goodsServlet?action=getGoodsImg&goodsId=${goods.goodsId}"
 									style="border: 2px gray solid" height="500px">
 							</div>
 
@@ -83,11 +83,11 @@ pageContext.setAttribute("list", list);
 								</p>
 								<br> <br> 
 								<a
-									href="<%=request.getContextPath()%>/front-end/Member/goods/goods.do?action=getStoreId_For_Display_store"
+									href="<%=request.getContextPath()%>/CGA105G2/goodsServlet?action=getStoreId_For_Display_store"
 									class="btn btn-secondary btn-lg  mt-auto fs-4">回商品列</a> 
 									<a
 									class="btn btn-secondary btn-lg  mt-auto fs-4"
-									href="<%=request.getContextPath()%>/front-end/Member/goods/goods.do?goodsId=<%=goods.getGoodsId()%>&action=getOne_For_Update">再次修改商品</a>
+									href="<%=request.getContextPath()%>/CGA105G2/goodsServlet?goodsId=<%=goods.getGoodsId()%>&action=getOne_For_Update">再次修改商品</a>
 
 							</div>
 						</div>

@@ -21,7 +21,7 @@ import com.goods.model.Goods.pojo.Goods;
 import com.goods.model.service.GoodsService;
 
 @MultipartConfig
-@WebServlet("/front-end/Member/goods/goods.do")
+@WebServlet("/goodsServlet")
 public class GoodsServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -52,7 +52,7 @@ public class GoodsServlet extends HttpServlet {
 		// 來自Member_goods_listAll.jsp的請求
 		if ("getOne_For_Display".equals(action)) {
 
-			List<String> errorMsgs = new LinkedList<String>();
+			List<String> errorMsgs = new LinkedList<>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -220,7 +220,7 @@ public class GoodsServlet extends HttpServlet {
 		}
 
 		if ("insert".equals(action)) { // 來自addGoods.jsp的請求
-			List<String> errorMsgs = new LinkedList<String>();
+			List<String> errorMsgs = new LinkedList<>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			Integer storeId = null;
@@ -239,7 +239,7 @@ public class GoodsServlet extends HttpServlet {
 			in.close();
 			String goodsName = req.getParameter("goodsName");
 			String goodsNameReg = "^[(\u4e00-\u9fa5)]{2,15}$";
-			if (goodsName == null || goodsName.trim().length() == 0) {
+			if (goodsName == null || goodsName.trim().isEmpty()) {
 				errorMsgs.add("商品名稱: 請勿空白");
 			} else if (!goodsName.trim().matches(goodsNameReg)) { // 以下練習正則(規)表示式(regular-expression)
 				errorMsgs.add("商品名稱: 只能是中文, 且長度必需在2到15之間");
@@ -260,7 +260,7 @@ public class GoodsServlet extends HttpServlet {
 			}
 
 			String goodsText = req.getParameter("goodsText");
-			if (goodsText == null || goodsText.trim().length() == 0) {
+			if (goodsText == null || goodsText.trim().isEmpty()) {
 				errorMsgs.add("商品名稱: 請勿空白");
 			}
 			Goods goods = new Goods();
@@ -291,7 +291,7 @@ public class GoodsServlet extends HttpServlet {
 
 		if ("delete".equals(action)) { // 來自listAllGoods.jsp
 
-			List<String> errorMsgs = new LinkedList<String>();
+			List<String> errorMsgs = new LinkedList<>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -312,7 +312,7 @@ public class GoodsServlet extends HttpServlet {
 		}
 
 		if ("listGoods_ByCompositeQuery".equals(action)) { // 來自select_page.jsp的複合查詢請求
-			List<String> errorMsgs = new LinkedList<String>();
+			List<String> errorMsgs = new LinkedList<>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -325,14 +325,12 @@ public class GoodsServlet extends HttpServlet {
 			/*************************** 2.開始複合查詢 ***************************************/
 			GoodsService goodsSvc = new GoodsService();
 			List<Goods> list = goodsSvc.getAllGoods(map);
-
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("listGoods_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
 			req.setAttribute("storeId", storeId); // 資料庫取出的list物件,存入request
 			RequestDispatcher successView = req
 					.getRequestDispatcher("/front-end/Member/goods/Member_listGoods_ByCompositeQuery.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
 			successView.forward(req, res);
-			
 		}
 
 		if ("getGoodsImg".equals(action)) {

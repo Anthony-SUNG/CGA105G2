@@ -97,7 +97,7 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
     }
 
     @Override
-    public Advertise getByAdvId(Integer advId) {
+    public Advertise getById(Integer advId) {
         String sql = "SELECT * FROM cga105g2.ADVERTISE where ADV_ID = ?";
         Advertise Advertise = null;
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
@@ -161,7 +161,7 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
         Common con=new Common();
         String sql = "UPDATE cga105g2.ADVERTISE set EMP_ID=?, ADV_STATUS=? where ADV_ID = ?";
         try (PreparedStatement pstmt = con.getConnection().prepareStatement(sql)){
-            Advertise advertiseO = getByAdvId(advertise.getAdvId());
+            Advertise advertiseO = getById(advertise.getAdvId());
             pstmt.setInt(1, advertiseO.getEmpId());
             if (advertise.getEmpId() != null) pstmt.setInt(1, advertise.getEmpId());
             pstmt.setInt(2, advertiseO.getAdvStatus());
@@ -180,6 +180,7 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
 
     }
 
+
     public void failUpdate(Integer advStatus) {
         long miliseconds = System.currentTimeMillis();
         Date today = new Date(miliseconds);
@@ -196,7 +197,7 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
 
 
     @Override
-    public void delete(Integer advId) {
+    public void deleteById(Integer advId) {
         String sql = "DELETE FROM cga105g2.ADVERTISE where ADV_ID = ?";
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, advId);

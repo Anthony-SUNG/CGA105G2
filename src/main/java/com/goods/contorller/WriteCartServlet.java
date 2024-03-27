@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.goods.model.service.CartIteamService;
+import com.goods.model.Cart.dao.impl.CartDetailRedis;
 import com.store.model.service.StoreService;
 
 @WebServlet("/cart/Write")
@@ -22,9 +22,8 @@ public class WriteCartServlet extends HttpServlet {
 	    @Override
 	    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 	        response.setCharacterEncoding("UTF-8");
-	        CartIteamService cartSvc = new  CartIteamService();
-	        StoreService storeSvc = new StoreService();
-	        Writer out = response.getWriter();
+	        CartDetailRedis cartSvc = new CartDetailRedis();
+            Writer out = response.getWriter();
 	        String userId = String.valueOf(request.getSession().getAttribute("memId"));
 	        String cartJson = cartSvc.getCart(userId);
 	        out.write(cartJson);

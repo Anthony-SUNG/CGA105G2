@@ -274,6 +274,11 @@ public class ReservaHibernateDAO implements ReservaDAO_interface {
 	}
 
 	@Override
+	public void deleteById(Integer id) {
+
+	}
+
+	@Override
 	public List<Reserva> getBymemId(Integer memid) {
 		// TODO Auto-generated method stub
 		return null;
@@ -292,7 +297,7 @@ public class ReservaHibernateDAO implements ReservaDAO_interface {
 	}
 
 	@Override
-	public Reserva gettable(Integer id) {
+	public Reserva getTable(Integer id) {
 		return null;
 	}
 

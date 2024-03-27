@@ -26,7 +26,7 @@
             <li class="my-3">
                 <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown fs-5">🔻商城管理</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu3">
-                    <li><hr><a href="<%=request.getContextPath()%>/front-end/Member/goods/goods.do?action=getStoreId_For_Display_store" class="nav-link">🔆總覽商品</a>
+                    <li><hr><a href="<%=request.getContextPath()%>/CGA105G2/goodsServlet?action=getStoreId_For_Display_store" class="nav-link">🔆總覽商品</a>
                         <hr>
                     </li>
                 </ul>

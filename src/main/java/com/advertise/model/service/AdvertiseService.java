@@ -7,9 +7,6 @@ import java.util.List;
 import com.advertise.model.Advertise.dao.Advertise_interface;
 import com.advertise.model.Advertise.dao.impl.AdvertiseJDBCDAO;
 import com.advertise.model.Advertise.pojo.Advertise;
-import com.member.model.Member.dao.impl.MemberDAO;
-import com.member.model.Member.pojo.Member;
-import com.store.model.Store.dao.impl.StoreDAO;
 
 public class AdvertiseService {
 	private Advertise_interface dao;
@@ -35,19 +32,19 @@ public class AdvertiseService {
 		return dao.getAll();
 	}
 	public Advertise getByAdvId(Integer advId) {
-		return dao.getByAdvId(advId);
+		return dao.getById(advId);
 	}
 
 	
 	public void update(Integer advId,Integer empId){
-		Advertise advertise = dao.getByAdvId(advId);
+		Advertise advertise = dao.getById(advId);
 		advertise.setAdvStatus(3);
 		advertise.setEmpId(empId);
 		dao.update(advertise);
 		
 	}
 	public void updatePass(Integer advId,Integer empId){
-		Advertise advertise = dao.getByAdvId(advId);
+		Advertise advertise = dao.getById(advId);
 		advertise.setAdvStatus(2);
 		advertise.setEmpId(empId);
 		dao.update(advertise);
@@ -65,6 +62,6 @@ public class AdvertiseService {
 		return dao.getByStoreId(storeId);
 	}
 	public void deleteByStoreId(Integer advId){
-		 dao.delete(advId);
+		 dao.deleteById(advId);
 	}
 }

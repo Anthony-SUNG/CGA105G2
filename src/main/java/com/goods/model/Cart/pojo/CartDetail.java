@@ -1,6 +1,6 @@
 package com.goods.model.Cart.pojo;
 
-public class CartItem {
+public class CartDetail {
 	
 		private static final long serialVersionUID = 1L;
 
@@ -12,8 +12,7 @@ public class CartItem {
 		private Integer detailQuantity; // 商品數量
 		private Integer goodsTotalPrice;//商品總金額
 
-		public CartItem() {
-
+		public CartDetail() {
 		}
 
 		public Integer getStoreId() {

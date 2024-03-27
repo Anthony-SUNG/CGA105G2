@@ -53,7 +53,7 @@ public class ArtService {
 	}
 	
 	public Article getOneArt(Integer artId) {
-		return dao.getByArtId(artId);
+		return dao.getById(artId);
 	}
 
 	public List<Article> getAllMem(Integer memId) {

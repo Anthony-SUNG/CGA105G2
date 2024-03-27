@@ -225,7 +225,7 @@
                         </div>
                     </c:if>
                     <div>
-                        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/Member/goods/goods.do">
+                        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/CGA105G2/goodsServlet">
                             <button id="store_shop" type="submit"
                                     class="btn btn-success btn-block mt-5 mb-5"
                                     style="font-size: 28px; border: 0; background-color: rgb(96, 96, 0);">查看購物商城
