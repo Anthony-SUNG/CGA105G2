@@ -74,8 +74,7 @@ public class MemCodeHibernateDAO extends Common implements MemCodeDAO_interface 
             stmt.setInt(3, pojo1.getCodeId());
             stmt.setInt(4, pojo1.getMemId());
             stmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
         }

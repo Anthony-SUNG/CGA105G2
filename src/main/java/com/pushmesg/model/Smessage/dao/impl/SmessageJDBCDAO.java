@@ -19,12 +19,11 @@ public class SmessageJDBCDAO extends Common implements SmessageDAO_interface {
             pstmt.setInt(1, smessageVO.getSubId());
             pstmt.setString(2, smessageVO.getSmessageTxet());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -48,12 +47,11 @@ public class SmessageJDBCDAO extends Common implements SmessageDAO_interface {
                 smessage.setSmessageTime(rs.getTimestamp("SMESSAGE_TIME"));
                 list.add(smessage);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -66,12 +64,11 @@ public class SmessageJDBCDAO extends Common implements SmessageDAO_interface {
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

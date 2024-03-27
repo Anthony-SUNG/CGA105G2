@@ -31,12 +31,12 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                 pstmt.setInt(9, reservaVO.getRenPrice());
                 pstmt.setInt(10, reservaVO.getRenFprice());
                 pstmt.executeUpdate();
-                con.commit();
-                con.close();
+                getCon().commit();
+                getCon().close();
             } catch (SQLException se) {
                 logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
                 try {
-                    con.rollback();
+                    getCon().rollback();
                 } catch (SQLException r) {
                     logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
                 }
@@ -55,12 +55,12 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                 pstmt.setInt(8, reservaVO.getRenPrice());
                 pstmt.setInt(9, reservaVO.getRenFprice());
                 pstmt.executeUpdate();
-                con.commit();
-                con.close();
+                getCon().commit();
+                getCon().close();
             } catch (SQLException se) {
                 logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
                 try {
-                    con.rollback();
+                    getCon().rollback();
                 } catch (SQLException r) {
                     logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
                 }
@@ -89,12 +89,12 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                 pstmt.setNull(2, Types.NULL);
             }
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -119,12 +119,12 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                 pstmt.setInt(3, reserva_new.getRenId());
             }
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -139,12 +139,12 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
             pstmt.setInt(1, renstatus);
             pstmt.setInt(2, renid);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -175,12 +175,12 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                 reserva.setRenPrice(rs.getInt("REN_PRICE"));
                 reserva.setRenFprice(rs.getInt("REN_FPRICE"));
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -214,12 +214,12 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                 reserva.setRenFprice(rs.getInt("REN_FPRICE"));
                 list.add(reserva);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -252,12 +252,12 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                 reserva.setRenFprice(rs.getInt("REN_FPRICE"));
                 list.add(reserva);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -289,12 +289,12 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                 reserva.setRenFprice(rs.getInt("REN_FPRICE"));
                 list.add(reserva);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -326,12 +326,12 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                 reserva.setRenFprice(rs.getInt("REN_FPRICE"));
                 list.add(reserva);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -368,12 +368,12 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                 reserva.setRenFprice(rs.getInt("REN_FPRICE"));
                 list.add(reserva);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -502,12 +502,12 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                 reserva.setRenFprice(rs.getInt("REN_FPRICE"));
                 list.add(reserva);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -541,12 +541,12 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                 reserva.setRenFprice(rs.getInt("REN_FPRICE"));
                 list.add(reserva);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -571,12 +571,12 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
             pstmt.setInt(10, 2);
             pstmt.setInt(11, s);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -607,12 +607,12 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                 reserva.setRenPrice(rs.getInt("REN_PRICE"));
                 reserva.setRenFprice(rs.getInt("REN_FPRICE"));
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -645,12 +645,12 @@ public class ReservaJDBCDAO extends Common implements ReservaDAO_interface {
                 reserva.setRenPrice(rs.getInt("REN_PRICE"));
                 reserva.setRenFprice(rs.getInt("REN_FPRICE"));
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

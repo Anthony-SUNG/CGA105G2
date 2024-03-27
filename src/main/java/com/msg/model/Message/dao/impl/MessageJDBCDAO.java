@@ -20,12 +20,11 @@ public class MessageJDBCDAO extends Common implements Message_interface {
             pstmt.setInt(1, Message.getFollowId());
             pstmt.setString(2, Message.getMesText());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -46,12 +45,11 @@ public class MessageJDBCDAO extends Common implements Message_interface {
                 Message.setMesTime(rs.getTimestamp("MES_TIME"));
                 list.add(Message);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -73,12 +71,11 @@ public class MessageJDBCDAO extends Common implements Message_interface {
                 Message.setMesText(rs.getString("MES_TEXT"));
                 Message.setMesTime(rs.getTimestamp("MES_TIME"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -98,12 +95,11 @@ public class MessageJDBCDAO extends Common implements Message_interface {
                 Message.setMesTime(rs.getTimestamp("MES_TIME"));
                 list.add(Message);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -117,12 +113,11 @@ public class MessageJDBCDAO extends Common implements Message_interface {
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, MesId);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

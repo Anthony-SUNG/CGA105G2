@@ -19,12 +19,11 @@ public class EmployeeJDBCDAO extends Common implements EmployeeDAO_interface {
             pstmt.setString(1, EmployeeVO.getEmpAcc());
             pstmt.setString(2, EmployeeVO.getEmpPwd());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -43,12 +42,11 @@ public class EmployeeJDBCDAO extends Common implements EmployeeDAO_interface {
             pstmt.setDate(6, EmployeeVO.getEmpRtime());
             pstmt.setInt(7, EmployeeVO.getEmpId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -73,12 +71,11 @@ public class EmployeeJDBCDAO extends Common implements EmployeeDAO_interface {
                 employeeVO.setEmpTime(rs.getDate("EMP_TIME"));
                 employeeVO.setEmpRtime(rs.getDate("EMP_RTIME"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -103,12 +100,11 @@ public class EmployeeJDBCDAO extends Common implements EmployeeDAO_interface {
                 employee.setEmpTime(rs.getDate("EMP_TIME"));
                 employee.setEmpRtime(rs.getDate("EMP_RTIME"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -134,12 +130,11 @@ public class EmployeeJDBCDAO extends Common implements EmployeeDAO_interface {
                 employeeVO.setEmpRtime(rs.getDate("EMP_RTIME"));
                 list.add(employeeVO);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

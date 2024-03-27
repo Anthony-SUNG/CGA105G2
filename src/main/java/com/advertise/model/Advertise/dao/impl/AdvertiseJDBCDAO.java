@@ -6,9 +6,7 @@ import com.advertise.model.Advertise.pojo.Advertise;
 import com.core.common.Common;
 import com.core.entity.ErrorTitle;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,12 +23,11 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
             pstmt.setDate(5, pojo.getAdvStime());
             pstmt.setDate(6, pojo.getAdvNtime());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -41,8 +38,6 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
     public List<Advertise> getAll() {
         String sql = "SELECT * FROM cga105g2.ADVERTISE";
         List<Advertise> list = new ArrayList<>();
-
-
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -58,12 +53,11 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
                 Advertise.setAdvNtime(rs.getDate("ADV_NTIME"));
                 list.add(Advertise);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -90,12 +84,11 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
                 Advertise.setAdvNtime(rs.getDate("ADV_NTIME"));
                 list.add(Advertise);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -122,12 +115,11 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
                 Advertise.setAdvStime(rs.getDate("ADV_STIME"));
                 Advertise.setAdvNtime(rs.getDate("ADV_NTIME"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -138,7 +130,6 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
     public Advertise getByStoreId(Integer storeId) {
         String sql = "SELECT * FROM cga105g2.ADVERTISE where STORE_ID = ?";
         Advertise Advertise = null;
-
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, storeId);
             ResultSet rs = pstmt.executeQuery();
@@ -154,12 +145,11 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
                 Advertise.setAdvStime(rs.getDate("ADV_STIME"));
                 Advertise.setAdvNtime(rs.getDate("ADV_NTIME"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -167,28 +157,38 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
         return Advertise;
     }
 
-    public void update(Advertise Advertise) {
+    public void update(Advertise advertise) {
         String sql = "UPDATE cga105g2.ADVERTISE set EMP_ID=?, ADV_STATUS=? where ADV_ID = ?";
-        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
-            Advertise Advertise_old = getByAdvId(Advertise.getAdvId());
-            pstmt.setInt(1, Advertise_old.getEmpId());
-            pstmt.setInt(2, Advertise_old.getAdvStatus());
-            pstmt.setInt(3, Advertise_old.getAdvId());
-            if (Advertise.getEmpId() != null) {
-                pstmt.setInt(1, Advertise.getEmpId());
-            }
-            if (Advertise.getAdvStatus() != null) {
-                pstmt.setInt(2, Advertise.getAdvStatus());
-            }
+        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)){
+            Advertise advertiseO = getByAdvId(advertise.getAdvId());
+            pstmt.setInt(1, advertiseO.getEmpId());
+            if (advertise.getEmpId() != null) pstmt.setInt(1, advertise.getEmpId());
+            pstmt.setInt(2, advertiseO.getAdvStatus());
+            if (advertise.getAdvStatus() != null) pstmt.setInt(2, advertise.getAdvStatus());
+            pstmt.setInt(3, advertiseO.getAdvId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
+            }
+        }
+
+    }
+
+    public void failUpdate(Integer advStatus) {
+        long miliseconds = System.currentTimeMillis();
+        Date today = new Date(miliseconds);
+        for (Advertise e : getByStatus(advStatus)) {
+            if (e.getAdvNtime().before(today)) { //看日期是否大於今天
+                Advertise Advertise_old = new Advertise();
+                Advertise_old.setAdvId(e.getAdvId());
+                Advertise_old.setEmpId(e.getEmpId());
+                Advertise_old.setAdvStatus(3);
+                update(Advertise_old);
             }
         }
     }
@@ -200,12 +200,11 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, advId);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

@@ -27,12 +27,11 @@ public class GoodsJDBCDAO extends Common implements GoodsDAO_interface {
             pstmt.setInt(5, Goods.getGoodsPrice());
             pstmt.setString(6, Goods.getGoodsText());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -51,12 +50,11 @@ public class GoodsJDBCDAO extends Common implements GoodsDAO_interface {
             pstmt.setString(6, Goods.getGoodsText());
             pstmt.setInt(7, Goods.getGoodsId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -69,12 +67,11 @@ public class GoodsJDBCDAO extends Common implements GoodsDAO_interface {
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, goodsno);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -100,12 +97,11 @@ public class GoodsJDBCDAO extends Common implements GoodsDAO_interface {
                 goods.setGoodsRtime(rs.getTimestamp("goods_rtime"));
                 goods.setStoreId(rs.getInt("store_id"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -133,12 +129,11 @@ public class GoodsJDBCDAO extends Common implements GoodsDAO_interface {
                 goods.setGoodsRtime(rs.getTimestamp("goods_rtime"));
                 list.add(goods);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -165,12 +160,11 @@ public class GoodsJDBCDAO extends Common implements GoodsDAO_interface {
                 goods.setGoodsRtime(rs.getTimestamp("goods_rtime"));
                 list.add(goods);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

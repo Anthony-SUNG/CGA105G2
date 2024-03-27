@@ -24,12 +24,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
             pstmt.setInt(6, artVO.getArtScore());
             pstmt.setString(7, artVO.getArtTag());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -60,12 +59,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
                 Article.setArtScore(rs.getInt("art_Score"));
                 list.add(Article);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -96,12 +94,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
                 Article.setArtSumlike(rs.getInt("art_Sumlike"));
                 Article.setArtScore(rs.getInt("art_Score"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -131,12 +128,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
                 Article.setArtSumlike(rs.getInt("art_Sumlike"));
                 Article.setArtScore(rs.getInt("art_Score"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -167,12 +163,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
                 Article.setArtScore(rs.getInt("art_Score"));
                 list.add(Article);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -202,12 +197,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
                 Article.setArtScore(rs.getInt("art_Score"));
                 list.add(Article);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -239,12 +233,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
                 Article.setArtScore(rs.getInt("art_Score"));
                 list.add(Article);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -263,12 +256,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
             pstmt.setInt(6, Article.getArtScore());
             pstmt.setInt(7, Article.getArtId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -281,12 +273,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, artId);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -316,12 +307,11 @@ public class ArtJDBCDAO extends Common implements ArtDAO_interface {
                 Article.setArtScore(rs.getInt("art_Score"));
                 list.add(Article);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

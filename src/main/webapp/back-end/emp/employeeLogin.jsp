@@ -69,7 +69,6 @@
         } else {
             document.getElementById('spanAcc').innerHTML = "	"
         }
-        ;
     };
     inputPwd.oninput = function () {
         if (inputPwd.value === null || inputPwd.value === "") {
@@ -82,7 +81,6 @@
             document.getElementById('spanPwd').innerHTML = "	"
             $('#submit').removeAttr('disabled');
         }
-        ;
     };
     $(document).ready(function () {
         new ClipboardJS('.btn');

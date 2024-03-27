@@ -22,12 +22,11 @@ public class SubscribeJDBCDAO extends Common implements Subscribe_interface {
             pstmt.setInt(1, Subscribe.getStoreId());
             pstmt.setInt(2, Subscribe.getMemId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -48,12 +47,11 @@ public class SubscribeJDBCDAO extends Common implements Subscribe_interface {
                 Subscribe.setMemId(rs.getInt("MEM_ID"));
                 list.add(Subscribe);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -75,12 +73,11 @@ public class SubscribeJDBCDAO extends Common implements Subscribe_interface {
                 Subscribe.setStoreId(rs.getInt("STORE_ID"));
                 Subscribe.setMemId(rs.getInt("MEM_ID"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -102,12 +99,11 @@ public class SubscribeJDBCDAO extends Common implements Subscribe_interface {
                 Subscribe.setStoreId(rs.getInt("STORE_ID"));
                 Subscribe.setMemId(rs.getInt("MEM_ID"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -129,12 +125,11 @@ public class SubscribeJDBCDAO extends Common implements Subscribe_interface {
                 Subscribe.setMemId(rs.getInt("MEM_ID"));
                 list.add(Subscribe);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -156,12 +151,12 @@ public class SubscribeJDBCDAO extends Common implements Subscribe_interface {
                 Subscribe.setMemId(rs.getInt("MEM_ID"));
                 list.add(Subscribe);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -183,12 +178,12 @@ public class SubscribeJDBCDAO extends Common implements Subscribe_interface {
                 Subscribe.setMemId(rs.getInt("MEM_ID"));
                 list.add(Subscribe);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -205,12 +200,12 @@ public class SubscribeJDBCDAO extends Common implements Subscribe_interface {
             pstmt.setInt(1, storeId);
             pstmt.setInt(2, memId);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

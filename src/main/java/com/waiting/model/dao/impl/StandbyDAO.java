@@ -26,12 +26,11 @@ public class StandbyDAO extends Common implements StandbyDAO_interface {
             if (rs.next()) {
                 id = rs.getInt(1);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -47,12 +46,11 @@ public class StandbyDAO extends Common implements StandbyDAO_interface {
             pstm.setInt(1, standbyVo.getStaStatus());
             pstm.setInt(2, standbyVo.getStaId());
             pstm.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -65,12 +63,11 @@ public class StandbyDAO extends Common implements StandbyDAO_interface {
         String sql = "TRUNCATE TABLE cga105g2.standby;";
         try (java.sql.Statement stm = getConnection().createStatement();) {
             stm.executeUpdate(sql);
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.TRUNCATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -84,12 +81,11 @@ public class StandbyDAO extends Common implements StandbyDAO_interface {
         try (PreparedStatement pstm = getConnection().prepareStatement(sql);) {
             pstm.setInt(1, staId);
             pstm.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -113,12 +109,11 @@ public class StandbyDAO extends Common implements StandbyDAO_interface {
                 standbyVo.setStaTime(rs.getTimestamp("sta_Time"));
                 standbyVo.setStaStatus(rs.getInt("sta_Status"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -143,12 +138,11 @@ public class StandbyDAO extends Common implements StandbyDAO_interface {
                 standbyVo.setStaStatus(rs.getInt("sta_Status"));
                 list.add(standbyVo);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -165,12 +159,11 @@ public class StandbyDAO extends Common implements StandbyDAO_interface {
             while (rs.next()) {
                 staCount = rs.getInt(1);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -187,12 +180,11 @@ public class StandbyDAO extends Common implements StandbyDAO_interface {
             while (rs.next()) {
                 lastInsertId = rs.getInt(1);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

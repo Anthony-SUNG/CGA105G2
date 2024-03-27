@@ -37,12 +37,12 @@ public class ReservaReservaDetailMealJDBCDAO extends Common implements ReservaRe
 				reservaReservaDetailMeal.setArtScore(rs.getInt("ART_SCORE"));
 				list.add(reservaReservaDetailMeal);
 			}
-			con.commit();
-			con.close();
+			getCon().commit();
+			getCon().close();
 		} catch (SQLException se) {
 			logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
 			try {
-				con.rollback();
+				getCon().rollback();
 			} catch (SQLException r) {
 				logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
 			}

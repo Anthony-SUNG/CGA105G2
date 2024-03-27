@@ -22,12 +22,11 @@ public class OrderDetailJDBCDAO extends Common implements OrderDetailDAO_interfa
             pstmt.setInt(2, orderDetail.getGoodsId());
             pstmt.setInt(3, orderDetail.getDetailQuantity());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -44,12 +43,11 @@ public class OrderDetailJDBCDAO extends Common implements OrderDetailDAO_interfa
             pstmt.setInt(4, orderDetail.getOrderId());
             pstmt.setInt(5, orderDetail.getGoodsId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -63,12 +61,11 @@ public class OrderDetailJDBCDAO extends Common implements OrderDetailDAO_interfa
             pstmt.setInt(1, orderDetailVO);
             pstmt.setInt(2, orderDetailVO2);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -89,12 +86,11 @@ public class OrderDetailJDBCDAO extends Common implements OrderDetailDAO_interfa
                 orderDetail.setGoodsId(rs.getInt("goods_id"));
                 orderDetail.setDetailQuantity(rs.getInt("detail_quantity"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -117,12 +113,11 @@ public class OrderDetailJDBCDAO extends Common implements OrderDetailDAO_interfa
                 orderDetail.setDetailPrice(rs.getInt("detailprice"));
                 list.add(orderDetail); // Store the row in the list
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -151,12 +146,11 @@ public class OrderDetailJDBCDAO extends Common implements OrderDetailDAO_interfa
             pstmt.setInt(3, orderDetail.getDetailQuantity());
             pstmt.setInt(4, orderDetail.getDetailPrice());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(INSERT_STMT), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(INSERT_STMT), r);
             }

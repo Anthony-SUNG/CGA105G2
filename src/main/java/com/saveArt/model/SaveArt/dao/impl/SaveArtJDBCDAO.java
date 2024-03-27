@@ -20,12 +20,11 @@ public class SaveArtJDBCDAO extends Common implements SaveArt_interface {
             pstmt.setInt(1, SaveArt.getArtId());
             pstmt.setInt(2, SaveArt.getMemId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -44,12 +43,11 @@ public class SaveArtJDBCDAO extends Common implements SaveArt_interface {
                 SaveArt.setMemId(rs.getInt("MEM_ID"));
                 list.add(SaveArt);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -69,12 +67,11 @@ public class SaveArtJDBCDAO extends Common implements SaveArt_interface {
                 SaveArt.setArtId(rs.getInt("ART_ID"));
                 SaveArt.setMemId(rs.getInt("MEM_ID"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -94,12 +91,12 @@ public class SaveArtJDBCDAO extends Common implements SaveArt_interface {
                 SaveArt.setMemId(rs.getInt("MEM_ID"));
                 list.add(SaveArt);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -114,12 +111,12 @@ public class SaveArtJDBCDAO extends Common implements SaveArt_interface {
             pstmt.setInt(1, artId);
             pstmt.setInt(2, memId);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

@@ -39,10 +39,18 @@ public class Common {
     }
 
     public void close() throws SQLException {
-        if (this.con != null) {
-            this.con.commit();
-            this.con.close();
+        try {
+            if (this.con != null) {
+                this.con.commit();
+                this.con.close();
+            }
+        } catch (Exception e) {
+            logger.error(ErrorTitle.UNKNOWN_TITLE.getTitle("關閉錯誤"));
+            this.con.rollback();
+        } finally {
+            if (this.con != null)  this.con.close();
         }
+
     }
 
     public Connection getCon() {

@@ -847,9 +847,11 @@ public class LonginServlet extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
             response.getWriter().print("<html><body>" + form + "</body></html>");
         }
+        StoreDAO sdao = new StoreDAO();
         //  plan1(update)
         if ("plan1".equals(action)) {
             Integer storeId = Integer.valueOf(request.getParameter("storeId"));
+            sdao.updatePlan(storeId,1);
             request.getSession().setAttribute("storeId", storeId);
             request.setAttribute("toResult", true);
             String url = "/front-end/store/food_order/food_order.do?action=food_order_button";
@@ -859,15 +861,17 @@ public class LonginServlet extends HttpServlet {
         //  plan2(update)
         if ("plan2".equals(action)) {
             Integer storeId = Integer.valueOf(request.getParameter("storeId"));
+            sdao.updatePlan(storeId,2);
             request.getSession().setAttribute("storeId", storeId);
             request.setAttribute("toResult", true);
             String url = "/front-end/store/food_order/food_order.do?action=food_order_button";
             RequestDispatcher successView = request.getRequestDispatcher(url);
             successView.forward(request, response);
         }
-        //  plan2(update)
+        //  plan3(update)
         if ("plan3".equals(action)) {
             Integer storeId = Integer.valueOf(request.getParameter("storeId"));
+            sdao.updatePlan(storeId,3);
             request.getSession().setAttribute("storeId", storeId);
             request.setAttribute("toResult", true);
             String url = "/front-end/store/food_order/food_order.do?action=food_order_button";

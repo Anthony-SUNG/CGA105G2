@@ -27,12 +27,11 @@ public class PointGoodsDAO extends Common implements PointGoodsDAO_interface {
             pstmt.setTimestamp(6, sqlTimestamp);
             pstmt.setInt(7, pointgoods.getPdStatus());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -53,12 +52,11 @@ public class PointGoodsDAO extends Common implements PointGoodsDAO_interface {
             pstmt.setInt(6, pointgoods.getPdStatus());
             pstmt.setInt(7, pointgoods.getPdId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -71,12 +69,11 @@ public class PointGoodsDAO extends Common implements PointGoodsDAO_interface {
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, pdId);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -102,12 +99,11 @@ public class PointGoodsDAO extends Common implements PointGoodsDAO_interface {
                 pointgoods.setPdStatus(rs.getInt("PD_STATUS"));
                 pointgood = pointgoods;
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -133,12 +129,11 @@ public class PointGoodsDAO extends Common implements PointGoodsDAO_interface {
                 pointgoods.setPdStatus(rs.getInt("PD_STATUS"));
                 list.add(pointgoods);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -164,12 +159,11 @@ public class PointGoodsDAO extends Common implements PointGoodsDAO_interface {
                 pointgoods.setPdStatus(rs.getInt("PD_STATUS"));
                 list.add(pointgoods);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

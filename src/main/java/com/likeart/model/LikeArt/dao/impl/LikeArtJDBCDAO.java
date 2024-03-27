@@ -20,12 +20,11 @@ public class LikeArtJDBCDAO extends Common implements LikeArt_interface {
             pstmt.setInt(1, LikeArt.getArtId());
             pstmt.setInt(2, LikeArt.getMemId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -45,8 +44,7 @@ public class LikeArtJDBCDAO extends Common implements LikeArt_interface {
                 LikeArt.setMemId(rs.getInt("MEM_ID"));
                 list.add(LikeArt);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
         }
@@ -66,8 +64,7 @@ public class LikeArtJDBCDAO extends Common implements LikeArt_interface {
                 LikeArt.setArtId(rs.getInt("ART_ID"));
                 LikeArt.setMemId(rs.getInt("MEM_ID"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
         }
@@ -80,12 +77,11 @@ public class LikeArtJDBCDAO extends Common implements LikeArt_interface {
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, likeId);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

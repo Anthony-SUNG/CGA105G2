@@ -23,12 +23,12 @@ public class MealJDBCDAO extends Common implements MealDAO_interface {
             pstmt.setInt(3, mealVO.getMealPrice());
             pstmt.setInt(4, mealVO.getMealStatus());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -42,12 +42,12 @@ public class MealJDBCDAO extends Common implements MealDAO_interface {
             pstmt.setInt(1, status);
             pstmt.setInt(2, id);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -69,12 +69,12 @@ public class MealJDBCDAO extends Common implements MealDAO_interface {
                 meal.setMealStatus(rs.getInt("MEAL_STATUS"));
                 list.add(meal);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -104,12 +104,12 @@ public class MealJDBCDAO extends Common implements MealDAO_interface {
                 meal.setMealStatus(rs.getInt("MEAL_STATUS"));
                 list.add(meal);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -132,12 +132,12 @@ public class MealJDBCDAO extends Common implements MealDAO_interface {
                 meal.setMealPrice(rs.getInt("MEAL_PRICE"));
                 meal.setMealStatus(rs.getInt("MEAL_STATUS"));
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

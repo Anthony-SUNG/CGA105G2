@@ -20,12 +20,11 @@ public class FollowMemJDBCDAO extends Common implements FollowMem_interface {
             pstmt.setInt(1, FollowMem.getMemId1());
             pstmt.setInt(2, FollowMem.getMemId2());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -46,12 +45,12 @@ public class FollowMemJDBCDAO extends Common implements FollowMem_interface {
                 FollowMem.setMemId2(rs.getInt("MEM_ID2"));
                 list.add(FollowMem);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -72,12 +71,12 @@ public class FollowMemJDBCDAO extends Common implements FollowMem_interface {
                 FollowMem.setMemId1(rs.getInt("MEM_ID1"));
                 FollowMem.setMemId2(rs.getInt("MEM_ID2"));
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -98,12 +97,12 @@ public class FollowMemJDBCDAO extends Common implements FollowMem_interface {
                 FollowMem.setMemId2(rs.getInt("MEM_ID2"));
                 list.add(FollowMem);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -125,12 +124,12 @@ public class FollowMemJDBCDAO extends Common implements FollowMem_interface {
                 FollowMem.setMemId2(rs.getInt("MEM_ID2"));
                 list.add(FollowMem);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -145,12 +144,12 @@ public class FollowMemJDBCDAO extends Common implements FollowMem_interface {
             pstmt.setInt(1, memId1);
             pstmt.setInt(2, memId2);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

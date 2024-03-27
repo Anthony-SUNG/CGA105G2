@@ -26,12 +26,12 @@ public class RootJDBCDAO extends Common implements RootDAO_interface {
                 rootvo.setRootText(rs.getString("ROOT_TEXT"));
                 list.add(rootvo);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -52,12 +52,12 @@ public class RootJDBCDAO extends Common implements RootDAO_interface {
                 rootVO.setRootText(rs.getString("ROOT_TEXT"));
                 list.add(rootVO);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -77,12 +77,12 @@ public class RootJDBCDAO extends Common implements RootDAO_interface {
                 rootvo.setRootId(rs.getInt("ROOT_ID"));
                 rootvo.setRootText(rs.getString("ROOT_TEXT"));
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

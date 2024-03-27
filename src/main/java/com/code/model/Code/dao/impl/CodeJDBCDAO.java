@@ -24,12 +24,11 @@ public class CodeJDBCDAO extends Common implements CodeDAO_interface {
             pstmt.setString(4, pojo.getCodeText());
             pstmt.setDate(5, pojo.getCodeNtime());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -42,12 +41,11 @@ public class CodeJDBCDAO extends Common implements CodeDAO_interface {
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -72,12 +70,11 @@ public class CodeJDBCDAO extends Common implements CodeDAO_interface {
                 pstmt.setDate(3, new Date(miliseconds));
             }
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -112,12 +109,11 @@ public class CodeJDBCDAO extends Common implements CodeDAO_interface {
             while (rs.next()) {
                 if (rs.getString("CODE_NUM").equals(codeNum)) list.add(rs.getInt("CODE_OFF"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -135,12 +131,11 @@ public class CodeJDBCDAO extends Common implements CodeDAO_interface {
             while (rs.next()) {
                 if (rs.getString("CODE_NUM").equals(codeNum)) list.add(rs.getInt("CODE_ID"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -168,12 +163,11 @@ public class CodeJDBCDAO extends Common implements CodeDAO_interface {
                 code.setCodeRtime(rs.getDate("CODE_RTIME"));
                 code.setCodeNtime(rs.getDate("CODE_NTIME"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -204,12 +198,11 @@ public class CodeJDBCDAO extends Common implements CodeDAO_interface {
                 code.setCodeNtime(rs.getDate("CODE_NTIME"));
                 list.add(code);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -237,12 +230,11 @@ public class CodeJDBCDAO extends Common implements CodeDAO_interface {
                 code.setCodeNtime(rs.getDate("CODE_NTIME"));
                 list.add(code);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

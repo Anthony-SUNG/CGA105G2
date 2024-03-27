@@ -35,12 +35,11 @@ public class OrderJDBCDAO extends Common implements OrderDAO_interface {
             // 新增訂單明細
             OrderDetailJDBCDAO orderDetailJDBCDAO = new OrderDetailJDBCDAO();
             orderDetailJDBCDAO.insert(null);
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -62,12 +61,11 @@ public class OrderJDBCDAO extends Common implements OrderDAO_interface {
             pstmt.setDate(9, order.getOrderOtime());
             pstmt.setInt(10, order.getOrderId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -133,12 +131,11 @@ public class OrderJDBCDAO extends Common implements OrderDAO_interface {
                 order.setOrderOtime(rs.getDate("order_otime"));
                 order.setOrderRtime(rs.getTimestamp("order_rtime"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -169,12 +166,11 @@ public class OrderJDBCDAO extends Common implements OrderDAO_interface {
                 order.setOrderRtime(rs.getTimestamp("order_rtime"));
                 list.add(order);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -220,12 +216,11 @@ public class OrderJDBCDAO extends Common implements OrderDAO_interface {
                 logger.error("未取得自增主鍵值");
             }
             rs.close();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(INSERT_STMT), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(INSERT_STMT), r);
             }
@@ -258,12 +253,11 @@ public class OrderJDBCDAO extends Common implements OrderDAO_interface {
                 code.setCodeStatus(rs.getInt("code_status"));
                 code.setCodeText(rs.getString("code_text"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

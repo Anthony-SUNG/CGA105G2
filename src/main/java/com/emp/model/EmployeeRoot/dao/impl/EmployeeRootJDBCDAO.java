@@ -21,12 +21,11 @@ public class EmployeeRootJDBCDAO extends Common implements EmployeeRootDAO_inter
             pstmt.setInt(1, employeeRoot.getEmpId());
             pstmt.setInt(2, employeeRoot.getRootId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -45,12 +44,11 @@ public class EmployeeRootJDBCDAO extends Common implements EmployeeRootDAO_inter
                 employeeRootVO.setEmpId(rs.getInt("EMP_ID"));
                 list.add(employeeRootVO);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -71,12 +69,11 @@ public class EmployeeRootJDBCDAO extends Common implements EmployeeRootDAO_inter
                 employeeRootVO.setEmpId(rs.getInt("EMP_ID"));
                 list.add(employeeRootVO);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -91,12 +88,11 @@ public class EmployeeRootJDBCDAO extends Common implements EmployeeRootDAO_inter
             pstmt.setInt(1, EMP_ID);
             pstmt.setInt(2, ROOT_ID);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -116,12 +112,11 @@ public class EmployeeRootJDBCDAO extends Common implements EmployeeRootDAO_inter
                 employeeRoot.setEmpId(rs.getInt("EMP_ID"));
                 list.add(employeeRoot);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

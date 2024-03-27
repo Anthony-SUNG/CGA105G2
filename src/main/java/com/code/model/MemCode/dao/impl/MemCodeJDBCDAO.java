@@ -20,12 +20,11 @@ public class MemCodeJDBCDAO extends Common implements MemCodeDAO_interface {
             pstmt.setInt(1, pojo.getCodeId());
             pstmt.setInt(2, pojo.getMemId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -44,12 +43,11 @@ public class MemCodeJDBCDAO extends Common implements MemCodeDAO_interface {
             pstmt.setInt(1, pojo.getCodeId());
             pstmt.setInt(2, pojo.getMemId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -70,12 +68,11 @@ public class MemCodeJDBCDAO extends Common implements MemCodeDAO_interface {
             pstmt.setInt(3, pojo1.getCodeId());
             pstmt.setInt(4, pojo1.getMemId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -106,12 +103,11 @@ public class MemCodeJDBCDAO extends Common implements MemCodeDAO_interface {
                 memcode.setMemId(rs.getInt("MEM_ID"));
                 list.add(memcode);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -131,12 +127,11 @@ public class MemCodeJDBCDAO extends Common implements MemCodeDAO_interface {
                 memcode.setMemId(rs.getInt("MEM_ID"));
                 list.add(memcode);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

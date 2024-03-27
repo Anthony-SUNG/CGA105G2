@@ -34,12 +34,11 @@ public class StoreDAO extends Common implements StoreDAO_interface {
             pstmt.setString(15, Store.getStoreTwId());
             pstmt.setString(16, Store.getStorePhone2());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -77,12 +76,11 @@ public class StoreDAO extends Common implements StoreDAO_interface {
             pstmt.setInt(24, Store.getStoreEtable());
             pstmt.setInt(25, Store.getStoreId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -95,12 +93,11 @@ public class StoreDAO extends Common implements StoreDAO_interface {
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)){
             pstmt.setInt(1, storeId);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -145,12 +142,11 @@ public class StoreDAO extends Common implements StoreDAO_interface {
                 store.setStoreTable(rs.getInt("STORE_TABLE"));
                 store.setStoreEtable(rs.getInt("STORE_ETABLE"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -197,12 +193,11 @@ public class StoreDAO extends Common implements StoreDAO_interface {
                 store.setStoreEtable(rs.getInt("STORE_ETABLE"));
                 list.add(store);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -249,12 +244,12 @@ public class StoreDAO extends Common implements StoreDAO_interface {
                 store.setStoreEtable(rs.getInt("STORE_ETABLE"));
                 list.add(store);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -269,12 +264,12 @@ public class StoreDAO extends Common implements StoreDAO_interface {
             pstmt.setInt(1, storeStatus);
             pstmt.setInt(2, storeId);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -288,12 +283,12 @@ public class StoreDAO extends Common implements StoreDAO_interface {
             pstmt.setInt(1, empId);
             pstmt.setInt(2, storeId);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -307,12 +302,12 @@ public class StoreDAO extends Common implements StoreDAO_interface {
             pstmt.setInt(1, storePlan);
             pstmt.setInt(2, storeId);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -326,12 +321,12 @@ public class StoreDAO extends Common implements StoreDAO_interface {
             pstmt.setInt(1, storeNplan);
             pstmt.setInt(2, storeId);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -347,12 +342,12 @@ public class StoreDAO extends Common implements StoreDAO_interface {
             pstmt.setInt(3, storeEtable);
             pstmt.setInt(4, storeId);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -374,12 +369,12 @@ public class StoreDAO extends Common implements StoreDAO_interface {
             } else {
                 store.setStoreId(0);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -410,12 +405,12 @@ public class StoreDAO extends Common implements StoreDAO_interface {
                 store.setStoreTwId(rs.getString("STORE_TW_ID"));
                 list.add(store);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -444,12 +439,12 @@ public class StoreDAO extends Common implements StoreDAO_interface {
                 store.setStoreUrl(rs.getString("STORE_URL"));
                 list.add(store);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -477,12 +472,12 @@ public class StoreDAO extends Common implements StoreDAO_interface {
             pstmt.setString(11, Store.getStoreText());
             pstmt.setInt(12, Store.getStoreId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -496,12 +491,12 @@ public class StoreDAO extends Common implements StoreDAO_interface {
             pstmt.setString(1, store.getStorePwd());
             pstmt.setString(2, store.getStoreAcc());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -517,12 +512,12 @@ public class StoreDAO extends Common implements StoreDAO_interface {
             pstmt.setString(1, store.getStorePwd());
             pstmt.setInt(2, store.getStoreId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -537,12 +532,12 @@ public class StoreDAO extends Common implements StoreDAO_interface {
             pstmt.setInt(2, plan);
             pstmt.setInt(3, storeId);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -562,12 +557,12 @@ public class StoreDAO extends Common implements StoreDAO_interface {
             pstmt.setInt(7, Store.getStoreStatus());
             pstmt.setInt(8, Store.getStoreId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -585,12 +580,12 @@ public class StoreDAO extends Common implements StoreDAO_interface {
                 store = new Store();
                 store.setStoreId(rs.getInt("STORE_ID"));
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -608,12 +603,12 @@ public class StoreDAO extends Common implements StoreDAO_interface {
             int q = 0;
             while (rs.next()) q += 1;
             re = 10 - q;
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

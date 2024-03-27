@@ -26,12 +26,11 @@ public class PointOrderDAO extends Common implements PointOrderDAO_interface {
             java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(utilDate.getTime());
             pstmt.setTimestamp(6, sqlTimestamp);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -52,12 +51,11 @@ public class PointOrderDAO extends Common implements PointOrderDAO_interface {
             pstmt.setTimestamp(6, sqlTimestamp);
             pstmt.setInt(7, pointorder.getPoId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -70,12 +68,11 @@ public class PointOrderDAO extends Common implements PointOrderDAO_interface {
         try (PreparedStatement pstmt = getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, po_id);
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.DELETE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -101,12 +98,11 @@ public class PointOrderDAO extends Common implements PointOrderDAO_interface {
                 pointorder.setPoUtime(rs.getTimestamp("PO_UTIME"));
                 pointorder.setEmpId(rs.getInt("EMP_ID"));
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -133,12 +129,11 @@ public class PointOrderDAO extends Common implements PointOrderDAO_interface {
                 pointorder.setEmpId(rs.getInt("EMP_ID"));
                 list.add(pointorder);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -165,12 +160,11 @@ public class PointOrderDAO extends Common implements PointOrderDAO_interface {
                 pointorder.setEmpId(rs.getInt("EMP_ID"));
                 list.add(pointorder);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -188,12 +182,11 @@ public class PointOrderDAO extends Common implements PointOrderDAO_interface {
             pstmt.setTimestamp(2, sqlTimestamp);
             pstmt.setInt(3, pointorder.getPoId());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -219,12 +212,11 @@ public class PointOrderDAO extends Common implements PointOrderDAO_interface {
                 pointorder.setEmpId(rs.getInt("EMP_ID"));
                 list.add(pointorder);
             }
-            con.commit();
-            con.close();
+            close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

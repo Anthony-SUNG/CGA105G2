@@ -186,7 +186,10 @@
 <!-- footer end -->
 </c:if>
 <script>
-    document.querySelectorAll('.adt')[0].setAttribute("class", "carousel-item  h-100 p-auto adt active");
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var adtElements = document.querySelectorAll('.adt');
+        if (adtElements.length > 0) adtElements[0].setAttribute("class", "carousel-item  h-100 p-auto adt active");
+    });
 </script>
 <script src="/CGA105G2/assets/js/vendor.js"></script>
 <script src="/CGA105G2/assets/js/polyfills.js"></script>

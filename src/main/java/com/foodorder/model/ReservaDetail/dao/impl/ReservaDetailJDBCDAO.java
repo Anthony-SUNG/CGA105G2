@@ -24,12 +24,12 @@ public class ReservaDetailJDBCDAO extends Common implements ReservaDetailDAO_int
             pstmt.setInt(3, reservaDetailVO.getRdQuantity());
             pstmt.setInt(4, reservaDetailVO.getPdPrice());
             pstmt.executeUpdate();
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.INSERT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -55,12 +55,12 @@ public class ReservaDetailJDBCDAO extends Common implements ReservaDetailDAO_int
                 reservaDetail.setPdPrice(rs.getInt("PD_PRICE"));
                 list.add(reservaDetail);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
@@ -82,12 +82,12 @@ public class ReservaDetailJDBCDAO extends Common implements ReservaDetailDAO_int
                 reservaDetail.setPdPrice(rs.getInt("PD_PRICE"));
                 list.add(reservaDetail);
             }
-            con.commit();
-            con.close();
+            getCon().commit();
+            getCon().close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.SELECT_TITLE.getTitle(sql), se);
             try {
-                con.rollback();
+                getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }
