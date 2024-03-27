@@ -31,11 +31,11 @@ public class Common {
             Statement statement = this.con.createStatement();
             String sql = "SET NAMES 'UTF8'";
             statement.executeUpdate(sql);
-            con.setAutoCommit(false);
+            this.con.setAutoCommit(false);
         } catch (SQLException e) {
-            logger.error(ErrorTitle.CONNECTION_TITLE.getTitle(con.toString()), e);
+            logger.error(ErrorTitle.CONNECTION_TITLE.getTitle(this.con.toString()), e);
         }
-        return con;
+        return this.con;
     }
 
     public void close() throws SQLException {
@@ -44,13 +44,10 @@ public class Common {
                 this.con.commit();
                 this.con.close();
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             logger.error(ErrorTitle.UNKNOWN_TITLE.getTitle("關閉錯誤"));
-            this.con.rollback();
-        } finally {
-            if (this.con != null)  this.con.close();
+            throw e;
         }
-
     }
 
     public Connection getCon() {

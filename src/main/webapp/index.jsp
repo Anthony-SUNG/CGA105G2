@@ -123,7 +123,7 @@
                                 <div class="carousel-item  h-100 p-auto adt">
                                 <a href="${ad.store.storeWeb}">
                                     <img src="<%=request.getContextPath()%>/adServlet?action=getPhoto&adId=${ad.advId}"
-                                         class="d-block card-body  h-100 w-auto "
+                                         class="carousel-caption card-body d-none d-md-block h-100 "
                                          style="min-width: auto ;margin:0 auto ;position: static !important" alt="...">
                                          </a>
                                     <div class="carousel-caption card-text d-none d-md-block h-25">

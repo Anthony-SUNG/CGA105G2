@@ -158,8 +158,9 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
     }
 
     public void update(Advertise advertise) {
+        Common con=new Common();
         String sql = "UPDATE cga105g2.ADVERTISE set EMP_ID=?, ADV_STATUS=? where ADV_ID = ?";
-        try (PreparedStatement pstmt = getConnection().prepareStatement(sql)){
+        try (PreparedStatement pstmt = con.getConnection().prepareStatement(sql)){
             Advertise advertiseO = getByAdvId(advertise.getAdvId());
             pstmt.setInt(1, advertiseO.getEmpId());
             if (advertise.getEmpId() != null) pstmt.setInt(1, advertise.getEmpId());
@@ -167,11 +168,11 @@ public class AdvertiseJDBCDAO extends Common implements Advertise_interface {
             if (advertise.getAdvStatus() != null) pstmt.setInt(2, advertise.getAdvStatus());
             pstmt.setInt(3, advertiseO.getAdvId());
             pstmt.executeUpdate();
-            close();
+            con.close();
         } catch (SQLException se) {
             logger.error(ErrorTitle.UPDATE_TITLE.getTitle(sql), se);
             try {
-                getCon().rollback();
+                con.getCon().rollback();
             } catch (SQLException r) {
                 logger.error(ErrorTitle.ROLLBACK_TITLE.getTitle(sql), r);
             }

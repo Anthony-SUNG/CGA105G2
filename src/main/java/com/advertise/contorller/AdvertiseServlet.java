@@ -35,7 +35,7 @@ public class AdvertiseServlet extends HttpServlet {
 			Integer empId = Integer.valueOf(str2);
 			AdvertiseService adSvc = new AdvertiseService();
 			adSvc.updatePass(advId, empId);
-			String url = "/back-end/advertise/reviewAdvertise2.jsp";
+			String url = "/back-end/advertise/reviewAdvertise.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); 
 			successView.forward(req, res);
 		}
@@ -46,7 +46,7 @@ public class AdvertiseServlet extends HttpServlet {
 			Integer empId = Integer.valueOf(str2);
 			AdvertiseService adSvc = new AdvertiseService();
 			adSvc.update(advId, empId);
-			String url = "/back-end/advertise/reviewAdvertise2.jsp";
+			String url = "/back-end/advertise/reviewAdvertise.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
@@ -110,7 +110,7 @@ public class AdvertiseServlet extends HttpServlet {
 					successView.forward(req, res);
 					return;
 				}else {
-						String url = "/back-end/advertise/reviewAdvertise2.jsp";
+						String url = "/back-end/advertise/reviewAdvertise.jsp";
 						RequestDispatcher successView = req.getRequestDispatcher(url);
 						successView.forward(req, res);
 					return;
@@ -118,10 +118,11 @@ public class AdvertiseServlet extends HttpServlet {
 			}
 		}
 		if("forAd".equals(action)) {
-			String str = req.getParameter("advId");
-			Integer advId = Integer.valueOf(str);
-			String str2 = req.getParameter("emp");
-			Integer empid = Integer.valueOf(str2);
+			String advIds = req.getParameter("advId");
+			Integer advId = Integer.valueOf(advIds);
+			String empIds = req.getParameter("empId");
+			Integer empid = Integer.valueOf(empIds);
+
 			AdvertiseService adSvc = new AdvertiseService();
 			Advertise ad = adSvc.getByAdvId(advId);
 			ad.setEmpId(empid);
@@ -129,11 +130,6 @@ public class AdvertiseServlet extends HttpServlet {
 			String url = "/back-end/advertise/reviewAdvertiseRoot.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
-
 		}
-
-
-
-
 	}
 }
